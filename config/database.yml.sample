@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  host: localhost
+  port: 3306
+  encoding: utf8
+  username: root
+  password: root
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: arenah_development
+
+test:
+  <<: *default
+  database: arenah_test
+
+production:
+  <<: *default
+  database: arenah_production
