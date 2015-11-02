@@ -1,6 +1,9 @@
 class Topic < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, :use => :slugged
+
   has_many :posts
 
   validates :title, length: { maximum: 100 }
-  validates :game_room_id, presence: true
+  validates_presence_of :game_room_id, :slug
 end

@@ -8,8 +8,11 @@ class CreateTopics < ActiveRecord::Migration
       t.integer :position
       t.integer :topic_group_id #, index: true, foreign_key: true
       t.integer :post_id, index: true, foreign_key: true
+      t.string :slug, :null => false
 
       t.timestamps null: false
     end
+
+    add_index :topics, :slug, :unique => true
   end
 end

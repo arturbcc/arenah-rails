@@ -1,8 +1,8 @@
 class Post < ActiveRecord::Base
   belongs_to :topic
+  belongs_to :character
 
-  validates :topic_id, presence: true
-  validates :message, presence: true
+  validates_presence_of :topic_id, :message
 
   def from_character?(character_id)
     self.character_id == character_id
