@@ -8,8 +8,8 @@ class Character < ActiveRecord::Base
   # enum gender_type: [:male, :female]
   # enum sheet_status_type: [:freemod, :on]
 
-  #belongs_to :user
-  #belongs_to :game_room
+  belongs_to :user
+  belongs_to :game_room
   has_many :posts
 
   validates_presence_of :name, :user_id, :game_room_id, :slug

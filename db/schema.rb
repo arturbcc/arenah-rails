@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103103917) do
+ActiveRecord::Schema.define(version: 20151103113049) do
 
   create_table "characters", force: :cascade do |t|
     t.integer  "user_id",        limit: 4
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20151103103917) do
 
   add_index "characters", ["game_room_id"], name: "index_characters_on_game_room_id", using: :btree
   add_index "characters", ["slug"], name: "index_characters_on_slug", unique: true, using: :btree
+  add_index "characters", ["user_id"], name: "index_characters_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
@@ -48,18 +49,18 @@ ActiveRecord::Schema.define(version: 20151103103917) do
 
   create_table "game_rooms", force: :cascade do |t|
     t.integer  "character_id",          limit: 4
-    t.string   "name",                  limit: 255,             null: false
+    t.string   "name",                  limit: 255,                null: false
     t.string   "subtitle",              limit: 255
     t.string   "short_description",     limit: 255
     t.string   "description",           limit: 255
     t.string   "banner_url",            limit: 255
     t.string   "css",                   limit: 255
-    t.string   "slug",                  limit: 255,             null: false
+    t.string   "slug",                  limit: 255,                null: false
     t.integer  "status",                limit: 4,   default: 1
     t.string   "google_analytics_code", limit: 255
-    t.boolean  "show_signature"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.boolean  "show_signature",                    default: true
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   add_index "game_rooms", ["character_id"], name: "index_game_rooms_on_character_id", using: :btree
@@ -93,5 +94,21 @@ ActiveRecord::Schema.define(version: 20151103103917) do
   add_index "topics", ["game_room_id"], name: "index_topics_on_game_room_id", using: :btree
   add_index "topics", ["post_id"], name: "index_topics_on_post_id", using: :btree
   add_index "topics", ["slug"], name: "index_topics_on_slug", unique: true, using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",           limit: 255,                 null: false
+    t.string   "password",        limit: 255,                 null: false
+    t.string   "name",            limit: 100,                 null: false
+    t.string   "nickname",        limit: 255,                 null: false
+    t.string   "secret_question", limit: 255
+    t.string   "secret_answer",   limit: 255
+    t.boolean  "active",                      default: false
+    t.string   "activation_code", limit: 255
+    t.string   "slug",            limit: 255,                 null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+  end
+
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
 end

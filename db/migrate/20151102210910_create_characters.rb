@@ -1,7 +1,7 @@
 class CreateCharacters < ActiveRecord::Migration
   def change
     create_table :characters do |t|
-      t.integer :user_id #, index: true, foreign_key: true
+      t.integer :user_id, index: true, foreign_key: true
       t.integer :game_room_id, index: true, foreign_key: true
       t.string :name, limit: 100
       t.string :avatar_url
