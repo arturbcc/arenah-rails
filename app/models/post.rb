@@ -7,5 +7,5 @@ class Post < ActiveRecord::Base
   def from_character?(character_id)
     self.character_id == character_id
   end
-  # Usar decorators para o método acima? O IsFromMaster também
+  # TODO: should we use decorators for the from_character? method? Is_from_master is also another candidate.
 end
