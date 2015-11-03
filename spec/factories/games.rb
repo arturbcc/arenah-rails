@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :game_room do
+  factory :game do
     name 'Resident Evil'
     status 1
   end

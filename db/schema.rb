@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20151103121113) do
 
   create_table "characters", force: :cascade do |t|
     t.integer  "user_id",        limit: 4,               null: false
-    t.integer  "game_room_id",   limit: 4
+    t.integer  "game_id",        limit: 4
     t.string   "name",           limit: 100
     t.string   "avatar_url",     limit: 255
     t.integer  "type",           limit: 4,   default: 0, null: false
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20151103121113) do
     t.datetime "updated_at",                             null: false
   end
 
-  add_index "characters", ["game_room_id"], name: "index_characters_on_game_room_id", using: :btree
+  add_index "characters", ["game_id"], name: "index_characters_on_game_id", using: :btree
   add_index "characters", ["slug"], name: "index_characters_on_slug", unique: true, using: :btree
   add_index "characters", ["user_id"], name: "index_characters_on_user_id", using: :btree
 
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20151103121113) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
-  create_table "game_rooms", force: :cascade do |t|
+  create_table "games", force: :cascade do |t|
     t.integer  "character_id",          limit: 4
     t.string   "name",                  limit: 255,                null: false
     t.string   "subtitle",              limit: 255
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(version: 20151103121113) do
     t.datetime "updated_at",                                       null: false
   end
 
-  add_index "game_rooms", ["character_id"], name: "index_game_rooms_on_character_id", using: :btree
-  add_index "game_rooms", ["slug"], name: "index_game_rooms_on_slug", unique: true, using: :btree
+  add_index "games", ["character_id"], name: "index_games_on_character_id", using: :btree
+  add_index "games", ["slug"], name: "index_games_on_slug", unique: true, using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.integer  "topic_id",     limit: 4,   null: false
@@ -78,30 +78,30 @@ ActiveRecord::Schema.define(version: 20151103121113) do
   add_index "posts", ["topic_id"], name: "index_posts_on_topic_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
-    t.integer  "user_id",      limit: 4,             null: false
-    t.integer  "game_room_id", limit: 4,             null: false
-    t.integer  "status",       limit: 4, default: 0, null: false
+    t.integer  "user_id",    limit: 4,             null: false
+    t.integer  "game_id",    limit: 4,             null: false
+    t.integer  "status",     limit: 4, default: 0, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "subscriptions", ["game_id"], name: "index_subscriptions_on_game_id", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
+
+  create_table "topic_groups", force: :cascade do |t|
+    t.integer  "game_id",    limit: 4,               null: false
+    t.string   "name",       limit: 100,             null: false
+    t.integer  "position",   limit: 4,   default: 0
+    t.string   "slug",       limit: 255,             null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
 
-  add_index "subscriptions", ["game_room_id"], name: "index_subscriptions_on_game_room_id", using: :btree
-  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
-
-  create_table "topic_groups", force: :cascade do |t|
-    t.integer  "game_room_id", limit: 4,               null: false
-    t.string   "name",         limit: 100,             null: false
-    t.integer  "position",     limit: 4,   default: 0
-    t.string   "slug",         limit: 255,             null: false
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-  end
-
-  add_index "topic_groups", ["game_room_id"], name: "index_topic_groups_on_game_room_id", using: :btree
+  add_index "topic_groups", ["game_id"], name: "index_topic_groups_on_game_id", using: :btree
   add_index "topic_groups", ["slug"], name: "index_topic_groups_on_slug", unique: true, using: :btree
 
   create_table "topics", force: :cascade do |t|
-    t.integer  "game_room_id",   limit: 4,               null: false
+    t.integer  "game_id",        limit: 4,               null: false
     t.integer  "character_id",   limit: 4
     t.string   "title",          limit: 100,             null: false
     t.string   "description",    limit: 255
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 20151103121113) do
   end
 
   add_index "topics", ["character_id"], name: "index_topics_on_character_id", using: :btree
-  add_index "topics", ["game_room_id"], name: "index_topics_on_game_room_id", using: :btree
+  add_index "topics", ["game_id"], name: "index_topics_on_game_id", using: :btree
   add_index "topics", ["post_id"], name: "index_topics_on_post_id", using: :btree
   add_index "topics", ["slug"], name: "index_topics_on_slug", unique: true, using: :btree
   add_index "topics", ["topic_group_id"], name: "index_topics_on_topic_group_id", using: :btree

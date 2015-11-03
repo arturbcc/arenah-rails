@@ -6,5 +6,5 @@ class TopicGroup < ActiveRecord::Base
   has_many :topics, dependent: :delete_all
 
   validates :name, length: { maximum: 100 } # check the correct limit
-  validates_presence_of :game_room_id, :name, :slug
+  validates_presence_of :game_id, :name, :slug
 end

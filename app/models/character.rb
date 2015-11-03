@@ -9,8 +9,8 @@ class Character < ActiveRecord::Base
   # enum sheet_status_type: [:freemod, :on]
 
   belongs_to :user
-  belongs_to :game_room
+  belongs_to :game
   has_many :posts
 
-  validates_presence_of :name, :user_id, :game_room_id, :slug, :type, :status, :gender, :sheet_mode
+  validates_presence_of :name, :user_id, :game_id, :slug, :type, :status, :gender, :sheet_mode
 end

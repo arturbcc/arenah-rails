@@ -3,9 +3,10 @@ class Topic < ActiveRecord::Base
   friendly_id :title, :use => :slugged
 
   # TODO: on delete, we must recount the post count of all characters
+  # It should belongs to game room, or we need to remove the has_many topics from the game room
   has_many :posts, dependent: :delete_all
   belongs_to :topic_group
 
   validates :title, length: { maximum: 100 } #check the correct limit
-  validates_presence_of :game_room_id, :slug
+  validates_presence_of :game_id, :slug
 end

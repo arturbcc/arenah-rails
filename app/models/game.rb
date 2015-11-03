@@ -1,5 +1,4 @@
-# TODO: should we rename it to just 'game'?
-class GameRoom < ActiveRecord::Base
+class Game < ActiveRecord::Base
   extend FriendlyId
 
   has_many :topics

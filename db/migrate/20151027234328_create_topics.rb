@@ -1,7 +1,7 @@
 class CreateTopics < ActiveRecord::Migration
   def change
     create_table :topics do |t|
-      t.integer :game_room_id, index: true, foreign_key: true, null: false
+      t.integer :game_id, index: true, foreign_key: true, null: false
       t.integer :character_id, index: true, foreign_key: true
       t.string :title, limit: 100, :null => false
       t.string :description

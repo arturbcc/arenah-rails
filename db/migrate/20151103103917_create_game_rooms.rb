@@ -1,6 +1,6 @@
 class CreateGameRooms < ActiveRecord::Migration
   def change
-    create_table :game_rooms do |t|
+    create_table :games do |t|
       t.integer :character_id, index: true, foreign_key: true
       t.string :name, null: false
       t.string :subtitle
@@ -16,6 +16,6 @@ class CreateGameRooms < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :game_rooms, :slug, :unique => true
+    add_index :games, :slug, :unique => true
   end
 end
