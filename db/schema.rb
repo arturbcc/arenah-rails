@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103120216) do
+ActiveRecord::Schema.define(version: 20151103121113) do
 
   create_table "characters", force: :cascade do |t|
     t.integer  "user_id",        limit: 4
     t.integer  "game_room_id",   limit: 4
     t.string   "name",           limit: 100
     t.string   "avatar_url",     limit: 255
-    t.integer  "type",           limit: 4,   default: 0
+    t.integer  "type",           limit: 4,   default: 0, null: false
     t.string   "signature",      limit: 255
-    t.integer  "status",         limit: 4,   default: 1
-    t.integer  "gender",         limit: 4,   default: 0
-    t.integer  "sheet_mode",     limit: 4,   default: 0
+    t.integer  "status",         limit: 4,   default: 1, null: false
+    t.integer  "gender",         limit: 4,   default: 0, null: false
+    t.integer  "sheet_mode",     limit: 4,   default: 0, null: false
     t.datetime "last_post_date"
     t.integer  "post_count",     limit: 4,   default: 0
     t.string   "slug",           limit: 255,             null: false
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 20151103120216) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "game_room_subscriptions", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4,             null: false
+    t.integer  "game_room_id", limit: 4,             null: false
+    t.integer  "status",       limit: 4, default: 0, null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "game_room_subscriptions", ["game_room_id"], name: "index_game_room_subscriptions_on_game_room_id", using: :btree
+  add_index "game_room_subscriptions", ["user_id"], name: "index_game_room_subscriptions_on_user_id", using: :btree
 
   create_table "game_rooms", force: :cascade do |t|
     t.integer  "character_id",          limit: 4

@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   extend FriendlyId
 
   has_many :characters
+  has_many :game_room_subscriptions
 
   friendly_id :nickname, :use => :slugged
 

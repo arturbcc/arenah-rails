@@ -8,5 +8,6 @@ describe GameRoom, type: :model do
 
   it { should have_many :topics }
   it { should have_many :characters }
+  it { should have_many :game_room_subscriptions }
   it { should validate_length_of :name }
 end
