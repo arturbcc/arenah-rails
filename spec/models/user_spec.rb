@@ -3,14 +3,14 @@ require_relative '../support/shared_examples/sluggable'
 
 describe User, type: :model do
   it { should have_many :characters }
-  it { should have_many :game_room_subscriptions }
+  it { should have_many :subscriptions }
   it { should validate_length_of :name }
   it { should validate_length_of :nickname }
   it { should validate_presence_of :name }
   it { should validate_presence_of :nickname }
   it { should validate_presence_of :password }
 
-  it_behaves_like 'a sluggable', 'user-nickname' do
-    let(:sluggable) { User.create(name: 'user', nickname: 'User Nickname', password: 'X03MO1qnZdYdgyfeuILPmQ==') }
+  it_behaves_like 'a sluggable', 'john-doe' do
+    let(:sluggable) { create(:user) }
   end
 end

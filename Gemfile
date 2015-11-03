@@ -33,9 +33,12 @@ gem 'friendly_id', '~> 5.1.0'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+end
+
+group :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
   gem 'shoulda'
 end
 

@@ -1,15 +1,24 @@
+# TODO: should we rename it to just 'game'?
 class GameRoom < ActiveRecord::Base
   extend FriendlyId
 
   has_many :topics
   has_many :characters
-  has_many :game_room_subscriptions
-
-  # TODO: when a game room is closed, the subscriptions must be removed.
-  # A game Room is never deleted.
-
-  # TODO: should we rename it to just 'game'?
+  has_many :subscriptions
 
   friendly_id :name, :use => :slugged
   validates_presence_of :name, :slug
+
+  def close!
+    inactive!
+    subscriptions.each(&:destroy)
+  end
+
+  def reopen!
+    active!
+  end
+
+  private
+
+  enum status: [:inactive, :active]
 end
