@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103113049) do
+ActiveRecord::Schema.define(version: 20151103120216) do
 
   create_table "characters", force: :cascade do |t|
     t.integer  "user_id",        limit: 4
@@ -77,6 +77,18 @@ ActiveRecord::Schema.define(version: 20151103113049) do
   add_index "posts", ["character_id"], name: "index_posts_on_character_id", using: :btree
   add_index "posts", ["topic_id"], name: "index_posts_on_topic_id", using: :btree
 
+  create_table "topic_groups", force: :cascade do |t|
+    t.integer  "game_room_id", limit: 4
+    t.string   "name",         limit: 100,             null: false
+    t.integer  "position",     limit: 4,   default: 0
+    t.string   "slug",         limit: 255,             null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "topic_groups", ["game_room_id"], name: "index_topic_groups_on_game_room_id", using: :btree
+  add_index "topic_groups", ["slug"], name: "index_topic_groups_on_slug", unique: true, using: :btree
+
   create_table "topics", force: :cascade do |t|
     t.integer  "game_room_id",   limit: 4,               null: false
     t.integer  "character_id",   limit: 4
@@ -94,6 +106,7 @@ ActiveRecord::Schema.define(version: 20151103113049) do
   add_index "topics", ["game_room_id"], name: "index_topics_on_game_room_id", using: :btree
   add_index "topics", ["post_id"], name: "index_topics_on_post_id", using: :btree
   add_index "topics", ["slug"], name: "index_topics_on_slug", unique: true, using: :btree
+  add_index "topics", ["topic_group_id"], name: "index_topics_on_topic_group_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           limit: 255,                 null: false

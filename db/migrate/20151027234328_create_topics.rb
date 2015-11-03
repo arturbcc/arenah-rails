@@ -6,7 +6,7 @@ class CreateTopics < ActiveRecord::Migration
       t.string :title, limit: 100, :null => false
       t.string :description
       t.integer :position, default: 0
-      t.integer :topic_group_id #, index: true, foreign_key: true
+      t.integer :topic_group_id, index: true, foreign_key: true
       t.integer :post_id, index: true, foreign_key: true
       t.string :slug, :null => false
 
