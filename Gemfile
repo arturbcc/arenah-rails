@@ -34,9 +34,6 @@ gem 'friendly_id', '~> 5.1.0'
 
 group :development, :test do
   gem 'byebug'
-end
-
-group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'shoulda'
