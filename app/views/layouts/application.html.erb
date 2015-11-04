@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width" />
 
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 
   <link rel="shortcut icon" href="/Content/Images/favicon.ico" type="image/x-icon" />
@@ -17,20 +18,19 @@
   <% end %>
 
   <%= yield :head %>
-  <%: Scripts.Render("~/bundles/jquery") %>
 </head>
 <body>
-  <% Html.RenderPartial("Header"); %>
+  <!-- % Html.RenderPartial("Header"); % -->
   <div id="content">
     <%= yield %>
     <section id="game-modal">
-      <% Html.RenderPartial("IncludeModal"); %>
+      <!-- % Html.RenderPartial("IncludeModal"); % -->
     </section>
   </div>
-  <% Html.RenderPartial("Footer"); %>
-  <% Html.RenderPartial("HiddenFields"); %>
-  <% Html.RenderPartial("TrackingScripts"); %>
-  <asp:ContentPlaceHolder ID="Javascripts" runat="server" />
+
+  <!-- % Html.RenderPartial("Footer"); % >
+  < % Html.RenderPartial("HiddenFields"); % >
+  < % Html.RenderPartial("TrackingScripts"); % -->
 
   <% if @game.present? %>
     <script type="text/javascript">
@@ -38,7 +38,6 @@
     </script>
   <% end %>
 
-  <%= javascript_include_tag 'application' %>
   <%= yield :javascripts %>
 </body>
 </html>
