@@ -2,11 +2,10 @@ class Character < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => :slugged
 
-  #http://stackoverflow.com/questions/75759/enums-in-ruby
-  # enum status_type: [:inactive, :active]
-  # enum character_type: [:pc, :npc, :game_master]
-  # enum gender_type: [:male, :female]
-  # enum sheet_status_type: [:freemod, :on]
+  enum status: { inactive: 0, active: 1 }
+  enum character_type: { pc: 0, npc: 1, game_master: 2 }
+  enum gender:  { male: 0, female: 1 }
+  enum sheet_mode: { freemode: 0, gamemode: 1 }
 
   belongs_to :user
   belongs_to :game

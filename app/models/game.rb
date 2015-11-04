@@ -8,6 +8,8 @@ class Game < ActiveRecord::Base
   friendly_id :name, :use => :slugged
   validates_presence_of :name, :slug
 
+  enum status: [:inactive, :active]
+
   def close!
     inactive!
     subscriptions.each(&:destroy)
@@ -16,8 +18,4 @@ class Game < ActiveRecord::Base
   def reopen!
     active!
   end
-
-  private
-
-  enum status: [:inactive, :active]
 end
