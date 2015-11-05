@@ -2,6 +2,7 @@ class Game < ActiveRecord::Base
   extend FriendlyId
 
   has_many :topics
+  has_many :topic_groups
   has_many :characters
   has_many :subscriptions
 

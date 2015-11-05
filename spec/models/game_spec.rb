@@ -9,6 +9,7 @@ describe Game, type: :model do
   end
 
   it { should have_many :topics }
+  it { should have_many :topic_groups }
   it { should have_many :characters }
   it { should have_many :subscriptions }
   it { should validate_length_of :name }

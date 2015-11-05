@@ -6,6 +6,7 @@ class Topic < ActiveRecord::Base
   # It should belongs to game room, or we need to remove the has_many topics from the game room
   has_many :posts, dependent: :delete_all
   belongs_to :topic_group
+  belongs_to :game
 
   validates :title, length: { maximum: 100 } #check the correct limit
   validates_presence_of :game_id, :slug

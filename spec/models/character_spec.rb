@@ -11,7 +11,7 @@ describe Character, type: :model do
   it { should validate_length_of :user_id }
   it { should validate_presence_of :game_id }
   it { should validate_presence_of :slug }
-  it { should validate_presence_of :type }
+  it { should validate_presence_of :character_type }
   it { should validate_presence_of :status }
   it { should validate_presence_of :gender }
   it { should validate_presence_of :sheet_mode }

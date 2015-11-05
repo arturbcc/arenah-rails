@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103121113) do
+ActiveRecord::Schema.define(version: 20151105130550) do
 
   create_table "characters", force: :cascade do |t|
     t.integer  "user_id",        limit: 4,               null: false
     t.integer  "game_id",        limit: 4
     t.string   "name",           limit: 100
     t.string   "avatar_url",     limit: 255
-    t.integer  "type",           limit: 4,   default: 0, null: false
+    t.integer  "character_type", limit: 4,   default: 0, null: false
     t.string   "signature",      limit: 255
     t.integer  "status",         limit: 4,   default: 1, null: false
     t.integer  "gender",         limit: 4,   default: 0, null: false
@@ -65,6 +65,13 @@ ActiveRecord::Schema.define(version: 20151103121113) do
 
   add_index "games", ["character_id"], name: "index_games_on_character_id", using: :btree
   add_index "games", ["slug"], name: "index_games_on_slug", unique: true, using: :btree
+
+  create_table "post_recipients", force: :cascade do |t|
+    t.integer  "post_id",      limit: 4
+    t.integer  "character_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "posts", force: :cascade do |t|
     t.integer  "topic_id",     limit: 4,   null: false

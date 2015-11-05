@@ -1,1 +1,40 @@
-teste
+<%= content_for :title, "#{@game.try(:name)} - #{@topic.try(:title)} - Arenah Tsuki" %>
+
+<!-- % Html.RenderPartial("PostHeader"); % -->
+
+<section id="page-body">
+  <h1>
+    <%= link_to @topic.title, topic_posts_path(@game, @topic) %>
+  </h1>
+
+  <!-- % if (!string.IsNullOrEmpty(Model.Game.Room.FilterByCharacter)) { %>
+    <div class="saga-warning">Saga de < %: Model.Identity.Character.Name %></div>
+  < % } % -->
+
+  <%= render 'breadcrumb', game: @game, topic: @topic %>
+
+  <!-- div class="reply-paging-line">
+    < % Html.RenderPartial("Pagination"); %>
+  </div -->
+
+  <div class="clear"></div>
+
+  <% @posts.each do |post| %>
+    <%= render 'post', game: @game, post: post, character: @character %>
+  <% end %>
+
+  <!-- % Html.RenderPartial("ButtonAndPagination"); % -->
+  <!-- % Html.RenderPartial("PlayersList"); % -->
+
+  <!-- % if (Model.Identity.CurrentRole == Identity.Role.GameMasterLogged || Model.Identity.CurrentRole == Identity.Role.PlayerLogged) { %>
+    <div id="online-users"></div>
+  < % } % -->
+</section>
+
+<%= content_for :javascripts do %>
+  <% unless @identity.unlogged? %>
+    $(document).ready(function () {
+      new UnreadPosts.Checker('<%= @topic.last_post_id %>').storeLastPostId();
+    });
+  <% end %>
+<% end %>

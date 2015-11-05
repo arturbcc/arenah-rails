@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Arenah Tsuki</title>
+  <title><%= yield(:title).presence || 'Arenah Tsuki' %></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width" />
 
@@ -20,9 +20,12 @@
   <%= yield :head %>
 </head>
 <body>
+  <% options = { identity: @identity, area: @area, game: @game, topic: @topic } %>
+  <%= render :header, identity: @identity, area: @area, game: @game, topic: @topic %>
   <!-- % Html.RenderPartial("Header"); % -->
   <div id="content">
     <%= yield %>
+
     <section id="game-modal">
       <!-- % Html.RenderPartial("IncludeModal"); % -->
     </section>
@@ -38,7 +41,9 @@
     </script>
   <% end %>
 
-  <%= yield :javascripts %>
+  <script>
+    <%= yield :javascripts %>
+  </script>
 </body>
 </html>
 

@@ -47,3 +47,7 @@ group :development do
   gem 'puma'
 end
 
+group :test do
+  gem 'simplecov'
+end
+
