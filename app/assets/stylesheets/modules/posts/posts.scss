@@ -1,0 +1,68 @@
+#page-body {
+  .post {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #E4E4CE;
+    border: 1px solid #000;
+    border-radius: 10px;
+    color: #000;
+    float: left;
+
+    .post .message {
+      float: left;
+      min-height: 200px;
+      padding: 10px;
+      line-height: 1.4em;
+      width: 800px;
+      font: 600 13px Open Sans;
+
+      .content {
+        background-color: #fff;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        text-align: justify;
+        margin-top: 2px;
+        box-shadow: 10px 10px 5px #888;
+        min-height: 300px;
+        position: relative;
+      }
+
+      ul.actions {
+        float: right;
+        margin-top: -10px;
+
+        li {
+          width: 72px;
+          height: 24px;
+          margin: 0 0 0 5px;
+          list-style: none;
+        }
+      }
+
+      header {
+        font-weight: 300;
+
+        a {
+          color: #C0111F;
+        }
+      }
+
+      footer {
+        font: 400 13px Open Sans;
+        margin-top: 20px;
+        padding: 10px;
+        border-top: 2px dotted #000;
+
+        img {
+          max-width: 770px;
+          max-height: 285px;
+        }
+      }
+    }
+  }
+}
+
+section.author .attributes-group-instructions {
+  display: none;
+}

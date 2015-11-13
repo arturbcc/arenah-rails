@@ -30,7 +30,7 @@ describe Game, type: :model do
 
   describe '#reopen!' do
     it 'changes the status of a game' do
-      game.update(status: 0)
+      game = create(:game, :closed)
       game.reopen!
       expect(game).to be_active
     end

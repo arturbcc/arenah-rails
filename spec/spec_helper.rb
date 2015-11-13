@@ -17,9 +17,14 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-if ENV['RCOV'] == 'true'
+if ENV['SIMPLE_COV'] == 'true'
   require 'simplecov'
-  SimpleCov.start
+
+  SimpleCov.start 'rails' do
+    %w{config/ spec/ coverage/ log/ bundle/}.each do |filter|
+      add_filter filter
+    end
+  end
 end
 
 RSpec.configure do |config|

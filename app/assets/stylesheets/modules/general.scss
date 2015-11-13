@@ -1,0 +1,57 @@
+body {
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+.clear {
+  clear: both;
+}
+
+h1 {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.relative {
+  position: relative;
+}
+
+.gold {
+  color: #F4DD1D !important;
+}
+
+#content {
+  width: 1004px;
+  margin: 0 auto;
+  margin-top: 55px;
+}
+
+#content header img {
+  width: 1000px;
+}
+
+#page-body {
+  padding-top: 15px;
+  font-size: 10px;
+  color: #fff;
+}
+
+#page-body h1 {
+  font-size: 2em;
+  line-height: inherit;
+  margin: 0.67em 0 !important;
+}
+
+#page-body h1 a:link, #content #page-body h1 a:visited, #page-body h1 a:active {
+  text-decoration: none;
+  color: #F4DD1D;
+}
+
+
+@media only screen and (max-width: 770px) {
+  .hide-on-small-screen {
+    display: none !important;
+  }
+}

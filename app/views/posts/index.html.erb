@@ -33,8 +33,8 @@
 
 <%= content_for :javascripts do %>
   <% unless @identity.unlogged? %>
-    $(document).ready(function () {
+    /*$(document).ready(function () {
       new UnreadPosts.Checker('<%= @topic.last_post_id %>').storeLastPostId();
-    });
+    });*/
   <% end %>
 <% end %>

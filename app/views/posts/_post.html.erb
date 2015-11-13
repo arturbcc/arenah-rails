@@ -1,17 +1,6 @@
-<%
-  isGameMaster = false
-  hasRecipients = false
-  isPostForLoggedCharacter = false
-  isPostOwner = false
-%>
+<% ability = Ability.new(@identity, post, character) %>
 
-<!-- % bool isPostForLoggedCharacter = Model.Game.Room.CurrentPost.IsForCharacter(Model.Identity.Character) && post.Author.Status == Character.StatusType.ACTIVE; % -->
-<!-- % bool isPostOwner = Model.Identity.Character != null && Model.Identity.Character.Id == post.CharacterId && post.Author.Status == Character.StatusType.ACTIVE; % -->
-
-
-<% player = ChracterPost.new(identity, post, character) %>
-
-<% if identity.game_master? %>
+<% if @identity.game_master? %>
   <style>
     .bbcode-master { display: block ! important; }
   </style>
@@ -23,48 +12,48 @@
   <section class="message">
     <header>
       <ul class="actions">
-        <% if player.can_delete? %>
+        <% if ability.can_delete? %>
           <li class="btn btn-dark btn-xs">
             <a href="javascript:void(0);" title="Excluir" data-post-id="<%= post.id %>" class="delete-post">Excluir</a>
           </li>
         <% end %>
-        <% if player.can_edit? %>
+        <% if ability.can_edit? %>
           <li class="btn btn-dark btn-xs">
             <!-- a href="< %: Url.Action("Edit", "Post", new { gameRoomSlug = Model.Game.Room.Slug, topicSlug = Model.Game.Room.CurrentTopic.Slug, id = post.Id } ) %>" title="Editar">Editar</a -->
           </li>
         <% end %>
 
-        <% if (isGameMaster || isPostForLoggedCharacter) { %>
+        <% if ability.can_reply? %>
             <li class="btn btn-dark btn-xs">
-              <!-- a href="<%: Url.Action("New", "Post", new { gameRoomSlug = Model.Game.Room.Slug, topicSlug = Model.Game.Room.CurrentTopic.Slug, id = post.Id } ) %>" title="Responder">Responder</a -->
+              <!-- a href="< %: Url.Action("New", "Post", new { gameRoomSlug = Model.Game.Room.Slug, topicSlug = Model.Game.Room.CurrentTopic.Slug, id = post.Id } ) %>" title="Responder">Responder</a -->
             </li>
-        <% } %>
+        <% end %>
       </ul>
       <div>
         <% if post.character.pc? %>
             por <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = post.Author.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="1015px">< %: post.Author.Name%></a -->
             em <%= post.created_at %>
         <% else %>
-            por <strong><%= post.character.name %></strong> em <%: post.Date() %>
+            por <strong><%= post.character.name %></strong> em <%= post.created_at %>
         <% end %>
       </div>
     </header>
 
-    <% if (hasRecipients && post.Author.Type == Character.CharacterType.GAMEMASTER) { %>
-      <div class="recipients <%: isPostForLoggedCharacter ? "highlight" : "" %>">
-        <%: string.Join(", ", Model.Game.Room.CurrentPost.RecipientsNames.ToArray()) %>
+    <% if !post.recipients.empty? %>
+      <div class="recipients <%= ability.recipient? ? "highlight" : "" %>">
+        <%= recipients_names(post) %>
       </div>
     <% end %>
 
     <article class="content">
-      <%= post.text %>
+      <%= post.message %>
     </article>
 
-    <% if (game.show_signatures && post.character.signature.present? %>
+    <% if game.show_signature && post.character.signature.present? %>
       <footer>
-          <!-- %= post.character.ParseSignature()) % -->
+        <%= post.character.signature %>
       </footer>
-    <% } %>
+    <% end %>
   </section>
 </section>
 <div class="clear"></div>

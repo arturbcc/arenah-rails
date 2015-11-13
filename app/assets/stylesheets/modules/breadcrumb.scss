@@ -1,0 +1,27 @@
+#page-body {
+  .bread-crumb a {
+    font-size: 12px;
+    color:#726F6F;
+
+    &:hover {
+      color: #F4DD1D;
+    }
+  }
+
+  .bread-crumb > a +a:before {
+    padding: 0 2px;
+    color: #726F6F;
+    content: "/\00a0";
+  }
+
+  .bread-crumb > .active {
+    cursor: default;
+    text-decoration: none;
+  }
+
+  .bread-crumb > .active:hover {
+    color: #F4DD1D;
+    cursor: default;
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,45 @@
+#site-header .navbar-collapse {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover,
+  .navbar-inverse .navbar-nav>li>a:focus {
+  background-color: #080808;
+}
+
+.navbar-inverse .navbar-nav>li:not(:last-child) {
+  border-right: 1px solid #000;
+}
+
+.navbar-inverse .navbar-nav>li:first-child {
+  border-left: 1px solid #000;
+}
+
+.navbar-fixed-top {
+  backface-visibility: hidden;
+}
+
+#site-header {
+  .dropdown-menu {
+    background-color: #1F1D1D;
+
+    .dropdown-menu {
+      a {
+        color: #fff;
+      }
+
+      i: hover {
+        color: #918D6C;
+      }
+
+      > li > a:hover {
+        color: #000 !important;
+      }
+    }
+  }
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  color: #262626 !important;
+}

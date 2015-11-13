@@ -1,0 +1,19 @@
+#page-body .post .message {
+  .recipients {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 23px;
+    background-color: #F5F5DC;
+    border-radius: 5px;
+    font: 500 15px Open Sans;
+  }
+
+  .recipients.highlight {
+    background-color: #000;
+    color: #F4DD1D;
+    font-weight: bold;
+  }
+}

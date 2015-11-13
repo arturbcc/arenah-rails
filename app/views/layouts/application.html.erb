@@ -20,24 +20,23 @@
   <%= yield :head %>
 </head>
 <body>
-  <% options = { identity: @identity, area: @area, game: @game, topic: @topic } %>
-  <%= render :header, identity: @identity, area: @area, game: @game, topic: @topic %>
-  <!-- % Html.RenderPartial("Header"); % -->
+  <%= render 'shared/header', area: @area, game: @game, topic: @topic %>
+
   <div id="content">
     <%= yield %>
 
     <section id="game-modal">
-      <!-- % Html.RenderPartial("IncludeModal"); % -->
+      <%= render 'shared/modal' %>
     </section>
   </div>
 
-  <!-- % Html.RenderPartial("Footer"); % >
-  < % Html.RenderPartial("HiddenFields"); % >
-  < % Html.RenderPartial("TrackingScripts"); % -->
+  <%= render 'shared/footer' %>
+  <%= render 'shared/hidden_fields' %>
+  <%= render 'shared/tracking_scripts' %>
 
   <% if @game.present? %>
     <script type="text/javascript">
-      ga('create', '<%= @game.GoogleAnalyticsCode %>', 'auto', { 'name': 'userTracker' });
+      ga('create', '< %= @game.GoogleAnalyticsCode %>', 'auto', { 'name': 'userTracker' });
     </script>
   <% end %>
 
@@ -46,4 +45,3 @@
   </script>
 </body>
 </html>
-
