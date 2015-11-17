@@ -3,7 +3,7 @@
 run the following commands:
 
 `rake db:drop db:create db:migrate db:seed`
-rake initialize::assets
+rake initialize:assets
 
 
 == README
