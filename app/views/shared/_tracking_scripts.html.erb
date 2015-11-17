@@ -10,5 +10,9 @@
 
     ga('create', 'UA-36555166-1', 'auto');
     ga('send', 'pageview');
+
+    <% if game.present? %>
+      ga('create', '< %= @game.GoogleAnalyticsCode %>', 'auto', { 'name': 'userTracker' });
+    <% end %>
   </script>
 <% end %>

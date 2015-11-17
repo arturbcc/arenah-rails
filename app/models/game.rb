@@ -19,4 +19,10 @@ class Game < ActiveRecord::Base
   def reopen!
     active!
   end
+
+  def pcs
+    characters
+      .where('characters.character_type = ?', 0)
+      .order('characters.name')
+  end
 end

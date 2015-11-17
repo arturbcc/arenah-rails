@@ -13,13 +13,11 @@
   <link rel="icon" href="/Content/Images/favicon.ico" type="image/ico" />
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600,700" rel="stylesheet" />
 
-  <% if @game.present? %>
-    <link href="/games/<%= @game.slug %>/css/custom.css" rel="stylesheet" />
-  <% end %>
+  <%= custom_css(@game) %>
 
   <%= yield :head %>
 </head>
-<body>
+<body class="arenah-theme">
   <%= render 'shared/header', area: @area, game: @game, topic: @topic %>
 
   <div id="content">
@@ -32,13 +30,7 @@
 
   <%= render 'shared/footer' %>
   <%= render 'shared/hidden_fields' %>
-  <%= render 'shared/tracking_scripts' %>
-
-  <% if @game.present? %>
-    <script type="text/javascript">
-      ga('create', '< %= @game.GoogleAnalyticsCode %>', 'auto', { 'name': 'userTracker' });
-    </script>
-  <% end %>
+  <%= render 'shared/tracking_scripts', game: @game %>
 
   <script>
     <%= yield :javascripts %>

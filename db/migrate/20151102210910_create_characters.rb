@@ -4,7 +4,7 @@ class CreateCharacters < ActiveRecord::Migration
       t.integer :user_id, index: true, foreign_key: true, null: false
       t.integer :game_id, index: true, foreign_key: true
       t.string :name, limit: 100
-      t.string :avatar_url
+      t.string :avatar
       t.integer :character_type, default: 0, null: false
       t.string :signature
       t.integer :status, default: 1, null: false

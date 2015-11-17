@@ -25,10 +25,11 @@
 
   <!-- % Html.RenderPartial("ButtonAndPagination"); % -->
   <!-- % Html.RenderPartial("PlayersList"); % -->
+  <%= render 'players_list', game: @game %>
 
-  <!-- % if (Model.Identity.CurrentRole == Identity.Role.GameMasterLogged || Model.Identity.CurrentRole == Identity.Role.PlayerLogged) { %>
+  <% unless @identity.read_only? %>
     <div id="online-users"></div>
-  < % } % -->
+  <% end %>
 </section>
 
 <%= content_for :javascripts do %>

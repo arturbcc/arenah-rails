@@ -35,4 +35,17 @@ describe Game, type: :model do
       expect(game).to be_active
     end
   end
+
+  describe '#pcs' do
+    let!(:user) { create(:user) }
+    let!(:game) { create(:game) }
+    let!(:char1) { create(:character, game: game, user: user) }
+    let!(:char2) { create(:character, game: game, user: user) }
+    let!(:npc) { create(:character, :npc, game: game, user: user) }
+    let!(:master) { create(:character, :game_master, game: game, user: user) }
+
+    it 'lists only the pc\'s ordered by name' do
+      expect(game.pcs).to eq([char1, char2])
+    end
+  end
 end

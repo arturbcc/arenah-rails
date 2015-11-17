@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20151105130550) do
     t.integer  "user_id",        limit: 4,               null: false
     t.integer  "game_id",        limit: 4
     t.string   "name",           limit: 100
-    t.string   "avatar_url",     limit: 255
+    t.string   "avatar",         limit: 255
     t.integer  "character_type", limit: 4,   default: 0, null: false
     t.string   "signature",      limit: 255
     t.integer  "status",         limit: 4,   default: 1, null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20151105130550) do
     t.string   "subtitle",              limit: 255
     t.string   "short_description",     limit: 255
     t.string   "description",           limit: 255
-    t.string   "banner_url",            limit: 255
+    t.string   "banner",                limit: 255
     t.string   "css",                   limit: 255
     t.string   "slug",                  limit: 255,                null: false
     t.integer  "status",                limit: 4,   default: 1

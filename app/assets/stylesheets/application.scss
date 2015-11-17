@@ -1,3 +1,6 @@
+/* External */
+@import 'bootstrap';
+
 @import 'modules/breadcrumb';
 @import 'modules/footer';
 @import 'modules/general';
@@ -11,7 +14,6 @@
 @import 'modules/posts/posts';
 @import 'modules/posts/recipients';
 @import 'modules/posts/saga';
-
 
 @import 'modules/header/alerts';
 @import 'modules/header/characters';

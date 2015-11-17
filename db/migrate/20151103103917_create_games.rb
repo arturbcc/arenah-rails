@@ -1,4 +1,4 @@
-class CreateGameRooms < ActiveRecord::Migration
+class CreateGames < ActiveRecord::Migration
   def change
     create_table :games do |t|
       t.integer :character_id, index: true, foreign_key: true
@@ -6,7 +6,7 @@ class CreateGameRooms < ActiveRecord::Migration
       t.string :subtitle
       t.string :short_description
       t.string :description
-      t.string :banner_url
+      t.string :banner
       t.string :css
       t.string :slug, null: false
       t.integer :status, default: 1
