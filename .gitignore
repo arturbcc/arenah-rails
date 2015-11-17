@@ -2,3 +2,5 @@ config/database.yml
 log/*.log
 coverage
 tmp/
+
+public/games/*

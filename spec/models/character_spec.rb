@@ -9,7 +9,6 @@ describe Character, type: :model do
   it { should have_many :posts }
   it { should validate_length_of :name }
   it { should validate_length_of :user_id }
-  it { should validate_presence_of :game_id }
   it { should validate_presence_of :slug }
   it { should validate_presence_of :character_type }
   it { should validate_presence_of :status }

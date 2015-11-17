@@ -14,7 +14,7 @@ module GameHelper
   private
 
   def banner_path(game)
-    "/games/#{game.id}/images/banners/#{game.banner}"
+    "/games/#{game.slug}/images/banners/#{game.banner}"
   end
 
   def default_banner_path

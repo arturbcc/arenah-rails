@@ -3,6 +3,7 @@
     <div id="panelHide">
       <p>Esconder</p>
     </div>
+
     <ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
       <% game.pcs.each do |character| %>
         <li>
@@ -10,8 +11,8 @@
           <%= link_to 'character_sheet#show', { 'data-toggle': 'modal', 'data-target': '#remoteModal', 'data-width': '1015px' } do %>
             <div class="imageWrapper player-unselected">
               <%= avatar(character) %>
-              <div class="characterNameBg" style="display: none;"></div>
-              <div class="characterName" style="display: none;"><%: character.Name %>
+              <div class="characterNameBg"></div>
+              <div class="characterName"><%= character.name %>
               </div>
             </div>
           <% end %>
@@ -19,6 +20,7 @@
       <% end %>
     </ul>
   </div>
+
   <div id="panelHandle">
     <p>Personagens</p>
   </div>

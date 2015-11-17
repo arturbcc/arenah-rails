@@ -1,3 +1,11 @@
+== Initial structure
+
+run the following commands:
+
+`rake db:drop db:create db:migrate db:seed`
+rake initialize::assets
+
+
 == README
 
 This README would normally document whatever steps are necessary to get the

@@ -48,19 +48,19 @@ ActiveRecord::Schema.define(version: 20151105130550) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "games", force: :cascade do |t|
-    t.integer  "character_id",          limit: 4
-    t.string   "name",                  limit: 255,                null: false
+    t.integer  "character_id",          limit: 4,                    null: false
+    t.string   "name",                  limit: 255,                  null: false
     t.string   "subtitle",              limit: 255
-    t.string   "short_description",     limit: 255
-    t.string   "description",           limit: 255
+    t.text     "short_description",     limit: 65535
+    t.text     "description",           limit: 65535
     t.string   "banner",                limit: 255
     t.string   "css",                   limit: 255
-    t.string   "slug",                  limit: 255,                null: false
-    t.integer  "status",                limit: 4,   default: 1
+    t.string   "slug",                  limit: 255,                  null: false
+    t.integer  "status",                limit: 4,     default: 1
     t.string   "google_analytics_code", limit: 255
-    t.boolean  "show_signature",                    default: true
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.boolean  "show_signature",                      default: true
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "games", ["character_id"], name: "index_games_on_character_id", using: :btree
@@ -74,11 +74,11 @@ ActiveRecord::Schema.define(version: 20151105130550) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "topic_id",     limit: 4,   null: false
+    t.integer  "topic_id",     limit: 4,        null: false
     t.integer  "character_id", limit: 4
-    t.string   "message",      limit: 255, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "message",      limit: 16777215, null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "posts", ["character_id"], name: "index_posts_on_character_id", using: :btree
@@ -108,12 +108,12 @@ ActiveRecord::Schema.define(version: 20151105130550) do
   add_index "topic_groups", ["slug"], name: "index_topic_groups_on_slug", unique: true, using: :btree
 
   create_table "topics", force: :cascade do |t|
+    t.integer  "topic_group_id", limit: 4
     t.integer  "game_id",        limit: 4,               null: false
     t.integer  "character_id",   limit: 4
     t.string   "title",          limit: 100,             null: false
     t.string   "description",    limit: 255
     t.integer  "position",       limit: 4,   default: 0
-    t.integer  "topic_group_id", limit: 4
     t.integer  "post_id",        limit: 4
     t.string   "slug",           limit: 255,             null: false
     t.datetime "created_at",                             null: false

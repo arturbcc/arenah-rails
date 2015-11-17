@@ -6,6 +6,8 @@ class Game < ActiveRecord::Base
   has_many :characters
   has_many :subscriptions
 
+  belongs_to :character
+
   friendly_id :name, :use => :slugged
   validates_presence_of :name, :slug
 

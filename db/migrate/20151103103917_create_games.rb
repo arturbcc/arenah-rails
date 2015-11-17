@@ -1,11 +1,11 @@
 class CreateGames < ActiveRecord::Migration
   def change
     create_table :games do |t|
-      t.integer :character_id, index: true, foreign_key: true
+      t.integer :character_id, index: true, foreign_key: true, null: false
       t.string :name, null: false
       t.string :subtitle
-      t.string :short_description
-      t.string :description
+      t.text :short_description, limit: 500
+      t.text :description
       t.string :banner
       t.string :css
       t.string :slug, null: false
