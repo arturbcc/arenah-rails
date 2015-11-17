@@ -12,7 +12,7 @@ module CharacterHelper
   private
 
   def avatar_path(character)
-    "/games/#{character.game.slug}/images/avatar/#{character.avatar}"
+    "/games/#{character.game.slug}/images/avatars/#{character.avatar}"
   end
 
   def male_avatar_path
