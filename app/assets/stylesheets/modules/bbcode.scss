@@ -1,0 +1,83 @@
+.bbcode-dice, .bbcode-dices {
+  border: 1px solid #CEC9C9;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 10px;
+  display: inline-table;
+  margin-bottom: 10px;
+  float: left;
+}
+
+.bbcode-dice {
+  background: url(/images/dices/dice-thumb.png) 0px 2px no-repeat;
+  padding-left: 30px;
+}
+
+.bbcode-full-width {
+  width: 100%;
+  display: inline-table;
+}
+
+.bbcode-dices hr {
+  border-top: 1px solid #B3AEAE;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.bbcode-dices br:first {
+  display: none;
+}
+
+.bbcode-dices kbd {
+  background-color: #6D0909;
+}
+
+.bbcode-master {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  color: #103910;
+  background-color: #E2EBF4;
+  border-radius: 10px;
+  bottom: 10px;
+  width: 745px;
+  display: none;
+}
+
+.bbcode-master .fa-comments {
+  margin-right: 5px;
+}
+
+blockquote {
+  margin: 1.5em 0 1.5em;
+  padding: 0 2em 0 2.5em;
+  position:relative;
+}
+blockquote:before
+ {
+  color: #ccc;
+  content: "\201C";
+  font-size: 5em;
+  position:absolute;
+  left:5px;
+  top: 0.3em;
+  line-height: 0.1em;
+}
+
+blockquote:after
+ {
+   color: #ccc;
+  content: "\201D";
+  font-size: 5em;
+  position:absolute;
+  right:3px;
+  bottom: 0em;
+  line-height: 0.1em;
+}
+
+.bbcode-spoiler a {
+  color: #6D0909;
+}
+
+.bbcode-spoiler span {
+  display: none;
+}

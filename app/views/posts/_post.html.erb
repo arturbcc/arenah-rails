@@ -47,7 +47,8 @@
     <% end %>
 
     <article class="content">
-      <%= post.message %>
+      <%#= post.message.bbcode_to_html %>
+      <%= BBCode.parse(post.message) %>
     </article>
 
     <% if game.show_signature && post.character.signature.present? %>

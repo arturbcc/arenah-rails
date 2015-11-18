@@ -5,12 +5,6 @@ class PostsController < ApplicationController
     @character = Character.new
     @game = Game.friendly.find(params[:game])
     @topic = Topic.friendly.find(params[:topic])
-    @posts = @topic.posts #Post.where(game: params[:game], topic: params[:topic])
+    @posts = @topic.posts
   end
-
-  private
-
-  # def posts_params
-  #   params.require(:game).require(:topic)
-  # end
 end

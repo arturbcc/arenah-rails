@@ -5,6 +5,11 @@ run the following commands:
 `rake db:drop db:create db:migrate db:seed`
 rake initialize:assets
 
+== Resources ==
+
+bbcode: https://github.com/veger/ruby-bbcode
+emoji: http://blog.dfilimonov.com/2012/09/27/emoji-4-rails.html
+
 
 == README
 
