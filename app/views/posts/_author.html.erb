@@ -1,0 +1,68 @@
+<% ability = Ability.new(@identity, nil, author) %>
+
+<section class="author">
+
+  <div class="flip-panel avatar">
+    <div class="front">
+      <%= avatar(author, author.active? ? 'regular-avatar' : 'black-and-white-avatar') %>
+    </div>
+
+    <div class="back">
+      <ul class="options">
+        <% if author.pc? %>
+          <li>
+            <a href="#" ><i class="fa fa-file-text-o"></i> Ficha</a>
+            <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = author.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="1015px">
+              <i class="fa fa-file-text-o"></i> Ficha
+            </a -->
+          </li>
+
+          <% if ability.can_send_alert? %>
+            <li>
+              <a href="#"><i class="fa fa-bell"></i> Enviar alerta</a>
+              <!-- a href="< %: Url.Action("New", "Alerts", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = author.Slug })%>" data-toggle="modal" data-target="#remoteModal" data-width="600px">
+                <i class="fa fa-bell"></i> Enviar alerta
+              </a -->
+            </li>
+          <% end %>
+        <% end %>
+
+        <% if ability.can_send_message? %>
+          <li>
+            <a href="#"><i class="fa fa-envelope"></i> Enviar mensagem</a>
+            <!-- a href="< %: Url.Action("New", "Inbox", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = Model.Identity.Character.Slug, action = "compose", to = author.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="600px">
+              <i class="fa fa-envelope"></i> Enviar mensagem
+            </a -->
+          </li>
+        <% end %>
+
+        <% if author.pc? %>
+          <li>
+            <!-- a href="< %: Url.Action("Show", "Equipment", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = author.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="600px">
+              <i class="fa fa-suitcase"></i> Inventário
+            </a -->
+          </li>
+        <% end %>
+      </ul>
+
+      <div class="pull-right">
+        <ul>
+          <li class="btn btn-dark btn-xs link">
+            <a class="close-flip-panel" href="javascript:void(0);" title="Voltar">Fechar</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="name show-tooltip" data-toggle="tooltip" data-original-title="Clique na imagem para mais opções" data-placement="top"><%= author.name %></div>
+
+  <!-- % if (author.Sheet.AttributesGroups.Count > 0 && author.Type == Character.CharacterType.PC) { %>
+     < % foreach (AttributesGroup group in author.Sheet.FindToShow()) { %>
+      <div class="attributes">
+        < % group.FlatVersion = false; %>
+        < % Html.RenderPartial("Sheet/AttributesGroups/" + group.Type, group); %>
+      </div>
+     < % end %>
+  < % end % -->
+</section>

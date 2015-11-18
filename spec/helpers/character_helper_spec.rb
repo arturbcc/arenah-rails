@@ -21,5 +21,17 @@ describe CharacterHelper do
         expect(helper.avatar(character)).to include('male.png')
       end
     end
+
+    context 'with extra class' do
+      it 'adds the .avatar class' do
+        character = build(:character)
+        expect(helper.avatar(character)).to include('class="avatar"')
+      end
+
+      it 'adds a custom class' do
+        character = build(:character)
+        expect(helper.avatar(character, 'custom')).to include('class="custom"')
+      end
+    end
   end
 end

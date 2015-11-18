@@ -1,11 +1,11 @@
 module CharacterHelper
-  def avatar(character)
+  def avatar(character, klass = 'avatar')
     if character.avatar.present?
-      image_tag avatar_path(character), alt: character.name, title: character.name
+      image_tag avatar_path(character), alt: character.name, title: character.name, class: klass
     elsif character.female?
-      image_tag female_avatar_path, alt: character.name, title: character.name
+      image_tag female_avatar_path, alt: character.name, title: character.name, class: klass
     else
-      image_tag male_avatar_path, alt: character.name, title: character.name
+      image_tag male_avatar_path, alt: character.name, title: character.name, class: klass
     end
   end
 

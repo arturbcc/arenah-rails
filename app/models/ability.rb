@@ -19,6 +19,14 @@ class Ability
     identity.game_master? || recipient?
   end
 
+  def can_send_alert?
+    identity.game_master? && character.active?
+  end
+
+  def can_send_message?
+    !identity.unlogged? && character.active?
+  end
+
   def author?
     return false if character.nil?
 
