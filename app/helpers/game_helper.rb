@@ -1,6 +1,6 @@
 module GameHelper
   def banner(game)
-    if game.banner.present?
+    if 1==2 && game.banner.present?
       image_tag banner_path(game), alt: game.name, title: game.name
     else
       image_tag default_banner_path

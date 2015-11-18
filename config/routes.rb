@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  scope path: ':game/:topic', id: /!\/games\//, as: 'topic' do
+  scope path: ':game/:topic', as: 'topic' do
+    #id: /!\/games\//,
     resources :posts, except: :show
   end
 
