@@ -1,6 +1,5 @@
 <%= content_for :title, "#{@game.try(:name)} - #{@topic.try(:title)} - Arenah Tsuki" %>
 
-<!-- % Html.RenderPartial("PostHeader"); % -->
 <%= render 'post_header', game: @game, topic: @topic %>
 
 <section id="page-body">
