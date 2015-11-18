@@ -47,13 +47,12 @@
     <% end %>
 
     <article class="content">
-      <%#= post.message.bbcode_to_html %>
       <%= BBCode.parse(post.message) %>
     </article>
 
     <% if game.show_signature && post.character.signature.present? %>
       <footer>
-        <%= post.character.signature %>
+        <%= BBCode.parse(post.character.signature) %>
       </footer>
     <% end %>
   </section>

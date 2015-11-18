@@ -148,7 +148,7 @@ class BBCode
         description: 'Send a hidden message to the game master',
         example: '[master]Can I change my attribute?[/master].'},
       dice: {
-        html_open: '<div class="bbcode-dice">', html_close: '</div>',
+        html_open: '<div class="bbcode-dice">%between%</div>', html_close: '',
         description: 'Show the result for a simple dice roll',
         require_between: true,
         example: 'dice result: [dice]1d100 = 10[/dice].'},
