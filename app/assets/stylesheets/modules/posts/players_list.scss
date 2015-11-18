@@ -14,6 +14,23 @@
   border-radius: 0 5px 5px 0;
   float: left;
   cursor: pointer;
+
+  p {
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+   /* Opera */
+    -ms-transform: rotate(90deg);
+   /* IE 9 */
+    color: #F4DD1D;
+    font-size: 22px;
+    font-weight: 700;
+    left: -4px;
+    position: relative;
+    top: 26px;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 #panelContent {
@@ -23,41 +40,25 @@
   background-color: #EEE;
 }
 
-#panelHandle p {
-  -moz-transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
- /* Opera */
-  -ms-transform: rotate(90deg);
- /* IE 9 */
-  color: #F4DD1D;
-  font-size: 22px;
-  font-weight: 700;
-  left: -4px;
-  position: relative;
-  top: 26px;
-  margin: 0;
-  padding: 0;
-}
-
-#panelHide p {
-  color: #F4DD1D;
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
-  float: left;
-  width: 100%;
-  border-bottom: 1px solid #fff;
-  margin: 0;
-  padding: 0;
-}
-
 #panelHide {
   background-color: #333;
   height: 35px;
   width: 100%;
   cursor: pointer;
+
+  p {
+    color: #F4DD1D;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    margin: 0;
+    padding: 0;
+  }
 }
+
 
 .jcarousel-skin-tango {
   margin-top: 10px;
@@ -111,42 +112,42 @@
   border-radius: 10px;
 }
 
-.jcarousel-skin-tango .jcarousel-container-vertical {
-  width : 160px;
-  background: #282828!important;
-  border: 1px solid #F4DD1D!important;
-  padding: 40px 20px;
-}
+.jcarousel-skin-tango  {
+  .jcarousel-container-vertical {
+    width : 160px;
+    background: #282828!important;
+    border: 1px solid #F4DD1D!important;
+    padding: 40px 20px;
+  }
 
-.jcarousel-skin-tango .jcarousel-container {
+  .jcarousel-container {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
-   border-radius: 10px;
+    border-radius: 10px;
     background: #F0F6F9;
     border: 1px solid #346F97;
-}
+  }
 
-
-.jcarousel-skin-tango .jcarousel-clip {
+  .jcarousel-clip {
     overflow: hidden;
-}
+  }
 
-.jcarousel-skin-tango .jcarousel-clip-vertical {
+  .jcarousel-clip-vertical {
     width:  140px;
     height: 245px;
     left: -10px;
-}
+  }
 
-.jcarousel-skin-tango .jcarousel-item-vertical {
+  .jcarousel-item-vertical {
     margin-bottom: 10px;
-}
+  }
 
-.jcarousel-skin-tango .jcarousel-item-placeholder {
+  .jcarousel-item-placeholder {
     background: #fff;
     color: #000;
-}
+  }
 
-.jcarousel-skin-tango .jcarousel-next-vertical {
+  .jcarousel-next-vertical {
     position: absolute;
     bottom: 5px;
     left: 65px;
@@ -154,26 +155,25 @@
     height: 32px;
     cursor: pointer;
     background: transparent url(/Images/jcarousel-button-down.png) no-repeat 0 0;
-}
 
-.jcarousel-skin-tango .jcarousel-next-vertical:hover,
-.jcarousel-skin-tango .jcarousel-next-vertical:focus {
-    background-position: 0 -32px;
-}
+    &:hover, &:focus {
+      background-position: 0 -32px;
+    }
 
-.jcarousel-skin-tango .jcarousel-next-vertical:active {
-    background-position: 0 -64px;
-}
+    &:active {
+      background-position: 0 -64px;
+    }
+  }
 
-.jcarousel-skin-tango .jcarousel-next-disabled-vertical,
-.jcarousel-skin-tango .jcarousel-next-disabled-vertical:hover,
-.jcarousel-skin-tango .jcarousel-next-disabled-vertical:focus,
-.jcarousel-skin-tango .jcarousel-next-disabled-vertical:active {
+  .jcarousel-next-disabled-vertical,
+  .jcarousel-next-disabled-vertical:hover,
+  .jcarousel-next-disabled-vertical:focus,
+  .jcarousel-next-disabled-vertical:active {
     cursor: default;
     background-position: 0 -96px;
-}
+  }
 
-.jcarousel-skin-tango .jcarousel-prev-vertical {
+  .jcarousel-prev-vertical {
     position: absolute;
     top: 5px;
     left: 65px;
@@ -181,24 +181,25 @@
     height: 32px;
     cursor: pointer;
     background: transparent url(/Images/jcarousel-button-up.png) no-repeat 0 0;
-}
 
-.jcarousel-skin-tango .jcarousel-prev-vertical:hover,
-.jcarousel-skin-tango .jcarousel-prev-vertical:focus {
-    background-position: 0 -32px;
-}
+    &:hover, &:focus {
+      background-position: 0 -32px;
+    }
 
-.jcarousel-skin-tango .jcarousel-prev-vertical:active {
-    background-position: 0 -64px;
-}
+    &:active {
+      background-position: 0 -64px;
+    }
+  }
 
-.jcarousel-skin-tango .jcarousel-prev-disabled-vertical,
-.jcarousel-skin-tango .jcarousel-prev-disabled-vertical:hover,
-.jcarousel-skin-tango .jcarousel-prev-disabled-vertical:focus,
-.jcarousel-skin-tango .jcarousel-prev-disabled-vertical:active {
+  .jcarousel-prev-disabled-vertical,
+  .jcarousel-prev-disabled-vertical:hover,
+  .jcarousel-prev-disabled-vertical:focus,
+  .jcarousel-prev-disabled-vertical:active {
     cursor: default;
     background-position: 0 -96px;
+  }
 }
+
 
 #panelContent img {
   border-radius: 5px;
