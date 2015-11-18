@@ -7,7 +7,6 @@
 <% end %>
 
 <section class="post">
-  <!-- % Html.RenderPartial("PostAuthor"); % -->
   <%= render 'author', author: post.character %>
 
   <section class="message">
@@ -33,9 +32,10 @@
       <div>
         <% if post.character.pc? %>
             por <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = post.Author.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="1015px">< %: post.Author.Name%></a -->
-            em <%= post.created_at %>
+            em <%= post.created_at.strftime("%A, %d de %B de %Y às %H:%Mh") %>
         <% else %>
-            por <strong><%= post.character.name %></strong> em <%= post.created_at %>
+            por <strong><%= post.character.name %></strong>
+            em <%= post.created_at.strftime("%A, %d de %B de %Y às %H:%Mh") %>
         <% end %>
       </div>
     </header>
