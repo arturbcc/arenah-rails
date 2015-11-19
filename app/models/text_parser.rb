@@ -1,10 +1,33 @@
-class BBCode
-  def self.parse(text)
-    parsed = text.bbcode_to_html(true, additional_tags)
-    parsed.gsub('\r\n', '<br/>').gsub('\n', '<br/>').html_safe
+class TextParser
+  attr_reader :text
+
+  def initialize(text)
+    @text = text
   end
 
-  def self.additional_tags
+  def parse
+    parse_bbcode
+    parse_emoji
+    parse_newline
+
+    text.html_safe
+  end
+
+  private
+
+  def parse_bbcode
+    text = text.bbcode_to_html(true, additional_tags)
+  end
+
+  def parse_emoji
+    text = text.bbcode_to_html(true, additional_tags)
+  end
+
+  def parse_newline
+    text = text.gsub('\r\n', '<br/>').gsub('\n', '<br/>')
+  end
+
+  def additional_tags
     {
       b: {
         html_open: '<strong>', html_close: '</strong>',

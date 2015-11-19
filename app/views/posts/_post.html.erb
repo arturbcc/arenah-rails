@@ -47,12 +47,12 @@
     <% end %>
 
     <article class="content">
-      <%= BBCode.parse(post.message) %>
+      <%= Parsers::Post.parse(post.message) %>
     </article>
 
     <% if game.show_signature && post.character.signature.present? %>
       <footer>
-        <%= BBCode.parse(post.character.signature) %>
+        <%= Parsers::Post.parse(post.character.signature) %>
       </footer>
     <% end %>
   </section>
