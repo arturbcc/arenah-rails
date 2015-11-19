@@ -2,10 +2,6 @@ body {
   font-family: Verdana, Helvetica, Arial, sans-serif;
 }
 
-.clear {
-  clear: both;
-}
-
 h1 {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
@@ -14,12 +10,16 @@ a {
   text-decoration: none !important;
 }
 
+.clear {
+  clear: both;
+}
+
 .relative {
   position: relative;
 }
 
 .gold {
-  color: #F4DD1D !important;
+  color: $gold !important;
 }
 
 #content {
@@ -46,7 +46,7 @@ a {
 
 #page-body h1 a:link, #content #page-body h1 a:visited, #page-body h1 a:active {
   text-decoration: none;
-  color: #F4DD1D;
+  color: $gold;
 }
 
 

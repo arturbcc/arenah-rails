@@ -4,7 +4,7 @@
     color:#726F6F;
 
     &:hover {
-      color: #F4DD1D;
+      color: $gold;
     }
   }
 
@@ -20,7 +20,7 @@
   }
 
   .bread-crumb > .active:hover {
-    color: #F4DD1D;
+    color: $gold;
     cursor: default;
     text-decoration: none;
   }

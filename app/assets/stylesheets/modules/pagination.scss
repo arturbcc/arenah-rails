@@ -48,7 +48,7 @@
 
   > li > a:hover,> li > span:hover,> li > a:focus,> li > span:focus {
     color: #000;
-    background-color: #F4DD1D;
+    background-color: $gold;
     border-color: #5C5454;
   }
 
@@ -57,7 +57,7 @@
     z-index: 2;
     color: #000;
     cursor: default;
-    background-color: #F4DD1D;
+    background-color: $gold;
     border-color: #5C5454;
   }
 

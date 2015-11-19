@@ -36,23 +36,23 @@
       height: 45px;
     }
   }
+}
 
-  #masters {
-    padding: 15px 0 15px 10px;
-  }
+#site-footer #masters {
+  padding: 15px 0 15px 10px;
+}
 
-  #home {
-    padding-left: 18px;
-    padding-top: 18px;
-  }
+#site-footer #home {
+  padding-left: 18px;
+  padding-top: 18px;
+}
 
-  #archive {
-    padding-top: 28px;
-  }
+#site-footer #archive {
+  padding-top: 28px;
+}
 
-  #info {
-    padding: 21px 0 0 21px;
-  }
+#site-footer #info {
+  padding: 21px 0 0 21px;
 }
 
 .social-footer {
@@ -61,8 +61,7 @@
   height: 70px;
 }
 
-.social-footer li
-{
+.social-footer li {
   padding-top: 15px !important;
 }
 

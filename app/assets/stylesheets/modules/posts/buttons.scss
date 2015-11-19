@@ -1,10 +1,10 @@
 .btn-dark {
   background-color: #3A3836;
   border-color: #eea236;
-  color: #f4DD1D;
+  color: &gold;
 
   a {
-    color: #F4DD1D !important;
+    color: $gold !important;
   }
 }
 
@@ -32,7 +32,7 @@
   &:hover, &:focus, &:active {
     background-color: #1D1C1B;
     border-color: #d58512;
-    color: #f4DD1D;
+    color: $gold;
   }
 }
 

@@ -1,35 +1,36 @@
 <footer id="site-footer">
   <div class="pull-left">
-    <%= link_to root_path do %>
+    <%= link_to root_path, class: 'pull-left', title: 'Página inicial' do %>
       <div class="icon border-right" id="home">
         <div class="home"></div>
       </div>
     <% end %>
 
-<!--
-    <a href="< %: Url.Action("About", "Home")%>" title="Sobre" class="pull-left">
+    <%= link_to about_path, class: 'pull-left', title: 'Sobre' do %>
       <div class="icon border-right" id="info">
         <div class="info"></div>
       </div>
-    </a>
+    <% end %>
   </div>
+
   <div class="pull-right">
-    <a href="< %: Url.Action("Museum", "Home")%>" title="Museu" class="pull-left">
+    <%= link_to museum_path, class: 'pull-left', title: 'Museu' do %>
       <div class="icon border-left" id="archive">
         <div class="archive"></div>
       </div>
-    </a>
-    <a href="< %: Url.Action("Masters", "Home")%>" title="Mestres" class="pull-left">
+    <% end %>
+
+    <%= link_to masters_path, class: 'pull-left', title: 'Mestres' do %>
       <div class="icon border-left" id="masters">
         <div class="masters"></div>
       </div>
-    </a>
-    <a href="http://m.arenah.com.br" title="Arenah no celular" class="pull-left">
+    <% end %>
+
+    <%= link_to 'http://m.arenah.com.br', title: 'Arenah no celular', class: 'pull-left' do %>
       <div class="icon border-left">
         <div class="mobile"></div>
       </div>
-    </a>
-  -->
+    <% end %>
   </div>
   <div>
     <ul class="social-small-grid social-footer">
