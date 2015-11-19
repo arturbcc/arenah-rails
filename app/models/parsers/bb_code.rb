@@ -67,11 +67,13 @@ class Parsers::BBCode
         quick_param_format: /(([a-z]+)|(#[0-9a-f]{6}))/i,
         param_tokens: [{ token: :color, optional: true, default: '#000' }]},
       dices: {
-        html_open: '<div class="bbcode-full-width"><div class="bbcode-dices"><kbd> %title%</kbd><hr/>%between%</div></div>', html_close: '',
-        description: 'Show the complete result for a dice roll',
-        require_between: true,
+        html_open: '<div class="bbcode-full-width"><div class="bbcode-dices"><kbd> %dices%</kbd><hr/>', html_close: '</div></div>',
+        description: 'Show the complete result for dice rolls',
         example: 'dice result: [dices=Title]1d100 = 10[/dices].',
-        param_tokens: [{ token: :title, optional: true, prefix: 'title=', postfix: '', default: '' }]},
+        allow_quick_param: true,
+        allow_between_as_param: false,
+        quick_param_format: /([\w\s]*)/i,
+        param_tokens: [{ token: :dices, optional: true, default: 'Rolagens' }]},
       line: {
         html_open: '<hr />', html_close: '',
         description: 'Make a line',

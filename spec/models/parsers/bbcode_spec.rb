@@ -113,8 +113,8 @@ describe Parsers::BBCode do
     end
 
     it 'shows dices results' do
-      expected = 'dice result: <div class="bbcode-full-width"><div class="bbcode-dices"><kbd> title=</kbd><hr/>1d100 = 10</div></div>'
-      expect(parse('dice result: [dices=Title]1d100 = 10[/dices]')).to eq(expected)
+      expected = 'dice result: <div class="bbcode-full-width"><div class="bbcode-dices"><kbd> Results</kbd><hr/>1d100 = 10</div></div>'
+      expect(parse('dice result: [dices=Results]1d100 = 10[/dices]')).to eq(expected)
     end
 
     it 'renders a line' do
