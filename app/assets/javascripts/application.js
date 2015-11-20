@@ -10,7 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require_tree .
 //= require jquery/dist/jquery.min
 //= require bootstrap/dist/js/bootstrap.min
 //= require_tree ../../../vendor/assets/javascripts/
+
+//= require modules/general
+//= require modules/players_list
+//= require modules/posts
