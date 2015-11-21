@@ -8,7 +8,7 @@ rake initialize:assets
 == Resources ==
 
 bbcode: https://github.com/veger/ruby-bbcode
-emoji: http://blog.dfilimonov.com/2012/09/27/emoji-4-rails.html
+emoji: emojis taken from http://www.emoji-cheat-sheet.com/
 
 
 == README
