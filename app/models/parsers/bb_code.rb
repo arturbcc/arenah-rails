@@ -72,7 +72,7 @@ class Parsers::BBCode
         example: 'dice result: [dices=Title]1d100 = 10[/dices].',
         allow_quick_param: true,
         allow_between_as_param: false,
-        quick_param_format: /([\w\s]*)/i,
+        quick_param_format: /([\w\d\s]*)/i,
         param_tokens: [{ token: :dices, optional: true, default: 'Rolagens' }]},
       line: {
         html_open: '<hr />', html_close: '',
@@ -83,10 +83,13 @@ class Parsers::BBCode
         description: 'Css clear',
         example: '[clear][/clear].'},
       spoiler: {
-        html_open: '<span class="bbcode-spoiler"><a href="javascript:;"><i class="fa fa-plus-square"></i> %title%</a><span>', html_close: '</span></span>',
+        html_open: '<span class="bbcode-spoiler"><a href="javascript:;"><i class="fa fa-plus-square"></i> %spoiler%</a><span>', html_close: '</span></span>',
         description: 'Show a hidden spoiler',
         example: '[spoiler=Title]He dies in the end[/spoiler].',
-        param_tokens: [{ token: :title, optional: true, default: '' }]
+        allow_quick_param: true,
+        allow_between_as_param: false,
+        quick_param_format: /([\w\d\s]*)/i,
+        param_tokens: [{ token: :spoiler, optional: true, default: '' }]
       }
     }
   end

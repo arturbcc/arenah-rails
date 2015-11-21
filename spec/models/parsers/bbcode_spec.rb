@@ -126,7 +126,7 @@ describe Parsers::BBCode do
     end
 
     it 'hides a spoiler' do
-      expect(parse('[spoiler=Title]He dies in the end[/spoiler]')).to eq('<span class="bbcode-spoiler"><a href="javascript:;"><i class="fa fa-plus-square"></i> </a><span>He dies in the end</span></span>')
+      expect(parse('[spoiler=Title]He dies in the end[/spoiler]')).to eq('<span class="bbcode-spoiler"><a href="javascript:;"><i class="fa fa-plus-square"></i> Title</a><span>He dies in the end</span></span>')
     end
   end
 
