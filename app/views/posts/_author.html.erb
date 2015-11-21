@@ -1,10 +1,10 @@
 <% ability = Ability.new(@identity, nil, author) %>
 
-<section class="author">
-
-  <div class="flip-panel avatar">
+<section class="author" data-author>
+  <div class="flip-panel avatar" data-flip-panel>
     <div class="front">
-      <%= avatar(author, author.active? ? 'regular-avatar' : 'black-and-white-avatar') %>
+      <% klass = author.active? ? 'regular-avatar' : 'black-and-white-avatar' %>
+      <%= avatar(author, class: klass, 'data-flip-avatar' => 1 ) %>
     </div>
 
     <div class="back">
@@ -48,14 +48,14 @@
       <div class="pull-right">
         <ul>
           <li class="btn btn-dark btn-xs link">
-            <a class="close-flip-panel" href="javascript:void(0);" title="Voltar">Fechar</a>
+            <a href="javascript:void(0);" title="Voltar" data-unflip>Fechar</a>
           </li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="name show-tooltip" data-toggle="tooltip" data-original-title="Clique na imagem para mais opções" data-placement="top"><%= author.name %></div>
+  <div class="name show-tooltip" data-toggle="tooltip" data-original-title="Clique na imagem para mais opções" data-placement="top" data-tooltip><%= author.name %></div>
 
   <!-- % if (author.Sheet.AttributesGroups.Count > 0 && author.Type == Character.CharacterType.PC) { %>
      < % foreach (AttributesGroup group in author.Sheet.FindToShow()) { %>

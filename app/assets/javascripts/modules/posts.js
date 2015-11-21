@@ -1,59 +1,47 @@
-var Post = {
-  initialize: function () {
-    this.bindActions();
-  },
+var Post = function(topic) {
+  this.topic = topic;
+  this.posts = $('[data-post]');
+  this.authors = $('[data-author]');
+  this.avatar = this.authors.find('[data-flip-avatar]');
+  this.closeAvatar = this.authors.find('[data-unflip]');
+  this.deletePost = this.posts.find('[data-delete-post]');
 
-  flipAvatarForOptions: function () {
-    $('.flip-panel img').click(function () {
-      var element = $(this).parents('div.flip-panel').eq(0);
-      element.addClass("flip");
-    });
+  this.bindEvents();
+}
 
-    $('.close-flip-panel').click(function (e) {
-      var element = $(this).parents('div.flip-panel').eq(0);
-      console.log(element.attr("class"));
-      element.removeClass("flip");
-      e.preventDefault();
-    });
-  },
+var fn = Post.prototype;
 
-  destroy: function (id, callback) {
-    var topicSlug = $("#topic-slug").val();
-    var url = gameRoomUrl() + topicSlug + "/post/" + id + "/apagar";
+fn.bindEvents = function() {
+  this.avatar.on('click', $.proxy(this.flipAvatar, this));
+  this.closeAvatar.on('click', $.proxy(this.unflipAvatar, this));
+  this.deletePost.on('click', $.proxy(this.destroy, this));
+};
+
+fn.flipAvatar = function(event) {
+  $(event.target).closest('[data-flip-panel]').addClass('flip');
+};
+
+fn.unflipAvatar = function(event) {
+  $(event.target).closest('[data-flip-panel]').removeClass('flip');
+  event.preventDefault();
+};
+
+fn.destroy = function (event) {
+  if (confirm('Tem certeza que deseja excluir?')) {
+    var $el = $(event.target),
+        id = $el.data('post-id'),
+        url = $el.data('delete-post');
+
     $.ajax({
       url: url,
-      type: "POST",
-      success: function (data) {
-        if (data.Status != "OK") {
+      type: 'DELETE',
+      success: function(data) {
+        if (data.Status != 'OK') {
           NotyMessage.show("Não é possível apagar a postagem", 3000);
         } else {
-          if (callback && typeof callback == "function") {
-            callback(data);
-          }
+          $el.closest('data-post').fadeOut();
         }
       }
     });
-  },
-
-  bindActions: function () {
-    $('#online-users').lockScrollOnFooter();
-    $('.show-tooltip').tooltip();
-    this.flipAvatarForOptions();
-
-    $(".delete-post").click(function () {
-      var self = this;
-      if (confirm("Tem certeza que deseja excluir?")) {
-        Post.destroy($(self).attr("data-post-id"), function () {
-          $(self).parents(".post").fadeOut();
-        });
-      }
-    });
-
-    //Remove first br for each 'dices' block in the posts
-    $(".dices").each(function (index, dice) { $("br", dice).eq(0).hide() });
   }
 };
-
-$(document).ready(function () {
-  Post.initialize();
-});

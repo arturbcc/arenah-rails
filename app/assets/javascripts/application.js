@@ -14,6 +14,9 @@
 //= require bootstrap/dist/js/bootstrap.min
 //= require_tree ../../../vendor/assets/javascripts/
 
-//= require modules/general
-//= require modules/players_list
-//= require modules/posts
+//= require_tree ./modules
+//= require_tree ./pages
+
+$(function() {
+  page.dispatch();
+});

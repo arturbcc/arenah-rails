@@ -17,7 +17,7 @@
 
   <%= yield :head %>
 </head>
-<body class="arenah-theme">
+<body data-page='<%= "#{controller.controller_name}##{controller.action_name}" %>' class="arenah-theme">
   <%= render 'shared/header', area: @area, game: @game, topic: @topic %>
 
   <div id="content">

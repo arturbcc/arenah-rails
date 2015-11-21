@@ -6,21 +6,6 @@ $.fn.scrollBottom = function () {
   return $(document).height() - this.scrollTop() - this.height();
 };
 
-$.fn.lockScrollOnFooter = function () {
-  var container = $(this);
-  var id = container.attr("id");
-  var threshold = 100;
-  $(window).scroll(function () {
-    var scrollPosition = $(this).scrollBottom();
-
-    if (scrollPosition < threshold) {
-      container.removeClass("normal").addClass("over-footer-position");
-    } else if (container.hasClass("over-footer-position")) {
-      container.removeClass("over-footer-position").addClass("normal-position");
-    }
-  });
-};
-
 $.urlParam = function (name) {
   var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
   if (results == null) {
