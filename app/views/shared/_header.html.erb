@@ -1,9 +1,8 @@
 <header id="site-header">
   <%
-    #Area area = current.Area
     characters = [] #Model.Identity.Characters.Count
     isSaga = false #Model.Game.Room != null && !string.IsNullOrEmpty(Model.Game.Room.FilterByCharacter);
-    url = '' #Request.RawUrl;
+    url = request.original_url
   %>
 
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -26,16 +25,17 @@
       <% end %>
 
       <% if @identity.unlogged? %>
-        <!-- li class="hide-on-small-screen">
-          <a href="< %: Url.Action("Register", "Passport", new { u = url }) %>">
-            <span class="fa fa-file-text-o"></span> Cadastre-se
-          </a>
-        </li>
         <li>
-          <a href="< %: Url.Action("Login", "Passport", new { u = url }) %>">
+          <%= link_to passport_register_path(url: url) do %>
+            <span class="fa fa-file-text-o"></span> Cadastre-se
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to passport_login_path(url: url) do %>
             <span class="fa fa-sign-in"></span> Entrar
-          </a>
-        </li -->
+          <% end %>
+        </li>
       <% end %>
 
       <% if game.present? && @identity.player? && !area.profile? %>

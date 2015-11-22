@@ -8,5 +8,10 @@ Rails.application.routes.draw do
 
   resources :posts, only: :destroy
 
+  namespace :passaporte, as: :passport do
+    get 'register', path: 'registro'
+    get 'login'
+  end
+
   root 'home#index'
 end
