@@ -1,0 +1,12 @@
+#home-modal {
+  color: #000;
+
+  .btn-default {
+    background-color: #ccc;
+    border: 0;
+
+    &:hover, &:focus {
+      color: #000;
+    }
+  }
+}

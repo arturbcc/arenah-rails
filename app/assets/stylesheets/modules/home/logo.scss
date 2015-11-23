@@ -1,0 +1,49 @@
+@media(min-width:767px) {
+  .logo-container {
+    position: relative;
+    margin-left: -400px;
+    transition: margin-left 500ms ease-in-out;
+    text-transform: none;
+  }
+
+  .top-nav-collapse .logo-container {
+    position: relative;
+    margin-left: 0;
+    transition: margin-left 500ms ease-in-out;
+  }
+
+  .top-nav-collapse .site-trademark {
+    top: 17px !important;
+    transition: top 600ms ease-in-out;
+  }
+}
+
+@media(max-width:767px) {
+  .logo-container {
+    display: none;
+  }
+}
+
+.site-logo {
+  font-family: cursive;
+}
+
+div.site-name {
+  font-size: 38px;
+  color: #F4DD1D;
+  margin-left: 5px;
+  text-shadow: 1px 2px #C0111F;
+  line-height: 47px;
+}
+
+div.site-trademark {
+  font-size: 25px;
+  position: absolute;
+  top: 17px;
+  left: 130px;
+  color: #C0111F;
+}
+
+.navbar-header a {
+  text-decoration: none;
+}

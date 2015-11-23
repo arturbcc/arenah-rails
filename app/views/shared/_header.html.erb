@@ -1,7 +1,6 @@
 <header id="site-header">
   <%
-    characters = [] #Model.Identity.Characters.Count
-    isSaga = false #Model.Game.Room != null && !string.IsNullOrEmpty(Model.Game.Room.FilterByCharacter);
+    is_saga = false #Model.Game.Room != null && !string.IsNullOrEmpty(Model.Game.Room.FilterByCharacter);
     url = request.original_url
   %>
 
@@ -40,14 +39,14 @@
 
       <% if game.present? && @identity.player? && !area.profile? %>
         <li class="dropdown user-dropdown hide-on-small-screen">
-          <% string iconGold = isSaga ? " icon-gold" : ""; %>
+          <% string iconGold = is_saga ? " icon-gold" : ""; %>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-star-half-o<%= iconGold %>"></i> <%= @character.name %> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <% if @topic %>
               <li>
-                <% if isSaga %>
+                <% if is_saga %>
                   <%= link_to posts_path(game, topic) do %>
                     <i class="fa fa-bars"></i> Todos os posts
                   <% end %>
@@ -81,9 +80,9 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <!-- a href="< %: Url.Action("Index", "GameRoomDashboard", new { gameRoomSlug = Model.Game.Room.Slug }) %>">
+              <%= link_to admin_game_path(game) do %>
                 <i class="fa fa-dashboard"></i> Painel
-              </a -->
+              <% end %>
             </li>
             <!-- li><a href="< %: Url.Action("Index", "GameRoomConfiguration", new { gameRoomSlug = Model.Game.Room.Slug }) %>"><i class="fa fa-gear"></i> Sala</a></li>
             <li><a href="< %: Url.Action("Index", "GameRoomCharacters", new { gameRoomSlug = Model.Game.Room.Slug, t = "pcs" }) %>"><i class="fa fa-meh-o"></i> Pcs</a></li>
@@ -96,20 +95,20 @@
 
         <% if area.panel? %>
           <li class="dropdown characters-dropdown hide-on-small-screen">
-            <!-- a href="< %: Url.Action("Home", "GameRoom", new { gameRoomSlug = Model.Game.Room.Slug })%>">
+            <%= link_to admin_game(game) do %>
               <i class="fa fa-home"></i> Ir para <%= game.name %>
-            </a -->
+            <% end %>
           </li>
         <% end %>
 
-        <% if !area.profile? && characters > 1 %>
+        <% if !area.profile? && game.present? && game.characters.length > 1 %>
           <li class="dropdown characters-dropdown hide-on-small-screen">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-male"></i><i class="fa fa-female"></i> Meus personagens <b class="caret"></b>
             </a>
 
             <div class="dropdown-menu" id="my-characters">
-              <% characters.each do |character| %>
+              <% game.characters.each do |character| %>
                 <% if character.active? && !character.game.nil? && character.game.active? %>
                   <!-- a href="/personagem/trocar/< %: character.GameRoom.Slug %>/< %: character.Slug %>">
                     <img src="< %: Html.AvatarUrl(character) %>" title="<strong>Nome: </strong>< %: character.Name %><br /><strong>Sala: </strong>< %: character.GameRoom.Name %>" />
@@ -130,7 +129,7 @@
 
         <li class="dropdown user-dropdown">
           <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-character-id="<%= character.id %>" id="character-menu">
-            <!-- %: Html.Avatar(Model.Identity.Character, "size-20") %> <b class="caret"></b -->
+            <%= avatar(@character, class: 'size-20') %> <b class="caret"></b>
           </a>
 
           <ul class="dropdown-menu">
@@ -150,18 +149,9 @@
 
             <li class="divider"></li>
             <li>
-              <%
-                logoutUrl = url
-
-                if game.present? && topic.present?
-                  logoutUrl = '' #Url.Action("Index", "Post", new { gameRoomSlug = Model.Game.Room.Slug, topicSlug = Model.Game.Room.CurrentTopic.Slug });
-                elsif game.present?
-                  logoutUrl = '' #Url.Action("Home", "GameRoom", new { gameRoomSlug = Model.Game.Room.Slug });
-                end
-              %>
-              <!-- a href="< %: Url.Action("SignOut", "Passport", new { url = logoutUrl }) %>">
+              <%= link_to passport_logout_path(url: url) do %>
                 <i class="fa fa-power-off"></i> Sair
-              </a -->
+              <% end %>
             </li>
           </ul>
         </li>
@@ -172,8 +162,8 @@
 </header>
 
 
-<% firstRequest = params['pg'] == nil %>
-<% if isSaga && firstRequest %>
+<% first_request = params['pg'] == nil %>
+<% if is_saga && first_request %>
   <script>
     $(document).ready(function () {
       NotyMessage.show("Você está vendo apenas a sua saga. Para voltar, escolha a opção 'Todos os Posts' no mesmo menu superior", 4500, "warning");

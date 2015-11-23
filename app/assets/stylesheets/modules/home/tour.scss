@@ -1,0 +1,35 @@
+#players-tour, #masters-tour {
+  width: 200px;
+  height: 148px;
+  border-radius: 10px;
+  border: 2px solid #000;
+  background-color: rgba(244, 221, 29, 0.44);
+  margin-top: 10px;
+  margin-left: 10px;
+  padding-top: 53px;
+  font-size: 20px;
+  color: #000;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    border: 1px solid #28c3ab;
+    outline: 0;
+    color: #28c3ab;
+    background-color: rgba(0, 0, 0, 0.57);
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+  }
+}
+
+#tour .col-centered-inner  {
+  width: 432px;
+}
+
+@media(max-width:460px) {
+  #tour .col-centered-inner{
+    width: 230px;
+  }
+}

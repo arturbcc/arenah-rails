@@ -1,0 +1,47 @@
+#edit-user-profile {
+  background-color: #F8F8F8;
+  padding: 15px;
+
+  div.field {
+    position: relative;
+  }
+
+  .password-verdict {
+    position: absolute;
+    display: block;
+    top: -18px;
+    left: 110px;
+    text-align: right;
+    width: 150px;
+  }
+
+  .progress {
+    margin-top: 10px;
+    width: 260px;
+    background-color: #000;
+  }
+
+  label, div.field {
+    clear: both;
+    width: 100%;
+    display: inline-table;
+  }
+
+  div.field {
+    position: relative;
+  }
+
+  label {
+    margin-top: 5px;
+    margin-bottom: 0;
+  }
+
+  input {
+    width: 260px;
+  }
+}
+
+#edit-user-profile-header {
+  text-align: center;
+  margin-bottom: 15px;
+}

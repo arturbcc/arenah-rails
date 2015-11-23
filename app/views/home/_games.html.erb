@@ -1,0 +1,22 @@
+<h3>Todas as salas:</h3>
+<div class="col-centered-outer">
+  <div class="col-centered-inner">
+    <% @games.each do |game| %>
+      <%= link_to game_path(game) do %>
+        <div class="gameRoom">
+          <header><%= banner(game) %></header>
+          <section>
+            <h3><%= game.name %></h3>
+            <div class="text-left subtitle"><%= game.subtitle %></div>
+
+            <hr />
+
+            <div class="short-description">
+              <%= game.short_description %>
+            </div>
+          </section>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

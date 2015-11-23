@@ -1,0 +1,21 @@
+@media(min-width:767px) {
+  .top-nav-collapse a {
+    color: $gold;
+  }
+
+  .site-trademark {
+    top: -300px !important;
+    transition: top 600ms ease-in-out;
+  }
+
+  .top-nav-collapse #social_nav_2 {
+    margin-top: 10px;
+    margin-left: 50px;
+  }
+}
+
+@media(max-width:767px) {
+  #social_nav_2 {
+    margin-top: 10px !important;
+  }
+}

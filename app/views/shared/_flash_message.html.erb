@@ -1,0 +1,6 @@
+<% if @message.present? %>
+  <% message_type = @message_type || 'error'; %>
+    <script type="text/javascript">
+      NotyMessage.show('<%= @message %>', 3000, '<%= message_type %>');
+    </script>
+<% end %>

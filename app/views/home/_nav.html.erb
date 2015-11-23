@@ -1,0 +1,28 @@
+<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+  <ul class="nav navbar-nav">
+    <li class="hidden">
+      <a href="#page-top"></a>
+    </li>
+    <li class="page-scroll">
+      <a href="#rooms">Salas</a>
+    </li>
+    <li class="page-scroll">
+      <a href="#tour" class="gold">Faça um tour</a>
+    </li>
+    <li class="page-scroll">
+      <a href="#sign-up">Crie sua sala</a>
+    </li>
+    <% if @user.present? %>
+      <li>
+        <%= link_to "Olá, #{@user.nickname}",
+              edit_profile_path(@user.id),
+              'data-toggle' => 'modal',
+              'data-target' => '#remoteModal' %>
+      </li>
+    <% else %>
+      <li class="page-scroll">
+        <%= link_to 'Cadastre-se', passport_register_path %>
+      </li>
+    <% end %>
+  </ul>
+</div>
