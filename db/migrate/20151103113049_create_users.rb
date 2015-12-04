@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :nickname, null: false
       t.string :secret_question
       t.string :secret_answer
-      t.boolean :active, default: 0
+      t.boolean :active, default: false
       t.string :activation_code
       t.string :slug, null: false
 
