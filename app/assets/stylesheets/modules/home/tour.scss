@@ -1,4 +1,5 @@
-#players-tour, #masters-tour {
+#players-tour,
+#masters-tour {
   width: 200px;
   height: 148px;
   border-radius: 10px;
@@ -29,7 +30,7 @@
 }
 
 @media(max-width:460px) {
-  #tour .col-centered-inner{
+  #tour .col-centered-inner {
     width: 230px;
   }
 }

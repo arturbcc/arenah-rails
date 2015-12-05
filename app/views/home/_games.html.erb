@@ -3,7 +3,7 @@
   <div class="col-centered-inner">
     <% @games.each do |game| %>
       <%= link_to game_path(game) do %>
-        <div class="gameRoom">
+        <div class="game">
           <header><%= banner(game) %></header>
           <section>
             <h3><%= game.name %></h3>
