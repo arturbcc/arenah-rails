@@ -1,31 +1,31 @@
 #page-body {
   .post {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #E4E4CE;
-    border: 1px solid #000;
-    border-radius: 10px;
-    color: #000;
     float: left;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #000;
+    background-color: #E4E4CE;
+    border-radius: 10px;
+    border: 1px solid #000;
 
     .message {
       float: left;
-      min-height: 200px;
       padding: 10px;
-      line-height: 1.4em;
       width: 800px;
+      min-height: 200px;
       font: 600 13px Open Sans;
+      line-height: 1.4em;
 
       .content {
-        background-color: #fff;
-        padding: 15px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        text-align: justify;
-        margin-top: 2px;
-        box-shadow: 10px 10px 5px #888;
-        min-height: 300px;
         position: relative;
+        padding: 15px;
+        margin-top: 2px;
+        min-height: 300px;
+        text-align: justify;
+        background-color: #fff;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 10px 10px 5px #888;
       }
 
       ul.actions {
@@ -49,9 +49,9 @@
       }
 
       footer {
-        font: 400 13px Open Sans;
-        margin-top: 20px;
         padding: 10px;
+        margin-top: 20px;
+        font: 400 13px Open Sans;
         border-top: 2px dotted #000;
 
         img {
@@ -67,6 +67,6 @@ section.author .attributes-group-instructions {
   display: none;
 }
 
-.characterName, .characterNameBg {
+.character-name, .character-name-background {
   display: none;
 }

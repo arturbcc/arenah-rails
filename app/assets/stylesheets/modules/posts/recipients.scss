@@ -1,19 +1,19 @@
 #page-body .post .message {
   .recipients {
+    padding: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
+    font: 500 15px Open Sans;
     text-align: center;
     line-height: 23px;
     background-color: #F5F5DC;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font: 500 15px Open Sans;
   }
 
   .recipients.highlight {
-    background-color: #000;
     color: $gold;
     font-weight: bold;
+    background-color: #000;
   }
 }

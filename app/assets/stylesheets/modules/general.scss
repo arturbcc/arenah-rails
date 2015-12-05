@@ -3,7 +3,7 @@ body {
 }
 
 h1 {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -26,25 +26,28 @@ a {
   width: 1004px;
   margin: 0 auto;
   margin-top: 55px;
-}
 
-#content header img {
-  width: 1000px;
+  header img {
+    width: 1000px;
+  }
 }
 
 #page-body {
   padding-top: 15px;
   font-size: 10px;
   color: #fff;
+
+  h1 {
+    margin: .67em 0 !important;
+    font-size: 2em;
+    line-height: inherit;
+  }
 }
 
-#page-body h1 {
-  font-size: 2em;
-  line-height: inherit;
-  margin: 0.67em 0 !important;
-}
 
-#page-body h1 a:link, #content #page-body h1 a:visited, #page-body h1 a:active {
+#page-body h1 a:link,
+#content #page-body h1 a:visited,
+#page-body h1 a:active {
   text-decoration: none;
   color: $gold;
 }

@@ -4,22 +4,22 @@
   font: 300 13px Open Sans;
 
   .name {
-    background-color: #F5F5DC;
+    width: 185px;
     margin-top: 20px;
     text-align: center;
-    border: 1px solid #ccc;
-    width: 185px;
     font-weight: 600;
+    background-color: #F5F5DC;
+    border: 1px solid #ccc;
   }
 
   .attributes-group h2 {
-    text-align: center;
-    margin-top: -16px;
     height: 20px;
-    line-height: 20px;
+    margin-top: -16px;
+    margin-bottom: 0;
     font-size: 15px;
     font-weight: bold;
-    margin-bottom: 0;
+    text-align: center;
+    line-height: 20px;
   }
 
   hr {
@@ -27,12 +27,12 @@
   }
 
   img {
-    border: 1px solid #130316;
-    box-shadow: 10px 10px 5px #888;
-    margin: 0 auto;
     display: block;
     max-width: 133px;
     max-height: 133px;
+    margin: 0 auto;
+    border: 1px solid #130316;
+    box-shadow: 10px 10px 5px #888;
   }
 
   table {
@@ -42,11 +42,11 @@
 
 .flip-panel.avatar {
   .back {
+    display: block;
+    margin: 0 auto;
+    background-color: #fff;
     border: 1px solid #130316;
     box-shadow: 10px 10px 5px #888;
-    margin: 0 auto;
-    display: block;
-    background-color: #fff;
 
     .link {
       margin-right: 3px;
@@ -61,11 +61,11 @@
       }
 
       li {
-        list-style-type: none;
         margin-bottom: 6px;
+        list-style-type: none;
 
         &:hover {
-          background-color: #F5F5DC;
+          background-color: #f5f5dc;
         }
 
         a {
@@ -78,13 +78,14 @@
 }
 
 .flip-panel {
+  position: relative;
+  height: 130px;
+  width: 130px;
+  margin: 0 auto;
+  font-size: .8em;
   cursor: pointer;
   background-color: transparent;
-  margin: 0 auto;
-  width: 130px;
-  height: 130px;
-  position: relative;
-  font-size: .8em;
+
   -webkit-perspective: 600px;
   -moz-perspective: 600px;
 
@@ -95,6 +96,7 @@
     width: inherit;
     height: inherit;
     text-align: center;
+
     -webkit-transform: rotateX(0deg) rotateY(0deg);
     -webkit-transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
@@ -115,6 +117,7 @@
     z-index: 800;
     width: inherit;
     height: inherit;
+
     -webkit-transform: rotateY(-180deg);
     -webkit-transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
@@ -132,12 +135,14 @@
 
   &.flip .front {
     z-index: 900;
+
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
   }
 
   &.flip .back {
     z-index: 1000;
+
     -webkit-transform: rotateX(0deg) rotateY(0deg);
     -moz-transform: rotateX(0deg) rotateY(0deg);
     -webkit-backface-visibility: hidden;
@@ -151,5 +156,5 @@
 
 
 .post .author .circle .full {
-  background-color: #B6B6A6;
+  background-color: #b6b6a6;
 }

@@ -8,10 +8,10 @@
     }
   }
 
-  .bread-crumb > a +a:before {
-    padding: 0 2px;
-    color: #726F6F;
+  .bread-crumb > a + a:before {
     content: "/\00a0";
+    padding: 0 2px;
+    color: #726f6f;
   }
 
   .bread-crumb > .active {
@@ -21,7 +21,7 @@
 
   .bread-crumb > .active:hover {
     color: $gold;
-    cursor: default;
     text-decoration: none;
+    cursor: default;
   }
 }

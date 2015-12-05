@@ -11,21 +11,21 @@
     display: block;
     top: -18px;
     left: 110px;
-    text-align: right;
     width: 150px;
+    text-align: right;
   }
 
   .progress {
-    margin-top: 10px;
     width: 260px;
+    margin-top: 10px;
     background-color: #000;
   }
 
   label,
   div.field {
+    display: inline-table;
     clear: both;
     width: 100%;
-    display: inline-table;
   }
 
   div.field {
@@ -43,6 +43,6 @@
 }
 
 #edit-user-profile-header {
-  text-align: center;
   margin-bottom: 15px;
+  text-align: center;
 }

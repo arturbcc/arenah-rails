@@ -65,11 +65,11 @@ a:focus {
   height: 70px;
   margin-top: 15px;
   padding: 7px 16px;
-  border: 2px solid #fff;
-  border-radius: 35px;
   font-size: 40px;
   color: #fff;
   background: 0 0;
+  border: 2px solid #fff;
+  border-radius: 35px;
   -webkit-transition: background .3s ease-in-out;
   -moz-transition: background .3s ease-in-out;
   transition: background .3s ease-in-out;
@@ -110,9 +110,9 @@ a:focus {
   color: #fff;
   background: url(/images/home/forest.jpg) no-repeat center center scroll;
   background-color: #000;
+  background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
-  background-size: cover;
   -o-background-size: cover;
 }
 
@@ -123,9 +123,6 @@ a:focus {
 }
 
 @media(min-width:767px) {
-  .content-section {
-  }
-
   .download-section {
     padding: 100px 0;
   }
@@ -146,17 +143,17 @@ a:focus {
 }
 
 .btn-default {
-  border: 1px solid #000;
   color: #000;
   background-color: $gold;
+  border: 1px solid #000;
 }
 
 .btn-default:hover,
 .btn-default:focus {
-  border: 1px solid #28c3ab;
   outline: 0;
   color: #28c3ab;
   background-color: transparent;
+  border: 1px solid #28c3ab;
 }
 
 .btn-huge {
@@ -167,13 +164,13 @@ a:focus {
 ::-moz-selection {
   text-shadow: none;
   background: #fcfcfc;
-  background: rgba(255,255,255,.2);
+  background: rgba(255, 255, 255, .2);
 }
 
 ::selection {
   text-shadow: none;
   background: #fcfcfc;
-  background: rgba(255,255,255,.2);
+  background: rgba(255, 255, 255, .2);
 }
 
 img::selection {
@@ -185,7 +182,7 @@ img::-moz-selection {
 }
 
 body {
-  webkit-tap-highlight-color: rgba(255,255,255,.2);
+  webkit-tap-highlight-color: rgba(255, 255, 255, .2);
 }
 
 .gold-text {

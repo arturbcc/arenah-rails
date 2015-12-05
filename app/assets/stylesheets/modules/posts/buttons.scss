@@ -1,7 +1,7 @@
 .btn-dark {
+  color: &gold;
   background-color: #3A3836;
   border-color: #eea236;
-  color: &gold;
 
   a {
     color: $gold !important;
@@ -10,18 +10,19 @@
 
 .btn {
   display: inline-block;
+  padding: 6px 12px;
   margin-bottom: 0;
   font-weight: 400;
+  font-size: 14px;
   text-align: center;
+  line-height: 1.42857143;
   vertical-align: middle;
   cursor: pointer;
   background-image: none;
   border: 1px solid transparent;
-  white-space: nowrap;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
   border-radius: 4px;
+  white-space: nowrap;
+
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -29,14 +30,17 @@
   -webkit-appearance: button;
   text-transform: none;
 
-  &:hover, &:focus, &:active {
+  &:hover,
+  &:focus,
+  &:active {
+    color: $gold;
     background-color: #1D1C1B;
     border-color: #d58512;
-    color: $gold;
   }
 }
 
-.btn-xs, .btn-group-xs > .btn {
+.btn-xs,
+.btn-group-xs > .btn {
   padding: 1px 5px;
   font-size: 12px;
   line-height: 1.5;
@@ -48,6 +52,6 @@
 }
 
 .actions .btn-xs a {
-  width: 100%;
   display: inline-table;
+  width: 100%;
 }

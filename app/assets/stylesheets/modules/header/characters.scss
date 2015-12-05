@@ -1,15 +1,15 @@
 #my-characters {
   width: 265px;
   padding: 4px;
-  text-align: center;
-  background-color: #000;
-  color: $gold;
   border-top: 0 !important;
+  text-align: center;
+  color: $gold;
+  background-color: #000;
 
   img {
-    margin: 4px;
-    width: 70px;
     height: 70px;
+    width: 70px;
+    margin: 4px;
     border: 1px solid #000;
     border-radius: 10px;
   }

@@ -1,23 +1,23 @@
 var selectedPlayerId = 0;
 
 function showCharacterName(elem) {
-  elem.children('.characterNameBg').show();
-  elem.children('.characterName').show();
+  elem.children('.character-name-background').show();
+  elem.children('.character-name').show();
 };
 
 function hideCharacterName(elem) {
   if (!elem) {
-    $('.characterNameBg').hide();
-    $('.characterName').hide();
+    $('.character-name-background').hide();
+    $('.character-name').hide();
   } else {
-    elem.children('.characterNameBg').hide();
-    elem.children('.characterName').hide();
+    elem.children('.character-name-background').hide();
+    elem.children('.character-name').hide();
   }
 };
 
 function unbindEvents() {
-  $('.imageWrapper').unbind('hover');
-  $('.imageWrapper').unbind('click');
+  $('.image-wrapper').unbind('hover');
+  $('.image-wrapper').unbind('click');
   $('.jcarousel').unbind('mousewheel');
 };
 
@@ -45,7 +45,7 @@ $(document).ready(function () {
     $('.jcarousel-skin-tango .jcarousel-clip-vertical').css('height', windowHeight - 140);
 
     //Mouse over on side panel players
-    $('.imageWrapper').hover(function () {
+    $('.image-wrapper').hover(function () {
       var playerId = $(this).find('img').attr('rel');
 
       if (playerId != selectedPlayerId) {
@@ -61,7 +61,7 @@ $(document).ready(function () {
     });
 
     //opening/closure of player data
-    $(".imageWrapper").click(function () {
+    $(".image-wrapper").click(function () {
       hideCharacterName();
       var retreat = selectedPlayerId == $(this).find('img').attr('rel');
       selectedPlayerId = $(this).find('img').attr('rel');

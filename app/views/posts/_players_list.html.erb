@@ -9,10 +9,10 @@
         <li>
           <!-- ARRUMAR LINK -->
           <%= link_to 'character_sheet#show', { 'data-toggle': 'modal', 'data-target': '#remoteModal', 'data-width': '1015px' } do %>
-            <div class="imageWrapper player-unselected">
+            <div class="image-wrapper player-unselected">
               <%= avatar(character) %>
-              <div class="characterNameBg"></div>
-              <div class="characterName"><%= character.name %>
+              <div class="character-name-background"></div>
+              <div class="character-name"><%= character.name %>
               </div>
             </div>
           <% end %>

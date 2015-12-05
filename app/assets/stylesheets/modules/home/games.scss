@@ -1,8 +1,8 @@
 .game {
   float: left;
   padding: 0;
-  margin-left: 20px;
   margin-bottom: 30px;
+  margin-left: 20px;
   cursor: pointer;
   font-family: open sans;
   font-size: 13px;
@@ -10,7 +10,7 @@
   border: 2px solid #464646;
 
   @media(min-width: 992px) {
-     height: 370px;
+    height: 370px;
   }
 
   @media(min-width: 1200px) {
@@ -36,10 +36,10 @@
   }
 
   .author {
-    border-radius: 50%;
     float: left;
-    margin-right: 10px;
     width: 51px;
+    margin-right: 10px;
+    border-radius: 50%;
   }
 
   .author-avatar {
@@ -50,9 +50,9 @@
     transition: opacity .45s linear;
 
     img {
-      border-radius: 50%;
       height: 40px;
       width: 40px;
+      border-radius: 50%;
       border: 1px solid #000;
 
       -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
@@ -62,15 +62,15 @@
   }
 
   h3 {
-    text-align: left;
-    text-transform: inherit;
     margin-bottom: 10px;
     padding: 5px 5px 2px 10px;
+    text-align: left;
+    text-transform: inherit;
   }
 
   hr {
-    border-color: #403E3E;
     margin: 10px;
+    border-color: #403E3E;
   }
 
   header {

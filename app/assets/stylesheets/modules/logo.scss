@@ -2,20 +2,22 @@
   font-family: cursive;
 }
 
-div.site-name {
-  font-size: 38px;
-  color: $gold;
-  margin-left: 5px;
-  text-shadow: 1px 2px #C0111F;
-  line-height: 47px;
-}
+div {
+  &.site-name {
+    margin-left: 5px;
+    line-height: 47px;
+    font-size: 38px;
+    color: $gold;
+    text-shadow: 1px 2px #c0111f;
+  }
 
-div.site-trademark {
-  font-size: 25px;
-  position: absolute;
-  top: 17px;
-  left: 130px;
-  color: #C0111F;
+  &.site-trademark {
+    position: absolute;
+    top: 17px;
+    left: 130px;
+    font-size: 25px;
+    color: #c0111f;
+  }
 }
 
 .navbar-header a {

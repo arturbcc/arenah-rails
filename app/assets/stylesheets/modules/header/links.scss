@@ -4,7 +4,7 @@
 }
 
 .navbar-inverse .navbar-nav>li>a:hover,
-  .navbar-inverse .navbar-nav>li>a:focus {
+.navbar-inverse .navbar-nav>li>a:focus {
   background-color: #080808;
 }
 
@@ -22,15 +22,15 @@
 
 #site-header {
   .dropdown-menu {
-    background-color: #1F1D1D;
+    background-color: #1f1d1d;
 
     .dropdown-menu {
       a {
         color: #fff;
       }
 
-      i: hover {
-        color: #918D6C;
+      i:hover {
+        color: #918d6c;
       }
 
       > li > a:hover {
@@ -40,6 +40,7 @@
   }
 }
 
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
   color: #262626 !important;
 }

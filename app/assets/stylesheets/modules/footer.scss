@@ -1,23 +1,23 @@
 #site-footer {
+  float: left;
+  width: 100%;
+  height: 73px;
+  bottom: 0;
+  box-sizing: initial !important;
   margin: 0;
   margin-top: 5px;
-  border-top: 1px solid #000;
   background-color: #101010;
-  height: 73px;
-  box-sizing: initial !important;
-  bottom: 0;
-  width: 100%;
-  float: left;
+  border-top: 1px solid #000;
 
   .icon {
     width: 76px;
     height: 70px;
-    background-color: #1D1C1B;
-    cursor: pointer;
     padding: 15px 25px;
+    cursor: pointer;
+    background-color: #1d1c1b;
 
     &:hover {
-      background-color: #3A3836;
+      background-color: #3a3836;
     }
 
     &.border-left {
@@ -36,39 +36,36 @@
       height: 45px;
     }
   }
-}
 
-#site-footer #masters {
-  padding: 15px 0 15px 10px;
-}
+  #masters {
+    padding: 15px 0 15px 10px;
+  }
 
-#site-footer #home {
-  padding-left: 18px;
-  padding-top: 18px;
-}
+  #home {
+    padding-left: 18px;
+    padding-top: 18px;
+  }
 
-#site-footer #archive {
-  padding-top: 28px;
-}
+  #archive {
+    padding-top: 28px;
+  }
 
-#site-footer #info {
-  padding: 21px 0 0 21px;
+  #info {
+    padding: 21px 0 0 21px;
+  }
 }
 
 .social-footer {
   float: right;
   width: 220px !important;
   height: 70px;
-}
+  background-color: #1d1c1b;
 
-.social-footer li {
-  padding-top: 15px !important;
-}
+  li {
+    padding-top: 15px !important;
+  }
 
-.social-footer:hover {
-  background-color: #3A3836;
-}
-
-.social-footer {
-  background-color: #1D1C1B;
+  &:hover {
+    background-color: #3a3836;
+  }
 }
