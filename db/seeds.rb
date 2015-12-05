@@ -32,7 +32,7 @@ eva = Character.create(user: mayara, name: 'Eva', avatar: 'evap.png', post_count
 amy = Character.create(user: mariana, name: 'Amy', avatar: 'amy.png', character_type: 2, gender: 1, post_count: 199, last_post_date: Time.now)
 
 khalmyr = Character.create(user: artur, name: 'Khalmyr', avatar: 'khalmyr.png', character_type: 2)
-wynna = Character.create(user: janeroe, name: 'Wynna', avatar: 'wynna.png', character_type: 2)
+wynna = Character.create(user: janeroe, name: 'Wynna', avatar: 'wynna.jpg', character_type: 2)
 mestre_dos_magos = Character.create(user: artur, name: 'Mestre dos Magos', avatar: 'mestre-dos-magos.png', character_type: 2)
 
 luffy = Character.create(user: artur, name: 'Luffy', avatar: 'luffy.png', character_type: 1)
@@ -82,6 +82,7 @@ eric.update(game: dungeonsanddragons)
 presto.update(game: dungeonsanddragons)
 bobby.update(game: dungeonsanddragons)
 sheila.update(game: dungeonsanddragons)
+mestre_dos_magos.update(game: dungeonsanddragons)
 
 
 vampire = Game.new(

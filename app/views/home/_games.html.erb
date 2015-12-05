@@ -1,10 +1,17 @@
-<h3>Todas as salas:</h3>
-<div class="col-centered-outer">
-  <div class="col-centered-inner">
+<div class='col col-sm-12'>
+  <h3>Todas as salas</h3>
     <% @games.each do |game| %>
       <%= link_to game_path(game) do %>
-        <div class="game">
-          <header><%= banner(game) %></header>
+        <div class="game col col-sm-12">
+          <header>
+            <%= banner(game) %>
+              <section class='author-avatar'>
+                <% game.masters.each do |master| %>
+                  <%= avatar(master) %>
+                <% end %>
+              </section>
+          </header>
+
           <section>
             <h3><%= game.name %></h3>
             <div class="text-left subtitle"><%= game.subtitle %></div>
@@ -18,5 +25,4 @@
         </div>
       <% end %>
     <% end %>
-  </div>
 </div>

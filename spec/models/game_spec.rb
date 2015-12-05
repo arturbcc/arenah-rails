@@ -49,4 +49,17 @@ describe Game, type: :model do
       expect(game.pcs).to eq([char1, char2])
     end
   end
+
+  describe '#masters' do
+    let!(:user) { create(:user) }
+    let!(:game) { create(:game) }
+    let!(:char1) { create(:character, game: game, user: user) }
+    let!(:npc) { create(:character, :npc, game: game, user: user) }
+    let!(:master1) { create(:character, :game_master, game: game, user: user) }
+    let!(:master2) { create(:character, :game_master, game: game, user: user) }
+
+    it 'lists only the masters ordered by name' do
+      expect(game.masters).to match_array([master1, master2])
+    end
+  end
 end

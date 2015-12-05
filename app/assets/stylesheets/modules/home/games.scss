@@ -1,33 +1,29 @@
 .game {
   float: left;
-  height: 320px;
-  border: 1px solid #000;
-  margin-left: 20px;
-  background-color: #171616;
-  border-radius: 10px;
+  position: relative;
+  width: 360px;
+  height: 370px;
   padding: 0;
+  margin-left: 20px;
   margin-bottom: 30px;
-  box-shadow: 0 0 0 0 transparent;
-  -webkit-transition: box-shadow .2s ease-in-out;
-  -moz-transition: box-shadow .2s ease-in-out;
-  transition: box-shadow .2s ease-in-out;
   cursor: pointer;
-  font-family: Verdana;
+  font-family: open sans;
   font-size: 13px;
-  color: #CFD2A3;
+  background-color: #171616;
   border: 2px solid #464646;
 
   .short-description {
     width: 340px;
     padding: 10px;
+    padding-top: 0;
     text-align: justify;
-    font-family: open sans;
     font-size: 15px;
     color: #fff;
   }
 
   .subtitle {
     text-indent: 10px;
+    color: #CFD2A3;
   }
 
   .author {
@@ -37,6 +33,21 @@
     width: 51px;
   }
 
+  .author-avatar {
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity .45s linear;
+
+    img {
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      border: 1px solid #000;
+    }
+  }
+
   h3 {
     text-align: left;
     text-transform: inherit;
@@ -44,31 +55,16 @@
     padding: 5px 5px 2px 10px;
   }
 
-
   hr {
     border-color: #403E3E;
     margin: 10px;
   }
 
-  &:hover {
-    box-shadow: 0px -4px 18px 0 $gold;
-    -webkit-transition: box-shadow .2s ease-in-out;
-    -moz-transition: box-shadow .2s ease-in-out;
-    transition: box-shadow .2s ease-in-out;
-  }
+  header img {
+    max-height: 100px;
 
-  header {
-    border-bottom: 2px solid #000;
-    transition: box-shadow .5s ease-in-out;
-
-    img {
-      width: 340px;
-      max-height: 100px;
-      border-radius: 7px 7px 0px 0;
+    &:hover + .author-avatar {
+      opacity: 1;
     }
   }
 }
-
-
-
-

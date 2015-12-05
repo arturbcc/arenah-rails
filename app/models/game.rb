@@ -27,4 +27,10 @@ class Game < ActiveRecord::Base
       .where('characters.character_type = ?', 0)
       .order('characters.name')
   end
+
+  def masters
+    characters
+      .where('characters.character_type = ?', 2)
+      .order('characters.name')
+  end
 end
