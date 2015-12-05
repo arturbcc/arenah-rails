@@ -1,8 +1,5 @@
 .game {
   float: left;
-  position: relative;
-  width: 360px;
-  height: 370px;
   padding: 0;
   margin-left: 20px;
   margin-bottom: 30px;
@@ -12,8 +9,20 @@
   background-color: #171616;
   border: 2px solid #464646;
 
+  @media(min-width: 992px) {
+     height: 370px;
+  }
+
+  @media(min-width: 1200px) {
+    width: 360px;
+    height: 380px;
+  }
+
+  @media(min-width: 992px) and (max-width: 1199px) {
+    width: 445px;
+  }
+
   .short-description {
-    width: 340px;
     padding: 10px;
     padding-top: 0;
     text-align: justify;
@@ -35,7 +44,7 @@
 
   .author-avatar {
     position: absolute;
-    top: 80px;
+    bottom: -15px;
     right: 10px;
     opacity: 0;
     transition: opacity .45s linear;
@@ -60,11 +69,15 @@
     margin: 10px;
   }
 
-  header img {
-    max-height: 100px;
+  header {
+    position: relative;
 
-    &:hover + .author-avatar {
-      opacity: 1;
+    img {
+      max-width: 95%;
+
+      &:hover + .author-avatar {
+        opacity: 1;
+      }
     }
   }
 }
