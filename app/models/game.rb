@@ -9,7 +9,10 @@ class Game < ActiveRecord::Base
   belongs_to :character
 
   friendly_id :name, :use => :slugged
-  validates_presence_of :name, :slug
+
+  validates :name, length: { maximum: 45 }
+  validates :short_description, length: { maximum: 320 }
+  validates :name, :slug, presence: true
 
   enum status: [:inactive, :active]
 

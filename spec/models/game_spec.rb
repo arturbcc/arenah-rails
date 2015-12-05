@@ -13,7 +13,8 @@ describe Game, type: :model do
   it { should have_many :characters }
   it { should have_many :subscriptions }
   it { should belong_to :character }
-  it { should validate_length_of :name }
+  it { should validate_length_of(:name).is_at_most(45) }
+  it { should validate_length_of(:short_description).is_at_most(320) }
 
   describe '#close!' do
     let(:user) { create(:user) }
