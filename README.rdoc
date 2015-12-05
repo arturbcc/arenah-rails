@@ -15,6 +15,7 @@ emoji: emojis taken from http://www.emoji-cheat-sheet.com/
 === TODO LIST ===
 
 * Carousel - Home (js?)
+* Tooltips - Home (carousel, game images, etc)
 
 * Use Devise?
 * Use Cancancan? Aparently no
