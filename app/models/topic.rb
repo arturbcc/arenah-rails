@@ -9,5 +9,5 @@ class Topic < ActiveRecord::Base
   belongs_to :game
 
   validates :title, length: { maximum: 100 } #check the correct limit
-  validates_presence_of :game_id, :slug
+  validates :game_id, :slug, presence: true
 end

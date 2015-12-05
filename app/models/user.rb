@@ -6,5 +6,5 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :delete_all
 
   validates :name, :nickname, length: { maximum: 100 } #Check the correct limit
-  validates_presence_of :email, :password, :name, :nickname, :slug
+  validates :email, :password, :name, :nickname, :slug, presence: true
 end

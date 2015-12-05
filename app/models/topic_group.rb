@@ -7,5 +7,5 @@ class TopicGroup < ActiveRecord::Base
   belongs_to :game
 
   validates :name, length: { maximum: 100 } # check the correct limit
-  validates_presence_of :game_id, :name, :slug
+  validates :game_id, :name, :slug, presence: true
 end

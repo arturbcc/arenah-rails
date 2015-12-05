@@ -11,5 +11,5 @@ class Character < ActiveRecord::Base
   belongs_to :game
   has_many :posts
 
-  validates_presence_of :name, :user_id, :slug, :character_type, :status, :gender, :sheet_mode
+  validates :name, :user_id, :slug, :character_type, :status, :gender, :sheet_mode, presence: true
 end

@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   has_many :recipients, through: :post_recipients, source: :character
   # testar has_many :post_recipients, -> { joins(:characters).select('characters.id AS character_id, characters.name AS character_name') }
 
-  validates_presence_of :topic_id, :message
+  validates :topic_id, :message, presence: true
 
   # def from_character?(character)
   #   return false if character.nil?
