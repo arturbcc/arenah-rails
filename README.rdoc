@@ -3,7 +3,8 @@
 run the following commands:
 
 `rake db:drop db:create db:migrate db:seed`
-rake initialize:assets
+`rake initialize:assets`
+
 
 == Resources ==
 
@@ -15,6 +16,9 @@ emoji: emojis taken from http://www.emoji-cheat-sheet.com/
 === TODO LIST ===
 
 * Carousel - Home (js?)
+* Tooltip not working on posts
+  >> Change all markup to pass data through data attributes. The Tooltip.js class will handle it.
+  >> Check al valid parameters to pass and provide default behavior
 
 * Use Devise?
 * Use Cancancan? Aparently no
