@@ -55,7 +55,11 @@
     </div>
   </div>
 
-  <div class="name show-tooltip" data-toggle="tooltip" data-original-title="Clique na imagem para mais opções" data-placement="top" data-tooltip><%= author.name %></div>
+  <div class="name"
+    data-tooltip title="Clique na imagem para mais opções"
+    data-width="185px">
+    <%= author.name %>
+  </div>
 
   <!-- % if (author.Sheet.AttributesGroups.Count > 0 && author.Type == Character.CharacterType.PC) { %>
      < % foreach (AttributesGroup group in author.Sheet.FindToShow()) { %>
