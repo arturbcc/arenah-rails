@@ -17,6 +17,6 @@
 //= require_tree ./modules
 //= require_tree ./pages
 
-$(function() {
+$(document).on('ready page:load', function() {
   page.dispatch();
 });
