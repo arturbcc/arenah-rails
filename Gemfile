@@ -53,5 +53,7 @@ end
 
 group :test do
   gem 'simplecov'
+  gem 'vcr'
+  gem 'capybara'
+  gem 'poltergeist'
 end
-
