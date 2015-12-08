@@ -45,16 +45,10 @@ var PrivateAlerts = {
 }
 
 $(document).ready(function () {
-  $(".bbcode-spoiler a").on("click", function () {
-    $(this).hide();
-    $(this).next().show();
-  });
-
   if ($(".messages-dropdown").length > 0 && $("#character-slug").length > 0) {
     var characterSlug = $("#character-slug").val();
     PrivateMessages.checkForNewMessages(characterSlug);
   }
-
 
   if ($(".alerts-dropdown").length > 0 && $("#character-slug").length > 0) {
     var characterSlug = $("#character-slug").val();
