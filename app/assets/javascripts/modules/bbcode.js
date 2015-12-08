@@ -1,6 +1,5 @@
 var BBCode = {
-  // Removes the first br for each dice block
-  fixDices: function() {
+  removeFirstBrOnDices: function() {
     $(".dices").each(function (index, dice) {
       $("br", dice).eq(0).hide();
     });

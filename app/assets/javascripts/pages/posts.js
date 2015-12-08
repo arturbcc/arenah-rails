@@ -4,6 +4,4 @@ page.at('posts#index', function() {
 
   new OnlineUsers();
   new Tooltip();
-
-  BBCode.fixDices();
 });
