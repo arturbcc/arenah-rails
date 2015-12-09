@@ -7,14 +7,14 @@ var BBCode = function() {
 
 var fn = BBCode.prototype;
 
-fn.removeFirstBrOnDices: function() {
+fn.removeFirstBrOnDices = function() {
   $(".dices").each(function (index, dice) {
     $("br", dice).eq(0).hide();
   });
 }
 
 fn.bindEvents = function() {
-  this.spoiler.on("click", "a", this.showSpoiler);
+  this.spoilers.on("click", "a", this.showSpoiler);
 };
 
 fn.showSpoiler = function() {

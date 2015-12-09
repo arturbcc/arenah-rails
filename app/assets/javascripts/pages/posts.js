@@ -4,4 +4,5 @@ page.at('posts#index', function() {
 
   new OnlineUsers();
   new Tooltip();
+  new PlayersList();
 });
