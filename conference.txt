@@ -1,0 +1,40 @@
+<!--  https://developer.appear.in/ -->
+<html>
+  <head>
+    <script src="http://developer.appear.in/scripts/appearin-sdk.0.0.4.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+
+    <style>
+      #appear-in-container {
+        width: 100%;
+        border: 0;
+        border-radius: 12px;
+        height: 185px;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <div>Teste 1</div>
+    <div>Teste 2</div>
+    <div>
+      <iframe id='appear-in-container' width='400px' height='400px'></iframe>
+    </div>
+
+
+    <script>
+      var AppearIn = window.AppearIn;
+      var appearin = new AppearIn();
+      var isWebRtcCompatible = appearin.isWebRtcCompatible();
+
+      if (isWebRtcCompatible) {
+        appearin.getRandomRoomName().then(function (roomName) {
+          appearin.addRoomToElementById('appear-in-container', roomName);
+        });
+      } else {
+        alert('Navegador não é compatível. Use o Chrome, o Firefox ou o Opera');
+      }
+    </script>
+  </body>
+</html>

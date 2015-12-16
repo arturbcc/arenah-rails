@@ -15,6 +15,8 @@ emoji: emojis taken from http://www.emoji-cheat-sheet.com/
 
 === TODO LIST ===
 
+* Video Chat: check the conference.txt file on the root folder
+
 * Carousel - Home (js?)
 * Tooltip not working on posts
   >> Change all markup to pass data through data attributes. The Tooltip.js class will handle it.
