@@ -6,3 +6,44 @@
   border: 1px solid #000;
   background-color: #000;
 }
+
+
+/* minimalist theme */
+
+.minimalist-theme {
+  background-color: rgba(0, 0, 0, 0.075);
+  font-size: 16px;
+}
+
+.minimalist-theme #content {
+  border: none;
+  background-color: #fff;
+  padding: 0 2px;
+  border-radius: 5px;
+}
+
+.minimalist-theme #page-body .post {
+  background-color: inherit;
+  border-radius: 0;
+  border: none;
+}
+
+.minimalist-theme #page-body .post.odd {
+  background-color: rgba(241, 239, 239, 0.2);
+}
+
+.minimalist-theme #page-body .post .author {
+  margin-top: 14px;
+}
+
+.minimalist-theme #page-body .post .message {
+  font-size: 16px;
+}
+
+.minimalist-theme #page-body .post .message .content {
+  border: none;
+  box-shadow: none;
+  background-color: inherit;
+}
+
+
