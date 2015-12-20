@@ -1,13 +1,15 @@
 class Area
+  attr_reader :current
+
   def initialize(area = '')
-    @area = area.to_sym
+    @current = area.to_sym
   end
 
   def panel?
-    @area == :panel
+    @current == :panel
   end
 
   def profile?
-    @area == :profile
+    @current == :profile
   end
 end
