@@ -8,6 +8,7 @@
 @import 'jquery-ui-1.10.4';
 @import 'morris';
 @import 'select2';
+@import 'mixins';
 
 @import 'modules/breadcrumb';
 @import 'modules/bbcode';
@@ -19,6 +20,9 @@
 @import 'modules/pagination';
 @import 'modules/social_icons';
 @import 'modules/themes';
+
+@import 'modules/game/home';
+@import 'modules/game/menu';
 
 @import 'modules/posts/author';
 @import 'modules/posts/buttons';
