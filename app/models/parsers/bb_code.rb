@@ -53,7 +53,7 @@ class Parsers::BBCode
         example: '[color=red]This is red[/color]',
         allow_quick_param: true, allow_between_as_param: false,
         quick_param_format: /(([a-z]+)|(#[0-9a-f]{6}))/i,
-        param_tokens: [{token: :color}]},
+        param_tokens: [{ token: :color }]},
       master: {
         html_open: '<div class="bbcode-master"><i class="fa fa-comments fa-2x"></i>', html_close: '</div>',
         description: 'Send a hidden message to the game master',

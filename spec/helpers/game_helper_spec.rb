@@ -34,4 +34,38 @@ describe GameHelper do
       end
     end
   end
+
+  describe '#menu_item' do
+    let(:area) { Area.new }
+
+    it 'includes an icon' do
+      menu_item = helper.menu_item(area, icon: 'home')
+      expect(menu_item).to include('<i class="fa fa-home"></i>')
+    end
+
+    it 'includes a title' do
+      menu_item = helper.menu_item(area, title: 'Title')
+      expect(menu_item).to include('<strong>Title</strong>')
+    end
+
+    it 'includes a subtitle' do
+      menu_item = helper.menu_item(area, subtitle: 'Subtitle')
+      expect(menu_item).to include('<small>Subtitle</small>')
+    end
+
+    it 'includes a li element' do
+      menu_item = helper.menu_item(area)
+      expect(menu_item).to include('<li>')
+    end
+
+    it 'marks the link as active' do
+      menu_item = helper.menu_item(Area.new(:home), area: :home)
+      expect(menu_item).to include('class="active"')
+    end
+
+    it 'does not mark the link as active' do
+      menu_item = helper.menu_item(Area.new(:home), area: :inscription)
+      expect(menu_item).not_to include('class="active"')
+    end
+  end
 end
