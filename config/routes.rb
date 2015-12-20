@@ -7,14 +7,18 @@ Rails.application.routes.draw do
     get ':game/admin', to: 'games#index', as: :game
   end
 
-  get ':game/:topic/posts', to: 'posts#index', as: :posts
-  get ':game', to: 'games#show', as: :game
-  get ':game/inscreva-se', to: 'games#subscription', as: :subscription
-  get ':game/topicos', to: 'games#topics', as: :topics
-  get ':game/personagens', to: 'games#characters', as: :characters
-  get ':game/duelos', to: 'games#duels', as: :duels
-  get ':game/contato', to: 'games#contact', as: :contact
-  get 'sala/criar', to: 'games#new', as: :new_game
+  namespace :game, path: '' do
+    get ':game/:topic/posts', to: 'posts#index', as: :posts
+    get ':game/inscreva-se', to: 'subscription#show', as: :subscription
+    get ':game/topicos', to: 'home#topics', as: :topics
+    get ':game/personagens', to: 'home#characters', as: :characters
+    get ':game/duelos', to: 'home#duels', as: :duels
+    get ':game/contato', to: 'home#contact', as: :contact
+    get ':game', to: 'home#show', as: :home
+
+    #TODO: Fix this alias new_game
+    get 'sala/criar', to: 'home#new', as: :new
+  end
 
   resources :posts, only: :destroy
 

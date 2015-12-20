@@ -3,22 +3,22 @@
     <nav>
       <ul class="mcd-menu">
         <%= menu_item @area, area: :home, title: @game.name, subtitle: 'Página inicial',
-              url: game_path(game), icon: 'home' %>
+              url: game_home_path(game), icon: 'home' %>
 
         <%= menu_item(@area, area: :subscription, title: 'Inscreva-se', subtitle: 'Crie seu personagem',
-              url: subscription_path(game), icon: 'check') unless @identity.game_master? %>
+              url: game_subscription_path(game), icon: 'check') unless @identity.game_master? %>
 
         <%= menu_item @area, area: :topics, title: 'O jogo', subtitle: 'Vamos rolar os dados',
-              url: topics_path(game), icon: 'comments-o' %>
+              url: game_topics_path(game), icon: 'comments-o' %>
 
         <%= menu_item @area, area: :characters, title: 'Personagens', subtitle: 'Quem está jogando',
-              url: characters_path(game), icon: 'male' %>
+              url: game_characters_path(game), icon: 'male' %>
 
         <%= menu_item @area, area: :duels, title: 'Duelos', subtitle: 'Enfrente seus inimigos',
-              url: duels_path(game), icon: 'fire' %>
+              url: game_duels_path(game), icon: 'fire' %>
 
         <%= menu_item @area, area: :contact, title: 'Contato', subtitle: 'Fale com os mestres',
-              url: contact_path(game), icon: 'envelope-o' %>
+              url: game_contact_path(game), icon: 'envelope-o' %>
 
         </ul>
      </nav>

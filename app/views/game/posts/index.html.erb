@@ -1,10 +1,10 @@
 <%= content_for :title, "#{@game.try(:name)} - #{@topic.try(:title)} - Arenah Tsuki" %>
 
 <section id="page-body">
-  <%= render 'header', game: @game, topic: @topic %>
+  <%= render 'game/header', game: @game, topic: @topic %>
 
   <h1>
-    <%= link_to @topic.title, posts_path(@game, @topic) %>
+    <%= link_to @topic.title, game_posts_path(@game, @topic) %>
   </h1>
 
   <!-- % if (!string.IsNullOrEmpty(Model.Game.Room.FilterByCharacter)) { %>

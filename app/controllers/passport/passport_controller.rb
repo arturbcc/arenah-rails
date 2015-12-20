@@ -8,9 +8,9 @@ class PassportController < ApplicationController
 
   def return_url
     if @game.present? && @topic.present?
-      posts_path(@game, @topic)
+      game_posts_path(@game, @topic)
     elsif game.present?
-      game_path(@game)
+      game_home_path(@game)
     else
       params[:url]
     end

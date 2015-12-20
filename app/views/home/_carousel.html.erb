@@ -13,7 +13,7 @@
         <% if @games.count > i %>
         <% game = @games[i] %>
           <div class="item <%= 'active' if i == 0 %>">
-            <%= link_to game_path(game) do %>
+            <%= link_to game_home_path(game) do %>
               <%= banner(game) %>
               <div class="carousel-caption">
                 Sala <%= game.name %>

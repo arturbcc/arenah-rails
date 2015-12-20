@@ -1,7 +1,7 @@
 <div class='col col-sm-12'>
   <h3>Todas as salas</h3>
     <% @games.each do |game| %>
-      <%= link_to game_path(game) do %>
+      <%= link_to game_home_path(game) do %>
         <div class="game col col-sm-12" data-game>
           <header>
             <%= banner(game) %>

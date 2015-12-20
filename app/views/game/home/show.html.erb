@@ -1,10 +1,10 @@
 <%= content_for :title, "#{@game.name} - Arenah Tsuki" %>
 
-<%= render 'header', game: @game %>
+<%= render 'game/header', game: @game %>
 
 <section id="page-body">
   <div class="row" id="game-content">
-    <%= render 'menu', game: @game %>
+    <%= render 'game/menu', game: @game %>
 
     <div class="col-md-9" id="game-description">
       <section class="content">
@@ -17,18 +17,20 @@
 
           <div class="pull-left game-title">
             <h1>
-              <%= link_to @game.name, game_path(@game) %>
+              <%= link_to @game.name, game_home_path(@game) %>
             </h1>
             <p>
               <%= @game.subtitle %>
             </p>
           </div>
         </header>
+
         <article>
           <%= Parsers::Post.parse(@game.description) %>
         </article>
       </section>
     </div>
   </div>
+
   <div id="online-users"></div>
 </section>

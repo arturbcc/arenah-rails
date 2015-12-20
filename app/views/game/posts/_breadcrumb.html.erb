@@ -1,0 +1,5 @@
+<section class="bread-crumb">
+  <%= link_to 'Arenah Tsuki', root_path %>
+  <%= link_to game.name, game_home_path(game) if game.present? %>
+  <%= link_to topic.title, game_posts_path(game, topic) if game.present? && topic.present? %>
+</section>
