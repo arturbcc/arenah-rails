@@ -1,8 +1,8 @@
 <%= content_for :title, "#{@game.try(:name)} - #{@topic.try(:title)} - Arenah Tsuki" %>
 
-<%= render 'header', game: @game, topic: @topic %>
-
 <section id="page-body">
+  <%= render 'header', game: @game, topic: @topic %>
+
   <h1>
     <%= link_to @topic.title, posts_path(@game, @topic) %>
   </h1>
@@ -20,7 +20,7 @@
   <div class="clear"></div>
 
   <% @posts.each do |post| %>
-    <%= render 'post', game: @game, post: post, character: @character %>
+    <%= render 'post', game: @game, post: post, character: @character, klass: cycle('even', 'odd') %>
   <% end %>
 
   <!-- % Html.RenderPartial("ButtonAndPagination"); % -->
