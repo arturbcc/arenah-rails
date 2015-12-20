@@ -23,6 +23,8 @@ emoji: emojis taken from http://www.emoji-cheat-sheet.com/
   >> Check al valid parameters to pass and provide default behavior
 * http://colorschemedesigner.com/csd-3.5/#
 * minimalist theme
+* responsive layout
+* single typeface for the whole layout
 
 * Use Devise?
 * Use Cancancan? Aparently no
