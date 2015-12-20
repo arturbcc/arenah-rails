@@ -1,0 +1,130 @@
+.subscription  {
+  #game-description {
+    min-height: 322px;
+    font-family: Open Sans, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #333;
+  }
+
+  .alert-warning {
+    color: #B5B3B0;
+    background-color: #0C0B0B;
+    border: none;
+  }
+
+  .normal-border {
+    border: 1px solid #2A2929;
+    -moz-transition: border 0.3s ease-in 0s;
+    -webkit-transition: border 0.3s ease-in 0s;
+    -o-transition: border 0.3s ease-in 0s;
+    transition: border 0.3s ease-in 0s;
+  }
+
+  .gold-border {
+    border: 1px solid #F4DD1D;
+    -moz-transition: border 0.3s ease-in 0s;
+    -webkit-transition: border 0.3s ease-in 0s;
+    -o-transition: border 0.3s ease-in 0s;
+    transition: border 0.3s ease-in 0s;
+  }
+
+  .box {
+    width: 180px;
+    height: 160px;
+    margin: 0 auto;
+    padding: 10px;
+    color: #B5B3B0;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .onoffswitch {
+    position: relative;
+    width: 110px;
+    margin-top: 25px !important;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .onoffswitch-checkbox {
+    display: none;
+  }
+
+  .onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #999999;
+    border-radius: 20px;
+  }
+
+  .onoffswitch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+  }
+
+  .onoffswitch-inner:before,
+  .onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 14px;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    color: white;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .onoffswitch-inner:before {
+    content: "INSCRITO";
+    padding-left: 10px;
+    background-color: #F4DD1D; color: #000000;
+  }
+
+  .onoffswitch-inner:after {
+    content: "VISITANTE";
+    padding-right: 10px;
+    text-align: right;
+    font-size: 13px;
+    background-color: #EEEEEE; color: #999999;
+  }
+
+  .onoffswitch-switch {
+    display: block;
+    width: 21px;
+    top: 0;
+    bottom: 0;
+    right: 78px;
+    margin: 6px;
+    background: #FFFFFF;
+    border: 2px solid #999999;
+    border-radius: 20px;
+    position: absolute;
+    -moz-transition: all 0.3s ease-in 0s;
+    -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s;
+    transition: all 0.3s ease-in 0s;
+  }
+
+  .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+  }
+
+  .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+  }
+}

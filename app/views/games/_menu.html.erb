@@ -5,8 +5,8 @@
         <%= menu_item @area, area: :home, title: @game.name, subtitle: 'Página inicial',
               url: game_path(game), icon: 'home' %>
 
-        <%= menu_item(@area, area: :inscription, title: 'Inscreva-se', subtitle: 'Crie seu personagem',
-              url: inscription_path(game), icon: 'check') unless @identity.game_master? %>
+        <%= menu_item(@area, area: :subscription, title: 'Inscreva-se', subtitle: 'Crie seu personagem',
+              url: subscription_path(game), icon: 'check') unless @identity.game_master? %>
 
         <%= menu_item @area, area: :topics, title: 'O jogo', subtitle: 'Vamos rolar os dados',
               url: topics_path(game), icon: 'comments-o' %>

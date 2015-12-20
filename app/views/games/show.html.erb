@@ -13,9 +13,6 @@
             <% @game.masters.each do |master| %>
               <%= avatar(master, class: 'avatar') %>
             <% end %>
-            <!-- % foreach (Character master in Model.Game.Room.Masters()) { % >
-              < % : Html.Avatar(master, "avatar") % >
-            < % } % -->
           </div>
 
           <div class="pull-left game-title">
@@ -29,7 +26,6 @@
         </header>
         <article>
           <%= Parsers::Post.parse(@game.description) %>
-          <!-- %= Html.Raw(BBCode.Parse(Model.Game.Room.Description)) % -->
         </article>
       </section>
     </div>

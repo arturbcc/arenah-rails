@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get ':game/:topic/posts', to: 'posts#index', as: :posts
   get ':game', to: 'games#show', as: :game
-  get ':game/inscricoes', to: 'games#inscriptions', as: :inscription
+  get ':game/inscreva-se', to: 'games#subscription', as: :subscription
   get ':game/topicos', to: 'games#topics', as: :topics
   get ':game/personagens', to: 'games#characters', as: :characters
   get ':game/duelos', to: 'games#duels', as: :duels

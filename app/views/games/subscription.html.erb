@@ -1,0 +1,30 @@
+<%= content_for :title, "#{@game.name} - Arenah Tsuki" %>
+
+<%= render 'header', game: @game %>
+
+<section id="page-body" class="subscription">
+  <div class="row" id="game-content">
+    <%= render 'menu', game: @game %>
+
+    <div class="col-md-9" id="game-description">
+      <div class="alert alert-warning">
+        Gostou desta sala de RPG e quer fazer parte do jogo? Primeiro, é preciso de inscrever. A participação
+        dos jogadores na sala passam primeiro pela aprovação do mestre, ele será notificado de sua inscrição.
+        Caso queira conversar com ele, entre em contato pelo menu à sua esquerda.
+      </div>
+
+      <div>
+        <div class="box <%= @subscribed ? "gold-border" : "normal-border" %>">
+          <span>Clique no botão abaixo para mudar seu status nesta sala</span>
+          <div class="onoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" />
+              <label class="onoffswitch-label" for="myonoffswitch">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+              </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
