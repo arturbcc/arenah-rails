@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   end
 
   get ':game/:topic/posts', to: 'posts#index', as: :posts
-  get ':game', to: 'games#index', as: :game
+  get ':game', to: 'games#show', as: :game
+  get ':game/inscricoes', to: 'games#inscriptions', as: :inscription
+  get ':game/topicos', to: 'games#topics', as: :topics
+  get ':game/personagens', to: 'games#characters', as: :characters
+  get ':game/duelos', to: 'games#duels', as: :duels
+  get ':game/contato', to: 'games#contact', as: :contact
   get 'sala/criar', to: 'games#new', as: :new_game
 
   resources :posts, only: :destroy
