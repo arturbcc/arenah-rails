@@ -1,0 +1,41 @@
+<div class="col-md-3" id="game-room-menu">
+  <div class="container">
+    <nav>
+      <ul class="mcd-menu">
+        <%= menu_item @area, area: :home, title: @game.name, subtitle: 'Página inicial',
+              url: game_path(game), icon: 'home' %>
+
+        <%= menu_item(@area, area: :inscription, title: 'Inscreva-se', subtitle: 'Crie seu personagem',
+              url: inscription_path(game), icon: 'check') unless @identity.game_master? %>
+
+        <%= menu_item @area, area: :topics, title: 'O jogo', subtitle: 'Vamos rolar os dados',
+              url: topics_path(game), icon: 'comments-o' %>
+
+        <%= menu_item @area, area: :characters, title: 'Personagens', subtitle: 'Quem está jogando',
+              url: characters_path(game), icon: 'male' %>
+
+        <%= menu_item @area, area: :duels, title: 'Duelos', subtitle: 'Enfrente seus inimigos',
+              url: duels_path(game), icon: 'fire' %>
+
+        <%= menu_item @area, area: :contact, title: 'Contato', subtitle: 'Fale com os mestres',
+              url: contact_path(game), icon: 'envelope-o' %>
+
+        </ul>
+     </nav>
+  </div>
+
+  <!-- div class="fb-like-box" data-href="http://facebook.com/arenah.tsuki" data-width="200px" data-colorscheme="dark" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div -->
+
+  <!-- div id="fb-root"></div -->
+  <script>
+  /*
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&appId=575444139215255&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    } (document, 'script', 'facebook-jssdk'));
+    */
+  </script>
+</div>

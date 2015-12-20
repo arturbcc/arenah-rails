@@ -1,0 +1,55 @@
+#game-room-content {
+  margin-bottom: 100px;
+
+  section.content {
+    font: 500 16px Open Sans;
+    line-height: 1.5;
+
+    img.avatar {
+      float: left;
+      width: 60px;
+      margin: 8px 15px 0px 5px;
+      border: 1px solid #2E2E2E;
+    }
+
+    header {
+      display: inline-block;
+      width: 100%;
+      min-height: 65px;
+      padding: 5px;
+      margin-bottom: 10px;
+      background-color: #1E1D1C;
+    }
+
+    article {
+      padding: 20px;
+      border: 1px solid #1E1D1C;
+      border-radius: 10px;
+    }
+  }
+
+  h1 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+#game-room-description {
+  float: left;
+  width: 755px;
+  min-height: 215px;
+  padding-right: 0;
+  padding: 0 20px;
+  margin-bottom: 30px;
+  text-align: justify;
+  border-left: 1px solid #1E1D1C;
+}
+
+#game-room-header {
+  margin-bottom: 20px;
+}
+
+#game-room-menu, .container {
+  width: 260px;
+  float: left;
+}

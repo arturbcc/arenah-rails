@@ -1,0 +1,36 @@
+<%= content_for :title, "#{@game.name} - Arenah Tsuki" %>
+
+<%= render 'header', game: @game %>
+
+<section id="page-body">
+  <div class="row" id="game-room-content">
+    <%= render 'menu', game: @game %>
+    <!-- % Html.RenderPartial("Menu"); % -->
+
+    <div class="col-md-9" id="game-room-description">
+      <section class="content">
+        <header>
+          <div class="pull-left">
+            <!-- % foreach (Character master in Model.Game.Room.Masters()) { % >
+              < % : Html.Avatar(master, "avatar") % >
+            < % } % -->
+          </div>
+
+          <div class="pull-left">
+            <h1>
+              <%= link_to @game.name, game_path(@game) %>
+            </h1>
+            <p>
+              <%= @game.subtitle %>
+            </p>
+          </div>
+        </header>
+        <article>
+          <%= Parsers::Post.parse(@game.description) %>
+          <!-- %= Html.Raw(BBCode.Parse(Model.Game.Room.Description)) % -->
+        </article>
+      </section>
+    </div>
+  </div>
+  <div id="online-users"></div>
+</section>
