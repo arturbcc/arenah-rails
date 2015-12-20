@@ -1,4 +1,4 @@
-#game-room-content {
+#game-content {
   margin-bottom: 100px;
 
   section.content {
@@ -34,7 +34,7 @@
   }
 }
 
-#game-room-description {
+#game-description {
   float: left;
   width: 755px;
   min-height: 215px;
@@ -45,11 +45,15 @@
   border-left: 1px solid #1E1D1C;
 }
 
-#game-room-header {
+#game-header {
   margin-bottom: 20px;
 }
 
-#game-room-menu, .container {
-  width: 260px;
+.game-title {
+  padding-left: 17px;
+}
+
+#game-menu {
   float: left;
+  width: 260px;
 }

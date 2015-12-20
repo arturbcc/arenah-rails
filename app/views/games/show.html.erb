@@ -3,20 +3,22 @@
 <%= render 'header', game: @game %>
 
 <section id="page-body">
-  <div class="row" id="game-room-content">
+  <div class="row" id="game-content">
     <%= render 'menu', game: @game %>
-    <!-- % Html.RenderPartial("Menu"); % -->
 
-    <div class="col-md-9" id="game-room-description">
+    <div class="col-md-9" id="game-description">
       <section class="content">
         <header>
-          <div class="pull-left">
+          <div class="pull-right">
+            <% @game.masters.each do |master| %>
+              <%= avatar(master, class: 'avatar') %>
+            <% end %>
             <!-- % foreach (Character master in Model.Game.Room.Masters()) { % >
               < % : Html.Avatar(master, "avatar") % >
             < % } % -->
           </div>
 
-          <div class="pull-left">
+          <div class="pull-left game-title">
             <h1>
               <%= link_to @game.name, game_path(@game) %>
             </h1>
