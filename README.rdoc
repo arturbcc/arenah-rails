@@ -21,6 +21,8 @@ emoji: emojis taken from http://www.emoji-cheat-sheet.com/
 * Tooltip not working on posts
   >> Change all markup to pass data through data attributes. The Tooltip.js class will handle it.
   >> Check al valid parameters to pass and provide default behavior
+* http://colorschemedesigner.com/csd-3.5/#
+* minimalist theme
 
 * Use Devise?
 * Use Cancancan? Aparently no
