@@ -51,19 +51,19 @@ ActiveRecord::Schema.define(version: 20151105130550) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "games", force: :cascade do |t|
-    t.integer  "character_id",                         null: false
-    t.string   "name",                                 null: false
+    t.integer  "character_id",                                    null: false
+    t.string   "name",                  limit: 45,                null: false
     t.string   "subtitle"
     t.text     "short_description"
     t.text     "description"
     t.string   "banner"
     t.string   "css"
-    t.string   "slug",                                 null: false
-    t.integer  "status",                default: 1
+    t.string   "slug",                                            null: false
+    t.integer  "status",                           default: 1
     t.string   "google_analytics_code"
-    t.boolean  "show_signature",        default: true
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.boolean  "show_signature",                   default: true
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "games", ["character_id"], name: "index_games_on_character_id", using: :btree
