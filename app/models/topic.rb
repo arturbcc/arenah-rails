@@ -10,4 +10,8 @@ class Topic < ActiveRecord::Base
 
   validates :title, length: { maximum: 100 } #check the correct limit
   validates :game_id, :slug, presence: true
+
+  scope :by_group_id, ->(group_id) { joins(:topic_group)
+    .where('topic_groups.id = ?', group_id).order('topic_groups.position')
+  }
 end

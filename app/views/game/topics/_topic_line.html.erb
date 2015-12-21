@@ -1,0 +1,21 @@
+<nav class="active fm-nav <%= 'game-master' if @identity.game_master? %>"
+  data-last-post-id="<%= topic.post_id %>"
+  data-topic-id="<%= topic.id %>">
+
+  <%= link_to game_posts_path(game, topic), data: { 'fm-index' => roman_number(index) }, class: 'animated fadeInLeft' do %>
+    <%#= icon('pencil') %>
+    <%#= icon('trash') %>
+    <span class="title"><%= topic.title %></span>
+    <span class="subtitle"><%= topic.description %></span>
+  <% end %>
+
+  <% if @identity.game_master? %>
+    <div class="extra-options">
+      <%= link_to game_edit_topic_path(topic), data: { toggle: 'modal', target: '#remoteModal', width: '365px' } do %>
+        <%= icon('edit') %>
+      <% end %>
+
+      <%= icon('trash') %>
+    </div>
+  <% end %>
+</nav>

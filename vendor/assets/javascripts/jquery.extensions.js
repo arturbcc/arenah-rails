@@ -15,4 +15,10 @@
     }
     return obj;
   };
+
+  $.fn.swapClasses = function(classToRemove, classToInclude) {
+    this.removeClass(classToRemove).addClass(classToInclude);
+
+    return this;
+  };
 })(window.jQuery);
