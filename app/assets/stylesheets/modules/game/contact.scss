@@ -1,0 +1,77 @@
+.game-contact {
+  input.rounded,
+  textarea.rounded {
+    padding: 4px 7px;
+    outline: 0;
+    width: 480px;
+    margin-top: 5px;
+    font-size: 14px;
+    background-color: #000;
+    background-color: #080808;
+    border: 1px solid #242121;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+  }
+
+  input.rounded {
+    height: 30px;
+  }
+
+  textarea.rounded {
+    height: 130px;
+  }
+
+  input.rounded:hover, textarea.rounded:hover {
+    border-color: $gold;
+  }
+
+  #game-description {
+    font: 500 13px Open Sans;
+    line-height: 1.5;
+
+    dl {
+      width: 485px;
+    }
+
+    dt {
+      font-weight: normal;
+    }
+
+    .btn-default {
+      color: #fff;
+      background-color: #000;
+      border-color: #434242;
+    }
+
+    .btn-default:hover,
+    .btn-default:focus,
+    .btn-default:active,
+    .btn-default.active {
+      color: $gold;
+      background-color: #000000;
+      border-color: $gold;
+    }
+
+    .outer {
+      width: 600px;
+      height: 325px;
+    }
+
+    .inner {
+      width: 500px;
+      height: 325px;
+      margin: 0 auto;
+      border-radius: 10px;
+      border: 1px solid #282727;
+      padding: 10px;
+      background-color: #131111;
+      color: #9d9898;
+    }
+  }
+
+  .margin-r5 {
+    margin-right: 5px;
+  }
+}

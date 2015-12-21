@@ -1,0 +1,27 @@
+<%= content_for :title, "#{@game.name} - Arenah Tsuki" %>
+
+<%= render 'game/header', game: @game %>
+
+<section id="page-body" class="game-contact">
+  <div class="row" id="game-content">
+    <%= render 'game/menu', game: @game %>
+
+    <div class="col-md-9" id="game-description">
+      <div class="outer">
+        <div class="inner">
+          <dl>
+            <dt>Assunto:</dt>
+            <dd><input class="rounded"></dd>
+            <dt>&nbsp;</dt>
+            <dt>Mensagem:</dt>
+            <dd><textarea class="rounded"></textarea></dd>
+            <dt>&nbsp;</dt>
+            <dd class="text-right">
+              <button type="button" class="btn btn-default margin-r5">Enviar</button>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

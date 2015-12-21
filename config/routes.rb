@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get ':game/topicos', to: 'home#topics', as: :topics
     get ':game/personagens', to: 'home#characters', as: :characters
     get ':game/duelos', to: 'home#duels', as: :duels
-    get ':game/contato', to: 'home#contact', as: :contact
+    get ':game/contato', to: 'contact#show', as: :contact
     get ':game', to: 'home#show', as: :home
 
     #TODO: Fix this alias new_game
