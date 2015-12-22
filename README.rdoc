@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/arturcp/arenah-rails.png)](https://travis-ci.org/arturcp/arenah-rails)
+== CI Status
 
+[![Build Status](https://travis-ci.org/arturcp/arenah-rails.svg?branch=master)](https://travis-ci.org/arturcp/arenah-rails)
 
 == Initial structure
 
