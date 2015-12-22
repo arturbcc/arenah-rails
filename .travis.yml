@@ -1,8 +1,10 @@
 language: ruby
 rvm:
   - 2.2.3
+env:
+  - DB=postgresql
 script:
   - rake spec
 before_install:
   - cp config/database.yml.postgres.sample.yaml config/database.yml
-  - RAILS_ENV=test rake db:create db:migrate'
+  - psql -c 'create database arenah_test' -U postgres'
