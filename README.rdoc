@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/arturcp/arenah-rails.png)](https://travis-ci.org/arturcp/arenah-rails)
+
+
 == Initial structure
 
 run the following commands:
