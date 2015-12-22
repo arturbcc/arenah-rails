@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+  - 2.2.3
+script:
+  - rspec
+before_install:
+  - cp config/database.yml.postgres.sample.yaml config/database.yml
+
