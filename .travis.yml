@@ -5,4 +5,4 @@ script:
   - rake spec
 before_install:
   - cp config/database.yml.postgres.sample.yaml config/database.yml
-
+  - RAILS_ENV=test rake db:create db:migrate'
