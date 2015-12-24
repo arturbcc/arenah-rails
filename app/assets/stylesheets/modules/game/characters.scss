@@ -1,0 +1,232 @@
+.game-characters {
+  #game-description {
+    width: 755px;
+    padding-right: 0;
+    text-align: center;
+  }
+
+  #game-description {
+    text-align: center;
+  }
+
+  #game-description h1 {
+    color: $gold;
+  }
+
+  #charactersList {
+    width: 735px;
+  	min-height: 420px;
+  }
+
+  .book {
+    margin: 14px 24px 2px 14px;
+  }
+
+  .book .title {
+    display: inline-table;
+    width: 100%;
+    font-size: 15px !important;
+    text-shadow: 0px 2px 0px #000;
+    color: #EDF47E !important;
+    background-color: rgba(0, 0, 0, 0.56);
+  }
+
+  /* CSS3 3D图书展示 (3D Book Showcase)
+  * Copyright (c) 2013, 梦幻神化
+  * http://www.bluesdream.com
+  *
+  * Create: 2013.01.28
+  *
+  */
+
+  /* = Global
+  -------------------------------------------------------------- */
+	.book {
+    float: left;
+    position: relative;
+		width: 84px;
+		-webkit-transition-duration: .5s;
+		-moz-transition-duration: .5s;
+		-ms-transition-duration: .5s;
+		-o-transition-duration: .5s;
+		transition-duration: .5s;
+		-webkit-perspective: 2000px;
+		-moz-perspective: 2000px;
+		-ms-perspective: 2000px;
+		-o-perspective: 2000px;
+		perspective: 2000px;
+		margin: 14px 27px 2px 14px;
+	}
+	.main {
+    position: relative;
+		width: 84px;
+		height: 120px;
+		color: #EDF47E;
+		-webkit-transform-style: preserve-3d;
+		-moz-transform-style: preserve-3d;
+		-ms-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+		-webkit-transition-duration: .5s;
+		-moz-transition-duration: .5s;
+		-ms-transition-duration: .5s;
+		-o-transition-duration: .5s;
+		transition-duration: .5s;
+	}
+
+  /* = Book Font
+  -------------------------------------------------------------- */
+	.book-font{
+    position:absolute;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+		width: 84px;
+    height: 120px;
+		font-size: 15px;
+    text-align: center;
+		box-shadow: inset 3px 0 10px rgba(0,0,0,0.1);
+		-webkit-transform-style: preserve-3d;
+		-moz-transform-style: preserve-3d;
+		-ms-transform-style: preserve-3d;
+		-o-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+
+		-webkit-transform-origin: 0% 50%;
+		-moz-transform-origin: 0% 50%;
+		-ms-transform-origin: 0% 50%;
+		-o-transform-origin: 0% 50%;
+		transform-origin: 0% 50%;
+
+		-webkit-transition-duration: .5s;
+		-moz-transition-duration: .5s;
+		-ms-transition-duration: .5s;
+		-o-transition-duration: .5s;
+		transition-duration: .5s;
+
+		-webkit-transform: translate3d(0,0,25px);
+		-moz-transform: translate3d(0,0,25px);
+		-ms-transform: translate3d(0,0,25px);
+		-o-transform: translate3d(0,0,25px);
+		transform: translate3d(0,0,25px);
+	}
+
+	.book-cover{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+		width: 84px;
+    height: 120px;
+		overflow: hidden;
+		background-color: #29303A;
+		background-size:  85px 50px;
+		-webkit-transform-style: preserve-3d;
+		-moz-transform-style: preserve-3d;
+		-ms-transform-style: preserve-3d;
+		-o-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	.title {
+    height: 8px;
+		margin: 5px 0 25px 0;
+		font-size: 13px;
+		text-shadow: 0px 2px 0px #000;
+	}
+	.author {
+    display: inline-table;
+    width: 100%;
+    height: 10px;
+		font-size: 10px;
+		color: #000;
+    background-color: rgba(255, 255, 255, 0.26);
+	}
+	.publisher {
+    position: absolute;
+    bottom: 0;
+		width: 100%;
+		font-size: 8px;
+	}
+
+  /* = Book Back
+  -------------------------------------------------------------- */
+	.book-back {
+		position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 8;
+    width: 84px;
+		color: #fff;
+    background: #29303A;
+		-webkit-transform: rotate3d(0,1,0,-180deg) translate3d(0,0,5px);
+		-moz-transform: rotate3d(0,1,0,-180deg) translate3d(0,0,5px);
+		-ms-transform: rotate3d(0,1,0,-180deg) translate3d(0,0,5px);
+		-o-transform: rotate3d(0,1,0,-180deg) translate3d(0,0,5px);
+		transform: rotate3d(0,1,0,-180deg) translate3d(0,0,5px);
+	}
+
+  /* = Order
+  -------------------------------------------------------------- */
+	.book-cover:after,
+  .book-back:after {
+		content: "";
+    position: absolute;
+		top: 0;
+		left: 1px;
+    bottom: 0;
+    width: 3px;
+		background: rgba(0,0,0,0.06);
+		box-shadow: 1px 0 3px rgba(255, 255, 255, 0.1);
+	}
+
+	.book-page,
+  .book-top,
+  .book-right,
+  .book-bottom {
+		background:#eeefe9;
+	}
+
+	.book-right {
+		width: 14px;
+		height: 110px;
+		position: absolute;
+		top: 5px;
+		right:  5px;
+		box-shadow: 0 1px 0 #eeefe9,0 -1px 0 #eeefe9;
+		-webkit-transform: rotate3d(0,1,0,18deg);
+		-moz-transform: rotate3d(0,1,0,18deg);
+		-ms-transform: rotate3d(0,1,0,18deg);
+		-o-transform: rotate3d(0,1,0,18deg);
+		transform: rotate3d(0,1,0,18deg);
+	}
+
+	.book-right {
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+  /* = Flip
+  -------------------------------------------------------------- */
+
+  /* Cover */
+	.view-cover:hover .main {
+		-webkit-transform: rotate3d(0,1,0,-40deg);
+		-moz-transform: rotate3d(0,1,0,-40deg);
+		-ms-transform: rotate3d(0,1,0,-40deg);
+		-o-transform: rotate3d(0,1,0,-40deg);
+		transform: rotate3d(0,1,0,-40deg);
+	}
+
+	.bookshelf {
+	  background: url(/images/bookshelf.jpg) repeat;
+	  display: inline-block;
+	}
+}

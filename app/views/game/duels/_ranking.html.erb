@@ -1,0 +1,46 @@
+<%
+  subtitle = ''
+  header = ''
+  quantity = quantity || 128
+
+  if type == 'biggest-gambler'
+    subtitle = "venceu #{quantity} apostas"
+    header = 'Apostas'
+  elsif type == 'biggest-winner'
+    subtitle = "venceu #{quantity} duelos"
+    header = 'Vitórias'
+  elsif type == 'most-frequent-player'
+    subtitle = "participou de #{quantity} duelos"
+    header = 'duelos'
+  end
+%>
+
+<% characters.each_with_index do |character, index| %>
+  <% if index == 0 %>
+    <div class="highlight">
+      <%= avatar(character, class: 'winner-avatar') %>
+      <div class="info-data">
+        <span class="winner"><a href="javascript:;"><%= character.name %></a> <%= subtitle %></span>
+        <span class="rank">1º Lugar</span>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Personagem</th>
+          <th><%= header %></th>
+        </tr>
+      </thead>
+      <tbody>
+  <% else %>
+    <tr>
+      <td><%= index + 1 %>º Lugar</td>
+      <td><%= character.name %></td>
+      <td><%= 120 - 2 * index %></td>
+    </tr>
+  <% end %>
+<% end %>
+  </tbody>
+</table>

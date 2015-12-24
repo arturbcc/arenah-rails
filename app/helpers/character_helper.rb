@@ -11,11 +11,11 @@ module CharacterHelper
     end
   end
 
-  private
-
   def avatar_path(character)
     "/games/#{character.game.slug}/images/avatars/#{character.avatar}"
   end
+
+  private
 
   def male_avatar_path
     '/images/defaults/male.png'

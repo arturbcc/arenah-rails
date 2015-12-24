@@ -1,0 +1,121 @@
+<%= content_for :title, "Duelos - #{@game.name} - Arenah Tsuki" %>
+
+<%= render 'game/header', game: @game %>
+
+<section id="page-body" class="game-duels">
+  <div class="row" id="game-content">
+    <%= render 'game/menu', game: @game %>
+
+    <div class="col-md-9" id="game-description">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#ranking" role="tab" data-toggle="tab">Ranking</a></li>
+        <li><a href="#nexts" role="tab" data-toggle="tab">Próximos duelos</a></li>
+        <li><a href="#history" role="tab" data-toggle="tab">Histórico</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+
+      <%
+        characters = @game.characters
+        character1 = characters[0]
+        character2 = characters.count > 1 ? characters[1] : characters[0]
+        character3 = characters.count > 2 ? characters[2] : characters[0]
+        character4 = characters.count > 3 ? characters[3] : characters[0]
+        character5 = characters.count > 4 ? characters[4] : characters[0]
+        character6 = characters.count > 5 ? characters[5] : characters[0]
+        character7 = characters.count > 6 ? characters[6] : characters[0]
+      %>
+
+       <div class="tab-pane fade active in" id="ranking">
+          <div class="pull-left biggest-gambler">
+            <%= render 'ranking',
+                  type: 'biggest-gambler',
+                  characters: [
+                    character1,
+                    character2,
+                    character3,
+                    character4,
+                    character5
+                  ] %>
+          </div>
+          <div class="pull-left biggest-winner">
+            <%= render 'ranking',
+                  type: 'biggest-winner',
+                  characters: [
+                    character6,
+                    character5,
+                    character4,
+                    character3,
+                    character2
+                  ] %>
+          </div>
+          <div class="pull-left most-frequent-player">
+            <%= render 'ranking',
+                  type: 'most-frequent-player',
+                  characters: [
+                    character4,
+                    character3,
+                    character2,
+                    character6,
+                    character5
+                  ] %>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="nexts">
+          <%= render 'duel' %>
+          <%= render 'duel' %>
+          <%= render 'duel' %>
+        </div>
+
+        <div class="tab-pane fade" id="history">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Duelo</th>
+                <th>Vencedor</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01/02/2014</td>
+                <td><span>Inuyasha</span> vs <span>Oliver Tsubasa</span></td>
+                <td>Inuyasha</td>
+                <td>
+                  <%= link_to game_duel_path(id: 1), data: { toggle: 'modal', target: '#remoteModal', width: '1015px' } do %>
+                    <%= icon('search') %>
+                  <% end %>
+                </td>
+              </tr>
+              <tr class="odd">
+                <td>01/02/2014</td>
+                <td><span>Strange</span> vs <span>Palace</span></td>
+                <td>Strange</td>
+                <td>
+                  <%= link_to game_duel_path(id: 2), data: { toggle: 'modal', target: '#remoteModal', width: '1015px' } do %>
+                    <%= icon('search') %>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td>28/01/2014</td>
+                <td><span>Hiei</span> vs <span>Oliver Tsubasa</span></td>
+                <td>Oliver Tsubasa</td>
+                <td>
+                  <%= link_to game_duel_path(id: 3), data: { toggle: 'modal', target: '#remoteModal', width: '1015px' } do %>
+                    <%= icon('search') %>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

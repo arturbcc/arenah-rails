@@ -1,5 +1,5 @@
 .btn-dark {
-  color: &gold;
+  color: $gold;
   background-color: #3A3836;
   border-color: #eea236;
 
@@ -27,7 +27,6 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-appearance: button;
   text-transform: none;
 
   &:hover,

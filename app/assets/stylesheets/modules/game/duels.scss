@@ -1,0 +1,235 @@
+.game-duels {
+
+  /* General */
+  #game-description {
+    padding: 0 0 0 20px;
+    line-height: 1.5;
+    font: 500 13px Open Sans;
+  }
+
+
+  #game-description a {
+    color: #d2d5d8;
+  }
+
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus {
+    color: $gold !important;
+    background-color: #000;
+  }
+
+  .nav > li > a:hover,
+  .nav > li > a:focus {
+    background-color: #B12727;
+  }
+
+  #nexts,
+  #ranking,
+  #history {
+    padding: 10px;
+    padding-bottom: 20px;
+    min-height: 300px;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+  }
+
+  .tab-content > .active {
+    display: inline-block;
+  }
+
+  /* Next Duels */
+  .duel {
+    float: left;
+    width: 325px;
+    height: 140px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 11px;
+    background-color: #2F2E2E;
+    border: 2px solid #928787;
+  }
+
+  .avatar {
+    float: left;
+    padding: 5px;
+    width: 215px;
+    font-weight: bold;
+    font-size: 25px;
+    text-indent: 2px;
+    color: $gold;
+  }
+
+  .avatar span {
+    text-shadow: 2px 1px 1px #000;
+  }
+
+  .avatar img {
+    width: 80px;
+    height: 80px;
+    margin-right: 3px;
+    border: 1px solid #130316;
+  }
+
+  .data {
+    float: left;
+    height: 129px;
+    width: 102px;
+    padding: 2px;
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+    background-color: #242323;
+    border: 1px solid #000;
+    border-radius: 5px;
+  }
+
+  .data span {
+    font-size: 16px;
+    font-weight: bold;
+    color: $gold;
+    background-color: #000;
+    border-radius: 50%;
+  }
+
+  .first-button {
+    margin-left: 4px;
+  }
+
+  .second-button {
+    margin-left: 38px;
+  }
+
+  /* Button */
+  .btn-dark {
+    background-color: #1D1C1B;
+    border-color: #eea236;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    font-weight: 400;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.42857143;
+    vertical-align: middle;
+    cursor: pointer;
+    white-space: nowrap;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-transform: none;
+  }
+
+  .btn-dark a {
+    color: $gold !important;
+  }
+
+  .btn:hover,
+  .btn:focus,
+  .btn:active {
+    background-color: #3A3836;
+  }
+
+  .btn-xs,
+  .btn-group-xs>.btn {
+    padding: 1px 5px;
+    line-height: 1.5;
+    font-size: 12px;
+    border-radius: 3px;
+  }
+
+  .buttons {
+    margin-top: 10px;
+  }
+
+  /* Common Rank Styles */
+  .highlight {
+    float: left;
+    padding: 5px;
+    border: 1px solid #ccc;
+    min-height: 127px;
+
+    .winner-avatar {
+      float: left;
+      width: 90px;
+      border: 1px solid #ccc;
+    }
+
+    .info-data {
+      float: left;
+      width: 125px;
+      margin-left: 5px;
+      padding: 0 5px;
+      text-align: center;
+    }
+
+    .info-data .winner a {
+      font-size: 14px;
+      color: $gold !important;
+    }
+
+    .info-data span {
+      display: block;
+      width: 100%;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+
+    .info-data .rank {
+      font-size: 22px;
+      font-weight: bold;
+    }
+  }
+
+  /* Ranking */
+  .biggest-gambler,
+  .biggest-winner {
+    width: 237px;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .biggest-winner {
+    background-color: #343232;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .most-frequent-player {
+    width: 237px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  #ranking .table {
+    font-size: 11px;
+    font-family: verdana;
+  }
+
+  #ranking .table td:nth-child(2) {
+    color: $gold;
+  }
+
+  #ranking .table td:nth-child(3) {
+    text-align: right;
+  }
+
+  /* Histórico */
+  #history {
+    width: 734px;
+  }
+
+  #history span {
+    color: $gold;
+  }
+
+  #history .odd {
+    background-color: #292626;
+  }
+}

@@ -13,12 +13,15 @@ Rails.application.routes.draw do
     get ':game/topicos', to: 'topics#index', as: :topics
     get ':game/topico/:id/editar', to: 'topics#edit', as: :edit_topic
     get ':game/grupo-de-topicos/:id/editar', to: 'topic_group#edit', as: :edit_topic_group
-    get ':game/personagens', to: 'home#characters', as: :characters
-    get ':game/duelos', to: 'home#duels', as: :duels
+    get ':game/personagens', to: 'characters#index', as: :characters
+    get ':game/duelos', to: 'duels#index', as: :duels
+    get ':game/duelo/:id', to: 'duels#show', as: :duel
     get ':game/contato', to: 'contact#show', as: :contact
     get ':game', to: 'home#show', as: :home
 
     post ':game/topicos/novo', to: 'topics#create', as: :new_topic
+
+    get ':game/personagem/:character/ficha', to: 'characters#sheet', as: :character_sheet
 
     #TODO: Fix this alias new_game
     get 'sala/criar', to: 'home#new', as: :new
