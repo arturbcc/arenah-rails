@@ -25,13 +25,13 @@
 
       <% if @identity.unlogged? %>
         <li>
-          <%= link_to passport_register_path(url: url) do %>
+          <%= link_to new_user_registration_path do %>
             <span class="fa fa-file-text-o"></span> Cadastre-se
           <% end %>
         </li>
 
         <li>
-          <%= link_to passport_login_path(url: url) do %>
+          <%= link_to new_user_session_path do %>
             <span class="fa fa-sign-in"></span> Entrar
           <% end %>
         </li>
@@ -119,7 +119,7 @@
           </li>
         <% end %>
 
-        <% if !area.profile? && !area.panel? && character.id > 0 %>
+        <% if !area.profile? && !area.panel? && @character.present? %>
 
           <!-- % Html.RenderPartial("HeaderMessages", Model); %>
 
@@ -128,9 +128,10 @@
         <% end %>
 
         <li class="dropdown user-dropdown">
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-character-id="<%= character.id %>" id="character-menu">
-            <%= avatar(@character, class: 'size-20') %> <b class="caret"></b>
-          </a>
+          <%= link_to 'javascript:;', class: 'dropdown-toggle', id: 'user-menu',
+                data: { 'user-id' => current_user.id, toggle: 'dropdown' } do %>
+            <%= user_avatar(current_user) %> <b class="caret"></b>
+          <% end %>
 
           <ul class="dropdown-menu">
             <li>
@@ -149,7 +150,7 @@
 
             <li class="divider"></li>
             <li>
-              <%= link_to passport_logout_path(url: url) do %>
+              <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa fa-power-off"></i> Sair
               <% end %>
             </li>

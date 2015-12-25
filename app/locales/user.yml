@@ -3,6 +3,12 @@ pt-BR:
     errors:
       messages:
         blank: 'é um campo obrigatório'
+        record_invalid: 'registro inválido'
+      models:
+        user:
+          attributes:
+            password:
+              too_short: 'muito curta'
     models:
       user: 'Usuário'
     attributes:

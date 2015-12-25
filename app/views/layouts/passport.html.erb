@@ -16,14 +16,15 @@
 </head>
 
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
   <div>
+    <p class='notice'><%= notice %></p>
     <%= yield %>
   </div>
 
   <%= render 'shared/tracking_scripts' %>
+
+  <%= render 'shared/flash_message', message: alert %>
+
   <script>
     <%= yield :javascripts %>
   </script>

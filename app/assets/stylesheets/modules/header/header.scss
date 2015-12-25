@@ -2,10 +2,24 @@
   z-index: 101;
 
   .badge.red {
-    background-color: #c0111f;
+    background-color: $main-red;
   }
 }
 
 i.icon-gold {
   color: $gold;
+}
+
+.user-avatar {
+  display: inline-block;
+  background-color: $main-red;
+  border-radius: 50%;
+  width: 21px;
+  text-align: center;
+  color: #000;
+  font-weight: bold;
+}
+
+.user-dropdown ul li a {
+  color: #fff;
 }

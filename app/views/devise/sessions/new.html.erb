@@ -10,13 +10,25 @@
             setCustomValidity("")' %>
       </div>
 
-      <div class="field">
+      <div class="field relative">
         <%= f.label :password %><br />
         <%= f.password_field :password, autocomplete: "off" %>
+
+        <%- if devise_mapping.recoverable? %>
+          <%= link_to 'Esqueceu a senha?', new_password_path(resource_name), id: 'forget-password' %><br />
+        <% end -%>
       </div>
 
       <div class="field devise-links">
-        <%= render "devise/shared/links" %>
+        <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+          <%= link_to "Não recebeu o email de confirmação?", new_confirmation_path(resource_name) %><br />
+        <% end -%>
+        <%- if devise_mapping.registerable? %>
+          <%= link_to "Cadastre-se", new_registration_path(resource_name) %><br />
+        <% end -%>
+
+        <br>
+        <%= link_to "Voltar", new_registration_path(resource_name) %><br />
       </div>
 
       <div id="lower">
@@ -29,5 +41,7 @@
       </div>
 
     <% end %>
+
+    <%= render 'shared/flash_message' %>
   </div>
 </section>

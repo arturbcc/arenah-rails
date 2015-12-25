@@ -38,12 +38,12 @@ Rails.application.routes.draw do
   get 'tour/mestres', to: 'tour#masters', as: :masters_tour
   get 'tour/jogadores', to: 'tour#players', as: :players_tour
 
-  namespace :passport, as: :passport, path: 'passaporte' do
-    get 'register', path: 'registro'
-    get 'login'
-    get 'logout'
-  end
-
+  # namespace :passport, as: :passport, path: 'passaporte' do
+  #   get 'register', path: 'registro'
+  #   get 'login'
+  #   get 'logout'
+  # end
+  #
   resources :profile, only: :edit, path: 'perfil'
 
   root 'home#index'

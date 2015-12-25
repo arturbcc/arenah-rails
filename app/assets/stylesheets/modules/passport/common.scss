@@ -175,3 +175,7 @@ input[type=submit]:active {
 	background-image: -moz-linear-gradient(top left 90deg, #6ec2e8 0%, #b6e2ff 100%);
 	background-image: linear-gradient(top left 90deg, #6ec2e8 0%, #b6e2ff 100%);
 }
+
+.field.relative {
+  position: relative;
+}
