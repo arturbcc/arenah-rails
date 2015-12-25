@@ -262,4 +262,10 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  # https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
+  Rails.application.config.to_prepare do
+    Devise::SessionsController.layout "passport"
+    Devise::Mailer.layout "email" # email.haml or email.erb
+  end
 end

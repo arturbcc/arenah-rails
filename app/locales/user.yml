@@ -13,3 +13,4 @@ pt-BR:
         updated_at: 'Atualizado em'
         email: 'Email'
         password: 'Senha'
+        remember_me: 'Mantenha-me conectado'

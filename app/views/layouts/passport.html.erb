@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head runat="server">
+  <title><%= yield(:title).presence || 'Arenah Tsuki' %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
+  <meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+  <%= stylesheet_link_tag    'passport', media: 'all' %>
+  <%= javascript_include_tag 'passport' %>
+
+  <%= csrf_meta_tags %>
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="/favicon.ico" type="image/ico" />
+  <%= yield :head %>
+</head>
+
+<body>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  <div>
+    <%= yield %>
+  </div>
+
+  <%= render 'shared/tracking_scripts' %>
+  <script>
+    <%= yield :javascripts %>
+  </script>
+</body>
+</html>
