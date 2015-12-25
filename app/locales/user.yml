@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    errors:
+      messages:
+        blank: 'é um campo obrigatório'
+    models:
+      user: 'Usuário'
+    attributes:
+      user:
+        name: 'Nome'
+        active: 'Ativo'
+        created_at: 'Criado em'
+        updated_at: 'Atualizado em'
+        email: 'Email'
+        password: 'Senha'

@@ -25,6 +25,9 @@ gem 'friendly_id', '~> 5.1.0'
 
 gem 'ruby-bbcode'
 
+gem 'devise'
+gem 'devise-encryptable'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
