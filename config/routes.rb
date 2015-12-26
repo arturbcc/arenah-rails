@@ -46,5 +46,6 @@ Rails.application.routes.draw do
   #
   resources :profile, only: :edit, path: 'perfil'
 
+
   root 'home#index'
 end

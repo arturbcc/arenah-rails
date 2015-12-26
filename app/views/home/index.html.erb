@@ -51,7 +51,8 @@
     <%= render 'shared/modal' %>
   </div>
 
-  <%= render 'shared/flash_message' %>
+  <%= render 'shared/flash_message', message: alert, message_type: 'success' %>
+  <%= render 'shared/flash_message', message: notice, message_type: 'success' %>
   <%= render 'shared/tracking_scripts' %>
 </body>
 </html>

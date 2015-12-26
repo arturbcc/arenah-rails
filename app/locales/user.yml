@@ -19,4 +19,5 @@ pt-BR:
         updated_at: 'Atualizado em'
         email: 'Email'
         password: 'Senha'
+        password_confirmation: 'Confirmação de senha'
         remember_me: 'Mantenha-me conectado'

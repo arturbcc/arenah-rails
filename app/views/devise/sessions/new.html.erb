@@ -1,4 +1,5 @@
 <% content_for :title, 'Entrar - Arenah Tsuki' %>
+
 <section class='login-section'>
   <div id="container">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -39,9 +40,6 @@
 
         <%= f.submit 'Entrar' %>
       </div>
-
     <% end %>
-
-    <%= render 'shared/flash_message' %>
   </div>
 </section>

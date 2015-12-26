@@ -15,7 +15,7 @@
   <%= yield :head %>
 </head>
 
-<body>
+<body data-page='<%= "#{controller.controller_name}##{controller.action_name}" %>'>
   <div>
     <p class='notice'><%= notice %></p>
     <%= yield %>

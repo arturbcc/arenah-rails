@@ -265,7 +265,12 @@ Devise.setup do |config|
 
   # https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
   Rails.application.config.to_prepare do
-    Devise::SessionsController.layout "passport"
-    Devise::Mailer.layout "email" # email.haml or email.erb
+    Devise::SessionsController.layout 'passport'
+    Devise::SessionsController.layout 'passport'
+    Devise::RegistrationsController.layout 'passport'
+    Devise::ConfirmationsController.layout 'passport'
+    Devise::UnlocksController.layout 'passport'
+    Devise::PasswordsController.layout 'passport'
+    Devise::Mailer.layout 'email'
   end
 end

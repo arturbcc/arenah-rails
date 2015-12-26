@@ -1,34 +1,46 @@
-<h2>Sign up</h2>
+<% content_for :title, 'Cadastre-se - Arenah Tsuki' %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<section class='register-section'>
+  <div id="container">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true,
+              oninvalid: 'validity.typeMismatch ?
+                setCustomValidity("Formato de email inválido") :
+                setCustomValidity("")' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+      <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(mínimo de <%= @minimum_password_length %> characteres)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+
+      <p>&nbsp;</p>
+      <p>
+        <%= link_to 'Voltar', go_back_path %><br />
+      </p>
+
+      <div id="lower">
+        <input type="checkbox" name="agreement" />
+        <label class="check" for="checkbox">
+          Li e concordo com os <a href="/termos-de-uso" alt='termos de uso' class='terms-of-use'>termos de uso</a>
+        </label>
+        <%= f.submit 'Cadastrar' %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</section>
