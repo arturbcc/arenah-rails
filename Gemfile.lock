@@ -61,6 +61,10 @@ GEM
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    dotenv (2.0.2)
+    dotenv-rails (2.0.2)
+      dotenv (= 2.0.2)
+      railties (~> 4.0)
     erubis (2.7.0)
     execjs (2.6.0)
     factory_girl (4.5.0)
@@ -207,6 +211,7 @@ DEPENDENCIES
   capybara
   devise
   devise-encryptable
+  dotenv-rails
   factory_girl_rails
   friendly_id (~> 5.1.0)
   jbuilder (~> 2.0)
