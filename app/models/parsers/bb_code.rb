@@ -1,6 +1,6 @@
 class Parsers::BBCode
   def self.parse(text)
-    text.bbcode_to_html(true, additional_tags)
+    text.present? ? text.bbcode_to_html(true, additional_tags) : ''
   end
 
   private
