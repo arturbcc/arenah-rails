@@ -14,6 +14,7 @@ run the following commands:
 
 bbcode: https://github.com/veger/ruby-bbcode
 emoji: emojis taken from http://www.emoji-cheat-sheet.com/
+inline css: http://templates.mailchimp.com/resources/inline-css/
 
 
 === TODO LIST ===

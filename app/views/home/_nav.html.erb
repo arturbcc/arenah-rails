@@ -6,7 +6,7 @@
     <li class="page-scroll">
       <a href="#rooms">Salas</a>
     </li>
-    <li class="page-scroll">
+    <li class="page-scroll hidden-sm">
       <a href="#tour" class="gold">Faça um tour</a>
     </li>
     <li class="page-scroll">
@@ -22,6 +22,9 @@
     <% else %>
       <li class="page-scroll">
         <%= link_to 'Cadastre-se', new_user_registration_path %>
+      </li>
+      <li class="page-scroll">
+        <%= link_to 'Entrar', new_user_session_path %>
       </li>
     <% end %>
   </ul>
