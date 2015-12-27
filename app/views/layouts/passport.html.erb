@@ -23,7 +23,11 @@
 
   <%= render 'shared/tracking_scripts' %>
 
-  <%= render 'shared/flash_message', message: alert %>
+  <% if alert.present? %>
+    <%= render 'shared/flash_message', message: alert %>
+  <% elsif notice.present? %>
+    <%= render 'shared/flash_message', message: notice, message_type: 'information' %>
+  <% end %>
 
   <script>
     <%= yield :javascripts %>
