@@ -48,11 +48,11 @@
             <% if @topic %>
               <li>
                 <% if is_saga %>
-                  <%= link_to posts_path(game, topic) do %>
+                  <%= link_to game_posts_path(game, topic) do %>
                     <i class="fa fa-bars"></i> Todos os posts
                   <% end %>
                 <% else %>
-                  <%= link_to posts_path(game, topic, { personagem: @character.slug }) do %>
+                  <%= link_to game_posts_path(game, topic, { personagem: @character.slug }) do %>
                     <i class="fa fa-filter"></i> Minha saga
                   <% end %>
                 <% end %>
