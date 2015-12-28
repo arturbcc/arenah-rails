@@ -1,0 +1,24 @@
+.login-section {
+  #container {
+  	height: 338px;
+  	margin-top: -156px;
+  	width: 340px;
+  	margin-left: -170px;
+  }
+
+  #retrieve-password-form {
+    display: none;
+  }
+
+  #forget-password {
+    position: absolute;
+    top: 25px;
+    right: 0;
+  }
+
+  .home-link {
+    position: absolute;
+    top: 63px;
+    left: 245px;
+  }
+}

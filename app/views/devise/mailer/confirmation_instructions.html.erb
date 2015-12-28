@@ -1,0 +1,18 @@
+<%= content_for :main_box_content do %>
+  <h1>Bem vindo(a), <%= @email %>!</h1>
+  <p class='lead' style='font-size: 18px;line-height: 21px;'>
+    Você está quase pronto para usar todos os recursos da Arenah Tsuki.
+  </p>
+  <p style='margin: 0 0 0 10px;'>
+    Para garantir que você é dono da conta de e-mail usada na Arenah, precisamos que confirme seu cadastro. É simples e rápido,
+    basta clicar no link abaixo. Caso o link não funcione, copie e cole o endereço no seu navegador.
+  </p>
+<% end %>
+
+<%= content_for :blue_box_content do %>
+  <p style='margin: 0 0 0 10px;'>
+    Confirme sua conta <%= link_to 'clicando neste link', confirmation_url(@resource, confirmation_token: @token) %>
+    <br>
+    Ou cole o seguinte endereço no navegador: <%= confirmation_url(@resource, confirmation_token: @token) %>
+  </p>
+<% end %>

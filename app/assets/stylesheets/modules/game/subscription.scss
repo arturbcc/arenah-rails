@@ -1,7 +1,7 @@
 .game-subscription  {
   #game-description {
     min-height: 322px;
-    font-family: Open Sans, Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.42857143;
     color: #333;
@@ -37,6 +37,10 @@
     color: #B5B3B0;
     text-align: center;
     border-radius: 10px;
+
+    &.gold-border {
+      color: $gold;
+    }
   }
 
   .onoffswitch {

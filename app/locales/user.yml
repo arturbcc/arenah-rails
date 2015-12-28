@@ -1,0 +1,23 @@
+pt-BR:
+  activerecord:
+    errors:
+      messages:
+        blank: 'é um campo obrigatório'
+        record_invalid: 'registro inválido'
+      models:
+        user:
+          attributes:
+            password:
+              too_short: 'muito curta'
+    models:
+      user: 'Usuário'
+    attributes:
+      user:
+        name: 'Nome'
+        active: 'Ativo'
+        created_at: 'Criado em'
+        updated_at: 'Atualizado em'
+        email: 'Email'
+        password: 'Senha'
+        password_confirmation: 'Confirmação de senha'
+        remember_me: 'Mantenha-me conectado'

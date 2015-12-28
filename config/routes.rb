@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :users
+  # devise_for :users, path: 'auth', path_names: {
+  #   sign_in: 'login', sign_out: 'logout', password: 'secret',
+  #   confirmation: 'verification', unlock: 'unblock', registration: 'register',
+  #   sign_up: 'cmon_let_me_in' }
+
   get 'sobre', to: 'home#about', as: :about
   get 'museu', to: 'home#museum', as: :museum
   get 'mestres', to: 'home#masters', as: :masters
@@ -20,6 +26,8 @@ Rails.application.routes.draw do
     get ':game', to: 'home#show', as: :home
 
     post ':game/topicos/novo', to: 'topics#create', as: :new_topic
+    post ':game/subscribe', to: 'subscription#create', as: :subscribe
+    delete ':game/unsubscribe', to: 'subscription#destroy', as: :unsubscribe
 
     get ':game/personagem/:character/ficha', to: 'characters#sheet', as: :character_sheet
 
@@ -32,13 +40,14 @@ Rails.application.routes.draw do
   get 'tour/mestres', to: 'tour#masters', as: :masters_tour
   get 'tour/jogadores', to: 'tour#players', as: :players_tour
 
-  namespace :passport, as: :passport, path: 'passaporte' do
-    get 'register', path: 'registro'
-    get 'login'
-    get 'logout'
-  end
-
+  # namespace :passport, as: :passport, path: 'passaporte' do
+  #   get 'register', path: 'registro'
+  #   get 'login'
+  #   get 'logout'
+  # end
+  #
   resources :profile, only: :edit, path: 'perfil'
+
 
   root 'home#index'
 end

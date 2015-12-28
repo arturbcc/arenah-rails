@@ -13,7 +13,7 @@
       padding: 10px;
       width: 800px;
       min-height: 200px;
-      font: 600 13px Open Sans;
+      font: 600 13px "Open Sans";
       line-height: 1.4em;
 
       .content {
@@ -44,14 +44,14 @@
         font-weight: 300;
 
         a {
-          color: #C0111F;
+          color: $main-red;
         }
       }
 
       footer {
         padding: 10px;
         margin-top: 20px;
-        font: 400 13px Open Sans;
+        font: 400 13px "Open Sans";
         border-top: 2px dotted #000;
 
         img {

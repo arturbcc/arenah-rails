@@ -8,6 +8,7 @@ var Home = function Home() {
 
 var fn = Home.prototype;
 
+// Animate log when the user scrolls down
 fn.animateHeader = function(threshold) {
   $(window).scroll(function () {
     if ($('.navbar').offset().top > threshold) {

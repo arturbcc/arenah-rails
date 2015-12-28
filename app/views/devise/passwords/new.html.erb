@@ -1,0 +1,22 @@
+<% content_for :title, 'Esqueceu a senha? - Arenah Tsuki' %>
+
+<section class='forget-password-section'>
+  <div id="container">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+
+      <div class="field devise-links">
+        <%= link_to "Voltar", session[:previous_url] %><br />
+      </div>
+
+      <div id="lower">
+        <%= f.submit 'Enviar instruções' %>
+      </div>
+    <% end %>
+  </div>
+</section

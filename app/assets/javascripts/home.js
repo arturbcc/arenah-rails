@@ -2,6 +2,7 @@
 //= require bootstrap/dist/js/bootstrap.min
 //= require_tree ../../../vendor/assets/javascripts/
 //= require modules/home
+//= require modules/noty_message
 
 //= require_tree ./pages
 

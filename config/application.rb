@@ -24,5 +24,13 @@ module Arenah
     config.active_record.raise_in_transactional_callbacks = true
 
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
+
+    config.i18n.load_path += Dir[Rails.root.join('app', 'locales', '**/*.{rb,yml}').to_s]
+    config.i18n.default_locale = 'pt-BR'
+
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      html_tag
+    }
+
   end
 end

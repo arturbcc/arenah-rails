@@ -25,6 +25,10 @@ gem 'friendly_id', '~> 5.1.0'
 
 gem 'ruby-bbcode'
 
+gem 'devise'
+gem 'devise-encryptable'
+gem 'jquery-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -39,6 +43,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'shoulda'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -56,4 +61,5 @@ group :test do
   gem 'vcr'
   gem 'capybara'
   gem 'poltergeist'
+  gem 'database_cleaner'
 end

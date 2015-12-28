@@ -1,0 +1,19 @@
+.resend-confirmation-section,
+.forget-password-section {
+  #container {
+  	height: 205px;
+  	margin-top: -156px;
+  	width: 340px;
+  	margin-left: -170px;
+  }
+
+  #lower {
+    text-align: center;
+
+    input {
+      width: 200px;
+      float: inherit;
+      margin-right: 0;
+    }
+  }
+}

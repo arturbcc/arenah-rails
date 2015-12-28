@@ -1,0 +1,47 @@
+<% content_for :title, 'Entrar - Arenah Tsuki' %>
+
+<section class='login-section'>
+  <div id="container">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true,
+          oninvalid: 'validity.typeMismatch ?
+            setCustomValidity("Formato de email inválido") :
+            setCustomValidity("")' %>
+      </div>
+
+      <div class="field relative">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: 'off' %>
+
+        <%- if devise_mapping.recoverable? %>
+          <%= link_to 'Esqueceu a senha?', new_password_path(resource_name), id: 'forget-password' %><br />
+        <% end -%>
+      </div>
+
+      <div class="field devise-links">
+        <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+          <%= link_to 'Não recebeu o email de confirmação?', new_confirmation_path(resource_name) %><br />
+        <% end -%>
+        <%- if devise_mapping.registerable? %>
+          <%= link_to 'Cadastre-se', new_registration_path(resource_name) %><br />
+        <% end -%>
+
+        <br>
+        <%= link_to 'Voltar', session[:previous_url] %><br />
+
+        <%= link_to 'Início | ', root_path, class: 'home-link' %>
+      </div>
+
+      <div id="lower">
+        <% if devise_mapping.rememberable? -%>
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, class: 'for-checkbox' %>
+        <% end -%>
+
+        <%= f.submit 'Entrar' %>
+      </div>
+    <% end %>
+  </div>
+</section>

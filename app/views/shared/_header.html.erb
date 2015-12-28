@@ -18,20 +18,21 @@
     <ul class="nav navbar-nav navbar-right navbar-user">
       <% if game.present? && @identity.read_only? %>
         <li class="hide-on-small-screen">
-          <a href="#" class="gold">
-            <span class="fa fa-play"></span> Inscreva-se!</a>
-          </li>
+          <%= link_to game_subscription_path(@game), class: 'gold', data: { header: 'subscribe' } do %>
+            <span class="fa fa-play"></span> Inscreva-se!
+          <% end %>
+        </li>
       <% end %>
 
       <% if @identity.unlogged? %>
         <li>
-          <%= link_to passport_register_path(url: url) do %>
+          <%= link_to new_user_registration_path, data: { header: 'sign-up' } do %>
             <span class="fa fa-file-text-o"></span> Cadastre-se
           <% end %>
         </li>
 
         <li>
-          <%= link_to passport_login_path(url: url) do %>
+          <%= link_to new_user_session_path, data: { header: 'sign-in' } do %>
             <span class="fa fa-sign-in"></span> Entrar
           <% end %>
         </li>
@@ -39,9 +40,9 @@
 
       <% if game.present? && @identity.player? && !area.profile? %>
         <li class="dropdown user-dropdown hide-on-small-screen">
-          <% string iconGold = is_saga ? " icon-gold" : ""; %>
+          <% iconGold = is_saga ? ' icon-gold' : ''; %>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-star-half-o<%= iconGold %>"></i> <%= @character.name %> <b class="caret"></b>
+            <i class="fa fa-star-half-o<%#= iconGold %>"></i> <%#= @character.name %> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <% if @topic %>
@@ -119,7 +120,7 @@
           </li>
         <% end %>
 
-        <% if !area.profile? && !area.panel? && character.id > 0 %>
+        <% if !area.profile? && !area.panel? && @character.present? %>
 
           <!-- % Html.RenderPartial("HeaderMessages", Model); %>
 
@@ -128,9 +129,10 @@
         <% end %>
 
         <li class="dropdown user-dropdown">
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-character-id="<%= character.id %>" id="character-menu">
-            <%= avatar(@character, class: 'size-20') %> <b class="caret"></b>
-          </a>
+          <%= link_to 'javascript:;', class: 'dropdown-toggle', id: 'user-menu',
+                data: { 'user-id' => current_user.id, toggle: 'dropdown' } do %>
+            <%= user_avatar(current_user) %> <b class="caret"></b>
+          <% end %>
 
           <ul class="dropdown-menu">
             <li>
@@ -149,7 +151,7 @@
 
             <li class="divider"></li>
             <li>
-              <%= link_to passport_logout_path(url: url) do %>
+              <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa fa-power-off"></i> Sair
               <% end %>
             </li>
