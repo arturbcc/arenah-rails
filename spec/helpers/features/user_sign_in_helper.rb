@@ -1,11 +1,11 @@
 module SignInHelper
-  def sign_in(user)
-    visit root_path
+  def sign_in(user, visit_login_page = false)
+    visit new_user_session_path if visit_login_page
 
     fill_in 'user_email', with: user.email
     fill_in 'user_password', with: user.password
 
-    click_button 'Login'
+    click_button 'Entrar'
   end
 end
 

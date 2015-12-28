@@ -18,20 +18,20 @@
     <ul class="nav navbar-nav navbar-right navbar-user">
       <% if game.present? && @identity.read_only? %>
         <li class="hide-on-small-screen">
-          <a href="#" class="gold">
+          <a href="#" class="gold" data-header='subscribe'>
             <span class="fa fa-play"></span> Inscreva-se!</a>
           </li>
       <% end %>
 
       <% if @identity.unlogged? %>
         <li>
-          <%= link_to new_user_registration_path do %>
+          <%= link_to new_user_registration_path, data: { header: 'sign-up' } do %>
             <span class="fa fa-file-text-o"></span> Cadastre-se
           <% end %>
         </li>
 
         <li>
-          <%= link_to new_user_session_path do %>
+          <%= link_to new_user_session_path, data: { header: 'sign-in' } do %>
             <span class="fa fa-sign-in"></span> Entrar
           <% end %>
         </li>

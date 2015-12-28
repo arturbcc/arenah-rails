@@ -1,5 +1,5 @@
 page.at('subscription#show', function() {
-  new Subscription('.box');
+  new Subscription('.game-subscription');
 });
 
 page.at('topics#index', function() {

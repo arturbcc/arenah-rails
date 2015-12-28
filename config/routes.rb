@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     get ':game', to: 'home#show', as: :home
 
     post ':game/topicos/novo', to: 'topics#create', as: :new_topic
+    post ':game/subscribe', to: 'subscription#create', as: :subscribe
+    delete ':game/unsubscribe', to: 'subscription#destroy', as: :unsubscribe
 
     get ':game/personagem/:character/ficha', to: 'characters#sheet', as: :character_sheet
 

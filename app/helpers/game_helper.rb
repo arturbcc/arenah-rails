@@ -5,7 +5,7 @@ module GameHelper
     url = options[:url] || 'javascript:;'
     klass = 'active' if area.current == options[:area]
 
-    link = link_to url, class: klass do
+    link = link_to url, class: klass, data: { menu: options[:area] } do
       concat(icon options[:icon]) if options[:icon]
       concat(content_tag :strong, options[:title]) if options[:title]
       concat(content_tag :small, options[:subtitle]) if options[:subtitle]
