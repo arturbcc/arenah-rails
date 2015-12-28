@@ -52,7 +52,8 @@
   </div>
 
   <%= render 'shared/flash_message', message: alert, message_type: 'success' %>
-  <%= render 'shared/flash_message', message: notice, message_type: 'success' %>
+  saiu com sucesso
+  <%= render 'shared/flash_message', message: notice, message_type: 'success' unless invalid_notice?(notice) %>
   <%= render 'shared/tracking_scripts' %>
 </body>
 </html>
