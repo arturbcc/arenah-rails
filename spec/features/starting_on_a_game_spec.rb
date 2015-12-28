@@ -17,7 +17,6 @@ feature 'Subscribe to a game' do
     sign_in user
 
     expect(page.current_path).to eq game_home_path(crossover)
-    expect(page.body).to have_css('.dropdown-toggle')
     expect(page.body).to have_css('.user-avatar')
 
     find('[data-menu=subscription]', match: :first).click

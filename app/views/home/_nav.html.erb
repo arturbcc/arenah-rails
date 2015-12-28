@@ -12,7 +12,7 @@
     <li class="page-scroll">
       <a href="#sign-up">Crie sua sala</a>
     </li>
-    <% if @identity.logged? %>
+    <% if current_user %>
       <li>
         <%= link_to "Olá, #{current_user.name}",
               edit_profile_path(current_user.id),

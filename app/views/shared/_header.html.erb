@@ -18,9 +18,10 @@
     <ul class="nav navbar-nav navbar-right navbar-user">
       <% if game.present? && @identity.read_only? %>
         <li class="hide-on-small-screen">
-          <a href="#" class="gold" data-header='subscribe'>
-            <span class="fa fa-play"></span> Inscreva-se!</a>
-          </li>
+          <%= link_to game_subscription_path(@game), class: 'gold', data: { header: 'subscribe' } do %>
+            <span class="fa fa-play"></span> Inscreva-se!
+          <% end %>
+        </li>
       <% end %>
 
       <% if @identity.unlogged? %>
@@ -39,9 +40,9 @@
 
       <% if game.present? && @identity.player? && !area.profile? %>
         <li class="dropdown user-dropdown hide-on-small-screen">
-          <% string iconGold = is_saga ? " icon-gold" : ""; %>
+          <% iconGold = is_saga ? ' icon-gold' : ''; %>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-star-half-o<%= iconGold %>"></i> <%= @character.name %> <b class="caret"></b>
+            <i class="fa fa-star-half-o<%#= iconGold %>"></i> <%#= @character.name %> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <% if @topic %>

@@ -13,7 +13,7 @@
 
       <div class="field relative">
         <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off" %>
+        <%= f.password_field :password, autocomplete: 'off' %>
 
         <%- if devise_mapping.recoverable? %>
           <%= link_to 'Esqueceu a senha?', new_password_path(resource_name), id: 'forget-password' %><br />
@@ -22,14 +22,16 @@
 
       <div class="field devise-links">
         <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-          <%= link_to "Não recebeu o email de confirmação?", new_confirmation_path(resource_name) %><br />
+          <%= link_to 'Não recebeu o email de confirmação?', new_confirmation_path(resource_name) %><br />
         <% end -%>
         <%- if devise_mapping.registerable? %>
-          <%= link_to "Cadastre-se", new_registration_path(resource_name) %><br />
+          <%= link_to 'Cadastre-se', new_registration_path(resource_name) %><br />
         <% end -%>
 
         <br>
-        <%= link_to "Voltar", session[:previous_url] %><br />
+        <%= link_to 'Voltar', session[:previous_url] %><br />
+
+        <%= link_to 'Início | ', root_path, class: 'home-link' %>
       </div>
 
       <div id="lower">
