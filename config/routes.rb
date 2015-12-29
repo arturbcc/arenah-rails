@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   #   get 'logout'
   # end
   #
-  resources :profile, only: :edit, path: 'perfil'
+  resources :profile, only: [:edit, :update], path: 'perfil'
 
 
   root 'home#index'

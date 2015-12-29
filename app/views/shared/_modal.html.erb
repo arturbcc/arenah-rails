@@ -1,5 +1,38 @@
-<div class="modal fade" id="remoteModal" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content"></div>
+<%
+  header ||= ''
+  sheet_button = false if sheet_button.nil?
+  save_button = false if save_button.nil?
+  save_method ||= 'console.log'
+  partial_name ||= ''
+  partial_data ||= nil
+  on_load_method ||= nil
+%>
+
+<% if header.present? %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h4><%= header %></h4>
   </div>
+<% end %>
+
+<div class="modal-body">
+  <%= render partial_name, data: partial_data %>
 </div>
+
+<div class="modal-footer">
+  <% if sheet_button %>
+    <button type="button" class="btn btn-default" onclick="openSheet()"><i class="fa fa-file-text-o"></i> Ficha</button>
+  <% end %>
+
+  <% if save_button %>
+    <button type="button" class="btn btn-default" onclick="<%= save_method %>()"><i class="fa fa-save"></i> Salvar</button>
+  <% end %>
+
+  <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out"></i> Fechar</button>
+</div>
+
+<% if on_load_method.present? %>
+  <script type="text/javascript">
+    <%= on_load_method %>
+  </script>
+<% end %>

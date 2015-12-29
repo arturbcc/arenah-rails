@@ -3,6 +3,8 @@
 //= require_tree ../../../vendor/assets/javascripts/
 //= require modules/home
 //= require modules/noty_message
+//= require modules/ga_event_tracker
+//= require modules/profile/edit
 
 //= require_tree ./pages
 

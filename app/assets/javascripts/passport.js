@@ -3,6 +3,7 @@
 //= require bootstrap/dist/js/bootstrap.min
 //= require_tree ../../../vendor/assets/javascripts/
 //= require modules/noty_message
+//= require modules/ga_event_tracker
 //= require_tree ./modules/passport
 //= require_tree ./pages
 

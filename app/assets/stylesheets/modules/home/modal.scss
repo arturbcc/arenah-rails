@@ -3,11 +3,11 @@
 
   .btn-default {
     border: 0;
-    background-color: #ccc;
 
     &:hover,
     &:focus {
-      color: #000;
+      color: #fff;
+      background-color: #000;
     }
   }
 }

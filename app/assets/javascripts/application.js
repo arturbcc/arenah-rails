@@ -13,6 +13,7 @@
 //= require jquery/dist/jquery.min
 //= require jquery_ujs
 //= require bootstrap/dist/js/bootstrap.min
+//= require modules/ga_event_tracker
 //= require_tree ../../../vendor/assets/javascripts/
 
 //= require_tree ./modules

@@ -1,0 +1,31 @@
+<div id="edit-user-profile-header">
+  <h2>Edite seus dados</h1>
+</div>
+
+<fieldset id="edit-user-profile">
+  <label for="name">Nome:</label>
+  <input type='hidden' id='user-id' value='<%= current_user.id %>' />
+  <div class="field">
+    <input type="text" id="name" value="<%= current_user.name %>" />
+  </div>
+
+  <label for="current-password">Senha atual:</label>
+  <div class="field">
+    <input type="password" id="current-password" />
+  </div>
+  <label for="new-password">Nova senha:</label>
+  <div class="field">
+    <input type="password" id="new-password" />
+  </div>
+  <label for="password-confirmation">Confirme a nova senha:</label>
+  <div class="field">
+    <input type="password" id="password-confirmation" />
+  </div>
+  <div class="field">
+    <div id="password-messages"></div>
+  </div>
+</fieldset>
+
+<script type="text/javascript">
+  Track.event('Profile', 'Edit', 'Edit profile for user <%= "#{current_user.email}, id #{current_user.id}" %>');
+</script>
