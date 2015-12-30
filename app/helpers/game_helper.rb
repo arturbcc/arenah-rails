@@ -15,17 +15,20 @@ module GameHelper
   end
 
   def banner(game)
+    image_tag banner_url(game), alt: game.name
+  end
+
+  def banner_url(game)
     if game.banner.present?
-      image_tag banner_path(game), alt: game.name
+      banner_path(game)
     else
-      image_tag default_banner_path, alt: game.name
+      default_banner_path
     end
   end
 
   def custom_css(game)
     "<link href='/games/#{game.slug}/css/custom.css' rel='stylesheet'>".html_safe if game.present?
   end
-
 
   def roman_number(number)
     raise 'Insert value between 1 and 3999' if number < 0 || number > 3999

@@ -1,0 +1,19 @@
+<div class="view-cover book">
+  <%= link_to game_home_path(game) do %>
+    <div class="main">
+      <div class="book-font">
+        <div class="book-cover" style="background:url(<%= banner_url(game) %>) no-repeat;">
+          <h1 class="title">
+            <%= game.name %></h1>
+          <h2 class="author">
+            <%= game.masters.map(&:name).join(', ') %>
+          </h2>
+          <div class="publisher">
+            Arenah Tsuki</div>
+        </div>
+      </div>
+      <div class="book-back"></div>
+      <div class="book-right"></div>
+    </div>
+  <% end %>
+</div>

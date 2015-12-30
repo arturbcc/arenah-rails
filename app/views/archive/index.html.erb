@@ -1,0 +1,39 @@
+<%= content_for :title, 'Arquivo - Arenah Tsuki' %>
+  <!--
+    Copyright (c) 2014 by Ryan (http://codepen.io/zhonglimh/pen/vGozE)
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+  <%#= render 'game/header', game: @game, topic: @topic %>
+  <%#= banner(Game.new) %>
+
+  <section id="page-body">
+
+    <h1>
+      <%= link_to 'Arquivo', archive_path %>
+    </h1>
+
+    <div>
+      No arquivo, guardamos todas as salas encerradas e/ou paralisadas para que mestres e jogadores possam reler
+      suas aventuras passadas, continuar um jogo interrompido ou reaproveitar fichas e dados
+      para uma nova sala.
+    </div>
+
+    <p>
+      &nbsp;
+    </p>
+  </section>
+
+  <section class="archive">
+    <div id="game-list" class="bookshelf">
+      <% @games.each do |game| %>
+        <%= render 'book', game: game %>
+      <% end %>
+    </div>
+  </section>
+
+  <%#= Scripts.Render("~/Scripts/museum") %>

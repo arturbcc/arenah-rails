@@ -89,10 +89,11 @@ vampire = Game.new(
   name: 'Vampiros',
   subtitle: 'A Máscara',
   short_description: 'Aventure-se em um mundo cheio de vampiros',
-  description: 'Vampiro é um ser mitológico ou folclórico que sobrevive se alimentando da essência vital de criaturas vivas (geralmente sob a forma de sangue), independentemente de ser um morto-vivo ou uma pessoa viva.nota 1 1 2 3 4 5 6 \r\n' +
+  description: 'Vampiro é um ser mitológico ou folclórico que sobrevive se alimentando da essência vital de criaturas vivas (geralmente sob a forma de sangue), independentemente de ser um morto-vivo ou uma pessoa viva.\r\n' +
           'Embora entidades vampíricas tenham sido registradas em várias culturas, possivelmente em tempos tão recuados quanto a pré-história,7 o termo vampiro apenas se tornou popular no início do século XIX, após um influxo de superstições vampíricas na Europa Ocidental, vindas de áreas onde lendas sobre vampiros eram frequentes, como os Balcãs e a Europa Oriental,8 embora variantes locais sejam também conhecidas por outras designações, como vrykolakas na Grécia e strigoi na Roménia. Este aumento das superstições vampíricas na Europa levou a uma histeria colectiva, resultando em alguns casos na perfuração de cadáveres com estacas e acusações de vampirismo.',
   banner: 'vampiro.png',
-  character: amy
+  character: amy,
+  status: 0
 )
 
 eva.update(game: vampire)

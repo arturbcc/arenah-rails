@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   #   sign_up: 'cmon_let_me_in' }
 
   get 'sobre', to: 'home#about', as: :about
-  get 'museu', to: 'home#museum', as: :museum
+  get 'arquivo', to: 'archive#index', as: :archive
   get 'mestres', to: 'home#masters', as: :masters
 
   namespace :admin do
