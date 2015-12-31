@@ -1,7 +1,7 @@
 # USERS
 
 carlos = User.create!(email: 'carlos@arenah.com', name: 'Carlos', password: '12345678', confirmed_at: Time.now)
-mariana = User.create!(email: 'mariana@arenah.com', name: 'Mariana', password: '12345678', confirmed_at: Time.now)
+mariana = User.create!(email: 'mariana@arenah.com', name: 'Mariana', password: '12345678', confirmed_at: Time.now, legacy_password: Devise::Encryptable::Encryptors::Md5.digest('123', nil, nil, nil))
 luisfelipe = User.create!(email: 'luisfelipe@arenah.com', name: 'Luís Felipe', password: '12345678', confirmed_at: Time.now)
 willian = User.create!(email: 'willian@arenah.com', name: 'Willian', password: '12345678', confirmed_at: Time.now)
 priscila = User.create!(email: 'priscila@arenah.com', name: 'Priscila', password: '12345678', confirmed_at: Time.now)

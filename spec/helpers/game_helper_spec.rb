@@ -68,4 +68,34 @@ describe GameHelper do
       expect(menu_item).not_to include('class="active"')
     end
   end
+
+  describe '#roman_number' do
+    it 'accepts numbers between 0 and 3999' do
+      error_message = 'Insert value between 1 and 3999'
+      expect { helper.roman_number(4000) }.to raise_error(error_message)
+      expect { helper.roman_number(-1) }.to raise_error(error_message)
+    end
+
+    it 'returns a roman number' do
+      expect(helper.roman_number(1)).to eq('I')
+      expect(helper.roman_number(6)).to eq('VI')
+      expect(helper.roman_number(7)).to eq('VII')
+      expect(helper.roman_number(10)).to eq('X')
+      expect(helper.roman_number(13)).to eq('XIII')
+      expect(helper.roman_number(19)).to eq('XVIV')
+      expect(helper.roman_number(20)).to eq('XX')
+      expect(helper.roman_number(47)).to eq('XLVII')
+      expect(helper.roman_number(50)).to eq('L')
+      expect(helper.roman_number(51)).to eq('LI')
+      expect(helper.roman_number(95)).to eq('XCV')
+      expect(helper.roman_number(100)).to eq('C')
+      expect(helper.roman_number(101)).to eq('CI')
+      expect(helper.roman_number(200)).to eq('CC')
+      expect(helper.roman_number(402)).to eq('CDII')
+      expect(helper.roman_number(518)).to eq('DXVIII')
+      expect(helper.roman_number(901)).to eq('CMI')
+      expect(helper.roman_number(1000)).to eq('M')
+      expect(helper.roman_number(2011)).to eq('MMXI')
+    end
+  end
 end

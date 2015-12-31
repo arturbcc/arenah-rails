@@ -17,7 +17,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-if ENV['SIMPLE_COV'] == 'true'
+if ENV['COVERAGE'] == 'true'
   require 'simplecov'
 
   SimpleCov.start 'rails' do

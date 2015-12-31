@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
     if legacy_password.present?
       md5 = Devise::Encryptable::Encryptors::Md5.digest(password, nil, nil, nil)
 
-      if Devise.secure_compare(md5.chomp, legacy_password.chomp('\n'))
+      if Devise.secure_compare(md5.chomp, legacy_password.chomp)
         new_password = User.new(:password => password).encrypted_password
         self.update(legacy_password: nil, encrypted_password: new_password)
       else

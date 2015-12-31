@@ -29,5 +29,11 @@ feature 'Subscribe to a game' do
     wait_for_ajax
 
     expect(page.body).to have_css('.gold-border')
+
+    node = find('.onoffswitch-inner', match: :first)
+    node.trigger('click')
+    wait_for_ajax
+
+    expect(page.body).not_to have_css('.gold-border')
   end
 end

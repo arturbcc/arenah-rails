@@ -53,16 +53,12 @@ module GameHelper
       "XL#{roman_number(number - 40)}"
     elsif number >= 10
       "X#{roman_number(number - 10)}"
-    elsif number >= 9
-      "IX#{roman_number(number - 9)}"
     elsif number >= 5
       "V#{roman_number(number - 5)}"
     elsif number >= 4
       "IV#{roman_number(number - 4)}"
     elsif number >= 1
       "I#{roman_number(number - 1)}"
-    else
-      raise 'something bad happened'
     end
   end
 
