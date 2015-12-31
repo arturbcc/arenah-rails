@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151224194507) do
+ActiveRecord::Schema.define(version: 20151231145324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,17 @@ ActiveRecord::Schema.define(version: 20151224194507) do
 
   add_index "games", ["character_id"], name: "index_games_on_character_id", using: :btree
   add_index "games", ["slug"], name: "index_games_on_slug", unique: true, using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "from",                       null: false
+    t.integer  "to",                         null: false
+    t.string   "body"
+    t.boolean  "read",       default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "messages", ["from"], name: "index_messages_on_from", using: :btree
 
   create_table "post_recipients", force: :cascade do |t|
     t.integer  "post_id"
