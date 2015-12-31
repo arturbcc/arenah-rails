@@ -1,5 +1,6 @@
 //= require jquery/dist/jquery.min
 //= require bootstrap/dist/js/bootstrap.min
+//= require jquery_ujs
 //= require_tree ../../../vendor/assets/javascripts/
 //= require modules/home
 //= require modules/noty_message
