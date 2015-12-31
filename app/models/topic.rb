@@ -8,7 +8,7 @@ class Topic < ActiveRecord::Base
   belongs_to :topic_group
   belongs_to :game
 
-  validates :title, length: { maximum: 100 } #check the correct limit
+  validates :title, length: { maximum: 100 }
   validates :game_id, :slug, presence: true
 
   scope :by_group_id, ->(group_id) { joins(:topic_group)

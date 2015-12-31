@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :delete_all
 
   #TODO: Check the correct limit
-  validates :name, length: { maximum: 100 }
+  validates :name, length: { maximum: 25 }
   validates :name, :slug, presence: true
 
   def valid_password?(password)

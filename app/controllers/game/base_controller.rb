@@ -1,22 +1,24 @@
 class Game::BaseController < ApplicationController
   before_action :load_game, :set_identity
 
+  attr_reader :identity
+
+  def current_game
+    @game
+  end
+
   protected
 
   def load_game
-    @game = Game.friendly.find(game_slug) if game_slug.present?
-  end
-
-  def game_slug
-    params[:game]
+    @game = Game.friendly.find(params[:game]) if params[:game].present?
   end
 
   def set_identity
     role = :unlogged
 
     if user_signed_in?
-      if @game
-        masters = current_user.characters.where(game_id: @game.id, character_type: 2)
+      if current_game.present?
+        masters = current_user.characters.where(game_id: current_game.id, character_type: 2)
         if masters.present?
           role = :game_master
         else

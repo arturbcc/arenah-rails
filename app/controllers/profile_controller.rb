@@ -20,8 +20,11 @@ class ProfileController < ApplicationController
         result = change_password
       end
 
-      current_user.save! if result[:status] == 200
-      sign_in current_user, :bypass => true
+      if result[:status] == 200
+        current_user.save!
+        sign_in current_user, :bypass => true
+      end
+
       render json: result
     else
       render json: { status: 422, message: 'Você não pode executar esta ação' }

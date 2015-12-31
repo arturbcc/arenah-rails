@@ -6,6 +6,6 @@ class TopicGroup < ActiveRecord::Base
   has_many :topics, dependent: :delete_all
   belongs_to :game
 
-  validates :name, length: { maximum: 100 } # check the correct limit
+  validates :name, length: { maximum: 100 }
   validates :game_id, :name, :slug, presence: true
 end

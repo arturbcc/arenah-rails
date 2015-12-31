@@ -12,4 +12,5 @@ class Character < ActiveRecord::Base
   has_many :posts
 
   validates :name, :user_id, :slug, :character_type, :status, :gender, :sheet_mode, presence: true
+  validates :name, length: { maximum: 100 }
 end

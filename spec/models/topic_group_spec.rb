@@ -8,7 +8,7 @@ describe TopicGroup, type: :model do
 
   it { should have_many :topics }
   it { should belong_to :game }
-  it { should validate_length_of :name }
+  it { should validate_length_of(:name).is_at_most(100) }
   it { should validate_presence_of :game_id }
   it { should validate_presence_of :name }
 end
