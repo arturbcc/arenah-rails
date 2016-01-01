@@ -10,6 +10,12 @@ require 'capybara/poltergeist'
 require Rails.root.join('spec/helpers/features/user_sign_in_helper')
 require Rails.root.join('spec/helpers/features/wait_for_ajax')
 
+require 'devise'
+
+RSpec.configure do |config|
+  config.include Devise::TestHelpers, :type => :controller
+end
+
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are

@@ -18,7 +18,7 @@ feature 'Edit Profile' do
     click_button 'Salvar'
     wait_for_ajax
 
-    expect(page.first('[data-target]').text).to eq "OLÁ, FAKE NAME"
+    expect(find("[data-hello]")).to have_content("OLÁ, FAKE NAME")
 
     click_link "Olá, fake name"
     wait_for_ajax
@@ -31,6 +31,6 @@ feature 'Edit Profile' do
     click_button 'Salvar'
     wait_for_ajax
 
-    expect(page.first('[data-target]').text).to eq "OLÁ, JOHN DOE"
+    expect(find("[data-hello]")).to have_content("OLÁ, JOHN DOE")
   end
 end

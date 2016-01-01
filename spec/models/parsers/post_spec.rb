@@ -10,7 +10,7 @@ describe Parsers::Post do
   end
 
   it 'parses emoji from text' do
-    expect(parse(':grin:')).to eq('<img class="emoji" src="/images/emoji/grin.png" alt="Grin" />')
+    expect(parse('cool :grin:')).to eq('cool <img class="emoji" src="/images/emoji/grin.png" alt="Grin" />')
   end
 
   def parse(text)

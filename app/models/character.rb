@@ -11,6 +11,9 @@ class Character < ActiveRecord::Base
   belongs_to :game
   has_many :posts
 
+  has_many :sent_messages, -> { order(created_at: :desc) }, foreign_key: :from, class_name: 'Message'
+  has_many :received_messages, -> { order(created_at: :desc) }, foreign_key: :to, class_name: 'Message'
+
   validates :name, :user_id, :slug, :character_type, :status, :gender, :sheet_mode, presence: true
   validates :name, length: { maximum: 100 }
 end

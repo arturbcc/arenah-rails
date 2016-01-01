@@ -1,18 +1,18 @@
 class Game::SubscriptionController < Game::BaseController
-  def show
-    authenticate_user!
+  before_action :authenticate_user!
 
+  def show
     @area = Area.new(:inscription)
-    @subscribed = Subscription.where(user: current_user, game: @game).present?
+    @subscribed = Subscription.where(user: current_user, game: current_game).present?
   end
 
   def create
     result = { status: 'Error', message: 'Usuário já inscrito' }
 
-    if Subscription.create(user_id: current_user.id, game_id: @game.id)
+    if Subscription.create(user_id: current_user.id, game_id: current_game.id)
       result = { status: 'OK', message: '' };
 
-      message = "Você possui uma [b]nova inscrição[/b] na sala #{@game.name}. Para gerenciar as inscrições, acesse [url=#{master_panel_url}]o painel[/url]."
+      message = "Você possui uma [b]nova inscrição[/b] na sala #{current_game.name}. Para gerenciar as inscrições, acesse [url=#{master_panel_url}]o painel[/url]."
       send_message_to_masters(message)
     end
 
@@ -22,9 +22,9 @@ class Game::SubscriptionController < Game::BaseController
   def destroy
     result = { status: 'Error', message: 'Usuário não inscrito' }
 
-    if Subscription.where(user_id: current_user.id, game_id: @game.id).delete_all
+    if Subscription.where(user_id: current_user.id, game_id: current_game.id).delete_all
       result = { status: 'OK', message: '' }
-      message = "#{current_user.name} deixou a sala #{@game.name}. Para gerenciar as inscrições, acesse [url=#{master_panel_url}]o painel[/url]."
+      message = "#{current_user.name} deixou a sala #{current_game.name}. Para gerenciar as inscrições, acesse [url=#{master_panel_url}]o painel[/url]."
       send_message_to_masters(message)
     end
 
@@ -39,9 +39,8 @@ class Game::SubscriptionController < Game::BaseController
   end
 
   def send_message_to_masters(message)
-    #TODO: build messages
-    # @game.masters.each do |master|
-    #   Message.create!(to: master.id, message: message)
-    # end
+    current_game.masters.each do |master|
+      Message.create!(from: Message::FROM_ARENAH, to: master.id, body: message)
+    end
   end
 end

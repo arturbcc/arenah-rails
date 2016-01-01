@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20151231145324) do
   add_index "games", ["slug"], name: "index_games_on_slug", unique: true, using: :btree
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "from",                       null: false
+    t.integer  "from",       default: 0
     t.integer  "to",                         null: false
     t.string   "body"
     t.boolean  "read",       default: false
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20151231145324) do
   end
 
   add_index "messages", ["from"], name: "index_messages_on_from", using: :btree
+  add_index "messages", ["to"], name: "index_messages_on_to", using: :btree
 
   create_table "post_recipients", force: :cascade do |t|
     t.integer  "post_id"
