@@ -37,8 +37,8 @@ Rails.application.routes.draw do
 
   resources :posts, only: :destroy
 
-  get 'tour/mestres', to: 'tour#masters', as: :masters_tour
-  get 'tour/jogadores', to: 'tour#players', as: :players_tour
+  get 'tour/mestres', to: 'tours#for_masters', as: :masters_tour
+  get 'tour/jogadores', to: 'tours#for_players', as: :players_tour
 
   # namespace :passport, as: :passport, path: 'passaporte' do
   #   get 'register', path: 'registro'

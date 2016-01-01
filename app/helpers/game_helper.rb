@@ -14,12 +14,13 @@ module GameHelper
     content_tag :li, link
   end
 
-  def banner(game)
-    image_tag banner_url(game), alt: game.name
+  def banner(game = nil)
+    alt = game.present? ? game.name : ''
+    image_tag banner_url(game), alt: alt
   end
 
-  def banner_url(game)
-    if game.banner.present?
+  def banner_url(game = nil)
+    if game.present? && game.banner.present?
       banner_path(game)
     else
       default_banner_path

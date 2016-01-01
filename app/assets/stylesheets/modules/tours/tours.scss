@@ -1,0 +1,85 @@
+.tour-section {
+  #tours {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  #main-video {
+    float: left;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 5px;
+    background-color: #121010;
+    border: 1px solid;
+  }
+
+  #video-list {
+    float: left;
+    width: 100%;
+    min-height: 500px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+
+  .video {
+    float: left;
+    width: 490px;
+    padding: 20px 5px;
+    margin: 10px;
+    min-height: 320px;
+    text-align: center;
+    background-color: #121010;
+  }
+
+  .video:nth-child(odd) {
+    margin-left: 0;
+  }
+
+  .video:nth-child(even) {
+    margin-right: 0;
+  }
+
+  .video h3 {
+    margin-top: 0px;
+    color: $gold;
+    font-weight: bold;
+  }
+
+  #main-video iframe, .description {
+    float: left;
+  }
+
+  #main-video .description {
+    width: 400px;
+    height: 295px;
+    margin-left: 20px;
+    padding-left: 10px;
+    color: #fff;
+    border-left: 1px solid #262626;
+  }
+
+  #main-video .description h3 {
+    margin-top: 10px;
+    color: $gold;
+    font-weight: bold;
+  }
+
+  #main-video .description p {
+    color: #ccc;
+    text-align: justify;
+  }
+
+  #main-video .description p a {
+    color: $gold;
+  }
+
+  #top-bar {
+    padding: 5px;
+    color: #412323;
+    text-align: center;
+    background-color: #f4edaF;
+    border: 1px solid #262626;
+    border-radius: 5px;
+  }
+}

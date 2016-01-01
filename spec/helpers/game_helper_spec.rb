@@ -17,6 +17,27 @@ describe GameHelper do
         expect(helper.banner(game)).to include('defaults/banner.jpg')
       end
     end
+
+    context 'without a game' do
+      it 'does not render the alt attribute' do
+        expect(helper.banner).to include('alt=""')
+      end
+    end
+  end
+
+  describe '#banner_url' do
+    context 'with game' do
+      it 'returns the banner url of the game' do
+        game = create(:game, banner: 'game_banner.png')
+        expect(helper.banner_url(game)).to include(game.banner)
+      end
+    end
+
+    context 'without game' do
+      it 'returns the default banner' do
+        expect(helper.banner_url).to include('defaults/banner.jpg')
+      end
+    end
   end
 
   describe '#custom' do
