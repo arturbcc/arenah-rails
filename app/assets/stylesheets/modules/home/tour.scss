@@ -1,36 +1,65 @@
-#players-tour,
-#masters-tour {
-  width: 200px;
-  height: 148px;
-  margin-top: 10px;
-  margin-left: 10px;
-  padding-top: 53px;
+.hint-box {
+  width: 250px;
+  height: 325px;
+  margin: 10px;
+  padding-top: 10px;
   font-size: 20px;
   color: #000;
-  border-radius: 10px;
   border: 2px solid #000;
-  background-color: rgba(244, 221, 29, 0.44);
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
+  border-radius: 10px;
+  background-color: #F9F7E4;
 
-  &:hover {
-    border: 1px solid #28c3ab;
-    outline: 0;
-    color: #28c3ab;
-    background-color: rgba(0, 0, 0, 0.57);
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+  i {
+    font-size: 60px;
+  }
+
+  article {
+    font-size: 16px;
+    text-align: justify;
+    font-family: sans-serif;
+    padding: 15px;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-transform: initial;
+    font-family: Helvetica;
   }
 }
 
-#tour .col-centered-inner  {
-  width: 432px;
+@media screen and (max-width: 994px) {
+  .hint-box {
+    width: 50%;
+    margin: 0 auto;
+  }
 }
 
-@media(max-width:460px) {
-  #tour .col-centered-inner {
-    width: 230px;
+@media screen and (max-width: 650px) {
+  .hint-box {
+    width: 100%;
+  }
+}
+
+.download-section {
+  .box-container {
+    text-align: center;
+    width: 815px;
+    margin: 0 auto;
+    height: 370px;
+  }
+
+  .hat {
+    font-size: 23px;
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 994px) {
+  .download-section {
+    .box-container {
+      width: 100%;
+    }
   }
 }

@@ -1,23 +1,36 @@
 <section id="tour" class="container content-section text-center">
   <div class="row download-section">
-    <div class="col-lg-8 col-lg-offset-2">
+    <div class="col-lg-12">
       <h2 class="gold-text">Role um teste de percepção...</h2>
-      <div>Conheça o que a Arenah Tsuki tem a oferecer para você</div>
+      <div class='hat'>Conheça o que a Arenah Tsuki tem a oferecer para você</div>
+        <div class='box-container'>
+          <div class="hint-box pull-left">
+            <%= icon('trophy') %><br />
+            <h3>Jogue!</h3>
+            <article>
+              Escolha as campanhas que mais lhe agradam e faça a inscrição na página do próprio jogo. Se preferir mestrar,
+            </article>
+            <%= link_to 'Crie sua sala', game_new_path, class: 'btn btn-default btn-lg' %>
+          </div>
 
-      <div class="col-centered-outer">
-        <div class="col-centered-inner">
-          <%= link_to players_tour_path do %>
-            <div class="pull-left" id="players-tour">Tour para jogadores</div>
-          <% end %>
-          <%= link_to masters_tour_path do %>
-            <div class="pull-left" id="masters-tour">Tour para mestres</div>
-          <% end %>
+          <div class="hint-box pull-left">
+              <%= icon('user') %><br />
+              <h3>Jogadores</h3>
+              <article>
+                Veja tudo o que está à sua espera nas sals de RPG da Arenah. Que tal dar uma espiada?
+              </article>
+              <%= link_to 'Faça um tour', players_tour_path, class: 'btn btn-default btn-lg' %>
+          </div>
+
+          <div class="hint-box pull-left">
+              <%= icon('user-secret') %><br />
+              <h3>Mestres</h3>
+              <article>
+                O controle da sala é seu! Mude a aparência dela, configure o sistema, as fichas e gerencie seus jogadores.
+              </article>
+              <%= link_to 'Faça um tour', masters_tour_path, class: 'btn btn-default btn-lg' %>
+          </div>
         </div>
-      </div>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
     </div>
   </div>
 </section>
