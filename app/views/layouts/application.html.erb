@@ -35,7 +35,7 @@
   <%= render 'shared/footer' %>
   <%= render 'shared/tracking_scripts', game: @game %>
 
-  <input id='environment' value='<%= Rails.env %>'/>
+  <input type='hidden' id='environment' value='<%= Rails.env %>'/>
 
   <script>
     <%= yield :javascripts %>

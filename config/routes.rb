@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   #   confirmation: 'verification', unlock: 'unblock', registration: 'register',
   #   sign_up: 'cmon_let_me_in' }
 
-  get 'sobre', to: 'home#about', as: :about
+  get 'sobre', to: 'about#show', as: :about
   get 'arquivo', to: 'archive#index', as: :archive
   get 'mestres', to: 'home#masters', as: :masters
 

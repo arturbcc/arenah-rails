@@ -69,3 +69,15 @@
     background-color: #3a3836;
   }
 }
+
+@media screen and (max-width: 645px) {
+  #site-footer .pull-right {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .social-footer {
+    display: none;
+  }
+}
