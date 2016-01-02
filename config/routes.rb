@@ -22,7 +22,8 @@ Rails.application.routes.draw do
     get ':game/personagens', to: 'characters#index', as: :characters
     get ':game/duelos', to: 'duels#index', as: :duels
     get ':game/duelo/:id', to: 'duels#show', as: :duel
-    get ':game/contato', to: 'contact#show', as: :contact
+    get ':game/contato', to: 'contact#new', as: :new_contact
+    post ':game/contato/criar', to: 'contact#create', as: :create_contact
     get ':game', to: 'home#show', as: :home
 
     post ':game/topicos/novo', to: 'topics#create', as: :new_topic

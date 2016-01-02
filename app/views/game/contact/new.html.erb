@@ -1,0 +1,32 @@
+<%= content_for :title, "Contato - #{@game.name} - Arenah Tsuki" %>
+
+<%= render 'game/header', game: @game %>
+
+<section id="page-body" class="game-contact">
+  <div class="row" id="game-content">
+    <%= render 'game/menu', game: @game %>
+
+    <div class="col-md-9" id="game-description">
+      <div class="outer">
+        <div class="inner">
+          <%= form_for(@message, url: game_create_contact_path(@game), html: { method: :post }) do |f| %>
+            <dl>
+              <% errors = @message.errors.first.last unless @message.errors.blank? %>
+              <dt>Mensagem  <span><%= "(#{errors})" if errors.present? %></span></dt>
+              <dd>
+                <%= f.text_area :body, class: 'rounded' %>
+              </dd>
+              <dt>&nbsp;</dt>
+              <dd class="text-right">
+                <%= f.button 'Enviar', class: 'btn btn-default margin-r5' %>
+              </dd>
+            </dl>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= render 'shared/flash_message', message: notice, message_type: 'success' if notice.present? %>
+<%= render 'shared/flash_message', message: alert, message_type: 'error' if alert.present? %>

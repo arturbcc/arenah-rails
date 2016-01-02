@@ -1,9 +1,9 @@
 .game-contact {
-  input.rounded,
   textarea.rounded {
     padding: 4px 7px;
     outline: 0;
     width: 480px;
+    height: 210px;
     margin-top: 5px;
     font-size: 14px;
     background-color: #000;
@@ -15,20 +15,12 @@
     -moz-border-radius: 5px;
   }
 
-  input.rounded {
-    height: 30px;
-  }
-
-  textarea.rounded {
-    height: 130px;
-  }
-
-  input.rounded:hover, textarea.rounded:hover {
+  textarea.rounded:hover {
     border-color: $gold;
   }
 
   #game-description {
-    font: 500 13px "Open Sans";
+    font: 500 17px "Open Sans";
     line-height: 1.5;
 
     dl {
@@ -37,6 +29,10 @@
 
     dt {
       font-weight: normal;
+
+      span {
+        color: $main-red;
+      }
     }
 
     .btn-default {
