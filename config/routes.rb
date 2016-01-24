@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     get ':game/topico/:id/editar', to: 'topics#edit', as: :edit_topic
     get ':game/grupo-de-topicos/:id/editar', to: 'topic_group#edit', as: :edit_topic_group
     get ':game/personagens', to: 'characters#index', as: :characters
+    # TODO: What is the differente between the route above and below?
+    get ':game/personagens/lista', to: 'characters#list', as: :characters_list
     get ':game/duelos', to: 'duels#index', as: :duels
     get ':game/duelo/:id', to: 'duels#show', as: :duel
     get ':game/contato', to: 'contact#new', as: :new_contact

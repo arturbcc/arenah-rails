@@ -16,7 +16,7 @@
       <% end %>
     </div>
     <h1>
-      <%= link_to game_posts_path(@game, @topic) %>
+      <%= link_to @topic.title, game_posts_path(@game, @topic) %>
     </h1>
     <div id="authors-panel">
       <section>
@@ -40,12 +40,18 @@
 
   <h3><% @area.edit_post? ? 'Edição de post' : 'Novo post' %></h3>
 
-  <%= url = @area.edit_post? ? game_edit_post_path(@game, @topic, @post) : game_new_post_path(@game, @topic) %>
+  <% url = @area.edit_post? ? game_edit_post_path(@game, @topic, @post) : game_new_post_path(@game, @topic) %>
   <%= form_for(@post, url: url, id: 'post-form') do |f| %>
     <%= render 'recipients' %>
 
     <div class="box-left">
-      <%= f.text_area :message, id: 'bbcodeEditor', class: @identity.game_master? ? 'master' : 'editor' %>
+      <%= f.text_area :message,
+            id: 'bbcodeEditor',
+            class: @identity.game_master? ? 'master' : 'editor',
+            data: {
+              'bbcode-editor' => ''
+            }
+      %>
 
       <div class="pull-right bottom-line-options">
         <button type="button" class="btn btn-default" id="preview">Visualizar</button>
@@ -58,3 +64,6 @@
     <%= render 'compose_tools' %>
   <% end %>
 </section>
+
+<div data-recipients='<%= recipients_ids(@post) %>'></div>
+<div data-characters-list='<%= game_characters_list_path(@game) %>'></div>

@@ -14,18 +14,23 @@
       <ul class="actions">
         <% if ability.can_delete? %>
           <li class="btn btn-dark btn-xs">
-            <a href="javascript:void(0);" title="Excluir" data-post-id="<%= post.id %>" class="delete-post" data-delete-post="<%= game_delete_post_path(game, topic, post) %>">Excluir</a>
+            <%= link_to 'Excluir', 'javascript:;',
+                  data: {
+                    'post-id' => post.id,
+                    'delete-post' => game_delete_post_path(game, topic, post)
+                  }
+            %>
           </li>
         <% end %>
         <% if ability.can_edit? %>
           <li class="btn btn-dark btn-xs">
-            <!-- a href="< %: Url.Action("Edit", "Post", new { gameRoomSlug = Model.Game.Room.Slug, topicSlug = Model.Game.Room.CurrentTopic.Slug, id = post.Id } ) %>" title="Editar">Editar</a -->
+            <%= link_to 'Editar', game_edit_post_path(game, topic, post) %>
           </li>
         <% end %>
 
         <% if ability.can_reply? %>
             <li class="btn btn-dark btn-xs">
-              <!-- a href="< %: Url.Action("New", "Post", new { gameRoomSlug = Model.Game.Room.Slug, topicSlug = Model.Game.Room.CurrentTopic.Slug, id = post.Id } ) %>" title="Responder">Responder</a -->
+              <%= link_to 'Responder', game_new_post_path(game, topic) %>
             </li>
         <% end %>
       </ul>
