@@ -11,7 +11,7 @@
 
   <% if @identity.game_master? %>
     <div class="extra-options">
-      <%= link_to game_edit_topic_path(topic), data: { toggle: 'modal', target: '#remoteModal', width: '365px' } do %>
+      <%= link_to game_edit_topic_path(game, topic), data: { toggle: 'modal', target: '#remoteModal', width: '365px' } do %>
         <%= icon('edit') %>
       <% end %>
 

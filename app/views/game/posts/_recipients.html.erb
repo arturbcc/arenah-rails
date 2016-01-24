@@ -1,0 +1,9 @@
+<% if @identity.game_master? %>
+  <div class="recipients-line alert alert-warning">
+    <span>Escolha para quem é a postagem</span>
+    <div class="clear"></div>
+    <input id="recipients" name="recipients" type="text" />
+  </div>
+<% elsif @post.present? %>
+  <input name="recipients" type="hidden" value="<%= @recipients %>" />
+<% end %>

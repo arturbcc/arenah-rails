@@ -51,6 +51,19 @@ describe Game, type: :model do
     end
   end
 
+  describe '#npcs' do
+    let!(:user) { create(:user) }
+    let!(:game) { create(:game) }
+    let!(:char1) { create(:character, game: game, user: user) }
+    let!(:char2) { create(:character, game: game, user: user) }
+    let!(:npc) { create(:character, :npc, game: game, user: user) }
+    let!(:master) { create(:character, :game_master, game: game, user: user) }
+
+    it 'lists only the npc\'s ordered by name' do
+      expect(game.npcs).to eq([npc])
+    end
+  end
+
   describe '#masters' do
     let!(:user) { create(:user) }
     let!(:game) { create(:game) }

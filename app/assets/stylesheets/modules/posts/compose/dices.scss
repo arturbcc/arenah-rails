@@ -1,0 +1,58 @@
+#compose-post {
+  .dice {
+    cursor: pointer;
+  }
+
+  #collapseTwo hr {
+    border-top-color: #B0AAAA;
+  }
+
+  #collapseThree .dice-user-input {
+    margin-top: 12px;
+  }
+
+  #collapseThree .dice-user-input button {
+    margin-top: -5px;
+  }
+
+  #collapseThree input {
+    width: 270px;
+    height: 30px;
+    color: #975;
+    font-size: 14px;
+  }
+
+  #collapseThree input.error {
+    background-color: rgb(201, 79, 79);
+    color: #fff;
+  }
+
+  #collapseThree #dice-results {
+    background-color: #000;
+    height: 80px;
+    margin-top: 10px;
+    overflow: auto;
+  }
+
+  #collapseThree #dice-results div {
+    height: 22px;
+    font-size: 13px;
+    background-color: #d2322d;
+    color: #fff;
+    margin: 3px;
+  }
+
+  #collapseThree #dice-results i {
+    padding-left: 2px;
+    cursor: pointer;
+  }
+
+  #dice-result-item-template {
+    display: none;
+  }
+
+  .dice-log {
+    float:right;
+    height: 19px !important;
+  }
+}

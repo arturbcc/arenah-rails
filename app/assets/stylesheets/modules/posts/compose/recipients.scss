@@ -1,0 +1,23 @@
+#compose-post {
+  .recipients-line {
+    margin-top: 23px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .recipients-line span {
+    font-size: 14px;
+  }
+
+  .recipients-line kbd {
+    font-size: 13px;
+    float: right;
+    display: none;
+  }
+
+  #recipients {
+    width: 627px;
+    background-color: #eee;
+    height: 28px;
+  }
+}

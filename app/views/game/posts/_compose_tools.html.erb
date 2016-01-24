@@ -1,0 +1,162 @@
+<div class="box-right <%= 'master' if @identity.game_master?  %>">
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            Personagens do grupo
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse">
+        <div class="panel-body">
+          <% @game.pcs.each do |character| %>
+            <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = character.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="1015px" class="group-character" data-id="< %: character.Id %>">
+              < %: Html.Avatar(character, "characterAvatar") %>
+            </a -->
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+            Demais personagens
+          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse">
+        <div class="panel-body">
+          <% @game.pcs.each do |character| %>
+            <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = character.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="1015px" class="other-character" data-id="< %: character.Id %>">
+              < %: Html.Avatar(character, "characterAvatar") %>
+            </a -->
+          <% end %>
+
+          <% if @identity.game_master? %>
+            <div class="clear"></div>
+            <hr />
+            <% @game.npcs.each do |character| %>
+              <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = character.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="1015px" class="other-character" data-id="< %: character.Id %>">
+                < %: Html.Avatar(character, "characterAvatar") %>
+              </a -->
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+            Rolagem de dados
+          </a>
+        </h4>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <img src="/images/dices/n3-d4.png" class="dice"   data-dice="1D4" title="1D4" />
+          <img src="/images/dices/n3-d6.png" class="dice"   data-dice="1D6" title="1D6" />
+          <img src="/images/dices/n3-d8.png" class="dice"   data-dice="1D8" title="1D8" />
+          <img src="/images/dices/n3-d10.png" class="dice"  data-dice="1D10" title="1D10" />
+          <img src="/images/dices/n3-d12.png" class="dice"  data-dice="1D12" title="1D12" />
+          <img src="/images/dices/n3-d20.png" class="dice"  data-dice="1D20" title="1D20" />
+          <img src="/images/dices/n3-d100.png" class="dice" data-dice="1D100" title="1D100" />
+
+          <div class="dice-user-input">
+            <input type="text" id="dice-expression" maxlength="30" placeholder="Ex.: 1D10 * 2 + 1" />
+            <button type="button" id="roll-dice" class="btn btn-danger btn-sm">Rolar</button>
+          </div>
+          <div id="dice-results"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+            <% if @identity.game_master? %>
+              Painel do sistema de RPG
+            <% else %>
+              Simulador
+            <% end %>
+            <span class="badge" id="rules-set-box-attributes">0</span>
+          </a>
+        </h4>
+      </div>
+      <div id="collapseFour" class="panel-collapse collapse">
+        <div class="panel-body rules-set-box">
+
+          <div class="upper-actions">
+            <% if @identity.game_master? %>
+              <button type="button" id="damage" class="btn btn-xs btn-default">Dano</button>
+              <button type="button" id="initiative" class="btn btn-xs btn-default">Iniciativa</button>
+            <% end %>
+          </div>
+
+          <div class="pull-left">
+            <span>Conjunto de regras:</span>
+            <div class="clear"></div>
+            <select class="rules-set">
+              <!-- % foreach (RulesSet rulesSet in Model.Game.Room.Sheet.Rules) { %>
+                <option value="< %: rulesSet.Id %>">< %: rulesSet.Name %></option>
+              < % } % -->
+            </select>
+            <div id="attributes-area">
+              <div class="splash">
+                <i class="fa fa-spinner fa-spin"></i> Escolha os atributos nas fichas
+              </div>
+            </div>
+            <div class="actions">
+              <button type="button" class="btn btn-xs btn-danger">Limpar</button>
+              <button type="button" class="btn btn-xs btn-success">Rolar dados</button>
+            </div>
+            <div class="tests-result">
+              <div class="test-result-status"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="character-attribute-line character-attribute-line-template">
+  <div class="attribute-position">1</div>
+  <img data-path="<%= avatar_path(Character.new(game_id: @game.id, avatar: 'avatar.png')) %>" />
+  <select class="attribute">
+    <option value="17">40 [Valor]</option>
+    <option value="10">10 [Pontos]</option>
+  </select>
+  <select class="operator">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+  </select>
+  <input type="text" class="modifier" value="0" />
+  <select class="operator">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+  </select>
+  <input type="text" class="modifier" value="0" />
+  <button type="button" class="close" onclick="RpgSystemPanel.removeAttribute(this);">
+    <span aria-hidden="true">&times;</span>
+    <span class="sr-only">Close</span>
+  </button>
+  <input type="hidden" data-original-position="" />
+</div>
+
+<div id="dice-result-item-template">
+  <i class='fa fa-plus-circle'></i>
+  <span></span>
+  <div class="dice-log">
+    <i class="fa fa-ellipsis-h"></i>
+  </div>
+</div>

@@ -38,6 +38,14 @@
 @import 'modules/posts/recipients';
 @import 'modules/posts/saga';
 
+@import 'modules/posts/compose/accordion';
+@import 'modules/posts/compose/author';
+@import 'modules/posts/compose/characters';
+@import 'modules/posts/compose/dices';
+@import 'modules/posts/compose/recipients';
+@import 'modules/posts/compose/rules_and_tests';
+@import 'modules/posts/compose/structure';
+
 @import 'modules/header/alerts';
 @import 'modules/header/characters';
 @import 'modules/header/header';

@@ -1,5 +1,5 @@
 class Game::BaseController < ApplicationController
-  before_action :load_game, :set_identity
+  before_action :load_game, :load_character, :set_identity
 
   attr_reader :identity
 
@@ -7,10 +7,22 @@ class Game::BaseController < ApplicationController
     @game
   end
 
+  def current_character
+    @character
+  end
+
   protected
 
   def load_game
     @game = Game.friendly.find(params[:game]) if params[:game].present?
+  end
+
+  def load_character
+    if user_signed_in?
+      @character = current_user.characters
+        .where(game: current_game)
+        .order(character_type: :desc).first
+    end
   end
 
   def set_identity

@@ -1,0 +1,60 @@
+
+<%= render 'game/header', game: @game, topic: @topic %>
+
+<section id="page-body">
+  <%= render 'breadcrumb', game: @game, topic: @topic %>
+
+  <input type="hidden" name="current-author" value="<%= @character.id %>" />
+  <header class="author">
+    <div class="image-with-caret <%= 'master' if @identity.game_master? %>">
+      <%= avatar(@character, class: 'toggle-panel') %>
+
+      <% if @identity.game_master? %>
+        <a href="javascript:;" id="change-author" class="toggle-panel">
+          <span class="caret"></span>
+        </a>
+      <% end %>
+    </div>
+    <h1>
+      <%= link_to game_posts_path(@game, @topic) %>
+    </h1>
+    <div id="authors-panel">
+      <section>
+        <%= link_to 'javascript:;', data: { id: @character.id }, class: 'impersonate' do %>
+          <%= avatar(@character, class: 'characterAvatar') %>
+        <% end %>
+
+        <% @game.npcs.each do |character| %>
+          <%= link_to 'javascript:;', data: { id: @character.id }, class: 'impersonate' do %>
+            <%= avatar(@character, class: 'toggle-panel') %>
+          <% end %>
+        <% end %>
+
+      </section>
+      <button type="button" class="close">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+    </div>
+  </header>
+
+  <h3><% @area.edit_post? ? 'Edição de post' : 'Novo post' %></h3>
+
+  <%= url = @area.edit_post? ? game_edit_post_path(@game, @topic, @post) : game_new_post_path(@game, @topic) %>
+  <%= form_for(@post, url: url, id: 'post-form') do |f| %>
+    <%= render 'recipients' %>
+
+    <div class="box-left">
+      <%= f.text_area :message, id: 'bbcodeEditor', class: @identity.game_master? ? 'master' : 'editor' %>
+
+      <div class="pull-right bottom-line-options">
+        <button type="button" class="btn btn-default" id="preview">Visualizar</button>
+        <% returnUrl = game_posts_path(@game, @topic) %>
+        <button type="button" class="btn btn-danger" data-url="<%= returnUrl %>" id="back">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="ComposePost.save();">Salvar</button>
+      </div>
+    </div>
+
+    <%= render 'compose_tools' %>
+  <% end %>
+</section>

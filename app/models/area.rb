@@ -12,4 +12,8 @@ class Area
   def profile?
     @current == :profile
   end
+
+  def edit_post?
+    @current == :edit_post
+  end
 end

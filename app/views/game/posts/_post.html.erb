@@ -14,7 +14,7 @@
       <ul class="actions">
         <% if ability.can_delete? %>
           <li class="btn btn-dark btn-xs">
-            <a href="javascript:void(0);" title="Excluir" data-post-id="<%= post.id %>" class="delete-post" data-delete-post="<%= game_posts_path(post) %>">Excluir</a>
+            <a href="javascript:void(0);" title="Excluir" data-post-id="<%= post.id %>" class="delete-post" data-delete-post="<%= game_delete_post_path(game, topic, post) %>">Excluir</a>
           </li>
         <% end %>
         <% if ability.can_edit? %>

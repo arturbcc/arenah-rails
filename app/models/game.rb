@@ -26,14 +26,22 @@ class Game < ActiveRecord::Base
   end
 
   def pcs
-    characters
-      .where('characters.character_type = ?', 0)
-      .order('characters.name')
+    find_by_type(0)
+  end
+
+  def npcs
+    find_by_type(1)
   end
 
   def masters
+    find_by_type(2)
+  end
+
+  private
+
+  def find_by_type(type)
     characters
-      .where('characters.character_type = ?', 2)
+      .where('characters.character_type = ?', type)
       .order('characters.name')
   end
 end

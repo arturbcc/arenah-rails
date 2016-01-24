@@ -1,0 +1,74 @@
+#compose-post {
+  .author {
+    position: relative;
+  }
+
+  .author .image-with-caret img {
+    float: left;
+    width: 50px !important;
+    height: 50px;
+    padding: 2px;
+    cursor: pointer;
+  }
+
+  .author .image-with-caret {
+    float: left;
+    margin-right: 10px;
+    padding-right: 4px;
+    border: 1px solid #4D4B4B;
+  }
+
+  .author .image-with-caret.master {
+    padding-right: 0;
+  }
+
+  .author .image-with-caret a {
+    color: #f4DD1D;
+  }
+
+  #change-author {
+    display: block;
+    float: left;
+    height: 50px;
+  }
+
+  #authors-panel {
+    width: 1000px;
+    background-color: rgba(33, 33, 32, 0.95);
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    z-index: 100;
+    border: 1px solid #484747;
+    overflow: auto;
+  }
+
+  #authors-panel img {
+    width: 100px !important;
+    height: 100px;
+    margin: 4px;
+    border: 2px solid #000;
+  }
+
+  .caret.caret-reversed {
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: none;
+    border-bottom: 4px solid #F4DD1D;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    border-top-width: 0px;
+    border-top-style: dotted;
+    content: "";
+  }
+
+  .author .close {
+    color: #fff;
+    position: absolute;
+    right: 5px;
+  }
+}

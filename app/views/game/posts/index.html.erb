@@ -20,11 +20,10 @@
   <div class="clear"></div>
 
   <% @posts.each do |post| %>
-    <%= render 'post', game: @game, post: post, character: @character, klass: cycle('even', 'odd') %>
+    <%= render 'post', game: @game, topic: @topic, post: post, character: @character, klass: cycle('even', 'odd') %>
   <% end %>
 
-  <!-- % Html.RenderPartial("ButtonAndPagination"); % -->
-  <!-- % Html.RenderPartial("PlayersList"); % -->
+  <%= render 'buttons_and_pagination', game: @game, topic: @topic %>
   <%= render 'players_list', game: @game %>
 
   <% unless @identity.read_only? %>

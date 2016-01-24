@@ -1,0 +1,138 @@
+#compose-post {
+  .upper-actions {
+    float: right;
+    margin-top: -10px;
+    margin-right: 3px;
+  }
+
+  .rules-set-box {
+    color: #000;
+    font-size: 12px;
+    overflow: hidden !important;
+  }
+
+  .rules-set {
+    width: 324px;
+    height: 25px;
+    cursor: pointer;
+  }
+
+  #attributes-area {
+    border: 1px solid #ccc;
+    height: 104px;
+    margin-top: 5px;
+    font-size: 11px;
+    width: 324px;
+  }
+
+  #attributes-area .splash {
+    margin-top: 40px;
+    margin-left: 65px;
+  }
+
+  .rules-set-box .actions {
+    margin-top: 5px;
+    float: left;
+  }
+
+  .red-badge {
+    background-color: #C0111F;
+  }
+
+  .tests-result {
+    float: left;
+    width: 176px;
+    height: 22px;
+    border: 1px solid #ccc;
+    margin: 3px;
+    margin-top: 5px;
+    font-size: 11px;
+    color: #fff;
+    padding-top: 2px;
+    position: relative;
+  }
+
+  .tests-result.on {
+    background-color: #d2322d;
+  }
+
+  .test-result-status {
+     position: absolute;
+     top: 19px;
+     left: 0;
+     color: #000;
+     width: 100%;
+     text-align: right;
+     font-size: 10px;
+  }
+
+  .character-attribute-line {
+    padding: 2px;
+    background-color: #F3FAFF;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .character-attribute-line-template {
+    display: none;
+  }
+
+  .character-attribute-line select {
+    height: 21px;
+  }
+
+  .character-attribute-line img {
+    width: 21px;
+    height: 21px;
+    float: left;
+    margin-right: 3px;
+  }
+
+  .character-attribute-line .modifier {
+    width: 25px;
+    text-align: center;
+  }
+
+  .character-attribute-line .attribute-position {
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 7px;
+    margin-left: 3px;
+    cursor: move;
+  }
+
+  .character-attribute-line .attribute {
+    width: 100px;
+  }
+
+  .character-attribute-line .close {
+    font-size: 19px;
+  }
+
+  .character-attribute-line.odd {
+    background-color: #FCFCEC;
+  }
+
+  #collapseFour .tests-result i {
+    padding-left: 2px;
+    cursor: pointer;
+    padding-right: 2px;
+    margin-top: 3px;
+  }
+
+  #collapseFour .tests-result .fa-ellipsis-h {
+    margin-top: 6px;
+  }
+
+  .bottom-line-options {
+    background-color: #fff;
+    padding: 5px;
+    width: 627px;
+    text-align: right;
+    border: 2px solid #3C769D
+  }
+
+  .preview-body img {
+    max-width: 558px;
+  }
+}

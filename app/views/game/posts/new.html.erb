@@ -1,0 +1,8 @@
+<%= content_for :title, "Novo post - #{@game.try(:name)} - #{@topic.try(:title)} - Arenah Tsuki" %>
+
+<section id='compose-post'>
+  <%= render 'form' %>
+</section>
+
+
+<%#= Html.RenderPartial("ComposePostScripts"); %>
