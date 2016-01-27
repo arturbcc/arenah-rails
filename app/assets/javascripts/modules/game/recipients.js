@@ -1,10 +1,6 @@
 var Recipients = function(container) {
-  this.panels = new ComposePostPanels();
-
   this.container = $(container);
   this.ids = this.parseIds($('[data-recipients]').data('recipients').split(', '));
-
-  this.bindEvents();
 };
 
 var fn = Recipients.prototype;
@@ -22,12 +18,12 @@ fn.parseIds = function(ids) {
   return list;
 }
 
-fn.bindEvents = function() {
-  var panels = this.panels;
-
+fn.onSelect = function(callback) {
   this.container.select2('val', this.ids);
 
-  $.each(this.ids, function(index, id) {
-    panels.showOnGroup(id);
-  });
+  if (typeof callback === 'function') {
+    $.each(this.ids, function(index, id) {
+      callback.call(id);
+    });
+  }
 };

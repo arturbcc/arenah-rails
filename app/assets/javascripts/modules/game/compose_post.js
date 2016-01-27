@@ -11,8 +11,10 @@ var ComposePost = function(recipients, characters) {
 var fn = ComposePost.prototype;
 
 fn.bindEvents = function() {
-  $.proxyAll(this, 'autoComplete');
+  $.proxyAll(this, 'autoComplete', 'selectRecipient');
+
   this.characters.load(this.autoComplete);
+  this.recipients.onSelect(this.selectRecipient);
 };
 
 fn.autoComplete = function() {
@@ -37,4 +39,8 @@ fn.autoComplete = function() {
   .on('select2-removing', function (e) {
     panels.showOnOthers(e.choice.id);
   });
+};
+
+fn.selectRecipient = function(id) {
+  this.panels.showOnGroup(id);
 };
