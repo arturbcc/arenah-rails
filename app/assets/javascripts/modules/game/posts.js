@@ -36,10 +36,10 @@ fn.destroy = function (event) {
       url: url,
       type: 'DELETE',
       success: function(data) {
-        if (data.Status != 'OK') {
-          NotyMessage.show("Não é possível apagar a postagem", 3000);
+        if (data.status == 200) {
+          $el.parents('[data-post]').fadeOut();
         } else {
-          $el.closest('data-post').fadeOut();
+          NotyMessage.show('Não é possível apagar a postagem', 3000);
         }
       }
     });

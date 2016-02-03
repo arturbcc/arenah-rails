@@ -28,7 +28,7 @@ class Ability
   end
 
   def author?
-    return false if character.nil?
+    return false if character.nil? || post.nil?
 
     post.character_id == character.id
   end

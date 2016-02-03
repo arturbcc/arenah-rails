@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     get ':game/:topic/post/criar', to: 'posts#new', as: :new_post
     get ':game/:topic/post/:id/editar', to: 'posts#edit', as: :edit_post
     patch ':game/:topic/post/:id', to: 'posts#update', as: :update_post
-    delete ':game/:topic/post/:id', to: 'posts#delete', as: :delete_post
+    delete ':game/:topic/post/:id', to: 'posts#destroy', as: :delete_post
     post ':game/:topic/post/', to: 'posts#create', as: :create_post
 
     get ':game/inscreva-se', to: 'subscription#show', as: :subscription
