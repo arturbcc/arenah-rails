@@ -1,13 +1,26 @@
 require 'rails_helper'
 
 describe RPG::Sheet do
-  before do
-    json = File.read(File.join(Rails.root, 'db/systems', 'crossover.json'))
-    @system = RPG::System.new(JSON.parse(json))
+  before(:all) do
+    load_system
   end
 
-  it 'lists all the groups of attributes by page and position' do
-    groups = @system.sheet.attributes_groups_by(page: 1, position: 'column_1')
-    expect(groups.map(&:name)).to eq(['Atributos', 'Aprimoramentos', 'Status'])
+  describe '#attributes_groups_by' do
+    it 'lists all the groups of attributes by page and position' do
+      groups = @system.sheet.attributes_groups_by(page: 1, position: 'column_1')
+      expect(groups.map(&:name)).to eq(['Atributos', 'Aprimoramentos', 'Status'])
+    end
+  end
+
+  describe '#pages' do
+    it 'serializes all pages' do
+      expect(@system.sheet.pages.count).to eq(3)
+    end
+  end
+
+  describe '#attributes_groups' do
+    it 'serializes all attributes groups' do
+      expect(@system.sheet.attributes_groups.count).to eq(10)
+    end
   end
 end

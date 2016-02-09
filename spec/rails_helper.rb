@@ -9,6 +9,7 @@ require 'rspec/rails'
 require 'capybara/poltergeist'
 require Rails.root.join('spec/helpers/features/user_sign_in_helper')
 require Rails.root.join('spec/helpers/features/wait_for_ajax')
+require Rails.root.join('spec/helpers/game_system_helper')
 
 require 'devise'
 
