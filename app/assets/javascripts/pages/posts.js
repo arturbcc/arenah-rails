@@ -7,7 +7,7 @@ page.at('posts#index', function() {
   new PlayersList();
 });
 
-page.at('posts#new', function() {
+page.at('posts#new posts#edit', function() {
   var recipients = new Recipients('#recipients');
   var characters = new Characters();
   var composePost = new ComposePost(recipients, characters);

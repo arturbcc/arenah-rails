@@ -12,10 +12,12 @@ class CreateGames < ActiveRecord::Migration
       t.integer :status, default: 1
       t.string :google_analytics_code
       t.boolean :show_signature, default: true
+      t.jsonb :system, default: {}, null: false
 
       t.timestamps null: false
     end
 
     add_index :games, :slug, :unique => true
+    add_index  :games, :system, using: :gin
   end
 end

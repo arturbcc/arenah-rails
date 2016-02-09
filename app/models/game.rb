@@ -16,6 +16,8 @@ class Game < ActiveRecord::Base
 
   enum status: [:inactive, :active]
 
+  serialize :system, RPG::System
+
   def close!
     inactive!
     subscriptions.each(&:destroy)

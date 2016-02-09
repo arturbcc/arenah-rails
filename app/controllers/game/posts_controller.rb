@@ -13,7 +13,7 @@ class Game::PostsController < Game::BaseController
 
   def edit
     @area = Area.new(:edit_post)
-    @post = Post.where(topic: @topic, id: params[:id])
+    @post = Post.find_by(topic: @topic, id: params[:id])
     @recipients = @post.present? ? @post.recipients.map(&:name) : ''
   end
 

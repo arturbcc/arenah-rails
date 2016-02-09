@@ -55,9 +55,18 @@
 
       <div class="pull-right bottom-line-options">
         <button type="button" class="btn btn-default" id="preview">Visualizar</button>
-        <% returnUrl = game_posts_path(@game, @topic) %>
-        <button type="button" class="btn btn-danger" data-url="<%= returnUrl %>" id="back">Cancelar</button>
-        <button type="button" class="btn btn-success" onclick="ComposePost.save();">Salvar</button>
+        <%= content_tag :button,
+              'Cancelar',
+              class: 'btn btn-danger',
+              id: 'back',
+              data: { url: game_posts_path(@game, @topic) }
+        %>
+
+        <%= content_tag :button,
+              'Salvar',
+              class: 'btn btn-success',
+              onclick: 'ComposePost.save();'
+        %>
       </div>
     </div>
 
@@ -65,5 +74,5 @@
   <% end %>
 </section>
 
-<div data-recipients='<%= recipients_ids(@post) %>'></div>
-<div data-characters-list='<%= game_characters_list_path(@game) %>'></div>
+<%= content_tag :div, '', data: { recipients: recipients_ids(@post) } %>
+<%= content_tag :div, '', data: { 'characters-list' => game_characters_list_path(@game) } %>

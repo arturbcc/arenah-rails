@@ -32,6 +32,6 @@ fn._loadCharacters = function(data, callback) {
   // }
 
   if (typeof callback === 'function') {
-    callback.call();
+    callback.call(this);
   }
 };
