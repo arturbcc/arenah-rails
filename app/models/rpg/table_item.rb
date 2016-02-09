@@ -1,10 +1,7 @@
 module RPG
   class TableItem
     include EmbeddedModel
-    # include Tokenable
 
-    attribute :key, :string
-    attribute :value, :string
-    attribute :position, :integer
+    attr_accessor :key, :value, :order
   end
 end

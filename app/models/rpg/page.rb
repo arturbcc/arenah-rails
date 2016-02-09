@@ -2,12 +2,10 @@ module RPG
   class Page
     include EmbeddedModel
 
-    attribute :number, :integer
-    attribute :number_of_columns, :integer
-    attribute :show_header, :boolean
+    attr_accessor :number, :number_of_columns, :show_header
 
     def show_header?
-      show_header
+      !!show_header
     end
   end
 end

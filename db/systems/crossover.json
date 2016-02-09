@@ -24,7 +24,7 @@
         "source_type": "fixed",
         "show_on_posts": false,
         "instructions": "<p>Preencha os dados básicos de seu personagem. Como a temática desta sala é crossover, todas as raças e classes são permitidas, mas em caso de dúvida entre em contato com o mestre.</p>",
-        "attributes_list": [
+        "character_attributes": [
           { "name": "Nome", "description": "Nome do personagem. Lembre-se de levar em conta a raça antes de escolher um nome", "order": 1 },
           { "name": "Nascimento", "description": "Data de nascimento", "order": 2 },
           { "name": "Local", "description": "Local de nascimento", "order": 3 },
@@ -48,7 +48,7 @@
         "source_type": "table",
         "show_on_posts": false,
         "instructions": "",
-        "attributes_list": [
+        "character_attributes": [
           {
             "name": "Carregar",
             "base_attribute_group": "Atributos",
@@ -56,7 +56,7 @@
             "abbreviation": "",
             "description": "",
             "order": 1,
-            "table": "Carregar"
+            "table_name": "Carregar"
           },
           {
             "name": "Levantar",
@@ -65,7 +65,7 @@
             "abbreviation": "",
             "description": "",
             "order": 2,
-            "table": "Levantar"
+            "table_name": "Levantar"
           },
           {
             "name": "Velocidade",
@@ -74,7 +74,7 @@
             "abbreviation": "",
             "description": "",
             "order": 3,
-            "table": "Velocidade"
+            "table_name": "Velocidade"
           },
           {
             "name": "Bônus de dano",
@@ -83,7 +83,7 @@
             "abbreviation": "",
             "description": "",
             "order": 4,
-            "table": "Bônus de dano"
+            "table_name": "Bônus de dano"
           }
         ]
       },
@@ -99,7 +99,7 @@
         "attributes_points_formula": "4 * points",
         "group_points_formula": "100 + #{Dados:Nível}",
         "instructions": "<p>Funcionam como uma forma de transportar um Personagem para o mundo fictício e estabelecer comparações entre ele e as diversas criaturas. São os Atributos que descrevem seu Personagem como ele é. São em número de 8, divididos em físicos e mentais. Os Atributos físicos são Constituição, Força, Destreza e Agilidade e os mentais são Inteligência, Força de Vontade, Percepção e Carisma</p> <p>Os Atributos variam de acordo com seus dados de comparação, sendo que um humano possui normalmente 3D, com Atributos variando de 3 a 18 (ver Dados de Comparação).</p><p>Os personagens começam o jogo com 101 pontos de atributos e ganham mais um por nível. Para ter uma base de comparação, uma pessoa comum teria 9 pontos em todos os atributos. Valores acima disso são considerados excepcionais, e abaixo disso são deficientes.</p>",
-        "attributes_list": [
+        "character_attributes": [
           {
             "name": "Força",
             "abbreviation": "Fr",
@@ -160,7 +160,7 @@
         "show_on_posts": false,
         "group_points_formula": "10 * #{Dados:Idade} + 5 * #{Atributos:Inteligência}",
         "instructions": "Determina o que seu Personagem sabe fazer. Ele pode saber usar uma espada, ou ser um excelente carpinteiro. É a Perícia que diz o quão bom ele é em determinada profissão. As Perícias são representadas em porcentagem.",
-        "attributes_list": [],
+        "character_attributes": [],
         "list": [
           { "name": "História", "description": "<b>História</b> é a ciência que estuda o Homem e sua ação no tempo e no espaço, concomitante à análise de processos e eventos ocorridos no passado. História como termo também pode verificar toda a informação do passado que pode ter sido requerida ou arquivada em todas as línguas por todo o mundo, isto como intermédio de registos." },
           { "name": "Heráldica", "description": "<p>A <b>heráldica</b> refere-se simultaneamente à ciência e à arte de descrever os <b><a href='/wiki/Bras%C3%A3o_de_armas' title='Brasão de armas'>brasões de armas</a></b> ou <b><a href='/wiki/Escudo_(her%C3%A1ldica)' title='Escudo (heráldica)'>escudos</a></b>. As origens da heráldica remontam aos tempos em que era imperativo distinguir os participantes das batalhas e dos torneios, assim como descrever os serviços por eles prestados e que eram pintados nos seus escudos. No entanto, é importante notar que um brasão de armas é definido não visualmente, mas antes pela sua descrição escrita, a qual é dada numa linguagem própria – a linguagem heráldica.</p><p style='text-align: center'><img src='http://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/BXVI_CoA_like_gfx_PioM.svg/166px-BXVI_CoA_like_gfx_PioM.svg.png' style='height: 100px' /></p>" },
@@ -187,7 +187,7 @@
         "source_type": "list",
         "group_points_formula": "5 + floor(#{Dados:Nível} / 3)",
         "instructions": "Aprimoramento: São pontos que um Jogador possui para <i>“refinar”</i> a história de seu Personagem. Podem ser utilizados para conseguir aliados, mais riquezas, mais poder, Magia; e depende de cada Jogador gastar seus pontos da maneira que achar melhor. Os Jogadores começam com 5 pontos de Aprimoramento por Personagem. Aprimoramentos são vantagens que um Jogador pode comprar para melhorar seu Personagem, ou desvantagens que pode comprar para limitar Personagens muito poderosos.",
-        "attributes_list": [],
+        "character_attributes": [],
         "list": [
           { "name": "Sensitivo", "cost": 1, "description": "<p>Seu Personagem possui grande intuição, uma sensibilidade extrema que lhe permite saber sobre coisas mesmo sem ter acesso a informações sobre elas.</p><p><b>1 ponto</b>: o Personagem sonha com coisas sobrenaturais, que podem vir a ocorrer. Escreve livros, modela esculturas e pinta quadros a respeito. Esses quadros devem ser usados pelo Mestre como ajuda na preparação de Campanhas e Aventuras.</p><p><b>2 pontos</b>: o Personagem possui uma espécie de sexto sentido,uma percepção extra-sensorial que beira a paranormalidade. Em alguns casos, com a permissão do Mestre, o Jogador pode tentar um Teste de Percepção para notar coisas que estão além dos sentidos normais: uma presença sobrenatural, um risco para sua vida ou a localização de um objeto perdido.</p>" },
           { "name": "Poderes mágicos", "cost": 2, "description": "<p><b>1 ponto</b>: Começou a estudar as artes arcanas a muito pouco tempo. Possui 2 pontos de Focus e 1 ponto de Magia. </p><p><b>2 pontos</b>: Possui alguns conhecimentos de efeitos de Magia. Possui 3 pontos de Focus para dividir entre os caminhos que desejar. Começa o jogo com 2 pontos de Magia. </p><p><b>3 pontos</b>: Mago. Já praticava as artes arcanas há algum tempo. Começa o jogo com 5 pontos de Focus e 3 pontos de Magia. </p><p><b>4 pontos</b>: Mago desenvolvido. Possui 7 pontos de Focus para dividir entre os caminhos, e pelo menos um inimigo mortal a mais do que já possuiria (fica a cargo do Mestre). Possui 5 pontos de Magia. </p><p><b>5 pontos</b>: São personagens mais velhos, com muito poder acumulado e bastante conhecimento de magia. Possui pelo menos DOIS inimigos mortais a mais dos que já possuiria (a cargo do Mestre – e pode pegar pesado!). O personagem dispõe de 9 pontos de Focus e 7 pontos de Magia. </p>" },
@@ -211,7 +211,7 @@
         "position": "column_1",
         "type": "text",
         "source_type": "open",
-        "attributes_list": []
+        "character_attributes": []
       },
       {
         "name": "História",
@@ -231,7 +231,7 @@
         "show_on_posts": true,
         "order_on_posts": 1,
         "source_type": "fixed",
-        "attributes_list": [
+        "character_attributes": [
           { "name": "Vida", "order": 1, "type": "bar", "master_only": true, "description": "Indica quantos pontos de vida o personagem possui. Quando chegar a zero, o personagem desmaia e algo deve ser feito ou ele morrerá (ao atingir -5 pontos)", "formula": "ceiling((#{Atributos:Força} + #{Atributos:Constituição}) / 2) + #{Dados:Nível} - 1" },
           { "name": "Magia", "order": 2, "type": "bar", "master_only": true, "description": "Poder arcano do personagem. Quanto mais pontos de magia, mais magias diferentes o mago pode invocar e mais fortes elas serão." },
           { "name": "XP", "order": 3, "type": "name_value", "master_only": true, "description": "Pontos de experiência do personagem." },
@@ -247,7 +247,7 @@
         "position": "column_2",
         "type": "text",
         "source_type": "list",
-        "attributes_list": [],
+        "character_attributes": [],
         "list": [
           { "name": "Alarme", "description": "<strong>Daemon:</strong> Entender Humanos/Água 3 <br><strong>Custo:</strong> 1 ponto por criatura<br> <strong>Duração:</strong> sustentável <br><strong>Alcance:</strong> padrão<br><p>Esta magia permite a uma criatura se mover e respirar livremente na água doce ou salgada. Ela não precisa de Perícias para nadar e pode se mover na água com a mesma velocidade que teria em terra (normalmente, sem esta magia, um Personagem na água se move com metade da velocidade normal). Lançada sobre uma criatura marinha, a magia tem efeito contrário  permitindo que ela possa respirar em terra.</p>", "action": "defense" },
           { "name": "Asfixia", "description": "<strong>Daemon:</strong> Controlar Ar 5<br/><strong>Custo:</strong> padrão<br/><strong>Duração:</strong> sustentável<br/> <strong>Alcance:</strong> padrão<br/> <p>Lançada contra uma criatura, esta magia exige um teste de Resistência; se falhar, a vítima não consegue mais respirar.Uma vítima de Asfixia pode prender a respiração durante Rx5 minutos (CON rodadas no sistema Daemon), se estiver em repouso ou velocidade normal; ou um turno por ponto de Resistência (ou CON/5) se estiver em combate ou realizando grande esforço físico. Esgotado esse tempo, come ça a perder 1 PV por turno até a morte. Esta magia não tem efeito contra mortos-vivos, golens, Criaturas Mágicas e obviamente </p>", "action": "attack" },
@@ -271,7 +271,7 @@
   "dice_roll_rules": [
     {
       "name": "Padrão",
-      "tests": [
+      "attributes_tests": [
         { "number_of_attributes": 1, "formula": "A1", "dice": "1D100" },
         { "number_of_attributes": 2, "formula": "A1 - A2 + 50", "dice": "1D100" },
         { "number_of_attributes": 3, "formula": "A1 + A2 - A3 + 50", "dice": "1D100" },
@@ -280,37 +280,37 @@
     },
     {
       "name": "Atributos vs Perícias",
-      "tests": [
+      "attributes_tests": [
         { "number_of_attributes": 1, "formula": "A1", "dice": "1D100" },
         { "number_of_attributes": 2, "formula": "A1 * A2 + 10", "dice": "1D100" }
       ]
     }
   ],
-  "dice_results_rules": [
+  "dice_result_rules": [
     {
       "name": "erro crítico",
-      "position": 1,
+      "order": 1,
       "color": "darkred",
       "formula": "95",
       "signal": ">="
     },
     {
       "name": "erro",
-      "position": 2,
+      "order": 2,
       "color": "red",
       "formula": "chance",
       "signal": ">="
     },
     {
       "name": "acerto crítico",
-      "position": 3,
+      "order": 3,
       "color": "darkgreen",
       "formula": "ceil(chance / 4)",
       "signal": "<="
     },
     {
       "name": "acerto",
-      "position": 4,
+      "order": 4,
       "color": "green",
       "formula": "chance",
       "signal": "<="
@@ -320,7 +320,7 @@
     {
       "name": "Carregar",
       "unit": "kg",
-      "items": [
+      "table_items": [
         { "key": "1", "value": 15 },
         { "key": "2", "value": 15 },
         { "key": "3", "value": 20 },
@@ -387,7 +387,7 @@
     {
       "name": "Levantar",
       "unit": "kg",
-      "items": [
+      "table_items": [
         { "key": "1", "value": 30 },
         { "key": "2", "value": 30 },
         { "key": "3", "value": 40 },
@@ -454,7 +454,7 @@
     {
       "name": "Bônus de dano",
       "unit": "",
-      "items": [
+      "table_items": [
         { "key": "1", "value": -3 },
         { "key": "2", "value": -3 },
         { "key": "3", "value": -2 },
@@ -521,7 +521,7 @@
     {
       "name": "Velocidade",
       "unit": "m/s2",
-      "items": [
+      "table_items": [
         { "key": "1", "value": 1.5 },
         { "key": "2", "value": 1.5 },
         { "key": "3", "value": 2 },

@@ -1,9 +1,7 @@
 module RPG
   class Table
     include EmbeddedModel
-    # include Tokenable
 
-    attribute :name, :string
-    serialize :items, ::CollectionSerializer.new(RPG::TableItem)
+    attr_accessor :name, :table_items, :unit
   end
 end
