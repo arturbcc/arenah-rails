@@ -41,6 +41,8 @@ shurato = Character.create!(user: artur, name: 'Shurato', avatar: 'shurato.png',
 
 
 #GAMES
+json = File.read(File.join(Rails.root, 'db/systems', 'crossover.json'))
+game_system = RPG::System.new(JSON.parse(json))
 
 crossover = Game.create!(
   name: 'Crossover',
