@@ -23,4 +23,11 @@ describe RPG::Sheet do
       expect(@system.sheet.attributes_groups.count).to eq(10)
     end
   end
+
+  describe '#find_attributes_group' do
+    it 'finds a group by its name' do
+      group = @system.sheet.attributes_groups.last
+      expect(@system.sheet.find_attributes_group('Equipamentos')).to eq(group)
+    end
+  end
 end

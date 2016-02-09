@@ -20,6 +20,10 @@ module RPG
         .sort_by { |group| group.order }
     end
 
+    def find_attributes_group(name)
+      attributes_groups.detect { |group| group.name == name }
+    end
+
     private
 
     def nested_attributes

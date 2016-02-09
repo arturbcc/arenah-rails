@@ -70,7 +70,7 @@
           {
             "name": "Velocidade",
             "base_attribute_group": "Atributos",
-            "base_attribute_name": "Velocidade",
+            "base_attribute_name": "Agilidade",
             "abbreviation": "",
             "description": "",
             "order": 3,
@@ -125,7 +125,7 @@
             "description": "Ao contrário da Destreza, a Agilidade não é válida para coisas feitas com as mãos — mas sim para o corpo todo. Com um alto valor em Agilidade um Personagem pode correr mais rápido, equilibrar-se melhor sobre um muro, dançar com mais graça, esquivar-se de ataques... É importante fixar a diferença entre Destreza e Agilidade para fins de jogo."
           },
           {
-            "name": "Inteligêcia",
+            "name": "Inteligência",
             "abbreviation": "Int",
             "order": 5,
             "description": "Inteligência é a capacidade de resolver problemas, nem mais e nem menos. Um Personagem inteligente está mais apto a compreender o que ocorre à sua volta e não se deixa enganar tão facilmente. Também lida com a memória, capacidade de abstrair conceitos e descobrir coisas novas."
