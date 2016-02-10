@@ -62,12 +62,14 @@ ActiveRecord::Schema.define(version: 20151231145324) do
     t.integer  "status",                           default: 1
     t.string   "google_analytics_code"
     t.boolean  "show_signature",                   default: true
+    t.jsonb    "system",                           default: {},   null: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
   end
 
   add_index "games", ["character_id"], name: "index_games_on_character_id", using: :btree
   add_index "games", ["slug"], name: "index_games_on_slug", unique: true, using: :btree
+  add_index "games", ["system"], name: "index_games_on_system", using: :gin
 
   create_table "messages", force: :cascade do |t|
     t.integer  "from",       default: 0

@@ -39,10 +39,8 @@ luffy = Character.create!(user: artur, name: 'Luffy', avatar: 'luffy.png', chara
 shurato = Character.create!(user: artur, name: 'Shurato', avatar: 'shurato.png', character_type: 1)
 
 
-
 #GAMES
 json = File.read(File.join(Rails.root, 'db/systems', 'crossover.json'))
-game_system = RPG::System.new(JSON.parse(json))
 
 crossover = Game.create!(
   name: 'Crossover',
@@ -55,7 +53,8 @@ crossover = Game.create!(
                 'É comum que crossovers sejam realizados entre produtos de uma mesma empresa, pessoa ou equipe de produção, seja no ramo de quadrinhos, na televisão ou na literatura, já que eles seriam os detentores dos direitos autorais e não existiriam problemas de violação destes direitos. Também é comum que personagens que já estão em domínio público participem de novas histórias (Sherlock Holmes e Drácula são apenas dois exemplos). Também é comum que acontecem crossovers como uma maneira de criar publicidade para algum produto ou atração. \n\n' +
                 '[center][img]/games/crossover/images/banners/capa.png[/img][/center]',
   banner: 'crossover.jpg',
-  subtitle: 'Onde os mundos se cruzam')
+  subtitle: 'Onde os mundos se cruzam',
+  system: json)
 
 inuyasha.update(game: crossover)
 strange.update(game: crossover)

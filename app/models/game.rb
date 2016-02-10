@@ -16,7 +16,14 @@ class Game < ActiveRecord::Base
 
   enum status: [:inactive, :active]
 
-  serialize :system, RPG::System
+  def system
+    @system ||= RPG::System.new(super)
+  end
+
+  def system_attributes=(hash)
+    system.assign_attributes(hash)
+    self[:system] = system.as_json
+  end
 
   def close!
     inactive!
