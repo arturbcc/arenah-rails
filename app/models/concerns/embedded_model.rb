@@ -4,7 +4,7 @@ module EmbeddedModel
   extend ActiveSupport::Concern
 
   included do
-    def initialize(hash)
+    def initialize(hash = {})
       hash.except(nested_attributes).each do |key, value|
         self.public_send("#{key}=", value)
       end
