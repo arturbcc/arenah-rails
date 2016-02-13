@@ -169,4 +169,52 @@ describe RPG::AttributesGroup do
       expect(@sheet.attributes_groups.count).to eq(10)
     end
   end
+
+  describe '#used_points' do
+    it 'returns zero then there are no list' do
+      attributes_group = RPG::AttributesGroup.new()
+      expect(attributes_group.used_points).to eq(0)
+    end
+
+    it 'returns zero then there are no attributes on the list' do
+      attributes_group = RPG::AttributesGroup.new({ character_attributes: [] })
+      expect(attributes_group.used_points).to eq(0)
+    end
+
+    it 'sums the points of all attributes on the list' do
+      attributes = [
+        { name: 'Força', points: 10  },
+        { name: 'Constituição', points: 12 },
+        { name: 'Destreza', points: 7 },
+        { name: 'Agilidade', points: 5 },
+        { name: 'Inteligência', points: 17 },
+        { name: 'Força de vontade', points: 21 },
+        { name: 'Percepção', points: 12 },
+        { name: 'Carisma', points: 10 }
+      ]
+      attributes_group = RPG::AttributesGroup.new({ 'character_attributes' => attributes })
+      expect(attributes_group.used_points).to eq(94)
+    end
+
+    it 'sums the points considering nil as zero' do
+      attributes = [
+        { name: 'Força', points: 10  },
+        { name: 'Constituição' }
+      ]
+      attributes_group = RPG::AttributesGroup.new({ 'character_attributes' => attributes })
+      expect(attributes_group.used_points).to eq(10)
+    end
+  end
+
+  describe '#total_points' do
+    xit 'returns the points of the group if no extra points are provided' do
+      attributes_group = RPG::AttributesGroup.new({ 'points' => 20 })
+      expect(attributes_group.total_points).to eq(10)
+    end
+
+    xit 'sums the points with extra_points' do
+      attributes_group = RPG::AttributesGroup.new({ 'points' => 20, 'extra_points' => 5 })
+      expect(attributes_group.total_points).to eq(15)
+    end
+  end
 end
