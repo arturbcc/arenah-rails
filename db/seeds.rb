@@ -1,3 +1,11 @@
+def load_system(game)
+  File.read(File.join(Rails.root, 'db/systems', "#{game}.json"))
+end
+
+def load_sheet(game, character)
+  File.read(File.join(Rails.root, "db/sheets/#{game}", "#{character}.json"))
+end
+
 # USERS
 
 carlos = User.create!(email: 'carlos@arenah.com', name: 'Carlos', password: '12345678', confirmed_at: Time.now)
@@ -13,35 +21,33 @@ johndoe = User.create!(email: 'johndoe@arenah.com', name: 'John Doe', password: 
 janeroe = User.create!(email: 'janeroe@arenah.com', name: 'Jane Roe', password: '12345678', confirmed_at: Time.now)
 visitante = User.create!(email: 'visitante@arenah.com', name: 'Visitante', password: '12345678', confirmed_at: Time.now)
 
-inuyasha = Character.create!(user: mariana, name: 'Inuyasha', avatar: 'inuyasha.jpg', post_count: 1093, signature: '[b]Quero mudar o mundo[/b], cruzar os céus e nada temer...', last_post_date: Time.now)
-strange = Character.create!(user: luisfelipe, name: 'Strange', avatar: 'strange.jpg', post_count: 501, last_post_date: 1.day.ago, sheet_mode: 0)
-goku = Character.create!(user: willian, name: 'Goku', avatar: 'goku.jpg', post_count: 400, signature: '[img]http://stuffpoint.com/dragonball-z/image/107122-dragonball-z-dbz-banner.jpg[/img]', last_post_date: 1.day.ago)
-hiei = Character.create!(user: priscila, name: 'Hiei', avatar: 'hiei.png', post_count: 382, last_post_date: 4.days.ago)
-oliver_tsubasa = Character.create!(user: nathalia, name: 'Oliver Tsubasa', avatar: 'oliver.jpg', post_count: 12, last_post_date: 7.days.ago)
-palace = Character.create!(user: mayara, name: 'Palace', avatar: 'palace.jpg', post_count: 10, gender: 1, last_post_date: 10.days.ago)
-coraline = Character.create!(user: pablo, name: 'Coraline', avatar: 'coraline.jpg', post_count: 50, gender: 1, last_post_date: 1.day.ago)
+inuyasha = Character.create!(user: mariana, name: 'Inuyasha', avatar: 'inuyasha.jpg', post_count: 1093, signature: '[b]Quero mudar o mundo[/b], cruzar os céus e nada temer...', last_post_date: Time.now, sheet: load_sheet('crossover', 'inuyasha'))
+strange = Character.create!(user: luisfelipe, name: 'Strange', avatar: 'strange.jpg', post_count: 501, last_post_date: 1.day.ago, sheet_mode: 0, sheet: '{}')
+goku = Character.create!(user: willian, name: 'Goku', avatar: 'goku.jpg', post_count: 400, signature: '[img]http://stuffpoint.com/dragonball-z/image/107122-dragonball-z-dbz-banner.jpg[/img]', last_post_date: 1.day.ago, sheet: '{}')
+hiei = Character.create!(user: priscila, name: 'Hiei', avatar: 'hiei.png', post_count: 382, last_post_date: 4.days.ago, sheet: '{}')
+oliver_tsubasa = Character.create!(user: nathalia, name: 'Oliver Tsubasa', avatar: 'oliver.jpg', post_count: 12, last_post_date: 7.days.ago, sheet: '{}')
+palace = Character.create!(user: mayara, name: 'Palace', avatar: 'palace.jpg', post_count: 10, gender: 1, last_post_date: 10.days.ago, sheet: '{}')
+coraline = Character.create!(user: pablo, name: 'Coraline', avatar: 'coraline.jpg', post_count: 50, gender: 1, last_post_date: 1.day.ago, sheet: '{}')
 
-hank = Character.create!(user: luisfelipe, name: 'Hank', avatar: 'hank.png', post_count: 199, last_post_date: Time.now)
-diana = Character.create!(user: mariana, name: 'Diana', avatar: 'diana.png', post_count: 299, gender: 1, last_post_date: Time.now)
-eric = Character.create!(user: carlos, name: 'Eric', avatar: 'eric.png', post_count: 19, last_post_date: Time.now)
-presto = Character.create!(user: willian, name: 'Presto', avatar: 'presto.png', post_count: 0)
-bobby = Character.create!(user: priscila, name: 'Bobby', avatar: 'bobby.png', post_count: 199, last_post_date: Time.now)
-sheila = Character.create!(user: nathalia, name: 'Sheila', avatar: 'sheila.png', post_count: 199, gender: 1, last_post_date: Time.now)
+hank = Character.create!(user: luisfelipe, name: 'Hank', avatar: 'hank.png', post_count: 199, last_post_date: Time.now, sheet: '{}')
+diana = Character.create!(user: mariana, name: 'Diana', avatar: 'diana.png', post_count: 299, gender: 1, last_post_date: Time.now, sheet: '{}')
+eric = Character.create!(user: carlos, name: 'Eric', avatar: 'eric.png', post_count: 19, last_post_date: Time.now, sheet: '{}')
+presto = Character.create!(user: willian, name: 'Presto', avatar: 'presto.png', post_count: 0, sheet: '{}')
+bobby = Character.create!(user: priscila, name: 'Bobby', avatar: 'bobby.png', post_count: 199, last_post_date: Time.now, sheet: '{}')
+sheila = Character.create!(user: nathalia, name: 'Sheila', avatar: 'sheila.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: '{}')
 
-eva = Character.create!(user: mayara, name: 'Eva', avatar: 'evap.png', post_count: 199, gender: 1, last_post_date: Time.now)
-amy = Character.create!(user: mariana, name: 'Amy', avatar: 'amy.png', character_type: 2, gender: 1, post_count: 199, last_post_date: Time.now)
+eva = Character.create!(user: mayara, name: 'Eva', avatar: 'evap.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: '{}')
+amy = Character.create!(user: mariana, name: 'Amy', avatar: 'amy.png', character_type: 2, gender: 1, post_count: 199, last_post_date: Time.now, sheet: '{}')
 
-khalmyr = Character.create!(user: artur, name: 'Khalmyr', avatar: 'khalmyr.png', character_type: 2)
-wynna = Character.create!(user: janeroe, name: 'Wynna', avatar: 'wynna.jpg', character_type: 2)
-mestre_dos_magos = Character.create!(user: artur, name: 'Mestre dos Magos', avatar: 'mestre-dos-magos.png', character_type: 2)
+khalmyr = Character.create!(user: artur, name: 'Khalmyr', avatar: 'khalmyr.png', character_type: 2, sheet: '{}')
+wynna = Character.create!(user: janeroe, name: 'Wynna', avatar: 'wynna.jpg', character_type: 2, sheet: '{}')
+mestre_dos_magos = Character.create!(user: artur, name: 'Mestre dos Magos', avatar: 'mestre-dos-magos.png', character_type: 2, sheet: '{}')
 
-luffy = Character.create!(user: artur, name: 'Luffy', avatar: 'luffy.png', character_type: 1)
-shurato = Character.create!(user: artur, name: 'Shurato', avatar: 'shurato.png', character_type: 1)
+luffy = Character.create!(user: artur, name: 'Luffy', avatar: 'luffy.png', character_type: 1, sheet: '{}')
+shurato = Character.create!(user: artur, name: 'Shurato', avatar: 'shurato.png', character_type: 1, sheet: '{}')
 
 
 #GAMES
-json = File.read(File.join(Rails.root, 'db/systems', 'crossover.json'))
-
 crossover = Game.create!(
   name: 'Crossover',
   status: 1,
@@ -54,7 +60,7 @@ crossover = Game.create!(
                 '[center][img]/games/crossover/images/banners/capa.png[/img][/center]',
   banner: 'crossover.jpg',
   subtitle: 'Onde os mundos se cruzam',
-  system: json)
+  system: load_system('crossover'))
 
 inuyasha.update(game: crossover)
 strange.update(game: crossover)

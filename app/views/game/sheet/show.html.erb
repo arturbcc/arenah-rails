@@ -1,0 +1,56 @@
+<div class="sheet" id="sheet" data-character-id="<%= @sheet.character.id %>">
+  <% @sheet.pages.each do |page| do %>
+    <div class="inner-border page-columns-<%= page.number_of_columns %>" data-columns="<%= page.number_of_columns %>">
+      <% render 'avatar', page: page.number, system_name: @sheet.system.name, character: @sheet.character %>
+
+      <section>
+        <% if page.show_header? %>
+          <header>
+            <% @sheet.header_attributes(page: page.number).each do |group| %>
+              <%= render "attributes_groups/#{group.type}", attributes_group: group %>
+            <% end %>
+          </header>
+        <% end %>
+
+        <main>
+          <% (1..page.number_of_columns).each do |column| %>
+            <% proportion = 12/page.number_of_columns %>
+            <section class="col-xs-<%= proportion %> col-sm-<%= proportion %> pull-left">
+              <% @sheet.column_attributes(page: page.number, column: column).each do |group| %>
+                <%= render "attributes_groups/#{group.type}", attributes_group: group %>
+              <% end %>
+            </section>
+          <% end %>
+        </main>
+
+        <% if page.show_footer? %>
+          <footer>
+            <div class="col-xs-12 col-sm-12 pull-left">
+              <% @sheet.footer_attributes(page: page.number).each do |group| %>
+                <%= render "attributes_groups/#{group.type}", attributes_group: group %>
+              <% end %>
+            </div>
+          </footer>
+        <% end %>
+      </section>
+
+      <div class="sheet-page-number"><%= page.number %></div>
+    </div>
+  <% end %>
+
+  <%#= Html.RenderPartial("Sheet/SheetTools"); %>
+</div>
+
+<script type="text/javascript">
+  // if (typeof AttributesInteraction !== "undefined") {
+  //   AttributesInteraction.initializeEvents();
+  // }
+  // 
+  // < % if ((Model.Identity.CurrentRole == Identity.Role.PlayerLogged && character.Id == Model.Identity.Character.Id && character.Status == Character.StatusType.ACTIVE) || (Model.Identity.CurrentRole == Identity.Role.GameMasterLogged)) { %>
+  //   EditCharacterSheet.equipmentsUrl = "< %: Url.Action("Show", "Equipment", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = character.Slug }) %>";
+  //   EditCharacterSheet.freeMode = < %: (character.SheetMode.ToString() == "FREEMODE").ToString().ToLower() %>;
+  //   EditCharacterSheet.isMaster = < %: (Model.Identity.CurrentRole == Identity.Role.GameMasterLogged).ToString().ToLower() %>;
+  //   EditCharacterSheet.isSheetOwner = < %: (Model.Identity.CurrentRole == Identity.Role.PlayerLogged && character.Id == Model.Identity.Character.Id).ToString().ToLower() %>;
+  //   EditCharacterSheet.initialize();
+  // < % } %>
+</script>

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe RPG::List do
   before(:all) do
-    load_system
+    @system = load_system
   end
 
   describe 'Perícias' do

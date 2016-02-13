@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe RPG::DiceResultRule do
   before(:all) do
-    load_system
+    @system = load_system
   end
 
   it 'serializes the rule for `Critical failure`' do

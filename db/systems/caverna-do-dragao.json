@@ -278,7 +278,7 @@
               { "base_attribute_group": "Atributos", "base_attribute_name": "Força", "signal": "+", "points": 2 }
             ],
             "damage": "1D20",
-            "initiative": -5
+            "initiaitve": -5
           },
           {
             "name": "Kimono",
@@ -290,7 +290,7 @@
             "modifiers": [
               { "base_attribute_group": "Atributos", "base_attribute_name": "Constituição", "signal": "+", "points": 3 }
             ],
-            "initiative": -1,
+            "initiaitve": -1,
             "ip": 5
           },
           {
@@ -299,14 +299,14 @@
             "image": "bow.png",
             "slots": [
               { "position": "left-hand" },
-              { "position": "right-hand" }
+              { "position": "right-hand" },
             ],
             "modifiers": [
               { "base_attribute_group": "Destreza", "base_attribute_name": "Atributos", "signal": "+", "points": 3 },
               { "base_attribute_group": "Agilidade", "base_attribute_name": "Atributos", "signal": "-", "points": 1 }
             ],
             "damage": "1D100 + 2",
-            "initiative": -3
+            "initiaitve": -3
           },
           {
             "name": "Botas de couro",
@@ -329,7 +329,7 @@
               { "position": "right-hand" }
             ],
             "modifiers": [],
-            "initiative": -2,
+            "initiaitve": -2,
             "ip": 4
           },
           {
@@ -340,7 +340,7 @@
               { "position": "feet" }
             ],
             "modifiers": [],
-            "initiative": 2
+            "initiaitve": 2
           },
           {
             "name": "Bastão",
@@ -351,7 +351,7 @@
               { "position": "right-hand" }
             ],
             "modifiers": [],
-            "initiative": -1
+            "initiaitve": -1
           },
           {
             "name": "Bola de futebol",
@@ -361,7 +361,7 @@
               { "position": "feet" }
             ],
             "modifiers": [],
-            "initiative": 0
+            "initiaitve": 0
           },
           {
             "name": "Shorts de futebol",
@@ -371,7 +371,7 @@
               { "position": "legs" }
             ],
             "modifiers": [],
-            "initiative": 0
+            "initiaitve": 0
           },
           {
             "name": "Jaqueta de futebol",
@@ -381,7 +381,7 @@
               { "position": "chest" }
             ],
             "modifiers": [],
-            "initiative": 0
+            "initiaitve": 0
           },
           {
             "name": "Bandeira do Japão",
@@ -391,7 +391,33 @@
               { "position": "right-hand" }
             ],
             "modifiers": [],
-            "initiative": 0
+            "initiaitve": 0
+          },
+          {
+            "name": "Arco mágico",
+            "description": "",
+            "image": "magic-bow.png",
+            "slots": [
+              { "position": "right-hand" }
+            ],
+            "modifiers": [
+              { "base_attribute_group": "Vida", "base_attribute_name": "Vida", "signal": "+", "points": 1 }
+            ],
+            "initiaitve": 0,
+            "ip": 0
+          },
+          {
+            "name": "Luvas",
+            "description": "glove.png",
+            "image": "",
+            "slots": [
+              { "position": "right-hand" }
+            ],
+            "modifiers": [
+              { "base_attribute_group": "Físicos", "base_attribute_name": "Destreza", "signal": "+", "points": 1 }
+            ],
+            "initiaitve": 0,
+            "ip": 0
           }
         ]
       }

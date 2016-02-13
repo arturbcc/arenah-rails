@@ -11,10 +11,13 @@
       <ul class="options">
         <% if author.pc? %>
           <li>
-            <a href="#" ><i class="fa fa-file-text-o"></i> Ficha</a>
-            <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = author.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="1015px">
-              <i class="fa fa-file-text-o"></i> Ficha
-            </a -->
+            <%= link_to game_sheet_path(author.slug), data: {
+                toggle: 'modal',
+                target: '#remoteModal',
+                width: '1015px'
+              } do  %>
+              <%= icon('file-text-o') %> Ficha
+            <% end %>
           </li>
 
           <% if ability.can_send_alert? %>

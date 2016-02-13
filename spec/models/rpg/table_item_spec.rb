@@ -4,7 +4,7 @@ describe RPG::TableItem do
   let(:table) { @system.tables.first }
 
   before(:all) do
-    load_system
+    @system = load_system
   end
 
   it 'serializes the 1st item on table `Carregar`' do

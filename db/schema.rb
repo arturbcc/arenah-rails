@@ -17,23 +17,25 @@ ActiveRecord::Schema.define(version: 20151231145324) do
   enable_extension "plpgsql"
 
   create_table "characters", force: :cascade do |t|
-    t.integer  "user_id",                                null: false
+    t.integer  "user_id",                                 null: false
     t.integer  "game_id"
     t.string   "name",           limit: 100
     t.string   "avatar"
-    t.integer  "character_type",             default: 0, null: false
+    t.integer  "character_type",             default: 0,  null: false
     t.string   "signature"
-    t.integer  "status",                     default: 1, null: false
-    t.integer  "gender",                     default: 0, null: false
-    t.integer  "sheet_mode",                 default: 0, null: false
+    t.integer  "status",                     default: 1,  null: false
+    t.integer  "gender",                     default: 0,  null: false
+    t.integer  "sheet_mode",                 default: 0,  null: false
     t.datetime "last_post_date"
     t.integer  "post_count",                 default: 0
-    t.string   "slug",                                   null: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.string   "slug",                                    null: false
+    t.jsonb    "sheet",                      default: {}, null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   add_index "characters", ["game_id"], name: "index_characters_on_game_id", using: :btree
+  add_index "characters", ["sheet"], name: "index_characters_on_sheet", using: :gin
   add_index "characters", ["slug"], name: "index_characters_on_slug", unique: true, using: :btree
   add_index "characters", ["user_id"], name: "index_characters_on_user_id", using: :btree
 

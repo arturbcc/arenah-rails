@@ -13,10 +13,12 @@ class CreateCharacters < ActiveRecord::Migration
       t.datetime :last_post_date
       t.integer :post_count, default: 0
       t.string :slug, :null => false
+      t.jsonb :sheet, default: {}, null: false
 
       t.timestamps null: false
     end
 
     add_index :characters, :slug, :unique => true
+    add_index  :characters, :sheet, using: :gin
   end
 end

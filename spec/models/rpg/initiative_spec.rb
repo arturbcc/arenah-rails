@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe RPG::Initiative do
   before(:all) do
-    load_system
+    @system = load_system
   end
 
   it 'serializes the initiative formula' do

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe RPG::Life do
   before(:all) do
-    load_system
+    @system = load_system
   end
 
   it 'serializes the name of the group that holds the life attribute' do

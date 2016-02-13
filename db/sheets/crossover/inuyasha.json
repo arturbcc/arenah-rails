@@ -1,0 +1,113 @@
+{
+  "attributes_groups": [
+    {
+      "name": "Dados",
+      "character_attributes": [
+        { "name": "Nome", "content": "Inuyasha" },
+        { "name": "Nascimento", "content": "Desconhecido" },
+        { "name": "Local", "content": "Era Feudal" },
+        { "name": "Sexo", "content": "Masculino" },
+        { "name": "Altura", "content": "1,70m" },
+        { "name": "Peso", "content": "75kg" },
+        { "name": "Classe", "content": "Guerreiro" },
+        { "name": "Nível", "content": "1" },
+        { "name": "Idiomas", "content": "Padrão" },
+        { "name": "Raça", "content": "Meio Youkai" },
+        { "name": "Idade", "content": "25" },
+        { "name": "Religião", "content": "--" }
+      ]
+    },
+    {
+      "name": "Dados Extras",
+      "character_attributes": []
+    },
+    {
+      "name": "Atributos",
+      "character_attributes": [
+        { "name": "Força", "content": 10  },
+        { "name": "Constituição", "content": 12 },
+        { "name": "Destreza", "content": 7 },
+        { "name": "Agilidade", "content": 5 },
+        { "name": "Inteligência", "content": 17 },
+        { "name": "Força de vontade", "content": 21 },
+        { "name": "Percepção", "content": 12 },
+        { "name": "Carisma", "content": 10 }
+      ]
+    },
+    {
+      "name": "Perícias",
+      "character_attributes": [
+        { "name": "História", "points": 10 },
+        { "name": "Heráldica", "points": 12 },
+        { "name": "Natação", "points": 27 },
+        { "name": "Sedução", "points": 35 },
+        { "name": "Lábia", "points": 37 },
+        { "name": "Manha", "points": 10 },
+        { "name": "Montaria - cavalo", "points": 10 },
+        { "name": "Prestidigitação", "points": 12 },
+        { "name": "Geografia", "points": 10 },
+        { "name": "Herbalismo", "points": 12 },
+        { "name": "Ler/Escrever", "points": 27 },
+        { "name": "Espada curta", "points": 35 },
+        { "name": "Espada longa", "points": 37 },
+        { "name": "Saltos", "points": 10 }
+      ]
+    },
+    {
+      "name": "Aprimoramentos",
+      "character_attributes": [
+        { "name": "Sensitivo" },
+        { "name": "Poderes mágicos" },
+        { "name": "Presença invisível" },
+        { "name": "Inimigo" },
+        { "name": "Má fama" }
+      ]
+    },
+    {
+      "name": "Itens",
+      "character_attributes": [
+        { "name": "Faca" },
+        { "name": "Mochila" },
+        { "name": "Algibeira" },
+        { "name": "Barraca" },
+        { "name": "Cantil" },
+        { "name": "Pergaminho" },
+        { "name": "Pena" },
+        { "name": "Tinteiro" },
+        { "name": "Caneca" }
+      ]
+    },
+    {
+      "name": "História",
+      "character_attributes": [
+        {
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur metus quis cursus semper. Morbi ac pharetra lorem. Phasellus non congue dolor. Mauris molestie malesuada porta. Cras in tempor ex, sed interdum nisi. Morbi ultrices sed diam ut porttitor. Integer et tortor erat. Nam malesuada pharetra odio sed pharetra. Morbi ullamcorper nibh mi, egestas ullamcorper ipsum cursus vitae. Phasellus blandit dolor nec quam aliquam, vel fermentum massa dignissim. Duis ut justo eu diam euismod fringilla. Proin iaculis lectus at dolor placerat blandit. Phasellus bibendum faucibus posuere. Fusce et justo vel erat mollis tempor nec in quam. Aenean non tristique orci. Suspendisse imperdiet volutpat magna, sit amet euismod est blandit a. Mauris eu velit id nibh faucibus lobortis ut ac dolor. Duis faucibus nulla metus, in lacinia felis molestie semper. Nullam ac aliquet turpis, a lacinia nulla. Suspendisse id leo a dolor consequat congue. Aliquam in orci augue. Praesent ac fringilla lectus. Ut finibus lacus ut risus tempor, sed auctor risus auctor. Phasellus iaculis metus a ligula cursus porta. Donec dignissim commodo posuere. Ut aliquam dui id nisi fringilla, ut malesuada felis ultricies. Duis sed rhoncus libero, non euismod urna. Vivamus fermentum fringilla velit id finibus. Donec et urna convallis, commodo ligula porta, euismod est. Integer a sem pulvinar, sagittis nunc ac, facilisis massa. Vivamus mi odio, iaculis eget cursus eget, posuere eget nisl. In imperdiet tempor tellus id egestas. Quisque venenatis nunc quis erat volutpat, sit amet egestas eros feugiat. Nam ante dolor, porttitor nec ante et, maximus ullamcorper tellus. Vivamus scelerisque hendrerit mi ac placerat. Proin at metus augue. Proin tristique maximus lacus, non molestie odio pretium at. Morbi nisl risus, vehicula quis arcu tincidunt, dapibus ornare justo. Nullam commodo ex sit amet leo pulvinar, in hendrerit elit auctor. Duis placerat odio quis ullamcorper vulputate. Donec sollicitudin interdum augue egestas laoreet. Morbi vel nulla ipsum. Nullam euismod pretium est, vehicula vestibulum metus. Quisque eleifend sem lacus, fringilla lacinia mauris dictum ac. Curabitur imperdiet magna ligula, ut porttitor diam ullamcorper et."
+        }
+      ]
+    },
+    {
+      "name": "Status",
+      "character_attributes": [
+        { "name": "Vida", "points": 49, "total": 100 },
+        { "name": "Magia", "points": 9, "total": 100  },
+        { "name": "XP", "points": 2636 },
+        { "name": "PH", "points": 10 },
+        { "name": "Recursos", "points": 1252 },
+        { "name": "Anime", "content": "Inuyasha" }
+      ]
+    },
+    {
+      "name": "Grimório",
+      "character_attributes": [
+        { "name": "Transformação em Youkai completo" }
+      ]
+    },
+    {
+      "name": "Equipamentos",
+      "equipments": [
+        { "name": "Tessaiga", "equipped_on": "right-hand" },
+        { "name": "Kimono", "equipped_on": "chest" }
+      ]
+    }
+  ]
+}

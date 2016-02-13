@@ -4,7 +4,7 @@ module RPG
 
     attr_accessor :name, :order, :position, :page, :instructions,
       :show_on_posts, :order_on_posts, :attributes_points_formula,
-      :group_points_formula, :character_attributes, :list,
+      :group_points_formula, :character_attributes, :list, :equipments,
 
       # The type indicates what kind of attributes the group will hold.
       # Each attribute type has its own behavior. The valid types are:
@@ -26,7 +26,7 @@ module RPG
       private
 
       def nested_attributes
-        %w(character_attributes list)
+        %w(character_attributes list equipments)
       end
   end
 end

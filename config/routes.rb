@@ -42,6 +42,8 @@ Rails.application.routes.draw do
 
     #TODO: Fix this alias new_game
     get 'sala/criar', to: 'home#new', as: :new
+
+    resources :sheet, only: :show, param: :character_slug, path: '/ficha'
   end
 
   resources :posts, only: :destroy

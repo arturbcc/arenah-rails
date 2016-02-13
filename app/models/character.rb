@@ -16,4 +16,14 @@ class Character < ActiveRecord::Base
 
   validates :name, :user_id, :slug, :character_type, :status, :gender, :sheet_mode, presence: true
   validates :name, length: { maximum: 100 }
+
+  def sheet
+    @sheet ||= RPG::Sheet.new(super)
+  end
+
+  def sheet_attributes=(hash)
+    debugger
+    sheet.assign_attributes(hash)
+    self[:sheet] = sheet.as_json
+  end
 end

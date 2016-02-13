@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe RPG::AttributesTest do
   before(:all) do
-    load_system
+    @system = load_system
   end
 
   describe 'Padrão' do
