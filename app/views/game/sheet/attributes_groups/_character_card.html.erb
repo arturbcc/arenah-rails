@@ -1,0 +1,48 @@
+<% data_attributes = {
+  'group-name' => group.name,
+  'points' => group.points,
+  'used-points' => group.used_points,
+  'source-type' => group.source_type,
+  'type' => group.type,
+  'editable-only-on-free-mode'=> true
+} %>
+
+<%= content_tag :div, class: 'attributes-group card-title-alignment', data: data_attributes do %>
+  <% Html.RenderPartial("Sheet/AttributesGroups/AttributesGroupTitle"); %>
+
+  <div class="character-card-group row" data-accept-edit-mode>
+    <%
+      description = ''
+      name = ''
+      linkClass = ''
+    %>
+
+    <% foreach (CharacterCardAttribute attribute in Model.Attributes) { %>
+      <%
+         name = attribute.DisplayName();
+        description = attribute.Description();
+        linkClass = description.Length > 0 ? "class=smart-description" : "";
+      %>
+      <div class="col-xs-4 col-sm-4">
+        <table class="key-value-table">
+          <tr data-attribute-name="<%: name %>">
+            <td class="key">
+              <a href="javascript:void(0);" <%: linkClass %>>
+                <%: name %>:
+              </a>
+            </td>
+            <td class="value">
+              <a data-editable-attribute="text" href="javascript:;"><%: attribute.Content %></a>
+            </td>
+
+            <%
+              if (description.Length > 0) {
+                Html.RenderPartial("Sheet/AttributesGroups/Attribute/Tooltip", attribute);
+              }
+            %>
+          </tr>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</div>

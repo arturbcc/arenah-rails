@@ -1,0 +1,58 @@
+<%
+  # TODO: fix this flat_version. For now, I will let the show_title be always true.
+  # In the previous version, ShowTitle use FlatVersion behind it:
+  #
+  #  public bool ShowTitle()
+  # {
+  #   return (!this.FlatVersion && this.ShowTitleOnPosts) || (this.FlatVersion);
+  # }
+  show_title = true
+
+  # TODO: the same with this show_points_counter. For now, it will always be true.
+  # Maybe those logics should not be in view at all
+  #
+  # public bool ShowPointsCounter()
+  # {
+  #   return this.Points > 0 && this.FlatVersion;
+  # }
+  show_points_counter = true
+
+  # TODO show_edit_button will always be true for now.
+  # public bool ShowEditButton()
+  # {
+  #   return this.FlatVersion && this.SourceType != Source.SourceType.Table;
+  # }
+  show_edit_button = true
+%>
+
+<% if show_title %>
+  <h2>
+    <% if group.instructions.present? %>
+      <%= link_to 'javascript:;', class: 'attributes-group-instructions' do %>
+        <%= icon('info-circle') %>
+      <% end %>
+    <% end %>
+
+    <%= group.name %>
+
+    <% if show_points_counter %>
+      <span class="group-points">
+        (<span class="<%= class_for_points_counter(group) %> points-counter"><%= group.used_points %></span> / <%= group.total_points %>)
+      </span>
+    <% } %>
+  </h2>
+
+  <% if show_edit_button %>
+    <span class="manage-group-container">
+      <%#= Html.RenderPartial("Sheet/AttributesGroups/AttributesGroupEditPanel"); %>
+    </span>
+  <% end %>
+
+  <% unless group.instructions.blank? %>
+    <table class="attributes-group-instructions-content">
+      <tr>
+        <%#= Html.RenderPartial("Sheet/AttributesGroups/Attribute/Tooltip", new CharacterAttribute() { Source = new Source() { Name = Model.Name, Description = Model.Instructions } }); %>
+     </tr>
+    </table>
+  <% end %>
+<% end %>

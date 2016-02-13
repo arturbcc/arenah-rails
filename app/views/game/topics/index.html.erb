@@ -43,8 +43,8 @@
                       data-topic-group-id="<%= group.id %>">
 
                   <%# TODO: Remove rails logic from view %>
-                  <% Topic.by_group_id(group.id).each do |topic| %>
-                    <%= render 'topic_line', game: @game, index: index + 1, topic: topic %>
+                  <% Topic.by_group_id(group.id).each_with_index do |topic, roman_index| %>
+                    <%= render 'topic_line', game: @game, index: roman_index + 1, topic: topic %>
                   <% end %>
                 </div>
               <% end %>

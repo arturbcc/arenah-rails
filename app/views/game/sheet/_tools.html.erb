@@ -1,0 +1,12 @@
+<div id="sheet-tools">
+  <span onclick="$('.select-attribute').trigger('click')"></span>
+  <div class="pull-right">
+    <a href="javascript:;" class="select-attribute"><i class="fa fa-check"></i></a> |
+
+    <% if @identity.game_master? %>
+      <a href="javascript:;"><i class="fa fa-edit"></i></a> |
+    <% end %>
+
+    <a href="javascript:;" class="close-tools">x</a>
+  </div>
+</div>
