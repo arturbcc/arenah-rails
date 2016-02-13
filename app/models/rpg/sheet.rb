@@ -29,5 +29,17 @@ module RPG
     def nested_attributes
       %w(pages attributes_groups)
     end
+
+    # This method overrides after_initialize created on EmbeddedModel
+    def after_initialize
+      apply_attributes_relationships
+    end
+
+    # This method will run after the initialize and relate all attributes groups
+    # Many attributes are based in others, and formulas also depends on other
+    # attributes and groups to be calculated, to it must be calculated only after
+    # all the sheet is loaded.
+    def apply_attributes_relationships
+    end
   end
 end
