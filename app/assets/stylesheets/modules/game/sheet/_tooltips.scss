@@ -1,0 +1,44 @@
+.qtip-bootstrap-1-columns {
+  width: 905px;
+  max-width: 905px !important;
+}
+
+.qtip-bootstrap-2-columns {
+  width: 440px;
+  max-width: 440px !important;
+}
+
+.qtip-bootstrap-3-columns {
+  width: 297px;
+  max-width: 297px !important;
+}
+
+.qtip-titlebar {
+  background-color: #000 !important;
+  color: $gold !important;
+}
+
+.qtip-content {
+  text-align: justify;
+  font-size: 12px;
+
+  .attributes {
+     width: 130px;
+  }
+
+  .extra-attributes {
+    margin: 0 auto;
+    width: 240px;
+  }
+
+  ul {
+    padding-left: 13px;
+    font-size: 10px;
+    list-style-type: disc;
+  }
+
+  img {
+    float: left;
+    margin-right: 5px;
+  }
+}

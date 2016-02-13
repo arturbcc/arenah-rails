@@ -1,0 +1,58 @@
+[data-state=new] td:first-child a {
+  color: $main-green !important;
+}
+
+.editable-list-group {
+  text-align: center;
+
+  .select2-container {
+    margin-top: 10px;
+    text-align: left;
+  }
+}
+
+.editable-list-group {
+  .add-editable-list-item {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    margin-top: 10px;
+    margin-left: 10px;
+    min-width: 40px;
+  }
+
+  .editable-list-items {
+    margin-top: 10px;
+    text-align: left;
+
+    li {
+      cursor: pointer;
+    }
+
+    tr[data-attribute-name] {
+      display: inline-table;
+      width: 100%;
+    }
+  }
+
+  &.type-open .add-editable-list-item {
+    margin-top: -3px;
+    margin-left: 0;
+  }
+
+  &.type-open .editable-list-input {
+    margin-top: 10px;
+    height: 28px;
+  }
+}
+
+.editable-drop-item-area {
+  padding-top: 8px;
+  height: 40px;
+  text-align: center;
+  border: 1px dashed #000;
+  background-color: #D28181;
+}
+
+.editable-current-item-description {
+  background-color: #FAFAEF;
+}

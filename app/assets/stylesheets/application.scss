@@ -31,13 +31,24 @@
 @import 'modules/game/subscription';
 @import 'modules/game/topics';
 
-@import 'modules/posts/author';
-@import 'modules/posts/buttons';
-@import 'modules/posts/emoji';
-@import 'modules/posts/players_list';
-@import 'modules/posts/posts';
-@import 'modules/posts/recipients';
-@import 'modules/posts/saga';
+@import 'modules/game/posts/author';
+@import 'modules/game/posts/buttons';
+@import 'modules/game/posts/emoji';
+@import 'modules/game/posts/players_list';
+@import 'modules/game/posts/posts';
+@import 'modules/game/posts/recipients';
+@import 'modules/game/posts/saga';
+
+@import 'modules/game/sheet/edit_attributes_group';
+@import 'modules/game/sheet/edit_based_attribute';
+@import 'modules/game/sheet/edit_bullets';
+@import 'modules/game/sheet/edit_card_group';
+@import 'modules/game/sheet/edit_group_of_type_list';
+@import 'modules/game/sheet/edit_mixed_attribute_group';
+@import 'modules/game/sheet/edit_rich_text';
+@import 'modules/game/sheet/instructions';
+@import 'modules/game/sheet/sheet';
+@import 'modules/game/sheet/tooltips';
 
 @import 'modules/posts/compose/accordion';
 @import 'modules/posts/compose/author';

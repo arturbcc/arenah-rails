@@ -1,0 +1,56 @@
+.attributes-group {
+  position: relative;
+
+  td {
+    height: 36px;
+  }
+}
+
+.ui-spinner input {
+  width: 50px !important;
+}
+
+.editable-clear-x {
+  display: none !important;
+}
+
+.input-sm {
+  height: 17px;
+  line-height: 1
+}
+
+.ui-widget input {
+  font-size: 14px;
+  text-align: center;
+  padding-right: 0 !important
+}
+
+.manage-attributes-group {
+  padding-top: 8px;
+  padding-bottom: 4px;
+  margin-bottom: 5px;
+  width: 100%;
+  min-height: 44px;
+  text-align: right;
+  background-color: #f9f9f9;
+  border: 1px dashed #ccc;
+}
+
+.editable-submit, .editable-cancel {
+  display: none;
+  height: 30px;
+}
+
+.edit-mode {
+  background-color: #FAFAEF;
+}
+
+.editable-edit .fa-edit {
+  font-size: 30px;
+  color: #AEADAD;
+}
+
+.manage-group-container {
+  position:relative;
+  display: none;
+}
