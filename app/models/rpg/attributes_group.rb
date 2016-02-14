@@ -22,14 +22,14 @@ module RPG
       # source. The valid source types are:
       #
       # TODO: list all source types here`
-      :source_type,
+      :source_type
 
       # These attributes are not stored in the database. They are calculated
       # at the end of the sheet initialization, linking attributes that are
       # based in others and calculating the formulas as well
 
-      # points will hold the result of the group_points_formula
-      :points
+      # Points will hold the result of the group_points_formula
+      attr_accessor :points
 
       def show_on_posts?
         !!show_on_posts
