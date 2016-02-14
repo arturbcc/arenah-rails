@@ -29,6 +29,8 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'jquery-rails'
 
+gem 'dentaku'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
