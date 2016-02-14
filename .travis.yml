@@ -4,8 +4,8 @@ rvm:
 env:
   - DB=postgresql
 script:
-  - rake db:migrate
-  - rake spec
+  - bundle exec rake db:migrate
+  - bundle exec rake spec
 before_install:
   - cp config/database.yml.postgres.sample.yaml config/database.yml
   - psql -c 'create database arenah_test' -U postgres
