@@ -10,8 +10,6 @@ module EmbeddedModel
       end
 
       save_nested_values(hash)
-
-      after_initialize
     end
   end
 
@@ -44,7 +42,4 @@ module EmbeddedModel
   def hash_values(hash, attribute)
     "RPG::#{attribute.classify}".constantize.new(hash[attribute])
   end
-
-  # Do not delete this method. It will be overriden on included classes
-  def after_initialize; end
 end

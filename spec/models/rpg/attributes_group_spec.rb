@@ -47,7 +47,7 @@ describe RPG::AttributesGroup do
       expect(group.order_on_posts).to eq(1)
       expect(group.instructions).not_to be_blank
       expect(group.attributes_points_formula).to eq('4 * points')
-      expect(group.group_points_formula).to eq('100 + #{Dados:Nível}')
+      expect(group.group_points_formula).to eq('100 + dados=>nivel')
       expect(group.character_attributes.count).to eq(8)
     end
 
@@ -63,7 +63,7 @@ describe RPG::AttributesGroup do
       expect(group.show_on_posts?).to be_falsy
       expect(group.instructions).not_to be_blank
       expect(group.attributes_points_formula).to be_nil
-      expect(group.group_points_formula).to eq('10 * #{Dados:Idade} + 5 * #{Atributos:Inteligência}')
+      expect(group.group_points_formula).to eq('10 * dados=>idade + 5 * atributos=>inteligencia')
       expect(group.character_attributes.count).to eq(0)
       expect(group.list.count).to eq(14)
     end
@@ -80,7 +80,7 @@ describe RPG::AttributesGroup do
       expect(group.show_on_posts?).to be_falsy
       expect(group.instructions).not_to be_blank
       expect(group.attributes_points_formula).to be_nil
-      expect(group.group_points_formula).to eq('5 + floor(#{Dados:Nível} / 3)')
+      expect(group.group_points_formula).to eq('5 + floor(dados=>nivel / 3)')
       expect(group.character_attributes.count).to eq(0)
       expect(group.list.count).to eq(13)
     end

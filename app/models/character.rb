@@ -18,11 +18,14 @@ class Character < ActiveRecord::Base
   validates :name, length: { maximum: 100 }
 
   def sheet
-    @sheet ||= RPG::Sheet.new(super)
+    @sheet ||= begin
+      sheet = RPG::Sheet.new(super)
+      sheet.apply_attributes_relationship(game.system)
+      # TODO: should I parse initiative and life in here?
+    end
   end
 
   def sheet_attributes=(hash)
-    debugger
     sheet.assign_attributes(hash)
     self[:sheet] = sheet.as_json
   end

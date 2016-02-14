@@ -286,17 +286,17 @@ describe RPG::CharacterAttribute do
       expect(group.character_attributes.count).to eq(8)
 
       expected = [
-        { name: 'Força', content: 10  },
-        { name: 'Constituição', content: 12 },
-        { name: 'Destreza', content: 7 },
-        { name: 'Agilidade', content: 5 },
-        { name: 'Inteligência', content: 17 },
-        { name: 'Força de vontade', content: 21 },
-        { name: 'Percepção', content: 12 },
-        { name: 'Carisma', content: 10 }
+        { name: 'Força', points: 10  },
+        { name: 'Constituição', points: 12 },
+        { name: 'Destreza', points: 7 },
+        { name: 'Agilidade', points: 5 },
+        { name: 'Inteligência', points: 17 },
+        { name: 'Força de vontade', points: 21 },
+        { name: 'Percepção', points: 12 },
+        { name: 'Carisma', points: 10 }
       ]
 
-      attributes = get_attributes(group.character_attributes, :name, :content)
+      attributes = get_attributes(group.character_attributes, :name, :points)
       expect(attributes).to eq(expected)
     end
 
