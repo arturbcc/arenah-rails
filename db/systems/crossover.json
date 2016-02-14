@@ -97,7 +97,7 @@
         "show_on_posts": true,
         "order_on_posts": 1,
         "attributes_points_formula": "4 * points",
-        "group_points_formula": "100 + #{Dados:Nível}",
+        "group_points_formula": "100 + dados=>nivel",
         "instructions": "<p>Funcionam como uma forma de transportar um Personagem para o mundo fictício e estabelecer comparações entre ele e as diversas criaturas. São os Atributos que descrevem seu Personagem como ele é. São em número de 8, divididos em físicos e mentais. Os Atributos físicos são Constituição, Força, Destreza e Agilidade e os mentais são Inteligência, Força de Vontade, Percepção e Carisma</p> <p>Os Atributos variam de acordo com seus dados de comparação, sendo que um humano possui normalmente 3D, com Atributos variando de 3 a 18 (ver Dados de Comparação).</p><p>Os personagens começam o jogo com 101 pontos de atributos e ganham mais um por nível. Para ter uma base de comparação, uma pessoa comum teria 9 pontos em todos os atributos. Valores acima disso são considerados excepcionais, e abaixo disso são deficientes.</p>",
         "character_attributes": [
           {
@@ -158,7 +158,7 @@
         "position": "column_2",
         "source_type": "list",
         "show_on_posts": false,
-        "group_points_formula": "10 * #{Dados:Idade} + 5 * #{Atributos:Inteligência}",
+        "group_points_formula": "10 * dados=>idade + 5 * atributos=>inteligencia",
         "instructions": "Determina o que seu Personagem sabe fazer. Ele pode saber usar uma espada, ou ser um excelente carpinteiro. É a Perícia que diz o quão bom ele é em determinada profissão. As Perícias são representadas em porcentagem.",
         "character_attributes": [],
         "list": [
@@ -185,7 +185,7 @@
         "position": "column_1",
         "type": "name_value",
         "source_type": "list",
-        "group_points_formula": "5 + floor(#{Dados:Nível} / 3)",
+        "group_points_formula": "5 + floor(dados=>nivel / 3)",
         "instructions": "Aprimoramento: São pontos que um Jogador possui para <i>“refinar”</i> a história de seu Personagem. Podem ser utilizados para conseguir aliados, mais riquezas, mais poder, Magia; e depende de cada Jogador gastar seus pontos da maneira que achar melhor. Os Jogadores começam com 5 pontos de Aprimoramento por Personagem. Aprimoramentos são vantagens que um Jogador pode comprar para melhorar seu Personagem, ou desvantagens que pode comprar para limitar Personagens muito poderosos.",
         "character_attributes": [],
         "list": [
