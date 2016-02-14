@@ -13,7 +13,7 @@
           <li>
             <%= link_to game_sheet_path(author.slug), data: {
                 toggle: 'modal',
-                target: '#remoteModal',
+                target: '#remote-modal',
                 width: '1015px'
               } do  %>
               <%= icon('file-text-o') %> Ficha
@@ -23,7 +23,7 @@
           <% if ability.can_send_alert? %>
             <li>
               <a href="#"><i class="fa fa-bell"></i> Enviar alerta</a>
-              <!-- a href="< %: Url.Action("New", "Alerts", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = author.Slug })%>" data-toggle="modal" data-target="#remoteModal" data-width="600px">
+              <!-- a href="< %: Url.Action("New", "Alerts", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = author.Slug })%>" data-toggle="modal" data-target="#remote-modal" data-width="600px">
                 <i class="fa fa-bell"></i> Enviar alerta
               </a -->
             </li>
@@ -33,7 +33,7 @@
         <% if ability.can_send_message? %>
           <li>
             <a href="#"><i class="fa fa-envelope"></i> Enviar mensagem</a>
-            <!-- a href="< %: Url.Action("New", "Inbox", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = Model.Identity.Character.Slug, action = "compose", to = author.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="600px">
+            <!-- a href="< %: Url.Action("New", "Inbox", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = Model.Identity.Character.Slug, action = "compose", to = author.Slug }) %>" data-toggle="modal" data-target="#remote-modal" data-width="600px">
               <i class="fa fa-envelope"></i> Enviar mensagem
             </a -->
           </li>
@@ -41,7 +41,7 @@
 
         <% if author.pc? %>
           <li>
-            <!-- a href="< %: Url.Action("Show", "Equipment", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = author.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="600px">
+            <!-- a href="< %: Url.Action("Show", "Equipment", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = author.Slug }) %>" data-toggle="modal" data-target="#remote-modal" data-width="600px">
               <i class="fa fa-suitcase"></i> Inventário
             </a -->
           </li>

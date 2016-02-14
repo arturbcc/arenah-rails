@@ -17,7 +17,7 @@
                   data: {
                     id: character.id,
                     toggle: 'modal',
-                    target: '#remoteModal',
+                    target: '#remote-modal',
                     width:'1015px'
                   } do %>
               <%= avatar(character, class: 'characterAvatar') %>
@@ -44,7 +44,7 @@
                   id: character.id,
                   data: {
                     toggle: 'modal',
-                    target: '#remoteModal',
+                    target: '#remote-modal',
                     width:'1015px'
                   } do %>
               <%= avatar(character, class: 'characterAvatar') %>
@@ -55,7 +55,7 @@
             <div class="clear"></div>
             <hr />
             <% @game.npcs.each do |character| %>
-              <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = character.Slug }) %>" data-toggle="modal" data-target="#remoteModal" data-width="1015px" class="other-character" data-id="< %: character.Id %>">
+              <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = character.Slug }) %>" data-toggle="modal" data-target="#remote-modal" data-width="1015px" class="other-character" data-id="< %: character.Id %>">
                 < %: Html.Avatar(character, "characterAvatar") %>
               </a -->
             <% end %>

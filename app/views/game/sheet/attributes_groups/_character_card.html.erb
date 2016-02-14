@@ -8,41 +8,31 @@
 } %>
 
 <%= content_tag :div, class: 'attributes-group card-title-alignment', data: data_attributes do %>
-  <% Html.RenderPartial("Sheet/AttributesGroups/AttributesGroupTitle"); %>
+  <%= render 'group_title', group: group %>
 
   <div class="character-card-group row" data-accept-edit-mode>
-    <%
-      description = ''
-      name = ''
-      linkClass = ''
-    %>
-
-    <% foreach (CharacterCardAttribute attribute in Model.Attributes) { %>
-      <%
-         name = attribute.DisplayName();
-        description = attribute.Description();
-        linkClass = description.Length > 0 ? "class=smart-description" : "";
-      %>
+    <% group.character_attributes.each do |attribute| %>
       <div class="col-xs-4 col-sm-4">
         <table class="key-value-table">
-          <tr data-attribute-name="<%: name %>">
+          <%= content_tag :tr, data: { 'atribute-name' => name } do %>
             <td class="key">
-              <a href="javascript:void(0);" <%: linkClass %>>
-                <%: name %>:
-              </a>
-            </td>
-            <td class="value">
-              <a data-editable-attribute="text" href="javascript:;"><%: attribute.Content %></a>
+              <%=
+                link_to attribute.name,
+                  'javascript:;',
+                  class: attribute.description.present? ? 'smart-description' : ''
+              %>
             </td>
 
-            <%
-              if (description.Length > 0) {
-                Html.RenderPartial("Sheet/AttributesGroups/Attribute/Tooltip", attribute);
-              }
-            %>
-          </tr>
+            <td class="value">
+              <%= link_to attribute.content, 'javascript:;', data: { 'editable-attribute' => 'text' } %>
+            </td>
+
+            <% if description.present? %>
+              <%= render 'tooltip', attribute: attribute %>
+            <% end %>
+          <% end %>
         </table>
       </div>
-    <% } %>
+    <% end %>
   </div>
 </div>

@@ -71,8 +71,6 @@ describe RPG::Sheet do
           # * dados=>nivel = 1
           expect(group.points).to eq(5)
         end
-
-
       end
     end
   end
