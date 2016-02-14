@@ -20,8 +20,11 @@ class Character < ActiveRecord::Base
   def sheet
     @sheet ||= begin
       sheet = RPG::Sheet.new(super)
-      sheet.apply_attributes_relationship(game.system)
-      # TODO: should I parse initiative and life in here?
+
+      if game.present?
+        sheet.apply_attributes_relationship(game.system)
+        # TODO: should I parse initiative and life in here?
+      end
     end
   end
 
