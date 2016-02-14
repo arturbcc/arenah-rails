@@ -50,13 +50,13 @@
 @import 'modules/game/sheet/sheet';
 @import 'modules/game/sheet/tooltips';
 
-@import 'modules/posts/compose/accordion';
-@import 'modules/posts/compose/author';
-@import 'modules/posts/compose/characters';
-@import 'modules/posts/compose/dices';
-@import 'modules/posts/compose/recipients';
-@import 'modules/posts/compose/rules_and_tests';
-@import 'modules/posts/compose/structure';
+@import 'modules/game/posts/compose/accordion';
+@import 'modules/game/posts/compose/author';
+@import 'modules/game/posts/compose/characters';
+@import 'modules/game/posts/compose/dices';
+@import 'modules/game/posts/compose/recipients';
+@import 'modules/game/posts/compose/rules_and_tests';
+@import 'modules/game/posts/compose/structure';
 
 @import 'modules/header/alerts';
 @import 'modules/header/characters';
