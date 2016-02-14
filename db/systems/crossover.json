@@ -1,7 +1,7 @@
 {
   "name": "Daemon",
   "initiative": {
-    "formula": "1D10 + #{Atributos:Agilidade}",
+    "formula": "1D10 + atributos=>agilidade",
     "order": "desc"
   },
   "life": {
