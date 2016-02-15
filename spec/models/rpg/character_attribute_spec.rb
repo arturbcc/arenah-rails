@@ -276,7 +276,7 @@ describe RPG::CharacterAttribute do
       group_name = 'Dados Extras'
       group = @sheet.find_attributes_group(group_name)
       expect(group.name).to eq(group_name)
-      expect(group.character_attributes.count).to eq(0)
+      expect(group.character_attributes.count).to eq(4)
     end
 
     it 'serializes the group "Atributos"' do

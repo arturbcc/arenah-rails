@@ -6,7 +6,7 @@ describe RPG::Initiative do
   end
 
   it 'serializes the initiative formula' do
-    expect(@system.initiative.formula).to eq('1D10 + #{Atributos:Agilidade}')
+    expect(@system.initiative.formula).to eq('1D10 + atributos=>agilidade')
   end
 
   it 'serializes the initiative order criteria' do

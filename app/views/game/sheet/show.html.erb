@@ -7,7 +7,7 @@
         <% if page.show_header? %>
           <header>
             <% @sheet.header_attributes(page: page.number).each do |group| %>
-              <%= render "attributes_groups/#{group.type}", group: group %>
+              <%= render "game/sheet/attributes_groups/#{group.type}", group: group %>
             <% end %>
           </header>
         <% end %>
@@ -17,7 +17,7 @@
             <% proportion = 12/page.number_of_columns %>
             <section class="col-xs-<%= proportion %> col-sm-<%= proportion %> pull-left">
               <% @sheet.column_attributes(page: page.number, column: column).each do |group| %>
-                <%= render "attributes_groups/#{group.type}", group: group %>
+                <%= render "game/sheet/attributes_groups/#{group.type}", group: group %>
               <% end %>
             </section>
           <% end %>
@@ -27,7 +27,7 @@
           <footer>
             <div class="col-xs-12 col-sm-12 pull-left">
               <% @sheet.footer_attributes(page: page.number).each do |group| %>
-                <%= render "attributes_groups/#{group.type}", group: group %>
+                <%= render "game/sheet/attributes_groups/#{group.type}", group: group %>
               <% end %>
             </div>
           </footer>

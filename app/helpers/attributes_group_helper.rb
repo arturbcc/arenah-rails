@@ -3,10 +3,11 @@
 # to see more possibilities
 module AttributesGroupHelper
   def class_for_points_counter(group)
+    points = group.points || 0
     counter_class = ''
-    if group.used_points < group.points
+    if group.used_points < points
       counter_class = 'available-points'
-    elsif group.used_points > group.points
+    elsif group.used_points > points
       counter_class = 'exceeded-points'
     end
 

@@ -36,7 +36,7 @@ describe RPG::Sheet do
   describe 'Character sheet' do
     before(:all) do
       @sheet = load_sheet('crossover', 'inuyasha')
-      @sheet.apply_attributes_relationship(@system)
+      @sheet.apply_attributes_relationship
     end
 
     context 'apply relationships and parse formulas on attributes groups' do

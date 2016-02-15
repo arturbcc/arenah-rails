@@ -20,16 +20,20 @@ class Character < ActiveRecord::Base
   def sheet
     @sheet ||= begin
       sheet = RPG::Sheet.new(super)
-
-      if game.present?
-        sheet.apply_attributes_relationship(game.system)
-        # TODO: should I parse initiative and life in here?
-      end
+      apply_attributes_relationship_on(sheet)
     end
   end
 
   def sheet_attributes=(hash)
     sheet.assign_attributes(hash)
     self[:sheet] = sheet.as_json
+  end
+
+  private
+
+  def apply_attributes_relationship_on(sheet)
+    sheet.apply_attributes_relationship
+    # TODO: should I parse initiative and life in here?
+    # probably no, I don't have a game in here anyway
   end
 end

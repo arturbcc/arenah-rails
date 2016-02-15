@@ -31,19 +31,16 @@ module RPG
     # Public: this method will link all attributes' groups and build the
     # character sheet relationships, parsing the formulas to calculate points
     # and binding attributes that are based in others.
-    #
-    # Paramters:
-    # * game_system: every system has its own sheet model. It contains all the
-    #   rules and formulas, while the character sheet has just a skeleton
-    #   of the game system with the attributes related to its owner.
-    def apply_attributes_relationship(game_system)
+    def apply_attributes_relationship
       return unless attributes_groups
 
       self.calculator = ::RPG::Calculator.new
 
       # calculate_attributes_modifiers
       save_attributes_as_variables
-      calculate_group_points(game_system)
+      calculate_group_points
+      #fetch_table_data
+      #calculate_based_attributes
 
       self
     end
@@ -64,15 +61,13 @@ module RPG
       end
     end
 
-    # Private: iterates through the game's attributes' groups collecting those
-    # with a formula to be parsed. It is important to note that it must use
-    # the game system's attributes groups because only the game knows the rules
-    # to be applied.
+    # Private: iterates through the attributes' groups collecting those
+    # with a formula to be parsed.
     #
-    # The points will be set on the character sheet attributes group, they
+    # The points will be set on the character sheet attributes group, and they
     # will be different for each character in the game.
-    def calculate_group_points(game_system)
-      game_system.sheet.attributes_groups.each do |group|
+    def calculate_group_points
+      attributes_groups.each do |group|
         if group.group_points_formula.present?
           character_group = self.find_attributes_group(group.name)
           character_group.points = self.calculator.evaluate(group.group_points_formula)
