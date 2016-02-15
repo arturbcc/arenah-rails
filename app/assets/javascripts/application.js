@@ -22,4 +22,7 @@
 $(document).on('ready page:load', function() {
   page.dispatch();
   new BBCode();
+
+  new ModalResize();
+  new ModalReuse();
 });
