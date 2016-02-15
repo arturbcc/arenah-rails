@@ -1,0 +1,4 @@
+test:
+  pre:
+    - 'cp .env.example .env'
+    - 'cp config/database.yml.postgres.sample.yaml config/database.yml'
