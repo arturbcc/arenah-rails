@@ -47,13 +47,13 @@
 
   .inner-border {
     display: inline-block;
-    border: 5px double #000;
-    min-height: 800px;
-    padding: 5px;
+    position: relative;
+    padding: 15px;
     padding-bottom: 50px;
+    min-height: 800px;
     min-width: 952px;
     margin-bottom: 5px;
-    position: relative;
+    border: 5px double #000;
   }
 
   .key-value-table {
@@ -124,7 +124,7 @@
 .sheet-page-number {
    position: absolute;
    height: 30px;
-   width: 930px;
+   width: 920px;
    text-align: right;
    bottom: 0;
 }
