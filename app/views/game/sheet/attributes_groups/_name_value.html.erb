@@ -1,0 +1,27 @@
+<%
+  data = {
+    "group-name": group.name,
+    "points": group.points,
+    "used-points": group.used_points,
+    "source-type": group.source_type,
+    "type": group.type
+  }
+%>
+
+<%= content_tag :div, class: 'attributes-group', data: data do %>
+  <%= render 'game/sheet/attributes_groups/group_title', group: group %>
+
+  <table class="table table-condensed name-value-attributes" data-accept-edit-mode>
+    <tbody>
+      <% group.character_attributes.each do |attribute| %>
+        <%= render 'game/sheet/attributes_types/name_value', attribute: attribute %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- %
+    if (Model.SourceType == Source.SourceType.List) {
+      Html.RenderPartial("Sheet/AttributesGroups/EditAttributesGroup");
+    end
+  % -->
+<% end %>

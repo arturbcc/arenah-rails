@@ -7,6 +7,9 @@ module RPG
       :abbreviation, :table_name, :cost, :prefix, :content, :points,
       :total
 
+    # Attributes that are not stored in the database
+    attr_accessor :equipment_modifier
+
     # Public: returns the final value of the attribute
     #
     # This method is used to be called on a formula. When an attribute is

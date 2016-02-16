@@ -1,0 +1,31 @@
+<%#= TODO: complete this partial  %>
+<%
+  data = {
+    "attribute-name": attribute.name,
+    "points": attribute.points,
+    "value": attribute.value
+  }
+%>
+
+<%= content_tag :tr, data: data do %>
+  <td>
+    <%= link_to 'javascript:;', class: attribute.description.present? ? 'smart-description' : ''  do %>
+      <%= attribute.name %>
+      <%= render 'modified_attribute_mark', attribute: attribute %>
+    <% end %>
+  </td>
+
+  <td class="text-right">
+    <!-- % Html.RenderPartial("Sheet/AttributesGroups/Attribute/EditableLink", new EditableLinkViewData() {
+         Type = "spinner",
+         Value = (attribute.Points - attribute.EquipmentModifier).ToString(),
+         Text = attribute.Points.ToString(),
+         Prefix = attribute.Source.Prefix,
+         Class = "",
+         Formula = attribute.Source.Formula,
+         MasterOnly = attribute.Source.MasterOnly
+       }); % -->
+  </td>
+
+  <%= render 'game/sheet/tooltip', attribute: attribute %>
+<% end %>

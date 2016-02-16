@@ -1,0 +1,3 @@
+<% if attribute.equipment_modifier.to_i != 0  %>
+  <span class='<%= attribute.equipment_modifier > 0 ? 'increased' : 'decreased' %>'>*</span>
+<% end %>

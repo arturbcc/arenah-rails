@@ -42,6 +42,8 @@ module RPG
       #fetch_table_data
       #calculate_based_attributes
 
+      # TODO: I need to remember to never modify the points of any attribute. Save
+      # in separated fields and use the method `value` to sum them up
       self
     end
 

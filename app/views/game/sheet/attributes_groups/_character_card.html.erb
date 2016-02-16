@@ -1,10 +1,10 @@
 <% data_attributes = {
-  'group-name' => group.name,
-  'points' => group.points,
-  'used-points' => group.used_points,
-  'source-type' => group.source_type,
-  'type' => group.type,
-  'editable-only-on-free-mode'=> true
+  'group-name': group.name,
+  'points': group.points,
+  'used-points': group.used_points,
+  'source-type': group.source_type,
+  'type': group.type,
+  'editable-only-on-free-mode': true
 } %>
 
 <%= content_tag :div, class: 'attributes-group card-title-alignment', data: data_attributes do %>
@@ -14,7 +14,7 @@
     <% group.character_attributes.each do |attribute| %>
       <div class="col-xs-4 col-sm-4">
         <table class="key-value-table">
-          <%= content_tag :tr, data: { 'atribute-name' => attribute.name } do %>
+          <%= content_tag :tr, data: { 'atribute-name': attribute.name } do %>
             <td class="key">
               <%=
                 link_to attribute.name,
@@ -24,12 +24,10 @@
             </td>
 
             <td class="value">
-              <%= link_to attribute.content, 'javascript:;', data: { 'editable-attribute' => 'text' } %>
+              <%= link_to attribute.content, 'javascript:;', data: { 'editable-attribute': 'text' } %>
             </td>
 
-            <% if attribute.description.present? %>
-              <%= render 'tooltip', attribute: attribute %>
-            <% end %>
+            <%= render 'game/sheet/tooltip', attribute: attribute %>
           <% end %>
         </table>
       </div>
