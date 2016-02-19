@@ -1,0 +1,20 @@
+<%
+  data = {
+    'name': attribute.name,
+    'points': attribute.points,
+    'value': attribute.value
+  }
+%>
+
+<%= content_tag :tr, data: data do %>
+  <td>
+    <%= link_to 'javascript:;' do %>
+      <%= attribute.name %>
+      <%= render 'game/sheet/modified_attribute_mark', attribute: attribute %>
+      (<%= attribute.points %>/<%= attribute.total %>)
+    <% end %>
+  </td>
+  <td class="text-right">
+    <%= image_attribute(@game.slug, atribute) %>
+  </td>
+</tr>

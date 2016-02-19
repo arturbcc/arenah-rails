@@ -1,0 +1,34 @@
+<%
+  data = {
+    'base-attribute-group': attribute.base_attribute_group,
+    'base-attribute-name': attribute.base_attribute_name,
+    'name': attribute.name,
+    'points': attribute.points,
+    'value': attribute.value
+  }
+%>
+
+<%= content_tag :tr, data: data do %>
+  <td>
+    <%= link_to 'javascript:;', class: attribute.description.present? ? 'smart-description' : '' do %>
+      <%= attribute.name %>
+
+      <% if attribute.base_attribute && attribute.base_attribute.abbreviation.present? %>
+        (<%= attribute.base_attribute.abbreviation %>)
+      <% end %>
+    <% end %>
+  </td>
+
+  <td class="text-right">
+    <%=
+      editable_link({
+        type: 'spinner',
+        value: attribute.points,
+        text: attribute.to_s,
+        master_only: attribute.master_only
+      })
+    %>
+  </td>
+
+  <%= render 'game/sheet/tooltip', attribute: attribute %>
+<% end %>

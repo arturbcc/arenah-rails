@@ -1,0 +1,91 @@
+{
+  "attributes_groups": [
+    {
+      "name": "Atributos",
+      "page": 1,
+      "order": 1,
+      "position": "column_1",
+      "character_attributes": [
+        {
+          "name": "Força",
+          "order": 1,
+          "abbreviation": "Fr",
+          "description": "<p>Determina a força física do Personagem, sua capacidade muscular. A Força não tem tanta influência sobre a aparência quanto a Constituição — um lutador magrinho de karatê pode ser forte o bastante para quebrar pilhas de tijolos, mas um fisiculturista musculoso dificilmente poderia igualar a proeza.</p><p>A Força, como a Constituição, tem influência sobre o cálculo dos Pontos de Vida. Quanto maior a FR, mais PVs um Personagem terá. A Força também afeta o dano que ele é capaz de causar com armas de combate corporal, e peso máximo que pode carregar ou sustentar (por poucos instantes).</p>"
+        },
+        {
+          "name": "Inteligência",
+          "order": 2,
+          "abbreviation": "Int",
+          "description": "Inteligência é a capacidade de resolver problemas, nem mais e nem menos. Um Personagem inteligente está mais apto a compreender o que ocorre à sua volta e não se deixa enganar tão facilmente. Também lida com a memória, capacidade de abstrair conceitos e descobrir coisas novas."
+        },
+        {
+          "name": "Magia",
+          "order": 3,
+          "abbreviation": "Mgc",
+          "description": "Poder arcano do personagem. É com a magia que ele uma pessoa é capaz de fazer feitiços e usar armas mágicas."
+        },
+        {
+          "name": "Agilidade",
+          "order": 4,
+          "abbreviation": "Agi",
+          "description": "Ao contrário da Destreza, a Agilidade não é válida para coisas feitas com as mãos — mas sim para o corpo todo. Com um alto valor em Agilidade um Personagem pode correr mais rápido, equilibrar-se melhor sobre um muro, dançar com mais graça, esquivar-se de ataques... É importante fixar a diferença entre Destreza e Agilidade para fins de jogo."
+        }
+      ]
+    },
+    {
+      "name": "Itens",
+      "page": 1,
+      "order": 2,
+      "position": "column_1",
+      "type": "list",
+      "character_attributes": [
+        { "name": "Bússola" },
+        { "name": "Corda" },
+        { "name": "Tacape mágico" },
+        { "name": "Unicórnio" }
+      ]
+    },
+    {
+      "name": "História",
+      "page": 2,
+      "order": 1,
+      "position": "column_1",
+      "type": "rich_text",
+      "source_type": "open",
+      "instructions": "",
+      "character_attributes": [
+        {
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur metus quis cursus semper. Morbi ac pharetra lorem. Phasellus non congue dolor. Mauris molestie malesuada porta. Cras in tempor ex, sed interdum nisi. Morbi ultrices sed diam ut porttitor. Integer et tortor erat. Nam malesuada pharetra odio sed pharetra. Morbi ullamcorper nibh mi, egestas ullamcorper ipsum cursus vitae. Phasellus blandit dolor nec quam aliquam, vel fermentum massa dignissim. Duis ut justo eu diam euismod fringilla. Proin iaculis lectus at dolor placerat blandit. Phasellus bibendum faucibus posuere. Fusce et justo vel erat mollis tempor nec in quam. Aenean non tristique orci. Suspendisse imperdiet volutpat magna, sit amet euismod est blandit a. Mauris eu velit id nibh faucibus lobortis ut ac dolor. Duis faucibus nulla metus, in lacinia felis molestie semper. Nullam ac aliquet turpis, a lacinia nulla. Suspendisse id leo a dolor consequat congue. Aliquam in orci augue. Praesent ac fringilla lectus. Ut finibus lacus ut risus tempor, sed auctor risus auctor. Phasellus iaculis metus a ligula cursus porta. Donec dignissim commodo posuere. Ut aliquam dui id nisi fringilla, ut malesuada felis ultricies. Duis sed rhoncus libero, non euismod urna. Vivamus fermentum fringilla velit id finibus. Donec et urna convallis, commodo ligula porta, euismod est. Integer a sem pulvinar, sagittis nunc ac, facilisis massa. Vivamus mi odio, iaculis eget cursus eget, posuere eget nisl. In imperdiet tempor tellus id egestas. Quisque venenatis nunc quis erat volutpat, sit amet egestas eros feugiat. Nam ante dolor, porttitor nec ante et, maximus ullamcorper tellus. Vivamus scelerisque hendrerit mi ac placerat. Proin at metus augue. Proin tristique maximus lacus, non molestie odio pretium at. Morbi nisl risus, vehicula quis arcu tincidunt, dapibus ornare justo. Nullam commodo ex sit amet leo pulvinar, in hendrerit elit auctor. Duis placerat odio quis ullamcorper vulputate. Donec sollicitudin interdum augue egestas laoreet. Morbi vel nulla ipsum. Nullam euismod pretium est, vehicula vestibulum metus. Quisque eleifend sem lacus, fringilla lacinia mauris dictum ac. Curabitur imperdiet magna ligula, ut porttitor diam ullamcorper et."
+        }
+      ]
+    },
+    {
+      "name": "Vida",
+      "page": 1,
+      "order": 1,
+      "position": "column_2",
+      "points": 78,
+      "total": 100,
+      "images": [
+        { "type": "danger", "name": "danger.gif" },
+        { "type": "low", "name": "caution_red.gif" },
+        { "type": "ok", "name": "caution.gif" },
+        { "type": "safe", "name": "fine.gif" }
+      ]
+    },
+    {
+      "name": "Mana",
+      "page": 1,
+      "order": 2,
+      "position": "column_2",
+      "points": 8,
+      "total": 100,
+      "images": [
+        { "type": "danger", "name": "danger.gif" },
+        { "type": "low", "name": "caution_red.gif" },
+        { "type": "ok", "name": "caution.gif" },
+        { "type": "safe", "name": "fine.gif" }
+      ]
+    }
+  ]
+}

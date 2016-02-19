@@ -1,0 +1,20 @@
+<tr data-attribute-name="<%= attribute.name %>" data-editable-attribute-type="text">
+  <td>
+    <%#= FIXME: this link is repeated many times, and the smart-description too %>
+    <%= link_to attribute.name, 'javascript:;', class: attribute.description.present? ? 'smart-description' : '' %>
+  </td>
+
+  <td class="text-right">
+    <%=
+      editable_link({
+        type: 'text',
+        value: attribute.content,
+        text: attribute.content,
+        prefix: attribute.prefix,
+        master_only: attribute.master_only
+      })
+    %>
+  </td>
+
+  <%= render 'game/sheet/tooltip', attribute: attribute %>
+</tr>

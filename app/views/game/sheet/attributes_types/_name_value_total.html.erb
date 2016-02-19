@@ -1,0 +1,42 @@
+<%
+  data = {
+    'name': attribute.name,
+    'points': attribute.points,
+    'value': attribute.value
+  }
+%>
+
+<%= content_tag :tr, data: data do %>
+  <td>
+    <%= link_to 'javascript:;', class: attribute.description.present? ? 'smart-description' : '' do %>
+      <%= attribute.name %>
+      <%= render 'game/sheet/modified_attribute_mark', attribute: attribute %>
+    <% end %>
+  </td>
+  <td class="text-right">
+    <%=
+      editable_link({
+        type: 'spinner',
+        value: attribute.points,
+        text: attribute.points,
+        prefix: attribute.prefix,
+        master_only: attribute.master_only
+      })
+    %>
+
+    <% if attribute.total.to_i > 0 %>
+      /
+      <%=
+        editable_link({
+          type: 'spinner',
+          value: attribute.total,
+          text: attribute.total,
+          formula: attribute.formula,
+          master_only: attribute.master_only
+        })
+      %>
+    <% end %>
+  </td>
+
+  <%= render 'game/sheet/tooltip', attribute: attribute %>
+<% end %>

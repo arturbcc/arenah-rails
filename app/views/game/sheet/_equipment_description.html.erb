@@ -1,0 +1,51 @@
+<div class="qtip-titlebar"><%= equipment.name %></div>
+<div class="qtip-content">
+  <div>
+    <%= equipment_image(game.name, equipment.image) %>
+  </div>
+  <div>
+    <p>
+      <%= raw(equipment.description) %>
+    </p>
+  </div>
+  <div class="clear"></div>
+  <hr />
+  <div class="extra-attributes">
+    <div class="pull-left equipment-attributes">
+      <p>
+        <strong>Atributos: </strong>
+        <ul>
+          <% equipment.modifiers.each do |modifier| %>
+            <% modifier_class = modifier.signal == '+' || modifier.signal == '*' ? 'green' : 'red' %>
+            <li class="<%= modifier_class %>">
+              <%= modifier.to_s %>
+            </li>
+          <% end %>
+
+          <% if equipment.initiative != 0 %>
+            <li>Iniciativa: <%= equipment.initiative %></li>
+          <% end %>
+
+          <% if equipment.damage.present? %>
+            <li>Dano: <%= equipment.damage %></li>
+          <% end %>
+
+          <% if equipment.ip.to_i > 0 %>
+            <li>Proteção: <%= equipment.ip %></li>
+          <% end %>
+        </ul>
+      </p>
+    </div>
+    <div class="pull-right">
+      <p>
+        <strong>Equipável em: </strong>
+        <br />
+        <ul>
+          <% equipment.slots.each do |slot| %>
+            <li><%= slot_name(slot.position) %></li>
+          <% end %>
+        </ul>
+      </p>
+    </div>
+  </div>
+</div>

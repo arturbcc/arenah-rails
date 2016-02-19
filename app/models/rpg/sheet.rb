@@ -28,6 +28,13 @@ module RPG
       attributes_groups.detect { |group| group.name == name }
     end
 
+    def find_character_attribute(group_name, attribute_name)
+      group = find_attributes_group(group_name)
+      return nil unless group
+
+      group.character_attributes.detect {|attr| attr.name == attribute_name }
+    end
+
     # Public: this method will link all attributes' groups and build the
     # character sheet relationships, parsing the formulas to calculate points
     # and binding attributes that are based in others.
@@ -36,11 +43,11 @@ module RPG
 
       self.calculator = ::RPG::Calculator.new
 
-      # calculate_attributes_modifiers
+      # calculate_attributes_modifiers => equipments?
       save_attributes_as_variables
       calculate_group_points
       #fetch_table_data
-      #calculate_based_attributes
+      calculate_based_attributes
 
       # TODO: I need to remember to never modify the points of any attribute. Save
       # in separated fields and use the method `value` to sum them up
@@ -51,6 +58,10 @@ module RPG
 
     def nested_attributes
       %w(pages attributes_groups)
+    end
+
+    def attributes_groups_by_type(type:)
+      attributes_groups.select {|group| group.type == type}
     end
 
     def save_attributes_as_variables
@@ -73,6 +84,21 @@ module RPG
         if group.group_points_formula.present?
           character_group = self.find_attributes_group(group.name)
           character_group.points = self.calculator.evaluate(group.group_points_formula)
+        end
+      end
+    end
+
+    # Private: Looks for attributes based in other attributes and saves a
+    # reference to their base attributes.
+    def calculate_based_attributes
+      attributes_groups_by_type(type: 'based').each do |group|
+        next unless group.character_attributes
+
+        group.character_attributes.each do |attribute|
+          attribute.base_attribute = find_character_attribute(
+            attribute.base_attribute_group,
+            attribute.base_attribute_name
+          )
         end
       end
     end

@@ -1,0 +1,22 @@
+<%
+  data = {
+    'group-name': group.name,
+    'source-type': group.source_type,
+    'type': group.type
+  }
+%>
+<%= content_tag :div, class: 'attributes-group', data: data do %>
+  <%= render 'game/sheet/attributes_groups/group_title', group: group %>
+
+  <table class="table table-condensed" data-accept-edit-mode>
+    <tbody>
+      <% group.character_attributes.each do |attribute| %>
+        <%= render 'game/sheet/attributes_types/text', attribute: attribute %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% if group.source_type == 'list' || group.source_type == 'open' %>
+    <%= render 'game/sheet/attributes_groups/edit_panel', group: group %>
+  <% end %>
+<% end %>

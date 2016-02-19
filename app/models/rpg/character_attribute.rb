@@ -5,10 +5,10 @@ module RPG
     attr_accessor :name, :order, :type, :master_only, :description,
       :formula, :action, :base_attribute_group, :base_attribute_name,
       :abbreviation, :table_name, :cost, :prefix, :content, :points,
-      :total
+      :total, :images
 
     # Attributes that are not stored in the database
-    attr_accessor :equipment_modifier
+    attr_accessor :equipment_modifier, :base_attribute
 
     # Public: returns the final value of the attribute
     #
@@ -18,7 +18,25 @@ module RPG
     # Returns: points, if points are present. Content, converted to float,
     # otherwise
     def value
-      points || content.to_f
+      if cost
+        cost
+      elsif points
+        base_points = base_attribute.present? ? base_attribute.points : 0
+        points + base_points
+        # TODO: sum the modifiers here as well
+      else
+        content.to_i
+      end
+    end
+
+    def to_s
+      "#{points} / #{total}"
+    end
+
+    private
+
+    def nested_attributes
+      %w(images)
     end
   end
 end

@@ -1,7 +1,6 @@
-<%#= TODO: complete this partial  %>
 <%
   data = {
-    'attribute-name': attribute.name,
+    'name': attribute.name,
     'points': attribute.points,
     'value': attribute.value
   }
@@ -11,17 +10,23 @@
   <td>
     <%= link_to 'javascript:;', class: attribute.description.present? ? 'smart-description' : ''  do %>
       <%= attribute.name %>
-      <%= render 'modified_attribute_mark', attribute: attribute %>
+      <%= render 'game/sheet/modified_attribute_mark', attribute: attribute %>
     <% end %>
   </td>
 
-  <td class="text-right">
+  <td class="text-right attribute circle">
+    <div class="pull-right">
+      <% (0..attribute.total).each do |i| %>
+        <div class='<%= i < attribute.points ? 'full' : 'empty' %>'></div>
+      <% end %>
+    </div>
+
     <%=
       editable_link({
-        type: 'spinner',
+        type: 'bullet',
         value: attribute.points,
         text: attribute.value.to_s,
-        prefix: attribute.prefix,
+        class: 'bullet-hidden',
         formula: attribute.formula,
         master_only: attribute.master_only
       })
@@ -29,4 +34,4 @@
   </td>
 
   <%= render 'game/sheet/tooltip', attribute: attribute %>
-<% end %>
+</tr>

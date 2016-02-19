@@ -1,10 +1,10 @@
 <%
   data = {
-    "group-name": group.name,
-    "points": group.points,
-    "used-points": group.used_points,
-    "source-type": group.source_type,
-    "type": group.type
+    'group-name': group.name,
+    'points': group.points,
+    'used-points': group.used_points,
+    'source-type': group.source_type,
+    'type': group.type
   }
 %>
 
@@ -19,9 +19,7 @@
     </tbody>
   </table>
 
-  <!-- %
-    if (Model.SourceType == Source.SourceType.List) {
-      Html.RenderPartial("Sheet/AttributesGroups/EditAttributesGroup");
-    end
-  % -->
+  <% if group.source_type == 'list' %>
+    <%= render 'game/sheet/attributes_groups/edit_panel', group: group %>
+  <% end %>
 <% end %>

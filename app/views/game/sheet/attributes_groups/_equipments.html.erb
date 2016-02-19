@@ -1,0 +1,19 @@
+<%
+  data = {
+    'group-name': group.name,
+    'source-type': group.source_type,
+    'type': group.type
+  }
+%>
+
+<%= content_tag :div, class: 'attributes-group', data: data do %>
+  <%= render 'game/sheet/attributes_groups/group_title', group: group %>
+
+  <table class="table table-condensed name-value-attributes">
+    <tbody>
+      <% group.equipments.each do |equipment| %>
+        <%= render 'game/sheet/attributes_types/equipment', equipment: equipment %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

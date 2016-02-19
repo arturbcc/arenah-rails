@@ -1,0 +1,41 @@
+<div class="hidden editable-list-group type-<%= group.source_type %>" data-group-name="<%= group.name %>">
+  <% if group.source_type == 'list' %>
+    <select>
+      <option value="0">Selecione...</option>
+    </select>
+  <% elsif group.source_type == 'open' %>
+    <input type="text" class="editable-list-input" />
+  <% end %>
+
+  <button type="button" class="btn btn-success btn-xs add-editable-list-item">Adicionar</button>
+
+  <div class="editable-current-item-description"></div>
+
+  <div class="editable-list-items">
+    <table class="table table-condensed name-value-attributes">
+      <tbody>
+        <% group.character_attributes.each do |attribute| %>
+          <% if ['name_value', 'text', 'base'].include?(group.type) %>
+            <%= render "game/sheet/attributes_types/#{group.type}", attribute: attribute %>
+          <% end %>
+        <% end %>
+
+        <tr class="template hidden" data-attribute-name="" data-points="">
+          <td>
+            <a href="javascript:void(0)" class="smart-description"></a>
+          </td>
+
+          <% if group.source_type == 'list' && ['name_value', 'based'].include?(group.type) %>
+              <td class="text-right"></td>
+          <% end %>
+
+          <td class="hidden">
+            <div class="qtip-titlebar"></div>
+            <div class="qtip-content"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="editable-drop-item-area"><i class="fa fa-ban"></i> Arraste aqui para remover</div>
+  </div>
+</div>

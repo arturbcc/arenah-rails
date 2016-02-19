@@ -1,0 +1,13 @@
+<tr data-attribute-name="<%= equipment.name %>">
+  <td>
+    <%= link_to equipment.name, 'javascript:;', class: equipment.description.present? ? 'smart-description' : '' %>
+  </td>
+
+  <td class="text-right equipped-item">
+    <%= 'Equipado' if equipment.equipped_on.present? %>
+  </td>
+
+  <td class="hidden">
+    <%= render 'game/sheet/equipment_description', game: @game, equipment: equipment %>
+  </td>
+</tr>

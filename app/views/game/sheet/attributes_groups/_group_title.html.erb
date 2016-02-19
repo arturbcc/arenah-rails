@@ -44,14 +44,15 @@
 
   <% if show_edit_button %>
     <span class="manage-group-container">
-      <%#= Html.RenderPartial("Sheet/AttributesGroups/AttributesGroupEditPanel"); %>
+      <%= render 'game/sheet/attributes_groups/edit_buttons' %>
     </span>
   <% end %>
 
   <% unless group.instructions.blank? %>
     <table class="attributes-group-instructions-content">
       <tr>
-        <%#= Html.RenderPartial("Sheet/AttributesGroups/Attribute/Tooltip", new CharacterAttribute() { Source = new Source() { Name = Model.Name, Description = Model.Instructions } }); %>
+        <%#= FIXME: The tooltip partial should receive name and description, this fix below must be removed %>
+        <%= render 'tooltip', attribute: RPG::CharacterAttribute.new(name: group.name, description: group.instructions) %>
      </tr>
     </table>
   <% end %>

@@ -1,0 +1,25 @@
+<%#= TODO: create a helper that receives a attribute and returns this data hash %>
+<%
+  data = {
+    'source-type': group.source_type,
+    'type': group.type,
+    'editable-only-on-free-mode': true
+  }
+%>
+
+<%= content_tag :div, class: 'attributes-group rich-text-attribute', data: data do %>
+  <%= render 'game/sheet/attributes_groups/group_title', group: group %>
+
+  <% group.character_attributes.each do |attribute| %>
+    <div>
+      <%= link_to 'javascript:;', class: 'ckeditor-attribute',
+        data: { type: attribute.type, name: attribute.name, 'editable-attribute': 'ckeditor' } do %>
+        <%= raw(attribute.content) %>
+      <% end %>
+
+      <textarea class="hidden"><%= attribute.content %></textarea>
+    </div>
+  <% end %>
+<% end %>
+
+<script src="//cdn.ckeditor.com/4.4.3/full/ckeditor.js"></script>

@@ -1,0 +1,11 @@
+<div class="attributes-group" data-source-type="<%= group.source_type %>">
+  <%= render 'game/sheet/attributes_groups/group_title', group: group %>
+
+  <table class="table table-condensed">
+    <tbody>
+      <% group.character_attributes.each do |attribute| %>
+        <%= render 'game/sheet/attributes_types/table', attribute: attribute %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

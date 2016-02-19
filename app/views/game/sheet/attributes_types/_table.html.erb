@@ -1,0 +1,11 @@
+<tr data-attribute-name="<%= attribute.name %>">
+  <td>
+    <%= link_to attribute.name, 'javascript:;', class: attribute.description.present? ? 'smart-description' : '' %>
+  </td>
+
+  <td class="text-right">
+    <%= attribute.value %> <%#= attribute.suffix %>
+  </td>
+
+  <%= render 'game/sheet/tooltip', attribute: attribute %>
+</tr>
