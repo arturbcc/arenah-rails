@@ -21,7 +21,7 @@ module RPG
       if cost
         cost
       elsif points
-        base_points = base_attribute.present? ? base_attribute.points : 0
+        base_points = base_attribute.present? ? base_attribute.value : 0
         points + base_points
         # TODO: sum the modifiers here as well
       else
@@ -30,7 +30,7 @@ module RPG
     end
 
     def to_s
-      "#{points} / #{total}"
+      "#{points} / #{value}"
     end
 
     private

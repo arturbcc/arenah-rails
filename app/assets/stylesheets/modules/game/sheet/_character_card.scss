@@ -1,0 +1,49 @@
+#sheet {
+  .character-card-group {
+    padding-bottom: 25px;
+    margin: 10px 0 !important;
+    line-height: 15px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+
+  .character-card-group td {
+    border-bottom: none;
+  }
+
+  .card-title-alignment {
+    h2 {
+      text-align: left !important;
+    }
+  }
+
+  .col-xs-4 {
+    height: 40px;
+  }
+
+  .key {
+    font-weight: bold;
+  }
+
+  .key-value-table {
+    border-collapse: separate;
+    border-spacing: 10px;
+
+    input {
+      padding: 0;
+      padding-left: 5px;
+      width: 125px !important;
+      height: 24px;
+      text-align: left;
+    }
+  }
+
+  .value {
+    margin-top: -1px;
+    margin-left: 2px;
+  }
+
+  tr {
+    height: 30px;
+  }
+}

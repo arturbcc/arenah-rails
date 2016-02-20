@@ -9,6 +9,10 @@
       display: block;
       margin-bottom: 15px;
       text-align: center;
+
+      &.with_gutter {
+        margin-bottom: 30px;
+      }
     }
 
     td {
@@ -19,13 +23,6 @@
     tr {
       cursor: pointer;
     }
-  }
-
-  .character-card-group {
-    margin: 10px 0 !important;
-    line-height: 15px;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
   }
 
   .col-sm-4 {
@@ -54,27 +51,6 @@
     min-width: 952px;
     margin-bottom: 5px;
     border: 5px double #000;
-  }
-
-  .key-value-table {
-    border-collapse: separate;
-    border-spacing: 10px;
-  }
-
-  .rich-text-attribute {
-    padding: 5px;
-    text-align: justify;
-
-    h2 {
-      margin-top: 0;
-    }
-  }
-
-  .value {
-    margin-top: -1px;
-    margin-left: 2px;
-    font-weight: bold;
-    font-family: Cursive;
   }
 
   a {

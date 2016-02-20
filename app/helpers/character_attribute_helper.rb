@@ -41,7 +41,7 @@ module CharacterAttributeHelper
       text
     end
 
-    content_tag :div do
+    content_tag :span do
       concat(prefix) if prefix.present?
       concat(value)
     end

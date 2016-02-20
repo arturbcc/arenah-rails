@@ -23,10 +23,12 @@
   #   return this.FlatVersion && this.SourceType != Source.SourceType.Table;
   # }
   show_edit_button = true
+
+  show_points = group.used_points != 0 || group.total_points != 0
 %>
 
 <% if show_title %>
-  <h2>
+  <h2 <%= 'class=with_gutter' unless show_points %>>
     <% if group.instructions.present? %>
       <%= link_to 'javascript:;', class: 'attributes-group-instructions' do %>
         <%= icon('info-circle') %>
@@ -35,10 +37,12 @@
 
     <%= group.name %>
 
-    <% if show_points_counter %>
+    <% if show_points_counter && show_points %>
       <span class="group-points">
         (<span class="<%= class_for_points_counter(group) %> points-counter"><%= group.used_points %></span> / <%= group.total_points %>)
       </span>
+    <% else %>
+      <br />
     <% end %>
   </h2>
 

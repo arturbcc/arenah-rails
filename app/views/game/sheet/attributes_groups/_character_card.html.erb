@@ -17,7 +17,7 @@
           <%= content_tag :tr, data: { 'atribute-name': attribute.name } do %>
             <td class="key">
               <%=
-                link_to attribute.name,
+                link_to "#{attribute.name}:",
                   'javascript:;',
                   class: attribute.description.present? ? 'smart-description' : ''
               %>

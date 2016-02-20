@@ -1,0 +1,19 @@
+#sheet {
+  .rich-text-attribute {
+    padding: 5px;
+    text-align: justify;
+
+    .editable-pre-wrapped {
+      white-space: inherit;
+    }
+
+    .ckeditor-attribute {
+      display: block;
+      margin-top: 10px;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+  }
+}

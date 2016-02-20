@@ -39,13 +39,13 @@
 @import 'modules/game/posts/recipients';
 @import 'modules/game/posts/saga';
 
-@import 'modules/game/sheet/edit_attributes_group';
-@import 'modules/game/sheet/edit_based_attribute';
-@import 'modules/game/sheet/edit_bullets';
-@import 'modules/game/sheet/edit_card_group';
-@import 'modules/game/sheet/edit_group_of_type_list';
-@import 'modules/game/sheet/edit_mixed_attribute_group';
-@import 'modules/game/sheet/edit_rich_text';
+@import 'modules/game/sheet/attributes_group';
+@import 'modules/game/sheet/based';
+@import 'modules/game/sheet/bullets';
+@import 'modules/game/sheet/character_card';
+@import 'modules/game/sheet/group_of_type_list';
+@import 'modules/game/sheet/mixed';
+@import 'modules/game/sheet/rich_text';
 @import 'modules/game/sheet/instructions';
 @import 'modules/game/sheet/sheet';
 @import 'modules/game/sheet/tooltips';
