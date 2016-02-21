@@ -1,12 +1,17 @@
-var ModalReuse = function() {
-  this._bindEvents();
-};
+define('modal-reuse', [], function() {
+  function ModalReuse() {
+    this._bindEvents();
+  };
 
-var fn = ModalReuse.prototype;
+  var fn = ModalReuse.prototype;
 
-fn._bindEvents = function() {
-  //Reusing Bootstrap 3 modal to as many links as possible
-  $('body').on('hidden.bs.modal', '.modal', function () {
-    $(this).removeData('bs.modal');
-  });
-};
+  fn._bindEvents = function() {
+    $('body').on('hidden.bs.modal', '.modal', $.proxy(this._allowModalReuse, this));
+  };
+
+  fn._allowModalReuse = function(e) {
+    $(event.target).removeData('bs.modal');
+  };
+
+  return ModalReuse;
+});

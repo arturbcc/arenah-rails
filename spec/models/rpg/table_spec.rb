@@ -29,7 +29,7 @@ describe RPG::Table do
   it 'serializes the table `Velocidade`' do
     table = @system.tables[3]
     expect(table.name).to eq('Velocidade')
-    expect(table.unit).to eq('m/s2')
+    expect(table.unit).to eq('m/s')
     expect(table.table_items.count).to eq(61)
   end
 end

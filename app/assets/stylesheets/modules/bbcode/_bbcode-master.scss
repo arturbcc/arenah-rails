@@ -1,0 +1,29 @@
+// ============================================================================
+// BBCode Master
+//
+// A block of text that will be displayed only to the game master.
+//
+// <div class="bbcode-master">
+//   <i class="fa fa-comments fa-2x"></i>
+//   A text for the game master's eyes only
+// </div>
+//
+// ============================================================================
+.bbcode-master {
+  display: none;
+  bottom: 10px;
+  padding: 10px;
+  width: 745px;
+  color: #103910;
+  background-color: #E2EBF4;
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+
+  .fa-comments {
+    margin-right: 5px;
+  }
+}
+
+[data-reader-role=game_master] .bbcode-master {
+  display: block;
+}

@@ -1,12 +1,17 @@
-var ModalResize = function() {
-  this._bindEvents();
-};
+define('modal-resize', [], function() {
+  function ModalResize() {
+    this._bindEvents();
+  };
 
-var fn = ModalResize.prototype;
+  var fn = ModalResize.prototype;
 
-fn._bindEvents = function() {
-  //Setting the width of the modal with a data-attribute
-  $("[data-toggle=modal]").click(function () {
-    $('.modal-dialog').css("width", $(this).attr("data-width"));
-  });
-};
+  fn._bindEvents = function() {
+    $('[data-toggle=modal]').on('click', $.proxy(this._resizeModal, this));
+  };
+
+  fn._resizeModal = function(e) {
+    $('.modal-dialog').css('width', $(event.target).attr('data-width'));
+  };
+
+  return ModalResize;
+});

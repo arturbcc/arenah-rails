@@ -1,0 +1,26 @@
+// ============================================================================
+// BBCode Spoiler
+//
+// A hidden block with a trigger to diplay it's content. The trigger uses to be
+// a link, although it can be virtually anything.
+//
+// This component uses to encapsulate others as its hidden block, like dice
+// rolls, for example.
+//
+// <span class="bbcode-spoiler">
+//   <a href="javascript:;" class="bbcode-spoiler__trigger">
+//     <i class="fa fa-plus-square"></i> Rolagens
+//   </a>
+//   <span class="bbcode-spoiler__hidden-text">
+//     Here comes a hidden text
+//   </span>
+// </span>
+//
+// ============================================================================
+.bbcode-spoiler__trigger {
+  color: $dark-red;
+}
+
+.bbcode-spoiler__hidden-text {
+  display: none;
+}

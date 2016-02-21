@@ -1,0 +1,30 @@
+{
+  "name": "page",
+  "main": "dist/page.js",
+  "version": "0.4.0",
+  "homepage": "https://github.com/lucasmazza/page.js",
+  "authors": [
+    "Lucas Mazza <lucastmazza@gmail.com>"
+  ],
+  "description": "Running your javascript code, one page at a time.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "example",
+    "karma.conf.js",
+    "package.json",
+    "script",
+    "src",
+    "test",
+    "webpack.config.js"
+  ],
+  "_release": "0.4.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.4.0",
+    "commit": "0bc88c7b6dc1a56264e1a02c014ca8343741756b"
+  },
+  "_source": "git://github.com/lucasmazza/page.js.git",
+  "_target": "~0.4.0",
+  "_originalSource": "lucasmazza/page.js"
+}

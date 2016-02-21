@@ -1,18 +1,26 @@
-page.at('posts#index', function() {
+page.at('game/posts#index', function() {
+  var OnlineUsers = require('online-users'),
+      PlayersList = require('players-list'),
+      Tooltip = require('tooltip'),
+      Post = require('post');
+
+  new OnlineUsers('[online-users]');
+  new PlayersList({ container: '#sidePanel' });
+  new Tooltip('[data-tooltip]');
+
   var topic = $("#topic-slug").val();
   new Post(topic);
-
-  new OnlineUsers();
-  new Tooltip();
-  new PlayersList();
 });
 
-page.at('posts#new posts#edit', function() {
-  var recipients = new Recipients('#recipients');
-  var characters = new Characters();
-  var composePost = new ComposePost(recipients, characters);
+page.at('game/posts#new game/posts#edit', function() {
+  var Characters = require('characters'),
+      Recipients = require('recipients'),
+      ComposePost = require('compose-post'),
+      Editor = require('editor');
 
-  composePost.autoComplete(627);
+  var recipients = new Recipients('#recipients'),
+      characters = new Characters(),
+      composePost = new ComposePost(recipients, characters);
 
   new Editor();
 });

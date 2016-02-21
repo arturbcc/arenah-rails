@@ -1,32 +1,42 @@
-var Recipients = function(container) {
-  $.proxyAll(this, 'parseIds', 'onSelect');
+define('recipients', [], function() {
+  function Recipients(container) {
+    this.container = $(container);
 
-  this.container = $(container);
-  this.ids = this.parseIds($('[data-recipients]').data('recipients').split(', '));
-};
+    var recipients = $('[data-recipients]').data('recipients');
+    if (recipients == '') {
+      this.ids = []
+    } else {
+      this.ids = this._parseIds($('[data-recipients]').data('recipients').split(', '));
+    }
 
-var fn = Recipients.prototype;
+    $.proxyAll(this, 'parseIds', 'onSelect');
+  };
 
-fn.parseIds = function(ids) {
-  if (!ids || ids.length == 0) {
-    return [];
-  }
+  var fn = Recipients.prototype;
 
-  var list = [];
-  $.each(ids, function(index, id) {
-    list.push(parseInt(id));
-  });
+  fn.onSelect = function(callback) {
+    //this.container.select2('val', this.ids);
+    this.container.val(this.ids).trigger('change');
 
-  return list;
-}
+    if (typeof(callback) === 'function') {
+      $.each(this.ids, function(index, id) {
+        callback.call(id);
+      });
+    }
+  };
 
-fn.onSelect = function(callback) {
-  //this.container.select2('val', this.ids);
-  this.container.val(this.ids).trigger('change');
+  fn._parseIds = function(ids) {
+    if (!ids || ids.length == 0) {
+      return [];
+    }
 
-  if (typeof callback === 'function') {
-    $.each(this.ids, function(index, id) {
-      callback.call(id);
+    var list = [];
+    $.each(ids, function(index, id) {
+      list.push(parseInt(id));
     });
-  }
-};
+
+    return list;
+  };
+
+  return Recipients;
+});

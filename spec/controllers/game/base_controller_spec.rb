@@ -23,8 +23,15 @@ describe Game::BaseController, type: :controller do
 
     it 'detects a player' do
       allow(controller).to receive(:current_game) { game }
+      create(:character, user: user, game: game)
       controller.send(:set_identity)
       expect(controller.identity).to be_player
+    end
+
+    it 'detects a visitor' do
+      allow(controller).to receive(:current_game) { game }
+      controller.send(:set_identity)
+      expect(controller.identity).to be_visitor
     end
   end
 

@@ -13,10 +13,13 @@
 //= require jquery/dist/jquery.min
 //= require jquery_ujs
 //= require bootstrap/dist/js/bootstrap.min
-//= require modules/ga_event_tracker
 //= require_tree ../../../vendor/assets/javascripts/admin/
+
+//= require page
+//= require almond
+
+//= require modules/ga-event-tracker
 
 $(document).on('ready page:load', function() {
   page.dispatch();
-  new BBCode();
 });

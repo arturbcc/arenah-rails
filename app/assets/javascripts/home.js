@@ -2,9 +2,14 @@
 //= require bootstrap/dist/js/bootstrap.min
 //= require jquery_ujs
 //= require_tree ../../../vendor/assets/javascripts/
+
+//= require page
+//= require almond
+
+//= require modules/on-scroll-watcher
 //= require modules/home
 //= require modules/noty_message
-//= require modules/ga_event_tracker
+//= require modules/ga-event-tracker
 //= require modules/profile/edit
 
 //= require_tree ./pages

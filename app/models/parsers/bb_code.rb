@@ -44,7 +44,7 @@ class Parsers::BBCode
           { token: :height,  prefix: 'height="', postfix: '" ', optional: true } ],
         quick_param_format_description: 'The image parameters \'%param%\' are incorrect, \'<width>x<height>\' excepted'},
       quote: {
-        html_open: '<blockquote>', html_close: '</blockquote>',
+        html_open: '<blockquote class="quotation">', html_close: '</blockquote>',
         description: 'Quote another person',
         example: '[quote]BBCode is great[/quote]'},
       color: {
@@ -83,7 +83,7 @@ class Parsers::BBCode
         description: 'Css clear',
         example: '[clear][/clear].'},
       spoiler: {
-        html_open: '<span class="bbcode-spoiler"><a href="javascript:;"><i class="fa fa-plus-square"></i> %spoiler%</a><span>', html_close: '</span></span>',
+        html_open: '<span class="bbcode-spoiler"><a href="javascript:;" class="bbcode-spoiler__trigger"><i class="fa fa-plus-square"></i> %spoiler%</a><span class="bbcode-spoiler__hidden-text">', html_close: '</span></span>',
         description: 'Show a hidden spoiler',
         example: '[spoiler=Title]He dies in the end[/spoiler].',
         allow_quick_param: true,

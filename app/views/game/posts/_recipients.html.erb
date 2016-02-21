@@ -2,7 +2,7 @@
   <div class="recipients-line alert alert-warning">
     <span>Escolha para quem é a postagem</span>
     <div class="clear"></div>
-    <input id="recipients" name="recipients" type="text" />
+    <input id="recipients" name="recipients" type="text" value="<%= @post.present? ? @recipients : '' %>" />
   </div>
 <% elsif @post.present? %>
   <input name="recipients" type="hidden" value="<%= @recipients %>" />

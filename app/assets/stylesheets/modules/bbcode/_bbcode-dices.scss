@@ -1,0 +1,45 @@
+// ============================================================================
+// BBCode Dices
+//
+// Display a list of dice rolls. It allows a title on the top, decorated around
+// <kbd> tags, and the list of rolls are separated with <br> tags, as shown
+// below:
+//
+// <div class="bbcode-full-width">
+//   <div class="bbcode-dices">
+//     <kbd>Title</kbd>
+//     <hr/>
+//     1D6 + 1D10 = 8 <br>
+//     1D4 = 2
+//   </div>
+// </div>
+//
+// ============================================================================
+.bbcode-dices {
+  float: left;
+  display: inline-table;
+  padding: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cEc9c9;
+  border-radius: 5px;
+
+  hr {
+    margin-top: 5px;
+    margin-bottom: 0;
+    border-top: 1px solid #b3aeae;
+  }
+
+  br:first {
+    display: none;
+  }
+
+  kbd {
+    background-color: $dark-red;
+  }
+}
+
+.bbcode-full-width {
+  display: inline-table;
+  width: 100%;
+}

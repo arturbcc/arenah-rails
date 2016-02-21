@@ -1,0 +1,36 @@
+// ============================================================================
+// BBCode quotation
+//
+// Quote the text of other posts
+//
+// <blackquote class="quotation">
+//   Here comes the text I am quoting
+// </div>
+//
+// ============================================================================
+
+blockquote.quotation {
+  position:relative;
+  padding: 0 2em 0 2.5em;
+  margin: 1.5em 0 1.5em;
+
+  &:before {
+    content: "\201C";
+    position: absolute;
+    left:5px;
+    top: 0.3em;
+    line-height: 0.1em;
+    font-size: 5em;
+    color: #ccc;
+  }
+
+  &:after {
+    content: "\201D";
+    position:absolute;
+    right:3px;
+    bottom: 0em;
+    line-height: 0.1em;
+    font-size: 5em;
+    color: #ccc;
+  }
+}

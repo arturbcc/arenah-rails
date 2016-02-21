@@ -60,11 +60,14 @@
 <%= content_for :javascripts do %>
   <%= render 'shared/flash_message' %>
 
+  var Topics = require('topics'),
+      topics = new Topics('.game-topics');
+
   <% unless @identity.unlogged? %>
-    Topics.unreadPostsCheck();
+    topics.unreadPostsCheck();
 
     <% if @identity.game_master? %>
-      Topics.initializeAdminTools();
+      topics.initializeAdminTools();
     <% end %>
   <% end %>
 <% end %>

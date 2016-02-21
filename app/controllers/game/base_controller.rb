@@ -30,11 +30,10 @@ class Game::BaseController < ApplicationController
 
     if user_signed_in?
       if current_game.present?
-        masters = current_user.characters.where(game_id: current_game.id, character_type: 2)
-        if masters.present?
+        if master?
           role = :game_master
         else
-          role = :player
+          role = player? ? :player : :visitor
         end
       else
         role = :visitor
@@ -42,5 +41,17 @@ class Game::BaseController < ApplicationController
     end
 
     @identity = Identity.new(role)
+  end
+
+  def master?
+    current_user.characters.where(
+      game_id: current_game.id,
+      character_type: 2).present?
+  end
+
+  def player?
+    player = current_user.characters.where(
+      game_id: current_game.id,
+      character_type: 0).present?
   end
 end

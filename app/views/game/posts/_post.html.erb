@@ -1,12 +1,6 @@
 <% ability = Ability.new(@identity, post, character) %>
 
-<% if @identity.game_master? %>
-  <style>
-    .bbcode-master { display: block ! important; }
-  </style>
-<% end %>
-
-<section class="post <%= klass %>" data-post>
+<section class="post <%= klass %>" data-post data-reader-role='<%= @identity.role %>'>
   <%= render 'author', author: post.character %>
 
   <section class="message">

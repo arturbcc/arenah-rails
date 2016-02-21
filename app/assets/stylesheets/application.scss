@@ -11,8 +11,13 @@
 @import 'select2';
 @import 'mixins';
 
+@import 'modules/bbcode/bbcode-dice';
+@import 'modules/bbcode/bbcode-dices';
+@import 'modules/bbcode/bbcode-master';
+@import 'modules/bbcode/bbcode-quotation';
+@import 'modules/bbcode/bbcode-spoiler';
+
 @import 'modules/archive';
-@import 'modules/bbcode';
 @import 'modules/breadcrumb';
 @import 'modules/footer';
 @import 'modules/general';

@@ -1,39 +1,56 @@
-var Home = function Home() {
-  this.headerThreshold = 50;
-  this.scrollAnimationTime = 1500;
+define('home', [], function() {
+  var onScrollWatcher = require('on-scroll-watcher');
 
-  this.animateHeader(this.headerThreshold);
-  this.configurePageScroll(this.scrollAnimationTime);
-};
+  function Home(options) {
+    options = options || {};
 
-var fn = Home.prototype;
+    this.threshold = options.threshold || 50;
+    this.scrollAnimationTime = options.scrollAnimationTime || 1500;
 
-// Animate log when the user scrolls down
-fn.animateHeader = function(threshold) {
-  $(window).scroll(function () {
-    if ($('.navbar').offset().top > threshold) {
-      $('.gold').removeClass('gold');
-      $('.navbar-fixed-top').addClass('top-nav-collapse');
+    this._bindEvents();
+  };
+
+  var fn = Home.prototype;
+
+  fn._bindEvents = function() {
+    $.proxyAll(this,
+      '_animateHeader',
+      '_scrollToSection');
+
+    new onScrollWatcher(this._animateHeader);
+
+    $('.page-scroll a').on('click', this._scrollToSection);
+  };
+
+  fn._animateHeader = function() {
+    var klass = 'top-nav-collapse',
+        top = $('.navbar').offset().top,
+        element = $('.navbar-fixed-top');
+
+    if (top > this.threshold) {
+      this._removeGold();
+      element.addClass(klass);
     } else {
-      $('.navbar-fixed-top').removeClass('top-nav-collapse');
+      element.removeClass(klass);
     }
-  });
-};
+  };
 
-//jQuery for page scrolling feature - requires jQuery Easing plugin
-fn.configurePageScroll = function(scrollAnimationTime) {
-  $('.page-scroll a').on('click', function (event) {
-    var anchor = $(this),
-        href = anchor.attr('href');
+  // jQuery for page scrolling feature -
+  // it requires jQuery Easing plugin
+  fn._scrollToSection = function(e) {
+    var href = $(e.target).attr('href'),
+        self = this;
 
     $('html, body').stop().animate({
       scrollTop: $(href).offset().top
-    }, scrollAnimationTime, 'easeInOutExpo');
+    }, self.scrollAnimationTime, 'easeInOutExpo');
 
     event.preventDefault();
-  });
+  };
 
-  $('.page-scroll').mouseover(function () {
-    $('.gold').removeClass('gold');
-  });
-};
+  fn._removeGold = function() {
+    $('.nav .active').removeClass('active');
+  };
+
+  return Home;
+});

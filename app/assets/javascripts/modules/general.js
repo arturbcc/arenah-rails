@@ -1,3 +1,4 @@
+// TODO: Work on this js file. Transform it into separatedly components
 function gameRoomUrl() {
   return "/" + $("#game-room").val() + "/";
 }

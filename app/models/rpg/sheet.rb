@@ -18,12 +18,16 @@ module RPG
     #
     # Returns an ordered list of attributes groups
     def attributes_groups_by(attributes_hash = {})
+      return [] unless attributes_groups.present?
+
       attributes_groups
         .select { |group| meet_conditions?(group, attributes_hash) }
         .sort_by { |group| group.order }
     end
 
     def find_attributes_group(name)
+      return nil unless attributes_groups.present?
+
       attributes_groups.detect { |group| group.name == name }
     end
 

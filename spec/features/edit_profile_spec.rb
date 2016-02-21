@@ -18,9 +18,10 @@ feature 'Edit Profile' do
     click_button 'Salvar'
     wait_for_ajax
 
-    expect(find("[data-hello]")).to have_content("OLÁ, FAKE NAME")
+    expect(page.body).to have_content('Perfil atualizado com sucesso')
+    expect(find('[data-hello]')).to have_content('OLÁ, FAKE NAME')
 
-    click_link "Olá, fake name"
+    click_link 'Olá, fake name'
     wait_for_ajax
 
     fill_in 'name', with: 'John Doe'
@@ -31,6 +32,7 @@ feature 'Edit Profile' do
     click_button 'Salvar'
     wait_for_ajax
 
-    expect(find("[data-hello]")).to have_content("OLÁ, JOHN DOE")
+    expect(page.body).to have_css('.modal-content')
+    expect(find('[data-hello]')).to have_content('OLÁ, JOHN DOE')
   end
 end

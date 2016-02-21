@@ -1,37 +1,43 @@
-var Characters = function() {
-  this.fullList = [];
-  this.pcs = [];
-};
+define('characters', [], function() {
+  function Characters() {
+    this.fullList = [];
+    this.pcs = [];
+  };
 
-var fn = Characters.prototype;
+  var fn = Characters.prototype;
 
-fn.load = function(callback) {
-  var url = $('[data-characters-list]').data('characters-list'),
-      self = this;
+  fn.load = function(callback) {
+    var url = $('[data-characters-list]').data('characters-list'),
+        self = this;
 
-  //$.get("/" + gameRoom + "/personagens/listas").done(function (data) {
-  $.getJSON(url).done(function(data) {
-    self._loadCharacters(data, callback);
-  });
-};
+    $.proxyAll(this, '_loadCharacters');
 
-fn._loadCharacters = function(data, callback) {
-  this.fullList = data.list;
-  var self = this;
-
-  $.each(data.pcs, function(index, character) {
-    self.pcs.push({
-      'id': character.id,
-      'text': character.name,
-      'avatar': character.avatar
+    $.getJSON(url).done(function(data) {
+      self._loadCharacters(data, callback);
     });
-  })
+  };
 
-  // if (role == "GameMasterLogged") {
-  //   Characters.changeAuthor($("#authors-panel"), 600);
-  // }
+  fn._loadCharacters = function(data, callback) {
+    var self = this;
 
-  if (typeof callback === 'function') {
-    callback.call(this);
-  }
-};
+    this.fullList = data.list;
+
+    $.each(data.pcs, function(index, character) {
+      self.pcs.push({
+        id: character.id,
+        text: character.name,
+        avatar: character.avatar
+      });
+    })
+
+    // if (role == "GameMasterLogged") {
+    //   Characters.changeAuthor($("#authors-panel"), 600);
+    // }
+
+    if (typeof(callback) === 'function') {
+      callback.call(this);
+    }
+  };
+
+  return Characters;
+});

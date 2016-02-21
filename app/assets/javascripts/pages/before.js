@@ -1,0 +1,3 @@
+page.at(':before', function() {
+
+});

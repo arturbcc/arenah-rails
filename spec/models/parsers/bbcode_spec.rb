@@ -65,7 +65,7 @@ describe Parsers::BBCode do
     end
 
     it 'renders a quote' do
-      expect(parse('[quote]BBCode is great[/quote]')).to eq('<blockquote>BBCode is great</blockquote>')
+      expect(parse('[quote]BBCode is great[/quote]')).to eq('<blockquote class="quotation">BBCode is great</blockquote>')
     end
 
     it 'changes the size of the text' do
@@ -126,7 +126,7 @@ describe Parsers::BBCode do
     end
 
     it 'hides a spoiler' do
-      expect(parse('[spoiler=Title]He dies in the end[/spoiler]')).to eq('<span class="bbcode-spoiler"><a href="javascript:;"><i class="fa fa-plus-square"></i> Title</a><span>He dies in the end</span></span>')
+      expect(parse('[spoiler=Title]He dies in the end[/spoiler]')).to eq('<span class="bbcode-spoiler"><a href="javascript:;" class="bbcode-spoiler__trigger"><i class="fa fa-plus-square"></i> Title</a><span class="bbcode-spoiler__hidden-text">He dies in the end</span></span>')
     end
   end
 

@@ -2,7 +2,7 @@
   <div class="container">
     <nav>
       <ul class="mcd-menu">
-        <%= menu_item @area, area: :home, title: @game.name, subtitle: 'Página inicial',
+        <%= menu_item @area, area: :home, title: 'A sala', subtitle: 'Página inicial',
               url: game_home_path(game), icon: 'home' %>
 
         <%= menu_item(@area, area: :subscription, title: 'Inscreva-se', subtitle: 'Crie seu personagem',

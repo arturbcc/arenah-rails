@@ -1,3 +1,4 @@
+// TODO: Will it be like this? Check if we can componentize it
 var Track = {
   event: function (category, action, label) {
     if (window.ga) {

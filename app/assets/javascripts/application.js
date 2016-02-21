@@ -13,16 +13,22 @@
 //= require jquery/dist/jquery.min
 //= require jquery_ujs
 //= require bootstrap/dist/js/bootstrap.min
-//= require modules/ga_event_tracker
 //= require_tree ../../../vendor/assets/javascripts/
+
+//= require page
+//= require almond
 
 //= require_tree ./modules
 //= require_tree ./pages
 
 $(document).on('ready page:load', function() {
   page.dispatch();
-  new BBCode();
 
+  var ModalResize = require('modal-resize'),
+      ModalReuse = require('modal-reuse'),
+      BBCode = require('bbcode');
+
+  new BBCode();
   new ModalResize();
   new ModalReuse();
 });

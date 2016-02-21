@@ -1,0 +1,21 @@
+// ============================================================================
+// BBCode Dice
+//
+// Display a single dice roll with a dice icon on the left.
+//
+// <div class="bbcode-dice">
+//   <font color="%color%">1D100 = 10</font>
+// </div>
+//
+// ============================================================================
+.bbcode-dice {
+  float: left;
+  display: inline-table;
+  padding: 5px;
+  padding-left: 30px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cEc9c9;
+  border-radius: 5px;
+  background: url(/images/dices/dice-thumb.png) 0px 2px no-repeat;
+}
