@@ -1,3 +1,4 @@
+// TODO: Check if this is the same component as sheet/attribute-tooltip
 define('tooltip', [], function() {
   function Tooltip(container) {
     this.container = $(container);
