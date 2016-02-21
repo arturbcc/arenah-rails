@@ -131,6 +131,10 @@ module Sheet
       attributes_groups_by(type: 'based').each do |group|
         next unless group.character_attributes
 
+        # TODO: remember to check if the attribute that is going to serve as
+        # the base does not have a base too, or it can go down to a deadlock
+        # this security check can be made on the controller, when the attributes
+        # are saved
         group.character_attributes.each do |attribute|
           attribute.base_attribute = find_character_attribute(
             attribute.base_attribute_group,
