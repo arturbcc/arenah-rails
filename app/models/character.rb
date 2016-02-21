@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Character < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => :slugged
@@ -19,7 +21,7 @@ class Character < ActiveRecord::Base
 
   def sheet
     @sheet ||= begin
-      sheet = RPG::Sheet.new(super)
+      sheet = Sheet::Sheet.new(super)
       apply_attributes_relationship_on(sheet)
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game < ActiveRecord::Base
   extend FriendlyId
 
@@ -17,7 +19,7 @@ class Game < ActiveRecord::Base
   enum status: [:inactive, :active]
 
   def system
-    @system ||= RPG::System.new(super)
+    @system ||= Sheet::System.new(super)
   end
 
   def system_attributes=(hash)

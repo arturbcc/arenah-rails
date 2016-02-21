@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game::DuelsController < Game::BaseController
   def index
     @area = Area.new(:duels)

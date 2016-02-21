@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   PAGEJS_ALIASES = { 'create' => 'new', 'update' => 'edit' }.freeze
 

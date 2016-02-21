@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game::CharactersController < Game::BaseController
   def index
     @area = Area.new(:characters)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ToursController < ApplicationController
   before_action :set_identity, :set_area
 

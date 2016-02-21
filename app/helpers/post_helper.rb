@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PostHelper
   def recipients_names(post)
     post.recipients.map(&:name).join(', ')

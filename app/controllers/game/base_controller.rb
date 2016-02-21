@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game::BaseController < ApplicationController
   before_action :load_game, :load_character, :set_identity
 

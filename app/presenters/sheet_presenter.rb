@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SheetPresenter
   attr_reader :character
 

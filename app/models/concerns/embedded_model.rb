@@ -35,11 +35,11 @@ module EmbeddedModel
 
   def array_values(hash, attribute)
     hash[attribute].map do |attr|
-      "RPG::#{attribute.classify}".constantize.new(attr)
+      "Sheet::#{attribute.classify}".constantize.new(attr)
     end
   end
 
   def hash_values(hash, attribute)
-    "RPG::#{attribute.classify}".constantize.new(hash[attribute])
+    "Sheet::#{attribute.classify}".constantize.new(hash[attribute])
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EquipmentHelper
   SLOT_DICTIONARY = {
     'left-hand' => 'Mão esquerda',

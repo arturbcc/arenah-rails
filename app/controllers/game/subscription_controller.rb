@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game::SubscriptionController < Game::BaseController
   before_action :authenticate_user!
 

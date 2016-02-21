@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Parsers::Emoji
   def self.parse(text, options = {class: 'emoji'})
     render_emoji(text, options)

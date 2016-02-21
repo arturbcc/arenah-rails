@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game::ContactController < Game::BaseController
   before_action :authenticate_user!, :set_message, :set_area
 

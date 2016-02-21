@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # TODO: Consider transforming this into a presenter. It could decide if the view
 # will show title, show edit button and so on. Check the partial _group_title
 # to see more possibilities

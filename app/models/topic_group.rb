@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TopicGroup < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => :slugged

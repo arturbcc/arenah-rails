@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CharacterAttributeHelper
   def bar_level(points, total)
     threshold = 100

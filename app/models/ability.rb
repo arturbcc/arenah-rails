@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Ability
   attr_reader :identity, :character, :post
 

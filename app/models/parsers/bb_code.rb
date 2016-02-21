@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Parsers::BBCode
   def self.parse(text)
     text.present? ? text.bbcode_to_html(true, additional_tags) : ''

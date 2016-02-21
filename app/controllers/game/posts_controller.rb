@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game::PostsController < Game::BaseController
   before_action :get_topic
 

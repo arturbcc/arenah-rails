@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UserHelper
   def user_avatar(user, options = {})
     options = options.merge(alt: user.name, title: user.name)

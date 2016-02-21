@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CharacterHelper
   def avatar(character, options = {})
     options = options.merge(alt: character.name, title: character.name)

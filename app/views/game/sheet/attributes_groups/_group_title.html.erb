@@ -56,7 +56,7 @@
     <table class="attributes-group-instructions-content">
       <tr>
         <%#= FIXME: The tooltip partial should receive name and description, this fix below must be removed %>
-        <%= render 'tooltip', attribute: RPG::CharacterAttribute.new(name: group.name, description: group.instructions) %>
+        <%= render 'tooltip', attribute: Sheet::CharacterAttribute.new(name: group.name, description: group.instructions) %>
      </tr>
     </table>
   <% end %>

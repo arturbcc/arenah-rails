@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game::SheetController < Game::BaseController
   def show
     character = Character.friendly.find(params[:character_slug])

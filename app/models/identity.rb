@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Identity
   VALID_ROLES = [:unlogged, :visitor, :player, :game_master]
 
