@@ -56,6 +56,7 @@ group :development do
   gem 'spring'
 
   gem 'puma'
+  gem 'quiet_assets'
 end
 
 group :test do
