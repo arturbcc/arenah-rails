@@ -43,9 +43,9 @@ module RPG
       return unless attributes_groups
 
       self.calculator = ::RPG::Calculator.new
-
-      # calculate_attributes_modifiers => equipments?
       save_attributes_as_variables
+
+      calculate_equipment_modifiers
       calculate_group_points
       calculate_based_attributes
 
@@ -132,6 +132,28 @@ module RPG
             attribute.base_attribute_group,
             attribute.base_attribute_name
           )
+        end
+      end
+    end
+
+    # Private: iterates through the list of equipments and, if the equipment is
+    # equipped, set the modifiers to the attributes it is supposed to change
+    def calculate_equipment_modifiers
+      attributes_groups_by(type: 'equipments').each do |group|
+        next unless group.equipments
+
+        group.equipments.each do |equipment|
+          if equipment.equipped_on.present?
+            equipment.modifiers.each do |modifier|
+              attribute = find_character_attribute(
+                modifier.base_attribute_group,
+                modifier.base_attribute_name
+              )
+
+              attribute.equipment_modifier = 0 if attribute.equipment_modifier.blank?
+              attribute.equipment_modifier += modifier.value if attribute
+            end
+          end
         end
       end
     end

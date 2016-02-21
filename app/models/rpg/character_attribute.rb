@@ -26,8 +26,7 @@ module RPG
         cost
       elsif points
         base_points = base_attribute.present? ? base_attribute.value : 0
-        points + base_points
-        # TODO: sum the modifiers here as well
+        points + base_points + equipment_modifier.to_i
       else
         content.to_i
       end

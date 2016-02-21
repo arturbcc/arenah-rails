@@ -8,5 +8,15 @@ module RPG
     def to_s
       "#{base_attribute_name} #{signal} #{points}"
     end
+
+    def value
+      if signal == '+'
+        points.to_i
+      elsif signal == '-'
+        -1 * points.to_i
+      else
+        0
+      end
+    end
   end
 end
