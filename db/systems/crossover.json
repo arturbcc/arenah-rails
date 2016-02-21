@@ -649,7 +649,7 @@
     },
     {
       "name": "Velocidade",
-      "unit": "m/s2",
+      "unit": "m/s",
       "table_items": [
         { "key": "1", "value": 1.5 },
         { "key": "2", "value": 1.5 },

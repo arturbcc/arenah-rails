@@ -14,7 +14,7 @@ class SheetPresenter
   end
 
   def header_attributes(page:)
-    @header_attributes ||= character.sheet.attributes_groups_by(page: page, position: 'header')
+    character.sheet.attributes_groups_by(page: page, position: 'header')
   end
 
   def column_attributes(page:, column:)
@@ -22,6 +22,6 @@ class SheetPresenter
   end
 
   def footer_attributes(page:)
-    @footer_attributes ||= character.sheet.attributes_groups_by(page: page, position: 'footer')
+    character.sheet.attributes_groups_by(page: page, position: 'footer')
   end
 end

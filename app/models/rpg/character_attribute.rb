@@ -8,15 +8,19 @@ module RPG
       :total, :images
 
     # Attributes that are not stored in the database
-    attr_accessor :equipment_modifier, :base_attribute
+    attr_accessor :equipment_modifier, :base_attribute, :unit
 
-    # Public: returns the final value of the attribute
+    # Public: returns the value of the attribute
     #
     # This method is used to be called on a formula. When an attribute is
     # used as a variable, it must provide a value to be used in the math.
     #
-    # Returns: points, if points are present. Content, converted to float,
-    # otherwise
+    # Return:
+    #
+    # * If the attribute has a cost, it will be the attribute value.
+    # * Else, if there are points on it, the points will be summed up with
+    #   the based attribute value and the modifiers
+    # * At last, if no rule was matched, it returns the the content
     def value
       if cost
         cost

@@ -2,9 +2,14 @@ module RPG
   class AttributesGroup
     include EmbeddedModel
 
-    attr_accessor :name, :order, :position, :page, :instructions,
+    attr_accessor :name, :order, :page, :instructions,
       :show_on_posts, :order_on_posts, :attributes_points_formula,
       :group_points_formula, :character_attributes, :list, :equipments,
+
+      # The position on the sheet where the group will appear.
+      #
+      # Valid positions are: header, column_1, column_2, column_3 and footer
+      :position,
 
       # The game master can deliberatedly add extra points to any attributes
       # group. This attribute will be added on a character sheet, not on the

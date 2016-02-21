@@ -32,8 +32,12 @@ class Character < ActiveRecord::Base
   private
 
   def apply_attributes_relationship_on(sheet)
-    sheet.apply_attributes_relationship
-    # TODO: should I parse initiative and life in here?
-    # probably no, I don't have a game in here anyway
+    sheet.apply_attributes_relationship!
+
+    if game && game.system
+      sheet.apply_table_data!(game.system)
+      # TODO: should I parse initiative and life in here?
+      # probably no, I don't have a game in here anyway
+    end
   end
 end

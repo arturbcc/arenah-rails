@@ -8,19 +8,17 @@ module RPG
 
     attr_accessor :calculator
 
-    # Public: lists all attributes groups on a given page, inside a given
-    # position, sorted by the `order` attribute.
-    #
-    # Valid positions are: header, column_1, column_2, column_3 and footer
+    # Public: List all attributes' groups filtered by a set of conditions
+    # sorted by the `order` attribute.
     #
     #  system.sheet.attributes_groups_by(page: 1, position: 'column_1')
     #  => [{ name: 'Atributos', order: 1, page: 1, position: 'column_1', ... },
     #      { name: 'Aprimoramentos', order: 2, page: 1, position: 'column_1', ... }]
     #
-    # Returns an ordered list of attributes groups for a given position
-    def attributes_groups_by(page:, position:)
+    # Returns an ordered list of attributes groups
+    def attributes_groups_by(attributes_hash = {})
       attributes_groups
-        .select { |group| group.page == page && group.position == position }
+        .select { |group| meet_conditions?(group, attributes_hash) }
         .sort_by { |group| group.order }
     end
 
@@ -35,10 +33,12 @@ module RPG
       group.character_attributes.detect {|attr| attr.name == attribute_name }
     end
 
-    # Public: this method will link all attributes' groups and build the
+    # Public: link all attributes' groups and build the
     # character sheet relationships, parsing the formulas to calculate points
     # and binding attributes that are based in others.
-    def apply_attributes_relationship
+    #
+    # Returns: the sheet
+    def apply_attributes_relationship!
       return unless attributes_groups
 
       self.calculator = ::RPG::Calculator.new
@@ -46,11 +46,41 @@ module RPG
       # calculate_attributes_modifiers => equipments?
       save_attributes_as_variables
       calculate_group_points
-      #fetch_table_data
       calculate_based_attributes
 
       # TODO: I need to remember to never modify the points of any attribute. Save
       # in separated fields and use the method `value` to sum them up
+
+      # TODO: I must never let an attribute be based on another based attribute
+      # Can it be based on a type=table group? To do that I need to parse the table
+      # groups before everything, but the points will not be ready yet
+      self
+    end
+
+    # Public: Fill the points of all attributes that are based in a table. The
+    # table belongs to the game system, not the sheet itself, and has a base
+    # attribute to be used as a key.
+    #
+    # Returns: the sheet
+    def apply_table_data!(game_system)
+      attributes_groups_by(type: 'table').each do |group|
+        next unless group.character_attributes
+
+        group.character_attributes.each do |attribute|
+          base_attribute = find_character_attribute(
+            attribute.base_attribute_group,
+            attribute.base_attribute_name
+          )
+
+          table = game_system.find_table(attribute.table_name)
+
+          if table.present?
+            attribute.points = table.value(base_attribute.value.to_s)
+            attribute.unit = table.unit
+          end
+        end
+      end
+
       self
     end
 
@@ -60,8 +90,10 @@ module RPG
       %w(pages attributes_groups)
     end
 
-    def attributes_groups_by_type(type:)
-      attributes_groups.select {|group| group.type == type}
+    def meet_conditions?(group, attributes_hash)
+      attributes_hash.reduce(true) do |value, object|
+        value &&= group.public_send("#{object[0]}") == object[1]
+      end
     end
 
     def save_attributes_as_variables
@@ -91,7 +123,7 @@ module RPG
     # Private: Looks for attributes based in other attributes and saves a
     # reference to their base attributes.
     def calculate_based_attributes
-      attributes_groups_by_type(type: 'based').each do |group|
+      attributes_groups_by(type: 'based').each do |group|
         next unless group.character_attributes
 
         group.character_attributes.each do |attribute|

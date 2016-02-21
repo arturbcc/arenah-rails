@@ -4,6 +4,11 @@ module RPG
 
     attr_accessor :name, :table_items, :unit
 
+    def value(key)
+      item = table_items.detect {|item| item.key == key }
+      item.present? ? item.value.to_i : 0
+    end
+
     private
 
     def nested_attributes
