@@ -36,8 +36,12 @@ class Character < ActiveRecord::Base
 
     if game && game.system
       sheet.apply_table_data!(game.system)
-      # TODO: should I parse initiative and life in here?
-      # probably no, I don't have a game in here anyway
+
+      sheet.life = sheet.find_character_attribute(
+        game.system.life.base_attribute_group,
+        game.system.life.base_attribute_name)
     end
+
+    sheet
   end
 end

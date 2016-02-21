@@ -6,7 +6,8 @@ module RPG
 
     attr_accessor :pages, :attributes_groups
 
-    attr_accessor :calculator
+    # Attributes that are not stored in the database
+    attr_accessor :calculator, :life, :initiative
 
     # Public: List all attributes' groups filtered by a set of conditions
     # sorted by the `order` attribute.
