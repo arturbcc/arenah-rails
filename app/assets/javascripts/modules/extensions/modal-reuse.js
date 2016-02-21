@@ -6,11 +6,11 @@ define('modal-reuse', [], function() {
   var fn = ModalReuse.prototype;
 
   fn._bindEvents = function() {
-    $('body').on('hidden.bs.modal', '.modal', $.proxy(this._allowModalReuse, this));
+    $('body').on('hidden.bs.modal', '.modal', this._allowModalReuse);
   };
 
   fn._allowModalReuse = function(e) {
-    $(event.target).removeData('bs.modal');
+    $(this).removeData('bs.modal');
   };
 
   return ModalReuse;

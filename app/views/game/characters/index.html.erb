@@ -11,22 +11,22 @@
         <h1>Personagens</h1>
 
         <div id="charactersList" class="bookshelf">
-          <% @game.characters.each do |character| %>
-          <% if character.pc? %>
-              <div class="view-cover book">
-                <%= link_to game_character_sheet_path(@game, character), data: { toggle: 'modal', target: '#remote-modal', width: '1015px' } do %>
-                  <div class="main">
-                    <div class="book-font">
-                      <div class="book-cover" style="background:url(<%= avatar_path(character) %>) no-repeat; background-size: 84px 120px;">
-                        <h1 class="title"><%= character.name %></h1>
-                      </div>
+          <% @game.pcs.each do |character| %>
+            <div class="view-cover book">
+              <%= link_to game_sheet_path(character.slug),
+                data: { toggle: 'modal', target: '#remote-modal', width: '975px' } do %>
+                <div class="main">
+                  <div class="book-font">
+                    <div class="book-cover"
+                      style="background:url(<%= avatar_path(character) %>) no-repeat; background-size: 84px 120px;">
+                      <h1 class="title"><%= character.name %></h1>
                     </div>
-                    <div class="book-back"></div>
-                    <div class="book-right"></div>
                   </div>
-                <% end %>
-              </div>
-            <% end %>
+                  <div class="book-back"></div>
+                  <div class="book-right"></div>
+                </div>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>
