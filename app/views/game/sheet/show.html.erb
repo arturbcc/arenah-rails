@@ -42,9 +42,8 @@
 </div>
 
 <script type="text/javascript">
-  // if (typeof AttributesInteraction !== "undefined") {
-  //   AttributesInteraction.initializeEvents();
-  // }
+  var Sheet = require('sheet');
+  new Sheet();
   //
   // < % if ((Model.Identity.CurrentRole == Identity.Role.PlayerLogged && character.Id == Model.Identity.Character.Id && character.Status == Character.StatusType.ACTIVE) || (Model.Identity.CurrentRole == Identity.Role.GameMasterLogged)) { %>
   //   EditCharacterSheet.equipmentsUrl = "< %: Url.Action("Show", "Equipment", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = character.Slug }) %>";

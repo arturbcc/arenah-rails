@@ -19,11 +19,11 @@
 }
 
 .qtip-content {
-  text-align: center;
+  text-align: left;
   font-size: 12px;
 
   .attributes {
-     width: 130px;
+    width: 130px;
   }
 
   .extra-attributes {
@@ -38,7 +38,6 @@
   }
 
   img {
-    float: left;
-    margin-right: 5px;
+    margin: 0 auto;
   }
 }
