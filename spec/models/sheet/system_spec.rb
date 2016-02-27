@@ -28,4 +28,16 @@ describe Sheet::System do
       expect(@system.tables.count).to eq(4)
     end
   end
+
+  describe '#find_table' do
+    let(:system) { Sheet::System.new({ name: 'Daemon', tables: [{ name: 'carregar' }, { name: 'levantar' }] }) }
+
+    it 'finds a table by the name' do
+      expect(system.find_table('carregar')).not_to be_nil
+    end
+
+    it 'returns nil with no table is found' do
+      expect(system.find_table('bônus de dano')).to be_nil
+    end
+  end
 end
