@@ -1,13 +1,5 @@
-<%#= TODO: create a helper that receives a attribute and returns this data hash %>
-<%
-  data = {
-    'source-type': group.source_type,
-    'type': group.type,
-    'editable-only-on-free-mode': true
-  }
-%>
-
-<%= content_tag :div, class: 'attributes-group rich-text-attribute', data: data do %>
+<%= content_tag :div, class: 'attributes-group rich-text-attribute',
+  data: group.to_params(editable_only_on_free_mode: true) do %>
   <%= render 'game/sheet/attributes_groups/group_title', group: group %>
 
   <% group.character_attributes.each do |attribute| %>

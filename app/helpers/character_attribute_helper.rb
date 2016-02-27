@@ -48,4 +48,29 @@ module CharacterAttributeHelper
       concat(value)
     end
   end
+
+  def partial_for_attribute_type(attribute, flat_version)
+    case attribute.type
+    when 'image'
+      flat_version ? 'name_value_total' : 'image'
+    when 'bar'
+      flat_version ? 'name_value_total' : 'bar'
+    when 'based'
+      'based'
+    when 'name_value'
+      'name_value'
+    when 'text'
+      'text'
+    else
+      'name_value_total'
+    end
+  end
+
+  def smart_description(attribute, &block)
+    klass = attribute.description.present? ? 'smart-description' : ''
+    link_to 'javascript:;', class: klass do
+      concat(attribute.name)
+      block.call if block.present?
+    end
+  end
 end

@@ -5,6 +5,7 @@ module EmbeddedModel
 
   included do
     def initialize(hash = {})
+      hash = ActiveSupport::HashWithIndifferentAccess.new(hash)
       hash.except(nested_attributes).each do |key, value|
         self.public_send("#{key}=", value)
       end

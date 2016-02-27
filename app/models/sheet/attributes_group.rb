@@ -54,6 +54,16 @@ module Sheet
         points.to_i + extra_points.to_i
       end
 
+      def to_params(options = {})
+        {
+          group_name: name,
+          points: points,
+          used_points: used_points,
+          source_type: source_type,
+          type: type
+        }.merge(options)
+      end
+
       private
 
       def nested_attributes

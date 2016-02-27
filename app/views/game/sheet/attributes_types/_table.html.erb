@@ -1,6 +1,6 @@
 <tr data-attribute-name="<%= attribute.name %>">
   <td>
-    <%= link_to attribute.name, 'javascript:;', class: attribute.description.present? ? 'smart-description' : '' %>
+    <%= smart_description(attribute) %>
   </td>
 
   <td class="text-right">

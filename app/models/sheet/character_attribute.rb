@@ -25,10 +25,10 @@ module Sheet
     # * At last, if no rule was matched, it returns the the content
     def value
       if cost
-        cost
+        cost.to_i
       elsif points
-        base_points = base_attribute.present? ? base_attribute.value : 0
-        points + base_points + equipment_modifier.to_i
+        base_points = base_attribute.present? ? base_attribute.value.to_i : 0
+        points.to_i + base_points + equipment_modifier.to_i
       else
         content.to_i
       end
@@ -36,6 +36,16 @@ module Sheet
 
     def to_s
       "#{points} / #{value}"
+    end
+
+    def to_params
+      {
+        base_attribute_group: base_attribute_group,
+        base_attribute_name: base_attribute_name,
+        name: name,
+        points: points,
+        value: value
+      }
     end
 
     private

@@ -167,6 +167,7 @@ describe Sheet::AttributesGroup do
       @sheet = load_sheet('crossover', 'inuyasha')
     end
 
+    # FIXME: what is this test testing?
     it 'serializes the equipments' do
       expect(@sheet.attributes_groups.count).to eq(10)
     end
@@ -185,7 +186,7 @@ describe Sheet::AttributesGroup do
 
     it 'sums the points of all attributes on the list' do
       attributes = [
-        { name: 'Força', points: 10  },
+        { name: 'Força', points: 10 },
         { name: 'Constituição', points: 12 },
         { name: 'Destreza', points: 7 },
         { name: 'Agilidade', points: 5 },
@@ -194,7 +195,7 @@ describe Sheet::AttributesGroup do
         { name: 'Percepção', points: 12 },
         { name: 'Carisma', points: 10 }
       ]
-      attributes_group = Sheet::AttributesGroup.new({ 'character_attributes' => attributes })
+      attributes_group = Sheet::AttributesGroup.new({ character_attributes: attributes })
       expect(attributes_group.used_points).to eq(94)
     end
 
@@ -203,20 +204,63 @@ describe Sheet::AttributesGroup do
         { name: 'Força', points: 10  },
         { name: 'Constituição' }
       ]
-      attributes_group = Sheet::AttributesGroup.new({ 'character_attributes' => attributes })
+      attributes_group = Sheet::AttributesGroup.new({ character_attributes: attributes })
       expect(attributes_group.used_points).to eq(10)
     end
   end
 
   describe '#total_points' do
     xit 'returns the points of the group if no extra points are provided' do
-      attributes_group = Sheet::AttributesGroup.new({ 'points' => 20 })
+      attributes_group = Sheet::AttributesGroup.new({ points: 20 })
       expect(attributes_group.total_points).to eq(10)
     end
 
     xit 'sums the points with extra_points' do
-      attributes_group = Sheet::AttributesGroup.new({ 'points' => 20, 'extra_points' => 5 })
+      attributes_group = Sheet::AttributesGroup.new({ points: 20, extra_points: 5 })
       expect(attributes_group.total_points).to eq(15)
+    end
+  end
+
+  describe '#to_params' do
+    let(:attribute_group) do
+      Sheet::AttributesGroup.new({
+        name: 'Group',
+        extra_points: 10,
+        points: 100,
+        source_type: 'list',
+        type: 'list',
+        character_attributes: [
+          { name: 'attribute 1', points: 10 },
+          { name: 'attribute 1', points: 25 }
+        ]
+      })
+    end
+
+    context 'without custom params' do
+      it 'transforms the group in a hash params' do
+        expected = {
+          group_name: 'Group',
+          points: 100,
+          used_points: 35,
+          source_type: 'list',
+          type: 'list'
+        }
+        expect(attribute_group.to_params).to eq(expected)
+      end
+    end
+
+    context 'with custom params' do
+      it 'transforms the group in a hash params' do
+        expected = {
+          group_name: 'Group',
+          points: 100,
+          used_points: 35,
+          source_type: 'list',
+          type: 'list',
+          editable_only_on_free_mode: true
+        }
+        expect(attribute_group.to_params(editable_only_on_free_mode: true)).to eq(expected)
+      end
     end
   end
 end

@@ -1,14 +1,4 @@
-<%
-  data = {
-    'group-name' => group.name,
-    'points' => group.points,
-    'used-points' => group.used_points,
-    'source-type' => group.source_type,
-    'type' => group.type
-  }
-%>
-
-<%= content_tag :div, class: 'attributes-group', data: data do %>
+<%= content_tag :div, class: 'attributes-group', data: group.to_params do %>
   <%= render 'game/sheet/attributes_groups/group_title', group: group %>
 
   <table class="table table-condensed attributes-with-base">

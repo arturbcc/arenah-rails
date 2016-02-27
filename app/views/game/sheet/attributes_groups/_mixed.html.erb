@@ -1,39 +1,17 @@
 <%
-  data = {
-    'group-name' => group.name,
-    'points' => group.points,
-    'used-points' => group.used_points,
-    'source-type' => group.source_type,
-    'type' => group.type
-  }
-
   # FIXME: for now, flat version is false. Understand what it is and change it
   flat_version = true
 %>
-<%= content_tag :div, class: 'attributes-group', data: data do %>
+
+<%= content_tag :div, class: 'attributes-group', data: group.to_params do %>
   <%= render 'game/sheet/attributes_groups/group_title', group: group %>
 
   <table class="table table-condensed attributes-with-base" data-accept-edit-mode>
     <tbody>
-      <%
-        group.character_attributes.each do |attribute|
-          partial_name =
-          case attribute.type
-          when 'image'
-            flat_version ? 'name_value_total' : 'image'
-          when 'bar'
-            flat_version ? 'name_value_total' : 'bar'
-          when 'based'
-            'based'
-          when 'name_value'
-            'name_value'
-          when 'text'
-            'text'
-          else
-            'name_value_total'
-          end
-      %>
-        <%= render "game/sheet/attributes_types/#{partial_name}", attribute: attribute %>
+      <% group.character_attributes.each do |attribute| %>
+        <% partial =  partial_for_attribute_type(attribute, flat_version) %>
+        <%= render "game/sheet/attributes_types/#{partial}",
+          attribute: attribute %>
       <% end %>
     </tbody>
   </table>

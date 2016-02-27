@@ -1,15 +1,6 @@
-<%
-  data = {
-    'name': attribute.name,
-    'points': attribute.points,
-    'value': attribute.value
-  }
-%>
-
-<%= content_tag :tr, data: data do %>
+<%= content_tag :tr, data: attribute.to_params do %>
   <td>
-    <%= link_to 'javascript:;', class: attribute.description.present? ? 'smart-description' : ''  do %>
-      <%= attribute.name %>
+    <%= smart_description(attribute) do %>
       <%= render 'game/sheet/modified_attribute_mark', attribute: attribute %>
     <% end %>
   </td>

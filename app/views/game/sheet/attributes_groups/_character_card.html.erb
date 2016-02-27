@@ -1,13 +1,5 @@
-<% data_attributes = {
-  'group-name': group.name,
-  'points': group.points,
-  'used-points': group.used_points,
-  'source-type': group.source_type,
-  'type': group.type,
-  'editable-only-on-free-mode': true
-} %>
-
-<%= content_tag :div, class: 'attributes-group card-title-alignment', data: data_attributes do %>
+<%= content_tag :div, class: 'attributes-group card-title-alignment',
+  data: group.to_params(editable_only_on_free_mode: true) do %>
   <%= render 'game/sheet/attributes_groups/group_title', group: group %>
 
   <div class="character-card-group row" data-accept-edit-mode>

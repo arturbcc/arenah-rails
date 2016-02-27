@@ -1,7 +1,6 @@
 <tr data-attribute-name="<%= attribute.name %>" data-editable-attribute-type="text">
   <td>
-    <%#= FIXME: this link is repeated many times, and the smart-description too %>
-    <%= link_to attribute.name, 'javascript:;', class: attribute.description.present? ? 'smart-description' : '' %>
+    <%= smart_description(attribute) %>
   </td>
 
   <td class="text-right">
