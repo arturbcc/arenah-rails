@@ -210,14 +210,14 @@ describe Sheet::AttributesGroup do
   end
 
   describe '#total_points' do
-    xit 'returns the points of the group if no extra points are provided' do
+    it 'returns the points of the group if no extra points are provided' do
       attributes_group = Sheet::AttributesGroup.new({ points: 20 })
-      expect(attributes_group.total_points).to eq(10)
+      expect(attributes_group.total_points).to eq(20)
     end
 
-    xit 'sums the points with extra_points' do
+    it 'sums the points with extra_points' do
       attributes_group = Sheet::AttributesGroup.new({ points: 20, extra_points: 5 })
-      expect(attributes_group.total_points).to eq(15)
+      expect(attributes_group.total_points).to eq(25)
     end
   end
 
