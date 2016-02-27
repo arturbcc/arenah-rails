@@ -9,6 +9,12 @@ run the following commands:
 `rake db:drop db:create db:migrate db:seed`
 `rake initialize:assets`
 
+== Coverage
+
+To run the tests with a coverages report, run:
+
+`COVERAGE=true rspec`
+
 
 == Resources ==
 
