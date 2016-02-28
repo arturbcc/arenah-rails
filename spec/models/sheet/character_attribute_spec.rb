@@ -502,6 +502,12 @@ describe Sheet::CharacterAttribute do
     end
   end
 
+  describe '#to_s' do
+    it 'prints the points and the value of the attribute' do
+      expect(Sheet::CharacterAttribute.new(points: 10, cost: 30).to_s).to eq('10 / 30')
+    end
+  end
+
   private
 
   def get_attributes(list, *keys)
