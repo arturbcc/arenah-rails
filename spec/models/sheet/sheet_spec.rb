@@ -80,7 +80,7 @@ describe Sheet::Sheet do
       it 'does not set the value of an attribute based on a table before applying table data' do
         speed = @sheet.find_character_attribute('Dados Extras', 'Velocidade')
         agility = @sheet.find_character_attribute('Atributos', 'Agilidade')
-        expect(speed.points).to eq(0)
+        expect(speed.points.to_i).to eq(0)
       end
 
       it 'sets the value of an attribute based on a table' do
@@ -89,7 +89,7 @@ describe Sheet::Sheet do
         speed = @sheet.find_character_attribute('Dados Extras', 'Velocidade')
         agility = @sheet.find_character_attribute('Atributos', 'Agilidade')
 
-        expect(speed.points).to eq(2)
+        expect(speed.points.to_i).to eq(2)
       end
     end
   end
