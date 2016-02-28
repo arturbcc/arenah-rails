@@ -38,4 +38,26 @@ describe Character, type: :model do
       end
     end
   end
+
+  context '#sheet' do
+    it 'loads the sheet' do
+      user = create(:user)
+      sheet = load_sheet('crossover', 'inuyasha')
+      inuyasha = Character.create!(user: user, name: 'Inuyasha', sheet: sheet.to_json)
+
+      expect(inuyasha.sheet.attributes_groups.count).to eq(10)
+    end
+
+    it 'loads the sheet with a system and applies table values on the groups' do
+      user = create(:user)
+      game = create(:game, system: load_system.to_json)
+      sheet = load_sheet('crossover', 'inuyasha')
+      inuyasha = Character.create!(user: user, game: game, name: 'Inuyasha', sheet: sheet.to_json)
+
+      speed = inuyasha.sheet.find_character_attribute('Dados Extras', 'Velocidade')
+      agility = inuyasha.sheet.find_character_attribute('Atributos', 'Agilidade')
+
+      expect(speed.points.to_i).to eq(2)
+    end
+  end
 end

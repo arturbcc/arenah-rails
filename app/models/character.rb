@@ -26,10 +26,11 @@ class Character < ActiveRecord::Base
     end
   end
 
-  def sheet_attributes=(hash)
-    sheet.assign_attributes(hash)
-    self[:sheet] = sheet.as_json
-  end
+  # TODO: Is this method necessary?
+  # def sheet_attributes=(hash)
+  #   sheet.assign_attributes(hash)
+  #   self[:sheet] = sheet.as_json
+  # end
 
   private
 

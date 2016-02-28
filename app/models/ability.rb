@@ -36,7 +36,7 @@ class Ability
   end
 
   def recipient?
-    return false if character.nil?
+    return false if character.nil? || post.nil?
 
     post.recipients.include?(character)
   end
