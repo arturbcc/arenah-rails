@@ -9,14 +9,20 @@ module CharacterAttributeHelper
 
   def bar_color(percentage)
     colors = ['red', 'orange', 'green', 'darkgreen']
-
-    colors[(percentage / 25).floor]
+    if percentage >= 100
+      colors[3]
+    elsif percentage < 0
+      colors[0]
+    else
+      colors[(percentage / 25).floor]
+    end
   end
 
   def image_attribute(game_slug, attribute)
     percentage = bar_level(attribute.points, attribute.total);
     images = attribute.images.sort_by(&:type)
-    image_name = images[(percentage / 25).floor].name
+    divisor = 100 / attribute.images.count
+    image_name = images[(percentage / divisor).floor].name
 
     image_tag "/#{game_slug}/images/images_attributes/#{image_name}"
   end
@@ -35,9 +41,9 @@ module CharacterAttributeHelper
         'javascript:;',
         class: klass.present? ? klass : '',
         data: {
-          'editable-attribute': type,
-          'master-only': master_only,
-          'value': value
+          editable_attribute: type,
+          master_only: master_only,
+          value: value
         }
     else
       text
@@ -49,8 +55,8 @@ module CharacterAttributeHelper
     end
   end
 
-  def partial_for_attribute_type(attribute, flat_version)
-    case attribute.type
+  def partial_for_attribute_type(attribute_type, flat_version = true)
+    case attribute_type
     when 'image'
       flat_version ? 'name_value_total' : 'image'
     when 'bar'

@@ -30,7 +30,7 @@ describe Sheet::System do
   end
 
   describe '#find_table' do
-    let(:system) { Sheet::System.new({ name: 'Daemon', tables: [{ name: 'carregar' }, { name: 'levantar' }] }) }
+    let(:system) { Sheet::System.new(name: 'Daemon', tables: [{ name: 'carregar' }, { name: 'levantar' }]) }
 
     it 'finds a table by the name' do
       expect(system.find_table('carregar')).not_to be_nil

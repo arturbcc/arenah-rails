@@ -9,7 +9,7 @@
   <table class="table table-condensed attributes-with-base" data-accept-edit-mode>
     <tbody>
       <% group.character_attributes.each do |attribute| %>
-        <% partial =  partial_for_attribute_type(attribute, flat_version) %>
+        <% partial =  partial_for_attribute_type(attribute.type, flat_version) %>
         <%= render "game/sheet/attributes_types/#{partial}",
           attribute: attribute %>
       <% end %>

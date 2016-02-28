@@ -180,7 +180,7 @@ describe Sheet::AttributesGroup do
     end
 
     it 'returns zero then there are no attributes on the list' do
-      attributes_group = Sheet::AttributesGroup.new({ character_attributes: [] })
+      attributes_group = Sheet::AttributesGroup.new(character_attributes: [])
       expect(attributes_group.used_points).to eq(0)
     end
 
@@ -195,7 +195,7 @@ describe Sheet::AttributesGroup do
         { name: 'Percepção', points: 12 },
         { name: 'Carisma', points: 10 }
       ]
-      attributes_group = Sheet::AttributesGroup.new({ character_attributes: attributes })
+      attributes_group = Sheet::AttributesGroup.new(character_attributes: attributes)
       expect(attributes_group.used_points).to eq(94)
     end
 
@@ -204,19 +204,19 @@ describe Sheet::AttributesGroup do
         { name: 'Força', points: 10  },
         { name: 'Constituição' }
       ]
-      attributes_group = Sheet::AttributesGroup.new({ character_attributes: attributes })
+      attributes_group = Sheet::AttributesGroup.new(character_attributes: attributes)
       expect(attributes_group.used_points).to eq(10)
     end
   end
 
   describe '#total_points' do
     it 'returns the points of the group if no extra points are provided' do
-      attributes_group = Sheet::AttributesGroup.new({ points: 20 })
+      attributes_group = Sheet::AttributesGroup.new(points: 20)
       expect(attributes_group.total_points).to eq(20)
     end
 
     it 'sums the points with extra_points' do
-      attributes_group = Sheet::AttributesGroup.new({ points: 20, extra_points: 5 })
+      attributes_group = Sheet::AttributesGroup.new(points: 20, extra_points: 5)
       expect(attributes_group.total_points).to eq(25)
     end
   end
