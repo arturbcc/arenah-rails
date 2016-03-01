@@ -33,7 +33,7 @@ define('highlight-attributes', [], function() {
     var element = $(e.currentTarget),
         searchMethod = this._searchMethodFor(element);
 
-    element.addClass('success')
+    element.addClass('success');
     searchMethod(element, function(attribute) {
       attribute.addClass('warning');
     });

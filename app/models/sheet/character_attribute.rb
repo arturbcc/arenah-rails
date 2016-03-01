@@ -40,7 +40,7 @@ module Sheet
 
     def to_params
       params = {
-        name: name,
+        attribute_name: name,
         points: points,
         value: value
       }
