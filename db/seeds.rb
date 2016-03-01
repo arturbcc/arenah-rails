@@ -27,7 +27,7 @@ goku = Character.create!(user: willian, name: 'Goku', avatar: 'goku.jpg', post_c
 hiei = Character.create!(user: priscila, name: 'Hiei', avatar: 'hiei.png', post_count: 382, last_post_date: 4.days.ago, sheet: '{}')
 oliver_tsubasa = Character.create!(user: nathalia, name: 'Oliver Tsubasa', avatar: 'oliver.jpg', post_count: 12, last_post_date: 7.days.ago, sheet: '{}')
 palace = Character.create!(user: mayara, name: 'Palace', avatar: 'palace.jpg', post_count: 10, gender: 1, last_post_date: 10.days.ago, sheet: '{}')
-coraline = Character.create!(user: pablo, name: 'Coraline', avatar: 'coraline.jpg', post_count: 50, gender: 1, last_post_date: 1.day.ago, sheet: '{}')
+coraline = Character.create!(user: pablo, name: 'Coraline', avatar: 'coraline.jpg', post_count: 50, gender: 1, last_post_date: 1.day.ago, sheet: '{}', sheet: load_sheet('crossover', 'coraline'))
 
 hank = Character.create!(user: luisfelipe, name: 'Hank', avatar: 'hank.png', post_count: 199, last_post_date: Time.now, sheet: '{}')
 diana = Character.create!(user: mariana, name: 'Diana', avatar: 'diana.png', post_count: 299, gender: 1, last_post_date: Time.now, sheet: '{}')

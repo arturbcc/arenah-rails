@@ -223,7 +223,7 @@ describe Sheet::AttributesGroup do
 
   describe '#to_params' do
     let(:attribute_group) do
-      Sheet::AttributesGroup.new({
+      Sheet::AttributesGroup.new(
         name: 'Group',
         extra_points: 10,
         points: 100,
@@ -233,7 +233,7 @@ describe Sheet::AttributesGroup do
           { name: 'attribute 1', points: 10 },
           { name: 'attribute 1', points: 25 }
         ]
-      })
+      )
     end
 
     context 'without custom params' do

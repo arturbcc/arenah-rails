@@ -22,10 +22,11 @@ class Game < ActiveRecord::Base
     @system ||= Sheet::System.new(super)
   end
 
-  def system_attributes=(hash)
-    system.assign_attributes(hash)
-    self[:system] = system.as_json
-  end
+  # TODO: Do we need this method?
+  # def system_attributes=(hash)
+  #   system.assign_attributes(hash)
+  #   self[:system] = system.as_json
+  # end
 
   def close!
     inactive!

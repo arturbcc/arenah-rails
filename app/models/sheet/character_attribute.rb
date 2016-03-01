@@ -39,13 +39,15 @@ module Sheet
     end
 
     def to_params
-      {
-        base_attribute_group: base_attribute_group,
-        base_attribute_name: base_attribute_name,
+      params = {
         name: name,
         points: points,
         value: value
       }
+      params[:base_attribute_group] = base_attribute_group if base_attribute_group.present?
+      params[:base_attribute_name] = base_attribute_name if base_attribute_name.present?
+
+      params
     end
 
     private

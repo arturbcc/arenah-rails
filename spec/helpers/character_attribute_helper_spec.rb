@@ -102,25 +102,25 @@ describe CharacterAttributeHelper do
   describe '#smart_description' do
     context 'description is present' do
       it 'includes the smart-description class' do
-        attribute = Sheet::CharacterAttribute.new({ name: 'Força', description: 'description' })
+        attribute = Sheet::CharacterAttribute.new(name: 'Força', description: 'description')
         expect(helper.smart_description(attribute)).to include('smart-description')
       end
     end
 
     context 'description is not present' do
       it 'does not include the smart-description class' do
-        attribute = Sheet::CharacterAttribute.new({ name: 'Força' })
+        attribute = Sheet::CharacterAttribute.new(name: 'Força')
         expect(helper.smart_description(attribute)).not_to include('smart-description')
       end
     end
 
     it 'includes the attribute name' do
-      attribute = Sheet::CharacterAttribute.new({ name: 'Força' })
+      attribute = Sheet::CharacterAttribute.new(name: 'Força')
       expect(helper.smart_description(attribute)).to include('Força')
     end
 
     it 'includes the block given' do
-      attribute = Sheet::CharacterAttribute.new({ name: 'Força' })
+      attribute = Sheet::CharacterAttribute.new(name: 'Força')
       expect { |b| helper.smart_description(attribute, &b) }.to yield_with_no_args
     end
   end

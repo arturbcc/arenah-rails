@@ -470,35 +470,46 @@ describe Sheet::CharacterAttribute do
   end
 
   describe '#to_params' do
-    let(:base_attribute) do
-      Sheet::CharacterAttribute.new({
-        name: 'Agilidade',
-        points: '10'
-      })
+    context 'with base attribute' do
+      let(:base_attribute) do
+        Sheet::CharacterAttribute.new(name: 'Agilidade', points: '10')
+      end
+
+      let(:attribute) do
+        Sheet::CharacterAttribute.new(
+          name: 'Natação',
+          base_attribute_group: 'Atributos',
+          base_attribute_name: 'Agilidade',
+          points: 30,
+          formula: '1D100',
+          order: 1
+        )
+      end
+
+      it 'transforms the attribute in a hash params' do
+        attribute.base_attribute = base_attribute
+
+        expected = {
+          base_attribute_group: 'Atributos',
+          base_attribute_name: 'Agilidade',
+          name: 'Natação',
+          points: 30,
+          value: 40
+        }
+        expect(attribute.to_params).to eq(expected)
+      end
     end
 
-    let(:attribute) do
-      Sheet::CharacterAttribute.new({
-        name: 'Natação',
-        base_attribute_group: 'Atributos',
-        base_attribute_name: 'Agilidade',
-        points: 30,
-        formula: '1D100',
-        order: 1
-      })
-    end
-
-    it 'transforms the attribute in a hash params' do
-      attribute.base_attribute = base_attribute
-
-      expected = {
-        base_attribute_group: 'Atributos',
-        base_attribute_name: 'Agilidade',
-        name: 'Natação',
-        points: 30,
-        value: 40
-      }
-      expect(attribute.to_params).to eq(expected)
+    context 'without base attribute' do
+      it 'transforms the attribute in a hash params' do
+        expected = {
+          name: 'Natação',
+          points: nil,
+          value: 0
+        }
+        attribute = Sheet::CharacterAttribute.new(name: 'Natação')
+        expect(attribute.to_params).to eq(expected)
+      end
     end
   end
 
