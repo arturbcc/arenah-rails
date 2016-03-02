@@ -232,9 +232,7 @@
       "position": "column_2",
       "type": "text",
       "source_type": "list",
-      "character_attributes": [
-        { "name": "Transformação em Youkai completo", "description": "Inuyasha pode se transformar em Youkai completo se a situação for complexa demais para que ele resolva sozinho. Este recurso pode ser usado apenas uma vez por semana", "action": "attack" }
-      ]
+      "character_attributes": []
     },
     {
       "name": "Equipamentos",
@@ -244,6 +242,29 @@
       "type": "equipments",
       "source_type": "equipments",
       "equipments": [
+        {
+          "name": "Nuvem",
+          "description": "A nuvem de Goku era seu meio de transporte quando era mais novo, ainda treinando sob a tutela do Mestre Kame.",
+          "image": "cloud.png",
+          "slots": [
+            { "position": "feet" }
+          ],
+          "modifiers": [],
+          "initiative": 2
+        },
+        {
+          "name": "Bastão",
+          "description": "O bastão mágico é capaz de aumentar ou diminuir de tamanho de acordo com a vontade de seu portador.",
+          "image": "staff.png",
+          "slots": [
+            { "position": "left-hand" },
+            { "position": "right-hand" }
+          ],
+          "modifiers": [
+          ],
+          "damage": "1D4",
+          "initiative": -1
+        }
       ]
     }
   ]
