@@ -1,0 +1,251 @@
+{
+  "attributes_groups": [
+    {
+      "name": "Dados",
+      "page": 1,
+      "order": 1,
+      "type": "character_card",
+      "position": "header",
+      "source_type": "fixed",
+      "show_on_posts": false,
+      "instructions": "<p>Preencha os dados básicos de seu personagem. Como a temática desta sala é crossover, todas as raças e classes são permitidas, mas em caso de dúvida entre em contato com o mestre.</p>",
+      "character_attributes": [
+        { "name": "Nome", "content": "Palave" },
+        { "name": "Nascimento", "content": "27 de março de 2000" },
+        { "name": "Local", "content": "Suíça" },
+        { "name": "Sexo", "content": "Feminino" },
+        { "name": "Altura", "content": "1,66m" },
+        { "name": "Peso", "content": "60kg" },
+        { "name": "Classe", "content": "Professora" },
+        { "name": "Nível", "content": "1" },
+        { "name": "Idiomas", "content": "Padrão" },
+        { "name": "Raça", "content": "Humana" },
+        { "name": "Idade", "content": "28" },
+        { "name": "Religião", "content": "Cristã" }
+      ]
+    },
+    {
+      "name": "Dados Extras",
+      "page": 1,
+      "order": 2,
+      "type": "table",
+      "position": "column_2",
+      "source_type": "table",
+      "show_on_posts": false,
+      "character_attributes": [
+        {
+          "name": "Carregar",
+          "base_attribute_group": "Atributos",
+          "base_attribute_name": "Força",
+          "abbreviation": "",
+          "description": "",
+          "order": 1,
+          "table_name": "Carregar"
+        },
+        {
+          "name": "Levantar",
+          "base_attribute_group": "Atributos",
+          "base_attribute_name": "Força",
+          "abbreviation": "",
+          "description": "",
+          "order": 2,
+          "table_name": "Levantar"
+        },
+        {
+          "name": "Velocidade",
+          "base_attribute_group": "Atributos",
+          "base_attribute_name": "Agilidade",
+          "abbreviation": "",
+          "description": "",
+          "order": 3,
+          "table_name": "Velocidade"
+        },
+        {
+          "name": "Bônus de dano",
+          "base_attribute_group": "Atributos",
+          "base_attribute_name": "Força",
+          "abbreviation": "",
+          "description": "",
+          "order": 4,
+          "table_name": "Bônus de dano"
+        }
+      ]
+    },
+    {
+      "name": "Atributos",
+      "page": 1,
+      "order": 1,
+      "type": "name_value",
+      "position": "column_1",
+      "source_type": "fixed",
+      "show_on_posts": true,
+      "order_on_posts": 1,
+      "attributes_points_formula": "4 * points",
+      "group_points_formula": "100 + dados=>nivel",
+      "instructions": "<p>Funcionam como uma forma de transportar um Personagem para o mundo fictício e estabelecer comparações entre ele e as diversas criaturas. São os Atributos que descrevem seu Personagem como ele é. São em número de 8, divididos em físicos e mentais. Os Atributos físicos são Constituição, Força, Destreza e Agilidade e os mentais são Inteligência, Força de Vontade, Percepção e Carisma</p> <p>Os Atributos variam de acordo com seus dados de comparação, sendo que um humano possui normalmente 3D, com Atributos variando de 3 a 18 (ver Dados de Comparação).</p><p>Os personagens começam o jogo com 101 pontos de atributos e ganham mais um por nível. Para ter uma base de comparação, uma pessoa comum teria 9 pontos em todos os atributos. Valores acima disso são considerados excepcionais, e abaixo disso são deficientes.</p>",
+      "character_attributes": [
+        {
+          "name": "Força",
+          "abbreviation": "Fr",
+          "order": 1,
+          "description": "<p>Determina a força física do Personagem, sua capacidade muscular. A Força não tem tanta influência sobre a aparência quanto a Constituição — um lutador magrinho de karatê pode ser forte o bastante para quebrar pilhas de tijolos, mas um fisiculturista musculoso dificilmente poderia igualar a proeza.</p> <p>A Força, como a Constituição, tem influência sobre o cálculo dos Pontos de Vida. Quanto maior a FR, mais PVs um Personagem terá. A Força também afeta o dano que ele é capaz de causar com armas de combate corporal, e peso máximo que pode carregar ou sustentar (por poucos instantes).</p>",
+          "points": 10
+        },
+        {
+          "name": "Constituição",
+          "abbreviation": "Con",
+          "order": 2,
+          "description": "Determina o vigor, saúde e condição física do Personagem. De modo geral, um Personagem com um baixo valor em Constituição é franzino e feio, enquanto um valor alto garante uma boa aparência — ou um aspecto de brutamontes, você decide. Isso não significa necessariamente que o Personagem seja forte ou fraco; isso é determinado pela Força. A Constituição determina a quantidade de Pontos de Vida — quanto mais alta a CON, mais PVs o Personagem terá. Também serve para testar a resistência a venenos, fadiga e rigores climáticos e físicos.",
+          "points": 10
+        },
+        {
+          "name": "Destreza",
+          "abbreviation": "Dex",
+          "order": 3,
+          "description": "Define a habilidade manual do Personagem, sua destreza com as mãos e/ou pés. Não inclui a agilidade corporal, apenas a destreza manual. Um Personagem com alta Destreza pode lidar melhor com armas, usar ferramentas, operar instrumentos delicados, atirar com arco-e-flecha, agarrar objetos em pleno ar...",
+          "points": 8
+        },
+        {
+          "name": "Agilidade",
+          "abbreviation": "Agi",
+          "order": 4,
+          "description": "Ao contrário da Destreza, a Agilidade não é válida para coisas feitas com as mãos — mas sim para o corpo todo. Com um alto valor em Agilidade um Personagem pode correr mais rápido, equilibrar-se melhor sobre um muro, dançar com mais graça, esquivar-se de ataques... É importante fixar a diferença entre Destreza e Agilidade para fins de jogo.",
+          "points": 10
+        },
+        {
+          "name": "Inteligência",
+          "abbreviation": "Int",
+          "order": 5,
+          "description": "Inteligência é a capacidade de resolver problemas, nem mais e nem menos. Um Personagem inteligente está mais apto a compreender o que ocorre à sua volta e não se deixa enganar tão facilmente. Também lida com a memória, capacidade de abstrair conceitos e descobrir coisas novas.",
+          "points": 10
+        },
+        {
+          "name": "Força de vontade",
+          "abbreviation": "Will",
+          "order": 6,
+          "description": "Esta é a capacidade de concentração e determinação do Personagem. Uma alta Força de Vontade fará com que um Personagem resista a coisas como tortura, hipnose, pânico, tentações e controle da mente. O Mestre também pode exigir Testes de Força de Vontade para verificar se um Personagem não fica apavorado diante de uma situação amedrontadora. Também está relacionada com a Magia e poderes psíquicos.",
+          "points": 16
+        },
+        {
+          "name": "Percepção",
+          "abbreviation": "Per",
+          "order": 7,
+          "description": "É a capacidade de observar o mundo à volta e perceber detalhes importantes — como aquele cano de revólver aparecendo na curva do corredor. Um Personagem com alta Percepção está sempre atento a coisas estranhas e minúcias quase imperceptíveis, enquanto o sujeito com Percepção baixa é distraído e avoado.",
+          "points": 10
+        },
+        {
+          "name": "Carisma",
+          "abbreviation": "Car",
+          "order": 8,
+          "description": "<p>Determina o charme do Personagem, sua capacidade de fazer com que outras pessoas gostem dele. Um alto valor em Carisma não quer dizer que ele seja bonito ou coisa assim, apenas simpático: uma modelo profissional que tenha alta Constituição e baixo Carisma seria uma chata insuportável; um baixinho feio e mirrado, mas simpático, poderia reunir sem problemas montes de amigos à sua volta.</p> <p>O Carisma também define a Sorte de um Personagem. Não existe um Atributo Sorte, mas em situações complicadas, o Jogador pode pedir ao Mestre que Teste sua Sorte. Afinal de contas, pessoas de “alto astral” costumam ser mais afortunadas que os pessimistas resmungões.</p>",
+          "points": 10
+        }
+      ]
+    },
+    {
+      "name": "Perícias",
+      "page": 1,
+      "order": 1,
+      "type": "based",
+      "position": "column_2",
+      "source_type": "list",
+      "show_on_posts": false,
+      "group_points_formula": "10 * dados=>idade + 5 * atributos=>inteligencia",
+      "instructions": "Determina o que seu Personagem sabe fazer. Ele pode saber usar uma espada, ou ser um excelente carpinteiro. É a Perícia que diz o quão bom ele é em determinada profissão. As Perícias são representadas em porcentagem.",
+      "character_attributes": [
+        { "name": "História", "points": 70, "description": "<b>História</b> é a ciência que estuda o Homem e sua ação no tempo e no espaço, concomitante à análise de processos e eventos ocorridos no passado. História como termo também pode verificar toda a informação do passado que pode ter sido requerida ou arquivada em todas as línguas por todo o mundo, isto como intermédio de registos." },
+        { "name": "Heráldica", "points": 12,  "description": "<p>A <b>heráldica</b> refere-se simultaneamente à ciência e à arte de descrever os <b><a href='/wiki/Bras%C3%A3o_de_armas' title='Brasão de armas'>brasões de armas</a></b> ou <b><a href='/wiki/Escudo_(her%C3%A1ldica)' title='Escudo (heráldica)'>escudos</a></b>. As origens da heráldica remontam aos tempos em que era imperativo distinguir os participantes das batalhas e dos torneios, assim como descrever os serviços por eles prestados e que eram pintados nos seus escudos. No entanto, é importante notar que um brasão de armas é definido não visualmente, mas antes pela sua descrição escrita, a qual é dada numa linguagem própria – a linguagem heráldica.</p><p style='text-align: center'><img src='http://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/BXVI_CoA_like_gfx_PioM.svg/166px-BXVI_CoA_like_gfx_PioM.svg.png' style='height: 100px' /></p>" },
+        { "name": "Natação", "points": 27,  "base_attribute_group": "Atributos", "base_attribute_name": "Agilidade", "description": "<p><b>Natação</b> é a capacidade do homem e de outros animais de se deslocarem através de movimentos efetuados no meio líquido, geralmente sem ajuda <font color='red'>artificial</font>. A natação é uma actividade que pode ser simultaneamente útil e recreativa. As suas principais utilizações são recreativas, balneares, pesca, exercício e desporto.</p><p style='text-align: center'><img src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Swimming.breaststroke.arp.750pix.jpg/250px-Swimming.breaststroke.arp.750pix.jpg' /></p>" },
+        { "name": "Sedução", "points": 35,  "base_attribute_group": "Atributos", "base_attribute_name": "Carisma", "description": "<b>Sedução</b> é a capacidade de encantar o outro com fins de atingir determinados objetivos." },
+        { "name": "Lábia", "points": 37,  "base_attribute_group": "Atributos", "base_attribute_name": "Carisma", "description": "Astúcia, manha" },
+        { "name": "Manha", "points": 10,  "base_attribute_group": "Atributos", "base_attribute_name": "Carisma", "description": "Astúcia" },
+        { "name": "Montaria - cavalo", "points": 10,  "base_attribute_group": "Atributos", "base_attribute_name": "Agilidade", "description": "<p>A arte de montar a cavalo que compreende todas as práticas desportivas que envolvam este animal.</p><p style='text-align: center'><img src='http://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Trakhener_-_Dressur_Zweites_2.jpg/250px-Trakhener_-_Dressur_Zweites_2.jpg' style='height: 100px' /></p>" },
+        { "name": "Prestidigitação", "points": 12,  "base_attribute_group": "Atributos", "base_attribute_name": "Destreza", "description": "Capacidade ou destreza de iludir utilizando as mãos; ilusionismo. Técnica ou habilidade de iludir (alguém) com a ajuda das mãos; ilusionismo ou mágica. " }
+      ]
+    },
+    {
+      "name": "Aprimoramentos",
+      "page": 1,
+      "order": 2,
+      "position": "column_1",
+      "type": "name_value",
+      "source_type": "list",
+      "group_points_formula": "5 + floor(dados=>nivel / 3)",
+      "instructions": "Aprimoramento: São pontos que um Jogador possui para <i>“refinar”</i> a história de seu Personagem. Podem ser utilizados para conseguir aliados, mais riquezas, mais poder, Magia; e depende de cada Jogador gastar seus pontos da maneira que achar melhor. Os Jogadores começam com 5 pontos de Aprimoramento por Personagem. Aprimoramentos são vantagens que um Jogador pode comprar para melhorar seu Personagem, ou desvantagens que pode comprar para limitar Personagens muito poderosos.",
+      "character_attributes": [
+        { "name": "Sensitivo", "cost": 1, "description": "<p>Seu Personagem possui grande intuição, uma sensibilidade extrema que lhe permite saber sobre coisas mesmo sem ter acesso a informações sobre elas.</p><p><b>1 ponto</b>: o Personagem sonha com coisas sobrenaturais, que podem vir a ocorrer. Escreve livros, modela esculturas e pinta quadros a respeito. Esses quadros devem ser usados pelo Mestre como ajuda na preparação de Campanhas e Aventuras.</p><p><b>2 pontos</b>: o Personagem possui uma espécie de sexto sentido,uma percepção extra-sensorial que beira a paranormalidade. Em alguns casos, com a permissão do Mestre, o Jogador pode tentar um Teste de Percepção para notar coisas que estão além dos sentidos normais: uma presença sobrenatural, um risco para sua vida ou a localização de um objeto perdido.</p>" },
+        { "name": "Presença invisível", "cost": 2, "description": "<p><b>2 pontos</b>: você tem a habilidade de não ser notado, as pessoas só percebem sua presença quando você se anuncia. O personagem não está realmente invisível, mas parece tão insignificante que as pessoas não prestam atenção nele, a menos que venha a se expor abertamente.</p>" },
+        { "name": "Inimigo", "cost": -2, "description": "<p><b>-1 ponto cada</b>: o personagem representa perigo para alguém, ou alguém o quer morto por algum motivo. Seu inimigo sempre será bem mais forte que você, e caso o vença, ele será substituído por outro ainda mais forte. O Mestre deve criar os inimigos e utilizá-los como NPCs durante as aventuras. </p>" },
+      ]
+    },
+    {
+      "name": "Itens",
+      "page": 2,
+      "order": 1,
+      "position": "column_1",
+      "type": "text",
+      "source_type": "open",
+      "character_attributes": [
+        { "name": "Kit de primeiros socorros" },
+        { "name": "Bolsa" },
+        { "name": "Saco de dinheiro" },
+        { "name": "Amuleto da sorte" }
+      ]
+    },
+    {
+      "name": "História",
+      "page": 3,
+      "order": 1,
+      "position": "column_1",
+      "type": "rich_text",
+      "source_type": "open",
+      "instructions": "A história do <b>personagem</b> é importante para torná-lo mais real, para que se possa compreendê-lo de forma mais profunda e detalhada. Escreva o que achar relevante sobre o passado, o presente e as ambições para o futuro, bem como a aparência, suas principais habilidades e os eventos pelos quais se tornou famoso.",
+      "character_attributes": [
+        {
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur metus quis cursus semper. Morbi ac pharetra lorem. Phasellus non congue dolor. Mauris molestie malesuada porta. Cras in tempor ex, sed interdum nisi. Morbi ultrices sed diam ut porttitor. Integer et tortor erat. Nam malesuada pharetra odio sed pharetra. Morbi ullamcorper nibh mi, egestas ullamcorper ipsum cursus vitae. Phasellus blandit dolor nec quam aliquam, vel fermentum massa dignissim. Duis ut justo eu diam euismod fringilla. Proin iaculis lectus at dolor placerat blandit. Phasellus bibendum faucibus posuere. Fusce et justo vel erat mollis tempor nec in quam. Aenean non tristique orci. Suspendisse imperdiet volutpat magna, sit amet euismod est blandit a. Mauris eu velit id nibh faucibus lobortis ut ac dolor. Duis faucibus nulla metus, in lacinia felis molestie semper. Nullam ac aliquet turpis, a lacinia nulla. Suspendisse id leo a dolor consequat congue. Aliquam in orci augue. Praesent ac fringilla lectus. Ut finibus lacus ut risus tempor, sed auctor risus auctor. Phasellus iaculis metus a ligula cursus porta. Donec dignissim commodo posuere. Ut aliquam dui id nisi fringilla, ut malesuada felis ultricies. Duis sed rhoncus libero, non euismod urna. Vivamus fermentum fringilla velit id finibus. Donec et urna convallis, commodo ligula porta, euismod est. Integer a sem pulvinar, sagittis nunc ac, facilisis massa. Vivamus mi odio, iaculis eget cursus eget, posuere eget nisl. In imperdiet tempor tellus id egestas. Quisque venenatis nunc quis erat volutpat, sit amet egestas eros feugiat. Nam ante dolor, porttitor nec ante et, maximus ullamcorper tellus. Vivamus scelerisque hendrerit mi ac placerat. Proin at metus augue. Proin tristique maximus lacus, non molestie odio pretium at. Morbi nisl risus, vehicula quis arcu tincidunt, dapibus ornare justo. Nullam commodo ex sit amet leo pulvinar, in hendrerit elit auctor. Duis placerat odio quis ullamcorper vulputate. Donec sollicitudin interdum augue egestas laoreet. Morbi vel nulla ipsum. Nullam euismod pretium est, vehicula vestibulum metus. Quisque eleifend sem lacus, fringilla lacinia mauris dictum ac. Curabitur imperdiet magna ligula, ut porttitor diam ullamcorper et."
+        }
+      ]
+    },
+    {
+      "name": "Status",
+      "page": 1,
+      "order": 3,
+      "position": "column_1",
+      "type": "mixed",
+      "show_on_posts": true,
+      "order_on_posts": 1,
+      "source_type": "fixed",
+      "character_attributes": [
+        { "name": "Vida", "points": 1, "total": 100, "order": 1, "type": "bar", "master_only": true, "description": "Indica quantos pontos de vida o personagem possui. Quando chegar a zero, o personagem desmaia e algo deve ser feito ou ele morrerá (ao atingir -5 pontos)", "formula": "ceiling((#{Atributos:Força} + #{Atributos:Constituição}) / 2) + #{Dados:Nível} - 1" },
+        { "name": "Magia", "points": 70, "total": 100, "order": 2, "type": "bar", "master_only": true, "description": "Poder arcano do personagem. Quanto mais pontos de magia, mais magias diferentes o mago pode invocar e mais fortes elas serão." },
+        { "name": "XP", "points": 7777, "order": 3, "type": "name_value", "master_only": true, "description": "Pontos de experiência do personagem." },
+        { "name": "PH", "points": 20, "order": 4, "type": "name_value", "master_only": true, "description": "Pontos heróicos funcionam como um reforço aos PVs do Personagem. São pontos que podem ser usados em situações que envolvam atos heróicos. O Personagem os adquire através de treino em artes marciais.", "formula": "is_present(#{Aprimoramentos:Pontos Heróicos}) * #{Aprimoramentos:Pontos Heróicos} * #{Dados:Nível}" },
+        { "name": "Recursos", "points": 8222, "order": 5, "type": "character", "master_only": true, "description": "Dinheiro do personagem", "prefix": "$" },
+        { "name": "Anime", "content": "", "order": 6, "type": "text" }
+      ]
+    },
+    {
+      "name": "Grimório",
+      "page": 2,
+      "order": 2,
+      "position": "column_2",
+      "type": "text",
+      "source_type": "list",
+      "character_attributes": [
+        { "name": "Alarme", "description": "<strong>Daemon:</strong> Entender Humanos/Água 3 <br><strong>Custo:</strong> 1 ponto por criatura<br> <strong>Duração:</strong> sustentável <br><strong>Alcance:</strong> padrão<br><p>Esta magia permite a uma criatura se mover e respirar livremente na água doce ou salgada. Ela não precisa de Perícias para nadar e pode se mover na água com a mesma velocidade que teria em terra (normalmente, sem esta magia, um Personagem na água se move com metade da velocidade normal). Lançada sobre uma criatura marinha, a magia tem efeito contrário  permitindo que ela possa respirar em terra.</p>", "action": "defense" },
+        { "name": "Asfixia", "description": "<strong>Daemon:</strong> Controlar Ar 5<br/><strong>Custo:</strong> padrão<br/><strong>Duração:</strong> sustentável<br/> <strong>Alcance:</strong> padrão<br/> <p>Lançada contra uma criatura, esta magia exige um teste de Resistência; se falhar, a vítima não consegue mais respirar.Uma vítima de Asfixia pode prender a respiração durante Rx5 minutos (CON rodadas no sistema Daemon), se estiver em repouso ou velocidade normal; ou um turno por ponto de Resistência (ou CON/5) se estiver em combate ou realizando grande esforço físico. Esgotado esse tempo, come ça a perder 1 PV por turno até a morte. Esta magia não tem efeito contra mortos-vivos, golens, Criaturas Mágicas e obviamente </p>", "action": "attack" },
+        { "name": "Borrão", "description": "<strong>Daemon: </strong> Controlar Luz 4<br><strong>Custo:  </strong> padrão<br><strong>Duração:</strong>  sustentável<br><strong>Alcance:</strong>  apenas o mago<br><p>Uma variante da magia Imagem Turva (veja mais adiante), mas com exigências diferentes  mais acessíveis para magos do Ar. No entanto, ela afeta apenas o próprio mago. Esta magia faz com que a imagem do Mago apareça borrada, o que dificulta muito ataques contra o mago. Lutar com ele será bem mais difícil: o atacante sofre um redutor de -1 em Habilidade (ou 20% em seu ataque). Personagens com Sentidos Especiais de qualquer tipo não podem ser enganados pelo Borrão, e atacam normalmente.</p>", "action": "defense" },
+        { "name": "Cores", "description": "<strong>Daemon: </strong> Controlar Luz 2<br /><strong>Custo:  </strong> 0<br /><strong>Duração:</strong> veja abaixo<br /><strong>Alcance:</strong> padrão<br /> <p>Esta mágica simples permite ao mago alterar as cores de uma pessoa, criatura ou objeto até o tamanho de um cavalo. Caso receba esta magia contra a sua vontade, o alvo tem direito a um teste de Resistência +1 (ou +10%) para evitar o efeito. A magia não afeta coisas ou criaturas invisíveis. Dura um minuto para cada ponto de Focus do mago no Caminho empregado (mas também pode ser Cancelada).</p>" }
+      ]
+    },
+    {
+      "name": "Equipamentos",
+      "page": 2,
+      "order": 1,
+      "position": "column_2",
+      "type": "equipments",
+      "source_type": "equipments",
+      "equipments": []
+    }
+  ]
+}
