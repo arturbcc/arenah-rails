@@ -22,7 +22,7 @@ janeroe = User.create!(email: 'janeroe@arenah.com', name: 'Jane Roe', password: 
 visitante = User.create!(email: 'visitante@arenah.com', name: 'Visitante', password: '12345678', confirmed_at: Time.now)
 
 inuyasha = Character.create!(user: mariana, name: 'Inuyasha', avatar: 'inuyasha.jpg', post_count: 1093, signature: '[b]Quero mudar o mundo[/b], cruzar os céus e nada temer...', last_post_date: Time.now, sheet: load_sheet('crossover', 'inuyasha'))
-strange = Character.create!(user: luisfelipe, name: 'Strange', avatar: 'strange.jpg', post_count: 501, last_post_date: 1.day.ago, sheet_mode: 0, sheet: '{}')
+strange = Character.create!(user: luisfelipe, name: 'Strange', avatar: 'strange.jpg', post_count: 501, last_post_date: 1.day.ago, sheet_mode: 0, sheet: load_sheet('crossover', 'strange'))
 goku = Character.create!(user: willian, name: 'Goku', avatar: 'goku.jpg', post_count: 400, signature: '[img]http://stuffpoint.com/dragonball-z/image/107122-dragonball-z-dbz-banner.jpg[/img]', last_post_date: 1.day.ago, sheet: load_sheet('crossover', 'goku'))
 hiei = Character.create!(user: priscila, name: 'Hiei', avatar: 'hiei.png', post_count: 382, last_post_date: 4.days.ago, sheet: load_sheet('crossover', 'hiei'))
 oliver_tsubasa = Character.create!(user: nathalia, name: 'Oliver Tsubasa', avatar: 'oliver.jpg', post_count: 12, last_post_date: 7.days.ago, sheet: load_sheet('crossover', 'hiei'))
