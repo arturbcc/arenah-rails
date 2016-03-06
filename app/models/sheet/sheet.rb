@@ -89,6 +89,12 @@ module Sheet
       self
     end
 
+    def posts_attributes_groups
+      attributes_groups.select do |group|
+        group.show_on_posts?
+      end.sort_by(&:order_on_posts)
+    end
+
     private
 
     def nested_attributes

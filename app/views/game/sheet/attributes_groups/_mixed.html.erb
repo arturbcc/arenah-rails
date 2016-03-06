@@ -1,15 +1,10 @@
-<%
-  # FIXME: for now, flat version is false. Understand what it is and change it
-  flat_version = true
-%>
-
 <%= content_tag :div, class: 'attributes-group', data: group.to_params do %>
   <%= render 'game/sheet/attributes_groups/group_title', group: group %>
 
   <table class="table table-condensed attributes-with-base" data-accept-edit-mode>
     <tbody>
       <% group.character_attributes.each do |attribute| %>
-        <% partial =  partial_for_attribute_type(attribute.type, flat_version) %>
+        <% partial = partial_for_attribute_type(attribute.type, group.quick_access) %>
         <%= render "game/sheet/attributes_types/#{partial}",
           attribute: attribute %>
       <% end %>

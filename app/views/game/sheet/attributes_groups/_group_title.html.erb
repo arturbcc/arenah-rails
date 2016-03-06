@@ -1,34 +1,11 @@
 <%
-  # TODO: fix this flat_version. For now, I will let the show_title be always true.
-  # In the previous version, ShowTitle use FlatVersion behind it:
-  #
-  #  public bool ShowTitle()
-  # {
-  #   return (!this.FlatVersion && this.ShowTitleOnPosts) || (this.FlatVersion);
-  # }
-  show_title = true
-
-  # TODO: the same with this show_points_counter. For now, it will always be true.
-  # Maybe those logics should not be in view at all
-  #
-  # public bool ShowPointsCounter()
-  # {
-  #   return this.Points > 0 && this.FlatVersion;
-  # }
-  show_points_counter = true
-
-  # TODO show_edit_button will always be true for now.
-  # public bool ShowEditButton()
-  # {
-  #   return this.FlatVersion && this.SourceType != Source.SourceType.Table;
-  # }
-  show_edit_button = true
-
-  show_points = group.total_points != 0
+  show_title = !group.quick_access || group.show_title_on_posts
+  show_edit_button = !group.quick_access && group.type == 'table'
+  show_points_counter = group.total_points != 0 && !group.quick_access
 %>
 
 <% if show_title %>
-  <h2 <%= 'class=with_gutter' unless show_points %>>
+  <h2 <%= 'class=with_gutter' unless show_points_counter %>>
     <% if group.instructions.present? %>
       <%= link_to 'javascript:;', class: 'attributes-group-instructions' do %>
         <%= icon('info-circle') %>
@@ -37,7 +14,7 @@
 
     <%= group.name %>
 
-    <% if show_points_counter && show_points %>
+    <% if show_points_counter %>
       <span class="group-points">
         (<span class="<%= class_for_points_counter(group) %> points-counter"><%= group.used_points %></span> / <%= group.total_points %>)
       </span>
@@ -56,7 +33,7 @@
     <table class="attributes-group-instructions-content">
       <tr>
         <%#= FIXME: The tooltip partial should receive name and description, this fix below must be removed %>
-        <%= render 'tooltip', attribute: Sheet::CharacterAttribute.new(name: group.name, description: group.instructions) %>
+        <%= render 'game/sheet/tooltip', attribute: Sheet::CharacterAttribute.new(name: group.name, description: group.instructions) %>
      </tr>
     </table>
   <% end %>

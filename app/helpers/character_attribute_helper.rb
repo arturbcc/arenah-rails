@@ -55,12 +55,12 @@ module CharacterAttributeHelper
     end
   end
 
-  def partial_for_attribute_type(attribute_type, flat_version = true)
+  def partial_for_attribute_type(attribute_type, quick_access = true)
     case attribute_type
     when 'image'
-      flat_version ? 'name_value_total' : 'image'
+      quick_access ? 'name_value_total' : 'image'
     when 'bar'
-      flat_version ? 'name_value_total' : 'bar'
+      quick_access ? 'name_value_total' : 'bar'
     when 'based'
       'based'
     when 'name_value'

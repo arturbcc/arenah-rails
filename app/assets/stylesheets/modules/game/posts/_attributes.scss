@@ -1,0 +1,43 @@
+.basic-attributes, .attributes {
+  text-align: left;
+  margin-top: 15px;
+  background-color: #F5F5DC;
+  width: 185px;
+  padding: 5px;
+  border: 1px solid#ccc;
+  font: 500 13px Open Sans;
+}
+
+.attributes a {
+  color: #333;
+}
+
+/* Circles */
+
+.circle {
+  margin-top: 5px;
+}
+
+.circle div.attribute-name {
+  width: 180px;
+  text-align: left;
+  font-size: 13px;
+}
+
+.circle div.full, .circle div.empty {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #000;
+  border-radius: 25px;
+  float: left;
+  margin-right: 3px;
+  margin-top: 4px;
+}
+
+.circle .full {
+  background-color: #000;
+}
+
+.circle .empty {
+  background-color: transparent;
+}

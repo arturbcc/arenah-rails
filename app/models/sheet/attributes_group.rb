@@ -5,7 +5,7 @@ module Sheet
     include EmbeddedModel
 
     attr_accessor :name, :order, :page, :instructions,
-      :show_on_posts, :order_on_posts, :attributes_points_formula,
+      :show_on_posts, :order_on_posts, :show_title_on_posts, :attributes_points_formula,
       :group_points_formula, :character_attributes, :list, :equipments,
 
       # The position on the sheet where the group will appear.
@@ -37,6 +37,9 @@ module Sheet
 
       # Points will hold the result of the group_points_formula
       attr_accessor :points
+
+      # Extra fields not stored in the database:
+      attr_accessor :quick_access
 
       def show_on_posts?
         !!show_on_posts

@@ -78,8 +78,9 @@
       "type": "name_value",
       "position": "column_1",
       "source_type": "fixed",
-      "show_on_posts": true,
+      "show_on_posts": false,
       "order_on_posts": 1,
+      "show_title_on_posts": true,
       "attributes_points_formula": "4 * points",
       "group_points_formula": "100 + dados=>nivel",
       "instructions": "<p>Funcionam como uma forma de transportar um Personagem para o mundo fictício e estabelecer comparações entre ele e as diversas criaturas. São os Atributos que descrevem seu Personagem como ele é. São em número de 8, divididos em físicos e mentais. Os Atributos físicos são Constituição, Força, Destreza e Agilidade e os mentais são Inteligência, Força de Vontade, Percepção e Carisma</p> <p>Os Atributos variam de acordo com seus dados de comparação, sendo que um humano possui normalmente 3D, com Atributos variando de 3 a 18 (ver Dados de Comparação).</p><p>Os personagens começam o jogo com 101 pontos de atributos e ganham mais um por nível. Para ter uma base de comparação, uma pessoa comum teria 9 pontos em todos os atributos. Valores acima disso são considerados excepcionais, e abaixo disso são deficientes.</p>",
@@ -214,6 +215,7 @@
       "type": "mixed",
       "show_on_posts": true,
       "order_on_posts": 1,
+      "show_title_on_posts": true,
       "source_type": "fixed",
       "character_attributes": [
         { "name": "Vida", "points": 1, "total": 100, "order": 1, "type": "bar", "master_only": true, "description": "Indica quantos pontos de vida o personagem possui. Quando chegar a zero, o personagem desmaia e algo deve ser feito ou ele morrerá (ao atingir -5 pontos)", "formula": "ceiling((#{Atributos:Força} + #{Atributos:Constituição}) / 2) + #{Dados:Nível} - 1" },

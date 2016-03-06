@@ -64,6 +64,15 @@
     <%= author.name %>
   </div>
 
+  <% if author.sheet.attributes_groups && author.pc? %>
+    <% author.sheet.posts_attributes_groups.each do |group| %>
+      <div class="attributes">
+        <% group.quick_access = true %>
+        <%= render "game/sheet/attributes_groups/#{group.type}", group: group %>
+      </div>
+    <% end %>
+  <% end %>
+
   <!-- % if (author.Sheet.AttributesGroups.Count > 0 && author.Type == Character.CharacterType.PC) { %>
      < % foreach (AttributesGroup group in author.Sheet.FindToShow()) { %>
       <div class="attributes">
