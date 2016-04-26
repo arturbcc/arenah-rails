@@ -96,7 +96,7 @@ describe Sheet::Sheet do
     describe '#posts_attributes_groups' do
       it 'filters only the attributes groups market to be displayed on posts, sorted by the order_on_posts' do
         groups = @sheet.posts_attributes_groups
-        expect(groups.map(&:name)).to eq(['Atributos', 'Status'])
+        expect(groups.map(&:name)).to eq(['Status'])
       end
     end
   end

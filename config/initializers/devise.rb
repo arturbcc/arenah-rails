@@ -263,6 +263,8 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
+  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+
   # https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
   Rails.application.config.to_prepare do
     Devise::SessionsController.layout 'passport'

@@ -4,7 +4,11 @@
       "name": "Atributos",
       "page": 1,
       "order": 1,
+      "type": "name_value",
       "position": "column_1",
+      "source_type": "fixed",
+      "show_on_posts": false,
+      "instructions": "",
       "character_attributes": [
         {
           "name": "Força",
@@ -35,9 +39,12 @@
     {
       "name": "Itens",
       "page": 1,
-      "order": 2,
-      "position": "column_1",
-      "type": "list",
+      "order": 1,
+      "type": "text",
+      "position": "column_2",
+      "source_type": "list",
+      "show_on_posts": false,
+      "instructions": "",
       "character_attributes": [
         { "name": "Bússola" },
         { "name": "Corda" },
@@ -47,11 +54,12 @@
     },
     {
       "name": "História",
-      "page": 2,
+      "page": 1,
       "order": 1,
-      "position": "column_1",
       "type": "rich_text",
       "source_type": "open",
+      "position": "footer",
+      "show_on_posts": false,
       "instructions": "",
       "character_attributes": [
         {
@@ -62,29 +70,51 @@
     {
       "name": "Vida",
       "page": 1,
-      "order": 1,
-      "position": "column_2",
-      "points": 78,
-      "total": 100,
-      "images": [
-        { "type": "danger", "name": "danger.gif" },
-        { "type": "low", "name": "caution_red.gif" },
-        { "type": "ok", "name": "caution.gif" },
-        { "type": "safe", "name": "fine.gif" }
+      "order": 2,
+      "type": "mixed",
+      "position": "column_1",
+      "source_type": "fixed",
+      "show_on_posts": true,
+      "order_on_posts": 1,
+      "character_attributes": [
+        {
+          "name": "Vida",
+          "order": 1,
+          "points": 78,
+          "total": 100,
+          "type": "image",
+          "images": [
+            { "type": "danger", "name": "danger.gif" },
+            { "type": "low", "name": "caution_red.gif" },
+            { "type": "ok", "name": "caution.gif" },
+            { "type": "safe", "name": "fine.gif" }
+          ]
+        }
       ]
     },
     {
       "name": "Mana",
       "page": 1,
       "order": 2,
+      "type": "mixed",
       "position": "column_2",
-      "points": 8,
-      "total": 100,
-      "images": [
-        { "type": "danger", "name": "danger.gif" },
-        { "type": "low", "name": "caution_red.gif" },
-        { "type": "ok", "name": "caution.gif" },
-        { "type": "safe", "name": "fine.gif" }
+      "source_type": "fixed",
+      "show_on_posts": true,
+      "order_on_posts": 2,
+      "character_attributes": [
+        {
+          "name": "Mana",
+          "order": 1,
+          "points": 8,
+          "total": 100,
+          "type": "image",
+          "images": [
+            { "type": "danger", "name": "danger.gif" },
+            { "type": "low", "name": "caution_red.gif" },
+            { "type": "ok", "name": "caution.gif" },
+            { "type": "safe", "name": "fine.gif" }
+          ]
+        }
       ]
     }
   ]

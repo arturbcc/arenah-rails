@@ -492,7 +492,7 @@ describe Sheet::CharacterAttribute do
         expected = {
           base_attribute_group: 'Atributos',
           base_attribute_name: 'Agilidade',
-          name: 'Natação',
+          attribute_name: 'Natação',
           points: 30,
           value: 40
         }
@@ -503,7 +503,7 @@ describe Sheet::CharacterAttribute do
     context 'without base attribute' do
       it 'transforms the attribute in a hash params' do
         expected = {
-          name: 'Natação',
+          attribute_name: 'Natação',
           points: nil,
           value: 0
         }

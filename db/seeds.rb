@@ -33,7 +33,7 @@ hank = Character.create!(user: luisfelipe, name: 'Hank', avatar: 'hank.png', pos
 diana = Character.create!(user: mariana, name: 'Diana', avatar: 'diana.png', post_count: 299, gender: 1, last_post_date: Time.now, sheet: '{}')
 eric = Character.create!(user: carlos, name: 'Eric', avatar: 'eric.png', post_count: 19, last_post_date: Time.now, sheet: '{}')
 presto = Character.create!(user: willian, name: 'Presto', avatar: 'presto.png', post_count: 0, sheet: '{}')
-bobby = Character.create!(user: priscila, name: 'Bobby', avatar: 'bobby.png', post_count: 199, last_post_date: Time.now, sheet: '{}')
+bobby = Character.create!(user: priscila, name: 'Bobby', avatar: 'bobby.png', post_count: 199, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'bobby'))
 sheila = Character.create!(user: nathalia, name: 'Sheila', avatar: 'sheila.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: '{}')
 
 eva = Character.create!(user: mayara, name: 'Eva', avatar: 'evap.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: '{}')
@@ -80,7 +80,8 @@ dungeonsanddragons = Game.create!(
   description: 'A abertura do primeiro ano da série mostra um grupo de seis jovens em um parque de diversões embarcando em uma montanha russa chamada Dungeons & Dragons. Contudo, durante o passeio, um portal se abre e transporta as crianças para outro mundo, chamado simplesmente de Reino, no qual o grupo já aparece trajando outras roupas e recebendo logo em seguida armas mágicas — as armas do poder — de alguém que se apresenta como o Mestre dos Magos (Dungeon Master, no original, termo também presente nos jogos de role-playing game que deram origem à série). <br/> A partir daí, os jovens passam por diversas aventuras buscando voltar para casa, durante as quais o Vingador, um mago maléfico, tenta a todo custo tomar as armas do poder dos jovens com a intenção de derrotar tanto o Mestre dos Magos quanto Tiamat, para assim dominar o Reino. Ao longo do seriado, revela-se que o Vingador é, na realidade, filho do Mestre dos Magos.\n\n[center][img]/games/caverna-do-dragao/images/banners/caverna.jpg[/img][/center]',
   banner: 'caverna do dragão.jpg',
   character: mestre_dos_magos,
-  subtitle: 'Decifre os enigmas do Mestre dos Magos')
+  subtitle: 'Decifre os enigmas do Mestre dos Magos',
+  system: load_system('caverna-do-dragao'))
 
 
 hank.update(game: dungeonsanddragons)

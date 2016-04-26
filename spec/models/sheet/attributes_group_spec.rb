@@ -17,7 +17,7 @@ describe Sheet::AttributesGroup do
       expect(group.type).to eq('character_card')
       expect(group.position).to eq('header')
       expect(group.source_type).to eq('fixed')
-      expect(group.show_on_posts?).to be_falsy
+      expect(group.show_on_posts?).to be false
       expect(group.instructions).not_to be_blank
       expect(group.character_attributes.count).to eq(12)
     end
@@ -31,7 +31,7 @@ describe Sheet::AttributesGroup do
       expect(group.type).to eq('table')
       expect(group.position).to eq('column_2')
       expect(group.source_type).to eq('table')
-      expect(group.show_on_posts?).to be_falsy
+      expect(group.show_on_posts?).to be false
       expect(group.instructions).to be_blank
       expect(group.character_attributes.count).to eq(4)
     end
@@ -45,7 +45,7 @@ describe Sheet::AttributesGroup do
       expect(group.type).to eq('name_value')
       expect(group.position).to eq('column_1')
       expect(group.source_type).to eq('fixed')
-      expect(group.show_on_posts?).to be_truthy
+      expect(group.show_on_posts?).to be false
       expect(group.order_on_posts).to eq(1)
       expect(group.instructions).not_to be_blank
       expect(group.attributes_points_formula).to eq('4 * points')
@@ -62,7 +62,7 @@ describe Sheet::AttributesGroup do
       expect(group.type).to eq('based')
       expect(group.position).to eq('column_2')
       expect(group.source_type).to eq('list')
-      expect(group.show_on_posts?).to be_falsy
+      expect(group.show_on_posts?).to be false
       expect(group.instructions).not_to be_blank
       expect(group.attributes_points_formula).to be_nil
       expect(group.group_points_formula).to eq('10 * dados=>idade + 5 * atributos=>inteligencia')
@@ -79,7 +79,7 @@ describe Sheet::AttributesGroup do
       expect(group.type).to eq('name_value')
       expect(group.position).to eq('column_1')
       expect(group.source_type).to eq('list')
-      expect(group.show_on_posts?).to be_falsy
+      expect(group.show_on_posts?).to be false
       expect(group.instructions).not_to be_blank
       expect(group.attributes_points_formula).to be_nil
       expect(group.group_points_formula).to eq('5 + floor(dados=>nivel / 3)')
@@ -96,7 +96,7 @@ describe Sheet::AttributesGroup do
       expect(group.type).to eq('text')
       expect(group.position).to eq('column_1')
       expect(group.source_type).to eq('open')
-      expect(group.show_on_posts?).to be_falsy
+      expect(group.show_on_posts?).to be false
       expect(group.instructions).to be_blank
       expect(group.attributes_points_formula).to be_nil
       expect(group.character_attributes.count).to eq(0)
@@ -111,7 +111,7 @@ describe Sheet::AttributesGroup do
       expect(group.type).to eq('rich_text')
       expect(group.position).to eq('column_1')
       expect(group.source_type).to eq('open')
-      expect(group.show_on_posts?).to be_falsy
+      expect(group.show_on_posts?).to be false
       expect(group.instructions).not_to be_blank
       expect(group.character_attributes).to be_nil
     end
@@ -125,7 +125,7 @@ describe Sheet::AttributesGroup do
       expect(group.type).to eq('mixed')
       expect(group.position).to eq('column_1')
       expect(group.source_type).to eq('fixed')
-      expect(group.show_on_posts?).to be_truthy
+      expect(group.show_on_posts?).to be true
       expect(group.order_on_posts).to eq(1)
       expect(group.instructions).to be_blank
       expect(group.character_attributes.count).to eq(6)
@@ -140,7 +140,7 @@ describe Sheet::AttributesGroup do
       expect(group.type).to eq('text')
       expect(group.position).to eq('column_2')
       expect(group.source_type).to eq('list')
-      expect(group.show_on_posts?).to be_falsy
+      expect(group.show_on_posts?).to be false
       expect(group.instructions).to be_blank
       expect(group.character_attributes.count).to eq(0)
       expect(group.list.count).to eq(7)
@@ -155,7 +155,7 @@ describe Sheet::AttributesGroup do
       expect(group.type).to eq('equipments')
       expect(group.position).to eq('column_2')
       expect(group.source_type).to eq('equipments')
-      expect(group.show_on_posts?).to be_falsy
+      expect(group.show_on_posts?).to be false
       expect(group.instructions).to be_blank
       expect(group.character_attributes).to be_nil
       expect(group.equipments.count).to eq(11)

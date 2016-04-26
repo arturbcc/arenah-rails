@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << User.permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: User.permitted_parameters)
   end
 
   def store_location
