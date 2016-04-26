@@ -76,10 +76,10 @@ describe CharacterAttributeHelper do
   end
 
   describe '#partial_for_attribute_type' do
-    context 'flat version' do
+    context 'quick access (posts page)' do
       it 'discovers the type of the attribute' do
-        expect(helper.partial_for_attribute_type('image')).to eq('name_value_total')
-        expect(helper.partial_for_attribute_type('bar')).to eq('name_value_total')
+        expect(helper.partial_for_attribute_type('image')).to eq('image')
+        expect(helper.partial_for_attribute_type('bar')).to eq('bar')
         expect(helper.partial_for_attribute_type('based')).to eq('based')
         expect(helper.partial_for_attribute_type('name_value')).to eq('name_value')
         expect(helper.partial_for_attribute_type('text')).to eq('text')
@@ -87,10 +87,10 @@ describe CharacterAttributeHelper do
       end
     end
 
-    context 'not flat version' do
+    context 'plain sheet version' do
       it 'discovers the type of the attribute' do
-        expect(helper.partial_for_attribute_type('image', false)).to eq('image')
-        expect(helper.partial_for_attribute_type('bar', false)).to eq('bar')
+        expect(helper.partial_for_attribute_type('image', false)).to eq('name_value_total')
+        expect(helper.partial_for_attribute_type('bar', false)).to eq('name_value_total')
         expect(helper.partial_for_attribute_type('based', false)).to eq('based')
         expect(helper.partial_for_attribute_type('name_value', false)).to eq('name_value')
         expect(helper.partial_for_attribute_type('text', false)).to eq('text')

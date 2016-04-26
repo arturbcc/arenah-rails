@@ -1,11 +1,18 @@
-<div class="special-attribute pull-left">
-  <span>
-    <%= attribute.name %> (<%= attribute.points %>/<%= attribute.total %>)
-    <%= render 'game/sheet/modified_attribute_mark', attribute: attribute %>
-  </span>
+  <tr>
+    <td colspan="2">
+      <div class="special-attribute">
+        <span>
+          <%= attribute.name %>
+          <div class="pull-right">(<%= attribute.points %>/<%= attribute.total %>)</div>
+          <%= render 'game/sheet/modified_attribute_mark', attribute: attribute %>
+        </span>
 
-  <% percentage = bar_level(attribute.points, attribute.total) %>
-  <div class="progress-bar <%= bar_color(percentage) %> stripes">
-      <span style="width: <%= percentage %>%"></span>
-  </div>
-</div>
+        <% percentage = bar_level(attribute.points, attribute.total) %>
+        <div class="progress character-bar-attributes">
+          <div class="progress-bar progress-bar-striped" style="width: <%= percentage %>%">
+
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>

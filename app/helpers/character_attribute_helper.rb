@@ -58,9 +58,9 @@ module CharacterAttributeHelper
   def partial_for_attribute_type(attribute_type, quick_access = true)
     case attribute_type
     when 'image'
-      quick_access ? 'name_value_total' : 'image'
+      quick_access ? 'image' : 'name_value_total'
     when 'bar'
-      quick_access ? 'name_value_total' : 'bar'
+      quick_access ? 'bar' : 'name_value_total'
     when 'based'
       'based'
     when 'name_value'
