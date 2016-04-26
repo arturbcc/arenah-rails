@@ -1,6 +1,6 @@
 == CI Status
 
-[![Build Status](https://travis-ci.org/arturcp/arenah-rails.svg?branch=master)](https://travis-ci.org/arturcp/arenah-rails)
+[![Build Status](https://circleci.com/gh/arturcp/arenah-rails.svg?style=shield&circle-token=:circle-token)]()
 
 == Initial structure
 
