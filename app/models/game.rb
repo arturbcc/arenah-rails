@@ -4,7 +4,7 @@ class Game < ActiveRecord::Base
   extend FriendlyId
 
   has_many :topics
-  has_many :topic_groups
+  has_many :topic_groups, -> { order(:position) }
   has_many :characters
   has_many :subscriptions
 

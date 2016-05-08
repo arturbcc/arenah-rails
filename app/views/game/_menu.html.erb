@@ -8,7 +8,7 @@
         <%= menu_item(@area, area: :subscription, title: 'Inscreva-se', subtitle: 'Crie seu personagem',
               url: game_subscription_path(game), icon: 'check') unless @identity.game_master? %>
 
-        <%= menu_item @area, area: :topics, title: 'O jogo', subtitle: 'Vamos rolar os dados',
+        <%= menu_item @area, area: :topics, title: 'O fórum', subtitle: 'Vamos rolar os dados',
               url: game_topics_path(game), icon: 'comments-o' %>
 
         <%= menu_item @area, area: :characters, title: 'Personagens', subtitle: 'Quem está jogando',
