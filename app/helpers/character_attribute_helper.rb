@@ -22,7 +22,7 @@ module CharacterAttributeHelper
     percentage = bar_level(attribute.points, attribute.total);
     images = attribute.images.sort_by(&:type)
     divisor = 100 / attribute.images.count
-    image_name = images[(percentage / divisor).floor].name
+    image_name = (images[(percentage / divisor).floor] || images.last).name
 
     image_tag "/games/#{game_slug}/images/images_attributes/#{image_name}"
   end

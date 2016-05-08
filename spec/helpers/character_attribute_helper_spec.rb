@@ -134,7 +134,12 @@ describe CharacterAttributeHelper do
         { type: 'safe', name: 'fine.gif' },
         { type: 'safe', name: 'super_fine.gif' }
       ]
+    end
 
+    it 'renders the danger image when the bar is empty' do
+      attribute = Sheet::CharacterAttribute.new(points: 0, total: 100, images: images)
+      img = helper.image_attribute('crossover', attribute)
+      expect(img).to include('/crossover/images/images_attributes/danger.gif')
     end
 
     it 'renders the danger image' do
@@ -163,6 +168,12 @@ describe CharacterAttributeHelper do
 
     it 'renders the super fine image' do
       attribute = Sheet::CharacterAttribute.new(points: 85, total: 100, images: images)
+      img = helper.image_attribute('crossover', attribute)
+      expect(img).to include('/crossover/images/images_attributes/super_fine.gif')
+    end
+
+    it 'renders the super fine image when the bar is full' do
+      attribute = Sheet::CharacterAttribute.new(points: 100, total: 100, images: images)
       img = helper.image_attribute('crossover', attribute)
       expect(img).to include('/crossover/images/images_attributes/super_fine.gif')
     end
