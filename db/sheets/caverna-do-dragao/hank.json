@@ -1,6 +1,22 @@
 {
   "attributes_groups": [
     {
+      "name": "Itens",
+      "page": 1,
+      "order": 1,
+      "type": "text",
+      "position": "column_2",
+      "source_type": "list",
+      "show_on_posts": false,
+      "instructions": "",
+      "character_attributes": [
+        { "name": "Proteção de couro" },
+        { "name": "Caneca" },
+        { "name": "Arco mágico" },
+        { "name": "Grampos" }
+      ]
+    },
+    {
       "name": "Atributos",
       "page": 1,
       "order": 1,
@@ -12,48 +28,32 @@
       "character_attributes": [
         {
           "name": "Força",
-          "order": 1,
           "abbreviation": "Fr",
           "description": "<p>Determina a força física do Personagem, sua capacidade muscular. A Força não tem tanta influência sobre a aparência quanto a Constituição — um lutador magrinho de karatê pode ser forte o bastante para quebrar pilhas de tijolos, mas um fisiculturista musculoso dificilmente poderia igualar a proeza.</p><p>A Força, como a Constituição, tem influência sobre o cálculo dos Pontos de Vida. Quanto maior a FR, mais PVs um Personagem terá. A Força também afeta o dano que ele é capaz de causar com armas de combate corporal, e peso máximo que pode carregar ou sustentar (por poucos instantes).</p>",
+          "order": 1,
           "points": 9
         },
         {
-          "name": "Inteligência",
-          "order": 2,
+          "name": "Inteligêcia",
           "abbreviation": "Int",
           "description": "Inteligência é a capacidade de resolver problemas, nem mais e nem menos. Um Personagem inteligente está mais apto a compreender o que ocorre à sua volta e não se deixa enganar tão facilmente. Também lida com a memória, capacidade de abstrair conceitos e descobrir coisas novas.",
+          "order": 2,
           "points": 9
         },
         {
           "name": "Magia",
-          "order": 3,
           "abbreviation": "Mgc",
           "description": "Poder arcano do personagem. É com a magia que ele uma pessoa é capaz de fazer feitiços e usar armas mágicas.",
+          "order": 3,
           "points": 9
         },
         {
           "name": "Agilidade",
-          "order": 4,
           "abbreviation": "Agi",
           "description": "Ao contrário da Destreza, a Agilidade não é válida para coisas feitas com as mãos — mas sim para o corpo todo. Com um alto valor em Agilidade um Personagem pode correr mais rápido, equilibrar-se melhor sobre um muro, dançar com mais graça, esquivar-se de ataques... É importante fixar a diferença entre Destreza e Agilidade para fins de jogo.",
+          "order": 4,
           "points": 9
         }
-      ]
-    },
-    {
-      "name": "Itens",
-      "page": 1,
-      "order": 1,
-      "type": "text",
-      "position": "column_2",
-      "source_type": "list",
-      "show_on_posts": false,
-      "instructions": "",
-      "character_attributes": [
-        { "name": "Bússola" },
-        { "name": "Corda" },
-        { "name": "Tacape mágico" },
-        { "name": "Unicórnio" }
       ]
     },
     {
@@ -109,7 +109,7 @@
         {
           "name": "Mana",
           "order": 1,
-          "points": 8,
+          "points": 28,
           "total": 100,
           "type": "image",
           "images": [
