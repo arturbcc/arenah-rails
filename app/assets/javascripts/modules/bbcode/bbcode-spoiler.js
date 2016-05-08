@@ -20,7 +20,7 @@ define('bbcode-spoiler', [], function() {
   };
 
   fn._showSpoiler = function() {
-    var spoilerBlock = $(event.target).parents('bbcode-spoiler');
+    var spoilerBlock = $(event.target).parents('.bbcode-spoiler');
     spoilerBlock.find('.bbcode-spoiler__trigger').hide();
     spoilerBlock.find('.bbcode-spoiler__hidden-text').show();
   };
