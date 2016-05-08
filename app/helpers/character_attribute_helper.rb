@@ -67,6 +67,8 @@ module CharacterAttributeHelper
       'name_value'
     when 'text'
       'text'
+    when 'bullet'
+      quick_access ? 'bullet' : 'name_value_total'
     else
       'name_value_total'
     end

@@ -1,0 +1,142 @@
+{
+  "name": "Vampiro, A Máscara",
+  "initiative": {
+    "formula": "",
+    "order": "desc"
+  },
+  "life": {
+     "base_attribute_group": "",
+     "base_attribute_name": ""
+  },
+  "sheet": {
+    "pages": [
+      { "number": 1, "number_of_columns": 3, "show_header": true },
+      { "number": 2, "number_of_columns": 1, "show_header": false }
+    ],
+    "attributes_groups": [
+      {
+        "name": "Dados",
+        "page": 1,
+        "order": 1,
+        "type": "character_card",
+        "position": "header",
+        "source_type": "fixed",
+        "show_on_posts": false,
+        "instructions": "",
+        "character_attributes": [
+          { "name": "Nome", "order": "1", "description" : "Nome do personagem" },
+          { "name": "Nascimento", "order": "2", "description" : "Data de nascimento" },
+          { "name": "Local", "order": "3", "description" : "Local de nascimento" },
+          { "name": "Sexo", "order": "4", "description" : "" },
+          { "name": "Clã", "order": "5", "description" : "Brujah, Gangrel, Malkaviano, Nosferatu, Toreador, Tremere" }
+        ]
+      },
+      {
+        "name": "História",
+        "page": 2,
+        "order": 1,
+        "type": "rich_text",
+        "source_type": "open",
+        "position": "column_1",
+        "show_on_posts": false,
+        "instructions": "",
+        "character_attributes": []
+      },
+      {
+        "name": "Físicos",
+        "page": 1,
+        "order": 1,
+        "type": "mixed",
+        "position": "column_1",
+        "source_type": "fixed",
+        "show_on_posts": true,
+        "order_on_posts": 1,
+        "points": 8,
+        "character_attributes": [
+          {
+            "name": "Força",
+            "order": 1,
+            "type": "bullet",
+            "total": 5
+          },
+          {
+            "name": "Destreza",
+            "order": 2,
+            "type": "bullet",
+            "total": 5
+          },
+          {
+            "name": "Vigor",
+            "order": 3,
+            "type": "bullet",
+            "total": 5
+          }
+        ]
+      },
+      {
+        "name": "Sociais",
+        "page": 1,
+        "order": 1,
+        "type": "mixed",
+        "position": "column_2",
+        "source_type": "fixed",
+        "show_on_posts": true,
+        "order_on_posts": 1,
+        "points": 8,
+        "character_attributes": [
+          {
+            "name": "Carisma",
+            "order": 1,
+            "type": "bullet",
+            "total": 5
+          },
+          {
+            "name": "Manipulação",
+            "order": 2,
+            "type": "bullet",
+            "total": 5
+          },
+          {
+            "name": "Aparência",
+            "order": 3,
+            "type": "bullet",
+            "total": 5
+          }
+        ]
+      },
+      {
+        "name": "Mentais",
+        "page": 1,
+        "order": 1,
+        "type": "mixed",
+        "position": "column_3",
+        "source_type": "fixed",
+        "show_on_posts": true,
+        "order_on_posts": 1,
+        "points": 8,
+        "character_attributes": [
+          {
+            "name": "Percepção",
+            "order": 1,
+            "type": "bullet",
+            "total": 5
+          },
+          {
+            "name": "Inteligência",
+            "order": 2,
+            "type": "bullet",
+            "total": 5
+          },
+          {
+            "name": "Raciocínio",
+            "order": 3,
+            "type": "bullet",
+            "total": 5
+          }
+        ]
+      }
+    ]
+  },
+  "dice_roll_rules": [],
+  "dice_result_rules": []
+}

@@ -7,12 +7,12 @@
 
   <td class="text-right attribute circle">
     <div class="pull-right">
-      <% (0..attribute.total).each do |i| %>
+      <% (0..attribute.total - 1).each do |i| %>
         <div class='<%= i < attribute.points ? 'full' : 'empty' %>'></div>
       <% end %>
     </div>
 
-    <%=
+    <%#=
       editable_link({
         type: 'bullet',
         value: attribute.points,
@@ -25,4 +25,4 @@
   </td>
 
   <%= render 'game/sheet/tooltip', attribute: attribute %>
-</tr>
+<% end %>

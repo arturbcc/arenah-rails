@@ -42,7 +42,7 @@ class Character < ActiveRecord::Base
 
       sheet.life = sheet.find_character_attribute(
         game.system.life.base_attribute_group,
-        game.system.life.base_attribute_name)
+        game.system.life.base_attribute_name) if game.system.life.present?
     end
 
     sheet
