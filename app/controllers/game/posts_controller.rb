@@ -9,11 +9,15 @@ class Game::PostsController < Game::BaseController
   end
 
   def new
+    authenticate_user!
+
     @area = Area.new(:create_post)
     @post = Post.new
   end
 
   def edit
+    authenticate_user!
+
     @area = Area.new(:edit_post)
     @post = Post.find_by(topic: @topic, id: params[:id])
     @recipients = @post.present? ? @post.recipients.map(&:name) : ''

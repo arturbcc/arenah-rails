@@ -4,10 +4,10 @@
 <section id="page-body">
   <%= render 'breadcrumb', game: @game, topic: @topic %>
 
-  <input type="hidden" name="current-author" value="<%= @character.id %>" />
+  <input type="hidden" name="current-author" value="<%= character.id %>" />
   <header class="author">
     <div class="image-with-caret <%= 'master' if @identity.game_master? %>">
-      <%= avatar(@character, class: 'toggle-panel') %>
+      <%= avatar(character, class: 'toggle-panel') %>
 
       <% if @identity.game_master? %>
         <a href="javascript:;" id="change-author" class="toggle-panel">
@@ -20,13 +20,13 @@
     </h1>
     <div id="authors-panel">
       <section>
-        <%= link_to 'javascript:;', data: { id: @character.id }, class: 'impersonate' do %>
-          <%= avatar(@character, class: 'characterAvatar') %>
+        <%= link_to 'javascript:;', data: { id: character.id }, class: 'impersonate' do %>
+          <%= avatar(character, class: 'characterAvatar') %>
         <% end %>
 
-        <% @game.npcs.each do |character| %>
-          <%= link_to 'javascript:;', data: { id: @character.id }, class: 'impersonate' do %>
-            <%= avatar(@character, class: 'toggle-panel') %>
+        <% @game.npcs.each do |npc| %>
+          <%= link_to 'javascript:;', data: { id: npc.id }, class: 'impersonate' do %>
+            <%= avatar(npc, class: 'toggle-panel') %>
           <% end %>
         <% end %>
 
