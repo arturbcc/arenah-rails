@@ -30,7 +30,12 @@
       </ul>
       <div>
         <% if post.character.pc? %>
-            por <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = post.Author.Slug }) %>" data-toggle="modal" data-target="#remote-modal" data-width="1015px">< %: post.Author.Name%></a -->
+            por
+            <%= link_to post.character.name, game_sheet_path(post.character.slug), data: {
+                toggle: 'modal',
+                target: '#remote-modal',
+                width: '975px'
+              } %>
             em <%= post.created_at.strftime("%A, %d de %B de %Y às %H:%Mh") %>
         <% else %>
             por <strong><%= post.character.name %></strong>
