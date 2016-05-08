@@ -29,12 +29,12 @@ oliver_tsubasa = Character.create!(user: nathalia, name: 'Oliver Tsubasa', avata
 palace = Character.create!(user: mayara, name: 'Palace', avatar: 'palace.jpg', post_count: 10, gender: 1, last_post_date: 10.days.ago, sheet: load_sheet('crossover', 'palace'))
 coraline = Character.create!(user: pablo, name: 'Coraline', avatar: 'coraline.jpg', post_count: 50, gender: 1, last_post_date: 1.day.ago, sheet: load_sheet('crossover', 'coraline'))
 
-hank = Character.create!(user: luisfelipe, name: 'Hank', avatar: 'hank.png', post_count: 199, last_post_date: Time.now, sheet: '{}')
-diana = Character.create!(user: mariana, name: 'Diana', avatar: 'diana.png', post_count: 299, gender: 1, last_post_date: Time.now, sheet: '{}')
-eric = Character.create!(user: carlos, name: 'Eric', avatar: 'eric.png', post_count: 19, last_post_date: Time.now, sheet: '{}')
-presto = Character.create!(user: willian, name: 'Presto', avatar: 'presto.png', post_count: 0, sheet: '{}')
+hank = Character.create!(user: luisfelipe, name: 'Hank', avatar: 'hank.png', post_count: 199, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'hank'))
+diana = Character.create!(user: mariana, name: 'Diana', avatar: 'diana.png', post_count: 299, gender: 1, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'diana'))
+eric = Character.create!(user: carlos, name: 'Eric', avatar: 'eric.png', post_count: 19, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'eric'))
+presto = Character.create!(user: willian, name: 'Presto', avatar: 'presto.png', post_count: 0, sheet: load_sheet('caverna-do-dragao', 'presto'))
 bobby = Character.create!(user: priscila, name: 'Bobby', avatar: 'bobby.png', post_count: 199, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'bobby'))
-sheila = Character.create!(user: nathalia, name: 'Sheila', avatar: 'sheila.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: '{}')
+sheila = Character.create!(user: nathalia, name: 'Sheila', avatar: 'sheila.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'sheila'))
 
 eva = Character.create!(user: mayara, name: 'Eva', avatar: 'evap.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: '{}')
 amy = Character.create!(user: mariana, name: 'Amy', avatar: 'amy.png', character_type: 2, gender: 1, post_count: 199, last_post_date: Time.now, sheet: '{}')
