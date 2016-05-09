@@ -18,7 +18,7 @@ page.at('game/posts#new game/posts#edit', function() {
       ComposePost = require('compose-post'),
       Editor = require('editor');
 
-  var recipients = new Recipients('#recipients'),
+  var recipients = new Recipients('#post_recipients'),
       characters = new Characters(),
       composePost = new ComposePost(recipients, characters);
 

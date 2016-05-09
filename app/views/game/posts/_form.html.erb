@@ -4,7 +4,6 @@
 <section id="page-body">
   <%= render 'breadcrumb', game: @game, topic: @topic %>
 
-  <input type="hidden" name="current-author" value="<%= character.id %>" />
   <header class="author">
     <div class="image-with-caret <%= 'master' if @identity.game_master? %>">
       <%= avatar(character, class: 'toggle-panel') %>
@@ -40,33 +39,35 @@
 
   <h3><% @area.edit_post? ? 'Edição de post' : 'Novo post' %></h3>
 
-  <% url = @area.edit_post? ? game_edit_post_path(@game, @topic, @post) : game_new_post_path(@game, @topic) %>
+  <% url = @area.edit_post? ? game_update_post_path(@game, @topic, @post) : game_create_post_path(@game, @topic) %>
   <%= form_for(@post, url: url, id: 'post-form') do |f| %>
-    <%= render 'recipients' %>
+    <%= render 'recipients', f: f %>
 
     <div class="box-left">
-      <%= f.text_area :message,
-            id: 'bbcodeEditor',
-            class: @identity.game_master? ? 'master' : 'editor',
-            data: {
-              'bbcode-editor' => ''
-            }
+      <%=
+        f.text_area :message,
+          id: 'bbcodeEditor',
+          class: @identity.game_master? ? 'master' : 'editor',
+          data: { bbcode_editor: '' }
       %>
 
       <div class="pull-right bottom-line-options">
         <button type="button" class="btn btn-default" id="preview">Visualizar</button>
-        <%= content_tag :button,
-              'Cancelar',
-              class: 'btn btn-danger',
-              id: 'back',
-              data: { url: game_posts_path(@game, @topic) }
+        <%=
+          content_tag :button,
+            'Cancelar',
+            class: 'btn btn-danger',
+            id: 'back',
+            data: { url: game_posts_path(@game, @topic) }
         %>
 
-        <%= content_tag :button,
-              'Salvar',
-              class: 'btn btn-success',
-              onclick: 'ComposePost.save();'
+        <%=
+          content_tag :button,
+            'Salvar',
+            class: 'btn btn-success'
         %>
+        <%#= FIXME: remove this code below or implement the correct way %>
+        <%#= ,onclick: 'ComposePost.save();' %>
       </div>
     </div>
 
@@ -75,4 +76,4 @@
 </section>
 
 <%= content_tag :div, '', data: { recipients: recipients_ids(@post) } %>
-<%= content_tag :div, '', data: { 'characters-list' => game_characters_list_path(@game) } %>
+<%= content_tag :div, '', data: { characters_list: game_characters_list_path(@game) } %>

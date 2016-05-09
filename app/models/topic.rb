@@ -16,4 +16,12 @@ class Topic < ActiveRecord::Base
   scope :by_group_id, ->(group_id) { joins(:topic_group)
     .where('topic_groups.id = ?', group_id).order('topic_groups.position')
   }
+
+  # TODO: check if this method is necessary. If so, maybe it should be in a
+  # after save of the post instance
+  # def recalculate_last_post
+  #   last_post = posts.last
+  #   post_id = last_post.id
+  #   save!
+  # end
 end

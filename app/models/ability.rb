@@ -40,4 +40,8 @@ class Ability
 
     post.recipients.include?(character)
   end
+
+  def can_write_post?
+    identity.game_master? || identity.player?
+  end
 end

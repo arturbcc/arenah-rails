@@ -6,7 +6,8 @@ define('recipients', [], function() {
     if (recipients == '') {
       this.ids = []
     } else {
-      this.ids = this._parseIds($('[data-recipients]').data('recipients').split(', '));
+      var ids = $('[data-recipients]').data('recipients') + '';
+      this.ids = this._parseIds(ids.split(', '));
     }
 
     $.proxyAll(this, 'parseIds', 'onSelect');

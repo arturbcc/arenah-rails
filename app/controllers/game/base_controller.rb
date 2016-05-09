@@ -2,6 +2,7 @@
 
 class Game::BaseController < ApplicationController
   before_action :load_game, :load_character, :set_identity
+  rescue_from Exceptions::Unauthorized, with: :unauthorized_access
 
   attr_reader :identity
 
@@ -55,5 +56,9 @@ class Game::BaseController < ApplicationController
     player = current_user.characters.where(
       game_id: current_game.id,
       character_type: 0).present?
+  end
+
+  def unauthorized_access
+    render 'shared/unauthorized', status: :unauthorized, layout: false
   end
 end
