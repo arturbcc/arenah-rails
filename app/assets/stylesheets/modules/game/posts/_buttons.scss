@@ -2,6 +2,11 @@
   color: $gold;
   background-color: #3A3836;
 
+  &:hover {
+    color: $gold;
+    background-color: #1D1C1B;
+  }
+
   a {
     color: $gold !important;
   }
@@ -34,7 +39,6 @@
     &:active {
       color: $gold;
       background-color: #1D1C1B;
-      border-color: #d58512;
     }
   }
 
