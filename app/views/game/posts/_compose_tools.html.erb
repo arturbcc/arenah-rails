@@ -11,8 +11,7 @@
       <div id="collapseOne" class="panel-collapse collapse">
         <div class="panel-body">
           <% @game.pcs.each do |character| %>
-            <!-- TODO: change this url to open the character sheet -->
-            <%= link_to 'javascript:;',
+            <%= link_to game_sheet_path(character.slug),
                   class: 'group-character',
                   data: {
                     id: character.id,
@@ -38,8 +37,7 @@
       <div id="collapseTwo" class="panel-collapse collapse">
         <div class="panel-body">
           <% @game.pcs.each do |character| %>
-            <!-- TODO: change this url to open the character sheet -->
-            <%= link_to 'javascript:;',
+            <%= link_to game_sheet_path(character.slug),
                   class: 'other-character',
                   data: {
                     id: character.id,
