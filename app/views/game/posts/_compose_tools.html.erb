@@ -20,7 +20,7 @@
                     target: '#remote-modal',
                     width:'1015px'
                   } do %>
-              <%= avatar(character, class: 'characterAvatar') %>
+              <%= avatar(character, class: 'character-avatar') %>
             <% end %>
           <% end %>
         </div>
@@ -41,13 +41,13 @@
             <!-- TODO: change this url to open the character sheet -->
             <%= link_to 'javascript:;',
                   class: 'other-character',
-                  id: character.id,
                   data: {
+                    id: character.id,
                     toggle: 'modal',
                     target: '#remote-modal',
                     width:'1015px'
                   } do %>
-              <%= avatar(character, class: 'characterAvatar') %>
+              <%= avatar(character, class: 'character-avatar') %>
             <% end %>
           <% end %>
 
@@ -56,7 +56,7 @@
             <hr />
             <% @game.npcs.each do |character| %>
               <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = character.Slug }) %>" data-toggle="modal" data-target="#remote-modal" data-width="1015px" class="other-character" data-id="< %: character.Id %>">
-                < %: Html.Avatar(character, "characterAvatar") %>
+                < %: Html.Avatar(character, "character-avatar") %>
               </a -->
             <% end %>
           <% end %>
