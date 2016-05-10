@@ -1,7 +1,6 @@
-define('compose-post', [], function() {
-  var ComposePostUI = require('compose-post-ui');
-
+define('compose-post', ['compose-post-ui', 'compose-post-preview'], function(ComposePostUI, ComposePostPreview) {
   function ComposePost(recipients, characters) {
+    new ComposePostPreview('#preview', '#preview-modal');
     this.composePostUI = new ComposePostUI();
 
     this.recipients = recipients;

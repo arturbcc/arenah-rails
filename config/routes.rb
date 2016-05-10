@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     patch ':game/:topic/post/:id', to: 'posts#update', as: :update_post
     delete ':game/:topic/post/:id', to: 'posts#destroy', as: :delete_post
     post ':game/:topic/post/', to: 'posts#create', as: :create_post
+    post ':game/:topic/post/preview', to: 'posts#preview', as: :preview_post
 
     get ':game/inscreva-se', to: 'subscription#show', as: :subscription
     get ':game/topicos', to: 'topics#index', as: :topics

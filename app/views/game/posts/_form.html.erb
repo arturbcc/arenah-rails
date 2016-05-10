@@ -53,7 +53,13 @@
       %>
 
       <div class="pull-right bottom-line-options">
-        <button type="button" class="btn btn-default" id="preview">Visualizar</button>
+        <%=
+          content_tag :button,
+            'Visualizar',
+            class: 'btn btn-default',
+            id: 'preview'
+        %>
+
         <%=
           content_tag :button,
             'Cancelar',
@@ -77,3 +83,5 @@
 
 <%= content_tag :div, '', data: { recipients: recipients_ids(@post) } %>
 <%= content_tag :div, '', data: { characters_list: game_characters_list_path(@game) } %>
+
+<div id='preview-modal' data-url='<%= game_preview_post_path(@game, @topic) %>'></div>
