@@ -1,14 +1,13 @@
-.post {
-  .btn-dark {
-    color: $gold;
-    background-color: #3A3836;
-    border-color: #eea236;
+.btn-dark {
+  color: $gold;
+  background-color: #3A3836;
 
-    a {
-      color: $gold !important;
-    }
+  a {
+    color: $gold !important;
   }
+}
 
+.post {
   .btn {
     display: inline-block;
     padding: 6px 12px;
