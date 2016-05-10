@@ -6,6 +6,7 @@ define('compose-post', [], function() {
 
     this.recipients = recipients;
     this.characters = characters;
+    this.saveButton = $('#save-post');
     this.recipientsWidth = '627px';
 
     this._bindEvents();
@@ -14,10 +15,11 @@ define('compose-post', [], function() {
   var fn = ComposePost.prototype;
 
   fn._bindEvents = function() {
-    $.proxyAll(this, 'autoComplete', 'selectRecipient');
+    $.proxyAll(this, 'autoComplete', 'selectRecipient', 'onSave');
 
     this.characters.load(this.autoComplete);
     this.recipients.onSelect(this.selectRecipient);
+    this.saveButton.on('click', this.onSave);
   };
 
   fn.autoComplete = function() {
@@ -46,6 +48,18 @@ define('compose-post', [], function() {
 
   fn.selectRecipient = function(id) {
     this.composePostUI.showOnGroup(id);
+  };
+
+  fn.onSave = function(event) {
+    event.preventDefault();
+
+    var message = $('#bbcode-editor').val();
+
+    if (message.length == 0) {
+      NotyMessage.show('O post não pode ficar em branco');
+    } else {
+      $(event.target).parents('form').submit();
+    }
   };
 
   return ComposePost;

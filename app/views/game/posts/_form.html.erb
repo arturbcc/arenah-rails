@@ -17,6 +17,7 @@
     <h1>
       <%= link_to @topic.title, game_posts_path(@game, @topic) %>
     </h1>
+
     <div id="authors-panel">
       <section>
         <%= link_to 'javascript:;', data: { id: character.id }, class: 'impersonate' do %>
@@ -64,10 +65,9 @@
         <%=
           content_tag :button,
             'Salvar',
-            class: 'btn btn-success'
+            class: 'btn btn-success',
+            id: 'save-post'
         %>
-        <%#= FIXME: remove this code below or implement the correct way %>
-        <%#= ,onclick: 'ComposePost.save();' %>
       </div>
     </div>
 
