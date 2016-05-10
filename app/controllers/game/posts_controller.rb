@@ -96,7 +96,7 @@ class Game::PostsController < Game::BaseController
   end
 
   def load_recipients
-    @recipients = current_post.present? ? current_post.recipients.map(&:name).join(', ') : ''
+    @recipients = current_post.present? ? current_post.recipients.map(&:id).join(', ') : ''
   end
 
   def create_post
