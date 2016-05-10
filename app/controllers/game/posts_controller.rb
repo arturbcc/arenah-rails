@@ -2,6 +2,7 @@
 
 class Game::PostsController < Game::BaseController
   before_action :get_topic
+  before_action :load_recipients, only: [:new, :edit]
   before_action :authenticate_user!, except: :index
 
   def index
@@ -11,13 +12,12 @@ class Game::PostsController < Game::BaseController
 
   def new
     @area = Area.new(:create_post)
-    @post = Post.new
+    @post = Post.new(recipients: current_post.present? ? current_post.recipients : [])
   end
 
   def edit
     @area = Area.new(:edit_post)
     @post = current_post
-    @recipients = @post.present? ? @post.recipients.map(&:name) : ''
   end
 
   def create
@@ -93,6 +93,10 @@ class Game::PostsController < Game::BaseController
     recipients.split(',').map do |character_id|
       Character.find(character_id.to_i)
     end
+  end
+
+  def load_recipients
+    @recipients = current_post.present? ? current_post.recipients.map(&:name).join(', ') : ''
   end
 
   def create_post

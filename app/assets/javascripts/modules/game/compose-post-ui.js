@@ -2,6 +2,8 @@ define('compose-post-ui', [], function() {
   function ComposePostUI(container) {
     this.panels = $(container || '#accordion');
     this.dicePanel = $('#collapseThree');
+
+    this._accordionInitialState();
   };
 
   var fn = ComposePostUI.prototype;
@@ -43,6 +45,15 @@ define('compose-post-ui', [], function() {
   fn._findOtherCharacter = function(id) {
     return $('.other-character[data-id=' + id + ']');
   };
+
+  fn._accordionInitialState = function() {
+    var recipients = $('[data-recipients]').data('recipients');
+    if (recipients !== '') {
+      this.openGroupPanel();
+    } else {
+      this.openOtherCharactersPanel();
+    }
+  }
 
   return ComposePostUI;
 });

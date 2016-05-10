@@ -3,8 +3,8 @@ define('recipients', [], function() {
     this.container = $(container);
 
     var recipients = $('[data-recipients]').data('recipients');
-    if (recipients == '') {
-      this.ids = []
+    if (recipients === '') {
+      this.ids = [];
     } else {
       var ids = $('[data-recipients]').data('recipients') + '';
       this.ids = this._parseIds(ids.split(', '));
@@ -21,7 +21,7 @@ define('recipients', [], function() {
 
     if (typeof(callback) === 'function') {
       $.each(this.ids, function(index, id) {
-        callback.call(id);
+        callback(id);
       });
     }
   };

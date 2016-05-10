@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   namespace :game, path: '' do
     get ':game/:topic/posts', to: 'posts#index', as: :posts
     get ':game/:topic/post/criar', to: 'posts#new', as: :new_post
+    get ':game/:topic/post/:id/responder', to: 'posts#new', as: :reply_post
     get ':game/:topic/post/:id/editar', to: 'posts#edit', as: :edit_post
     patch ':game/:topic/post/:id', to: 'posts#update', as: :update_post
     delete ':game/:topic/post/:id', to: 'posts#destroy', as: :delete_post
