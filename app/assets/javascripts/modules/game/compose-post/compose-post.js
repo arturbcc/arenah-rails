@@ -1,9 +1,9 @@
-define('compose-post', ['compose-post-ui', 'compose-post-preview', 'impersonate'],
-  function(ComposePostUI, ComposePostPreview, Impersonate) {
+define('compose-post', ['compose-post-accordion', 'compose-post-preview', 'impersonate'],
+  function(ComposePostAccordion, ComposePostPreview, Impersonate) {
   function ComposePost(recipients, characters) {
     new ComposePostPreview('#preview', '#preview-modal');
     new Impersonate();
-    this.composePostUI = new ComposePostUI();
+    this.composePostAccordion = new ComposePostAccordion();
 
     this.recipients = recipients;
     this.characters = characters;
@@ -24,7 +24,7 @@ define('compose-post', ['compose-post-ui', 'compose-post-preview', 'impersonate'
   };
 
   fn.autoComplete = function() {
-    var panels = this.composePostUI;
+    var panels = this.composePostAccordion;
 
     this.recipients.container.select2({
       data: this.characters.pcs,
@@ -48,7 +48,7 @@ define('compose-post', ['compose-post-ui', 'compose-post-preview', 'impersonate'
   };
 
   fn.selectRecipient = function(id) {
-    this.composePostUI.showOnGroup(id);
+    this.composePostAccordion.showOnGroup(id);
   };
 
   fn.onSave = function(event) {

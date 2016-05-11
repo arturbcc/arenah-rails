@@ -1,12 +1,12 @@
-define('compose-post-ui', [], function() {
-  function ComposePostUI(container) {
+define('compose-post-accordion', [], function() {
+  function ComposePostAccordion(container) {
     this.panels = $(container || '#accordion');
     this.dicePanel = $('#collapseThree');
 
     this._accordionInitialState();
   };
 
-  var fn = ComposePostUI.prototype;
+  var fn = ComposePostAccordion.prototype;
 
   fn.openGroupPanel = function() {
     this.panels.find('a[data-toggle=collapse]').eq(0).trigger('click');
@@ -27,11 +27,13 @@ define('compose-post-ui', [], function() {
   fn.showOnGroup = function(id) {
     this._findGroupCharacter(id).show();
     this._findOtherCharacter(id).hide();
+    this.openGroupPanel();
   };
 
   fn.showOnOthers = function(id) {
     this._findGroupCharacter(id).hide();
     this._findOtherCharacter(id).show();
+    this.openOtherCharactersPanel();
   };
 
   fn.isInDicePanel = function() {
@@ -55,5 +57,5 @@ define('compose-post-ui', [], function() {
     }
   }
 
-  return ComposePostUI;
+  return ComposePostAccordion;
 });
