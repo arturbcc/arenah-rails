@@ -1,4 +1,3 @@
-
 <%= render 'game/header', game: @game, topic: @topic %>
 
 <section id="page-body">
@@ -8,7 +7,7 @@
     <div class="image-with-caret <%= 'master' if @identity.game_master? %>">
       <%= avatar(character, class: 'toggle-panel') %>
 
-      <% if @identity.game_master? %>
+      <% if @identity.game_master? && @area.current != :edit_post %>
         <a href="javascript:;" id="change-author" class="toggle-panel">
           <span class="caret"></span>
         </a>
@@ -42,6 +41,7 @@
 
   <% url = @area.edit_post? ? game_update_post_path(@game, @topic, @post) : game_create_post_path(@game, @topic) %>
   <%= form_for(@post, url: url, id: 'post-form') do |f| %>
+    <%= hidden_field :post, :character_id, value: character.id %>
     <%= render 'recipients', f: f %>
 
     <div class="box-left">

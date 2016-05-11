@@ -1,6 +1,8 @@
-define('compose-post', ['compose-post-ui', 'compose-post-preview'], function(ComposePostUI, ComposePostPreview) {
+define('compose-post', ['compose-post-ui', 'compose-post-preview', 'impersonate'],
+  function(ComposePostUI, ComposePostPreview, Impersonate) {
   function ComposePost(recipients, characters) {
     new ComposePostPreview('#preview', '#preview-modal');
+    new Impersonate();
     this.composePostUI = new ComposePostUI();
 
     this.recipients = recipients;

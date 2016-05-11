@@ -18,6 +18,7 @@ class Game::PostsController < Game::BaseController
   def edit
     @area = Area.new(:edit_post)
     @post = current_post
+    @character = @post.character
   end
 
   def create
@@ -107,7 +108,7 @@ class Game::PostsController < Game::BaseController
   def create_post
     Post.create(topic: current_topic,
       message: post_params[:message],
-      character: current_character,
+      character: author,
       recipients: recipients(post_params[:recipients])
     )
   end
@@ -117,5 +118,25 @@ class Game::PostsController < Game::BaseController
       message: post_params[:message],
       recipients: recipients(post_params[:recipients])
     )
+  end
+
+  # TODO: Test trying to use an id that does not belong to the room, an id that
+  # belongs to another user and current user is not master, an empty id, without
+  # any id, the id of a user that does not exist
+
+  # Private: finds the author based on the character_id parameter. It considers
+  # the params instead of always using the current_character because there is
+  # a resource that allows the game masters to impersonate any of the game's
+  # NPC's
+  def author
+    character_id = params[:post][:character_id].to_i
+    return current_character unless character_id > 0 && @identity.game_master?
+
+    npc = Character.find_by(
+      id: character_id,
+      game_id: current_game.id,
+      character_type: 1)
+
+    npc || current_character
   end
 end
