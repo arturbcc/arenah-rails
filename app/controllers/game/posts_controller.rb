@@ -64,11 +64,6 @@ class Game::PostsController < Game::BaseController
     render json: { status: status }
   end
 
-  def preview
-    @message = Parsers::Post.parse(params[:message])
-    render partial: 'preview', layout: false
-  end
-
   private
 
   def get_topic
