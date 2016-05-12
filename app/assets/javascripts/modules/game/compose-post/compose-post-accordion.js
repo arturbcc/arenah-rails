@@ -1,6 +1,8 @@
 define('compose-post-accordion', [], function() {
   function ComposePostAccordion(container) {
     this.panels = $(container || '#accordion');
+    this.groupPanel = $('#collapseOne');
+    this.otherCharactersPanel = $('#collapseTwo');
     this.dicePanel = $('#collapseThree');
 
     this._accordionInitialState();
@@ -27,13 +29,27 @@ define('compose-post-accordion', [], function() {
   fn.showOnGroup = function(id) {
     this._findGroupCharacter(id).show();
     this._findOtherCharacter(id).hide();
-    this.openGroupPanel();
+
+    if (!this.isInGroupPanel()) {
+      this.openGroupPanel();
+    }
   };
 
   fn.showOnOthers = function(id) {
     this._findGroupCharacter(id).hide();
     this._findOtherCharacter(id).show();
-    this.openOtherCharactersPanel();
+
+    if (!this.isInOtherCharactersPanel()) {
+      this.openOtherCharactersPanel();
+    }
+  };
+
+  fn.isInGroupPanel = function() {
+    return this.groupPanel.hasClass('in');
+  };
+
+  fn.isInOtherCharactersPanel = function() {
+    return this.otherCharactersPanel.hasClass('in');
   };
 
   fn.isInDicePanel = function() {
