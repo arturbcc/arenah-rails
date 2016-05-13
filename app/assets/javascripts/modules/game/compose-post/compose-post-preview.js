@@ -21,14 +21,13 @@ define('compose-post-preview', [], function() {
     $.ajax({
       url: self.container.data('url'),
       data: {
-        blah: 'asdasdasd',
         message: $('#bbcode-editor').val()
       },
       type: 'POST',
       success: function(data) {
         self.container
           .html(data)
-          .find('.modal')
+          .find('.post-preview-modal')
           .modal('show');
       }
     });

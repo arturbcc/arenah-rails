@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     delete ':game/:topic/post/:id', to: 'posts#destroy', as: :delete_post
     post ':game/:topic/post/', to: 'posts#create', as: :create_post
     post ':game/:topic/post/preview', to: 'post_preview#show', as: :preview_post
+    get ':game/:topic/post/iniciativas', to: 'initiatives#show', as: :initiatives
 
     get ':game/inscreva-se', to: 'subscription#show', as: :subscription
     get ':game/topicos', to: 'topics#index', as: :topics

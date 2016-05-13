@@ -108,7 +108,7 @@
           <div class="upper-actions">
             <% if @identity.game_master? %>
               <button type="button" id="damage" class="btn btn-xs btn-default">Dano</button>
-              <button type="button" id="initiative" class="btn btn-xs btn-default">Iniciativa</button>
+              <button type="button" id="initiative" data-url="<%= game_initiatives_path(@game, @topic) %>" class="btn btn-xs btn-default">Iniciativa</button>
             <% end %>
           </div>
 

@@ -1,8 +1,10 @@
-define('compose-post', ['compose-post-accordion', 'compose-post-preview', 'impersonate'],
-  function(ComposePostAccordion, ComposePostPreview, Impersonate) {
+define('compose-post', ['compose-post-accordion', 'compose-post-preview', 'impersonate', 'initiative'],
+  function(ComposePostAccordion, ComposePostPreview, Impersonate, Initiative) {
+
   function ComposePost(recipients, characters) {
     new ComposePostPreview('#preview', '#preview-modal');
     new Impersonate();
+    new Initiative(characters);
     this.composePostAccordion = new ComposePostAccordion();
 
     this.recipients = recipients;

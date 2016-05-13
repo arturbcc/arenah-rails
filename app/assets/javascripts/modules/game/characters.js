@@ -1,3 +1,4 @@
+// TODO: should I rename the characters.js to charactersController?
 define('characters', [], function() {
   function Characters() {
     this.fullList = [];
@@ -30,13 +31,28 @@ define('characters', [], function() {
       });
     })
 
-    // if (role == "GameMasterLogged") {
-    //   Characters.changeAuthor($("#authors-panel"), 600);
-    // }
-
     if (typeof(callback) === 'function') {
       callback.call(this);
     }
+  };
+
+  fn.where = function(filters) {
+    var self = this;
+
+    return $.grep(this.fullList, function(character) {
+      return self._match(character, filters);
+    })[0];
+  };
+
+  fn._match = function(element, filters) {
+    var keys = Object.keys(filters),
+        matched = true;
+
+    $.each(keys, function(_, key) {
+      matched = matched && element[key] === filters[key];
+    });
+
+    return matched;
   };
 
   return Characters;

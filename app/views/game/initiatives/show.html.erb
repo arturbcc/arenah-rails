@@ -1,0 +1,42 @@
+<div id="initiative-container">
+  <div class="pull-left options">
+    <select id="initiative-character-list">
+      <optgroup label="Personagens do grupo">
+        <% @game.pcs.each do |character| %>
+          <% if @ids.include?(character.id) %>
+            <option value="<%= character.id %>"><%= character.name %></option>
+          <% end %>
+        <% end %>
+      </optgroup>
+      <optgroup label="Demais personagens">
+        <% @game.pcs.each do |character| %>
+          <% if !@ids.include?(character.id) %>
+            <option value="<%= character.id %>"><%= character.name %></option>
+          <% end %>
+        <% end %>
+      </optgroup>
+      <optgroup label="NPCs">
+        <% @game.npcs.each do |character| %>
+          <option value="<%= character.id %>"><%= character.name %></option>
+        <% end %>
+      </optgroup>
+    </select>
+    <button type="button" class="btn btn-success btn-xs add-character-initiative-list">Adicionar</button>
+  </div>
+
+  <div class="pull-left items-container">
+    <ul>
+      <% @game.pcs.each do |character| %>
+        <%= render 'initiative_item', character: character if @ids.include?(character.id) %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="pull-right calculate-container">
+    <button type="button" class="btn btn-success calculate-initiative">Calcular</button>
+  </div>
+
+  <div class="initiative-item-template">
+    <%= render 'initiative_item', character: @game.masters.first.dup %>
+  </div>
+</div>
