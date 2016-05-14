@@ -116,9 +116,9 @@
             <span>Conjunto de regras:</span>
             <div class="clear"></div>
             <select class="rules-set">
-              <!-- % foreach (RulesSet rulesSet in Model.Game.Room.Sheet.Rules) { %>
-                <option value="< %: rulesSet.Id %>">< %: rulesSet.Name %></option>
-              < % } % -->
+              <% @game.system.dice_roll_rules.each do |rule| %>
+                <option value="<%= rule.name %>"><%= rule.name %></option>
+              <% end %>
             </select>
             <div id="attributes-area">
               <div class="splash">
