@@ -83,5 +83,6 @@
 
 <%= content_tag :div, '', data: { recipients: recipients_ids(@post) } %>
 <%= content_tag :div, '', data: { characters_list: game_characters_list_path(@game) } %>
+<%= hidden_field :game_system, :url, value: game_system_path(@game) %>
 
 <div id='preview-modal' data-url='<%= game_preview_post_path(@game, @topic) %>'></div>

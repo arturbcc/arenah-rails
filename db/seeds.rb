@@ -43,9 +43,8 @@ khalmyr = Character.create!(user: artur, name: 'Khalmyr', avatar: 'khalmyr.png',
 wynna = Character.create!(user: janeroe, name: 'Wynna', avatar: 'wynna.jpg', character_type: 2, sheet: '{}')
 mestre_dos_magos = Character.create!(user: artur, name: 'Mestre dos Magos', avatar: 'mestre-dos-magos.png', character_type: 2, sheet: '{}')
 
-luffy = Character.create!(user: artur, name: 'Luffy', avatar: 'luffy.png', character_type: 1, sheet: '{}')
-shurato = Character.create!(user: artur, name: 'Shurato', avatar: 'shurato.png', character_type: 1, sheet: '{}')
-
+luffy = Character.create!(user: artur, name: 'Luffy', avatar: 'luffy.png', character_type: 1, sheet: load_sheet('crossover', 'luffy'))
+shurato = Character.create!(user: artur, name: 'Shurato', avatar: 'shurato.png', character_type: 1, sheet: load_sheet('crossover', 'shurato'))
 
 #GAMES
 crossover = Game.create!(

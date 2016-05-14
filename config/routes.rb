@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     delete ':game/unsubscribe', to: 'subscription#destroy', as: :unsubscribe
 
     get ':game/personagem/:character/ficha', to: 'characters#sheet', as: :character_sheet
+    get ':game/sistema', to: 'game#show', as: :system
 
     #TODO: Fix this alias new_game
     get 'sala/criar', to: 'home#new', as: :new

@@ -1,5 +1,5 @@
 // TODO: should I rename the characters.js to charactersController?
-define('characters', [], function() {
+define('characters', ['character'], function(Character) {
   function Characters() {
     this.fullList = [];
     this.pcs = [];
@@ -21,7 +21,9 @@ define('characters', [], function() {
   fn._loadCharacters = function(data, callback) {
     var self = this;
 
-    this.fullList = data.list;
+    $.each(data.list, function(_, character) {
+      self.fullList.push(new Character(character));
+    });
 
     $.each(data.pcs, function(index, character) {
       self.pcs.push({

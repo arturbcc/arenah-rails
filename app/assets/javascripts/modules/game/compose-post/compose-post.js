@@ -1,14 +1,20 @@
 define('compose-post', ['compose-post-accordion', 'compose-post-preview', 'impersonate', 'initiative'],
   function(ComposePostAccordion, ComposePostPreview, Impersonate, Initiative) {
 
-  function ComposePost(recipients, characters) {
+  function ComposePost(game, recipients) {
     new ComposePostPreview('#preview', '#preview-modal');
     new Impersonate();
-    new Initiative(characters);
+    new Initiative(game, function(initiativeText) {
+      $.markItUp({ replaceWith: initiativeText });
+
+      $('#bbcode-editor').focus();
+      $('.modal').modal('hide');
+    });
+
     this.composePostAccordion = new ComposePostAccordion();
 
     this.recipients = recipients;
-    this.characters = characters;
+    this.characters = game.characters;
     this.saveButton = $('#save-post');
     this.recipientsWidth = '627px';
 

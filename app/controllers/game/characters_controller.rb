@@ -9,7 +9,6 @@ class Game::CharactersController < Game::BaseController
   end
 
   def list
-    #LoadEquipmentsAndAttributes();
     render json: { list: @game.characters, pcs: @game.pcs }
   end
 end

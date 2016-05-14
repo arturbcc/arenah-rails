@@ -1,7 +1,10 @@
-define('initiative', [], function() {
-  function Initiative(characters) {
-    this.characters = characters;
+define('initiative', ['compose-post-dice-control'], function(ComposePostDiceControl) {
+  function Initiative(game, callback) {
+    this.game = game;
+    this.callback = callback;
+    this.characters = game.characters;
     this.initiativeButton = $('#initiative');
+    this.diceControl = new ComposePostDiceControl();
 
     this._bindEvents();
   };
@@ -110,86 +113,130 @@ define('initiative', [], function() {
   };
 
   fn._rollInitiative = function () {
-    // var characterId = 0,
-    //     character = null,
-    //     value = 0,
-    //     signal = "",
-    //     modifier = 0,
-    //     characters = [],
-    //     self = this;
-    //
-    // $(".items-container .character").each(function (index, item) {
-    //   characterId = parseInt($(item).attr("data-id"));
-    //   character = Characters.find(characterId);
-    //   value = $(item).find(".action-list").val();
-    //   signal = $(item).find(".signal").val();
-    //   modifier = $(item).find(".modifier").val();
-    //   characters.push(self.calculateCharacterInitiative(character, value, signal, modifier));
-    // });
-    //
-    // var order = Sheet.data.InitiativeFormulaRule;
-    // var orderedList = null;
-    // var desc = "0";
-    // var asc = "1";
-    // if (order == desc) {
-    //   orderedList = characters.sort(function (a, b) { return b.initiative - a.initiative; });
-    // } else {
-    //   orderedList = characters.sort(function (a, b) { return a.initiative - b.initiative; });
-    // }
-    //
-    // var template = "[dices=Iniciativas]";
-    // $.each(orderedList, function (index, item) {
-    //   template += "\n" + (index + 1) + ". " + item.name + " = " + item.initiative;
-    //   template += " [spoiler]=> " + item.log + " { rolagens: " + item.dices.join(", ") + " }[/spoiler]";
-    // });
-    // template += "[/dices][clear]\n";
-    //
+    var characters = this._characterListWithInitative(),
+        template = "[dices=Iniciativas]";
+
+    $.each(characters, function(index, character) {
+      template += "\n" + (index + 1) + ". " + character.name + " = " + character.initiative;
+      template += " [spoiler]=> " + character.log + " { rolagens: " + character.dices.join(", ") + " }[/spoiler]";
+    });
+
+    template += "[/dices]\n";
+
     // Track.event("Post", "Initiative", $("#character-slug").val() + " on " + gameRoomUrl() + $("#topic-slug").val());
-    //
-    // $('#bbcodeEditor').focus();
-    // $.markItUp({ replaceWith: template });
-    // $(".modal").modal("hide");
+
+    if (this.callback && typeof(this.callback) == 'function') {
+      this.callback(template);
+    }
   };
 
-  fn._calculateCharacterInitiative = function (character, value, signal, modifier) {
-    // var formula = Sheet.data.InitiativeFormula;
-    // var variables = formula.match(/\#\{([\w\:\s]*)\}/g);
-    // var log = formula;
-    //
-    // $.each(variables, function (index, match) {
-    //   var parts = match.substring(2, match.length - 1).split(':');
-    //   var group = parts[0];
-    //   var attribute = parts[1];
-    //   var pattern = new RegExp(match, 'g');
-    //   formula = formula.replace(pattern, Characters.attributePoints(character, group, attribute));
-    //
-    //   var attr = Characters.getAttribute(character, group, attribute);
-    //   var abbreviation = attr.Source.Abbreviation ? attr.Source.Abbreviation : attribute;
-    //   log = log.replace(pattern, Characters.attributePoints(character, group, attribute) + " (" + abbreviation + ")");
-    // });
-    //
-    // var penalty = parseInt($(".character[data-id=" + character.Id + "]").find(".action-list").val());
-    // DiceControl.clearLog();
-    // formula = DiceControl.replaceDiceVariables(formula);
-    // var expr = Parser.parse(formula);
-    // var result = expr.evaluate(expr) + penalty;
-    //
-    // if (penalty > 0) {
-    //   log += " + " + penalty;
-    // } else if (penalty < 0) {
-    //   log += " - " + (penalty * -1);
-    // }
-    //
-    // var diceLog = DiceControl._stash
-    // DiceControl.clearLog();
-    //
-    // return {
-    //   "id": character.Id,
-    //   "name": character.Name,
-    //   "initiative": parseInt(result),
-    //   "log": log,
-    //   "dices": diceLog
-    // };
+  fn._characterListWithInitative = function() {
+    var characterId = 0,
+        character,
+        value = 0,
+        signal = '',
+        modifier = 0,
+        characters = [],
+        self = this;
+
+    $('.items-container .character').each(function(_, element) {
+      var item = $(element);
+
+      characterId = parseInt(item.attr('data-id'));
+      character = self.characters.where({ id: characterId });
+      value = item.find('.action-list').val();
+      signal = item.find('.signal').val();
+      modifier = item.find('.modifier').val();
+
+      characters.push(self._calculateCharacterInitiative(character, value, signal, modifier));
+    });
+
+    return this._sortCharactersByInitiative(characters);
+  };
+
+  fn._sortCharactersByInitiative = function(characters) {
+    var order = this.game.system.initiative.order,
+        orderedList;
+
+    if (order === 'desc') {
+      orderedList = characters.sort(function(a, b) { return b.initiative - a.initiative; });
+    } else {
+      orderedList = characters.sort(function(a, b) { return a.initiative - b.initiative; });
+    }
+
+    return orderedList;
+  };
+
+  fn._calculateCharacterInitiative = function(character, value, signal, modifier) {
+    var formula = this.game.system.initiative.formula,
+        variables = formula.match(/(\w+=>\w+)/g),
+        log = formula;
+
+    $.each(variables, function(_, match) {
+      var parts = match.split('=>'),
+          group = parts[0],
+          attribute = parts[1],
+          pattern = new RegExp(match, 'g'),
+          attr = character.attribute(group, attribute),
+          abbreviation = attr.abbreviation || attr.name,
+          points = attr.points || 0;
+
+      formula = formula.replace(pattern, points);
+      log = log.replace(pattern, points + ' (' + abbreviation + ')');
+    });
+
+    this.diceControl.clearLog();
+    formula = this.diceControl.replaceDiceVariables(formula);
+
+    var characterContainer = $('.character[data-id=' + character.id + ']');
+        penalty = parseInt(characterContainer.find('.action-list').val()),
+        modifier = this._initiativeModifier(characterContainer),
+        expr = Parser.parse('(' + formula + ')' + modifier),
+        result = expr.evaluate(expr) + penalty;
+
+    if (penalty != 0 || modifier.length > 0) {
+      log = '(' + log + ') ' + modifier;
+    }
+
+    if (penalty > 0) {
+      log += ' + ' + penalty;
+    } else if (penalty < 0) {
+      log += ' - ' + (penalty * -1);
+    }
+
+    var diceLog = this.diceControl.stash;
+    this.diceControl.clearLog();
+
+    return {
+      'id': character.id,
+      'name': character.name,
+      'initiative': parseInt(result),
+      'log': log,
+      'dices': diceLog
+    };
+  };
+
+  fn._initiativeModifier = function(container) {
+    var signal = container.find('.signal').val(),
+        modifier = parseInt(container.find('.modifier').val());
+
+    if (this._invalidModifierCombination(signal, modifier)) {
+      return '';
+    } else {
+      return signal + ' ' + modifier;
+    }
+  };
+
+  fn._invalidModifierCombination = function(signal, modifier) {
+    if ((signal === '+' || signal === '-') && modifier === 0) {
+      return true;
+    } else if ((signal === '*' || signal === '/') && modifier === 1) {
+      return true;
+    } else if (signal == '/' && modifier == 0) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   fn._buildActionSelect = function(character) {
@@ -204,7 +251,6 @@ define('initiative', [], function() {
     itemsCount = 0;
 
     $.each(this._characterEquipments(character), function(index, equipment) {
-      // if (equipment.equipped_on !== 'right-hand' || equipment.equipped_on === 'left-hand') {
       if (equipment.equipped_on) {
         itemsCount += 1;
         equipments += "<option value='" + equipment.initiative + "'>" + equipment.name + "</option>";
