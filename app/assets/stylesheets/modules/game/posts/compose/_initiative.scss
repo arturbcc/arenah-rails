@@ -36,7 +36,7 @@
   }
 
   .calculate-container {
-    margin-right: 92px;
+    margin-right: 62px;
   }
 
   .initiative-item-template {
@@ -48,26 +48,40 @@
 
     input {
       width: 40px;
-      height: 20px;
+      height: 25px;
       float: left;
       margin-top: 5px;
       margin-left: 2px;
       text-align: right;
-      font-size: 11px;
+      font-size: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding-right: 5px;
     }
 
     .signal {
       margin-top: 5px;
+      height: 25px;
+      background-color: #fff;
+      width: 45px;
       float: left;
     }
 
     .action-list {
       margin-top: 2px;
       width: 300px;
+      height: 25px;
+      background-color: #fff;
     }
   }
+}
 
-  .signal {
-    margin-top: 10px;
-  }
+#initiative-placeholder {
+  border: 1px dashed #398439;
+  text-align: center;
+  margin: 0 15px 10px 15px;
+  padding: 100px;
+  background-color: #eee;
+  color: #449d44;
+  font-size: 18px;
 }

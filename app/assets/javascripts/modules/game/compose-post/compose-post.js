@@ -5,9 +5,8 @@ define('compose-post', ['compose-post-accordion', 'compose-post-preview', 'imper
     new ComposePostPreview('#preview', '#preview-modal');
     new Impersonate();
     new Initiative(game, function(initiativeText) {
-      $.markItUp({ replaceWith: initiativeText });
-
       $('#bbcode-editor').focus();
+      $.markItUp({ replaceWith: initiativeText });
       $('.modal').modal('hide');
     });
 

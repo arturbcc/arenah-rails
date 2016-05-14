@@ -15,7 +15,8 @@ define('initiative', ['compose-post-dice-control'], function(ComposePostDiceCont
     $.proxyAll(this,
       '_openInitiativePanel',
       '_addCharacter',
-      '_rollInitiative');
+      '_rollInitiative',
+      '_calculateButtonVisibility');
 
     this.initiativeButton.on('click', this._openInitiativePanel);
   };
@@ -36,10 +37,25 @@ define('initiative', ['compose-post-dice-control'], function(ComposePostDiceCont
 
     $('#initiative-container').on('click', '.close', function() {
       $(this).parents('li').remove();
+      self._calculateButtonVisibility();
     });
 
-
     $('#initiative-character-list').select2('val', '');
+    self._calculateButtonVisibility();
+  };
+
+  fn._calculateButtonVisibility = function() {
+    var characters = $('.items-container .character'),
+        calculateButton = $('.calculate-initiative'),
+        placeholder = $('#initiative-placeholder');
+
+    if (characters.length > 0) {
+      calculateButton.show();
+      placeholder.hide();
+    } else {
+      calculateButton.hide();
+      placeholder.show();
+    }
   };
 
   fn._openInitiativePanel = function(event) {
@@ -61,10 +77,14 @@ define('initiative', ['compose-post-dice-control'], function(ComposePostDiceCont
 
     $.get(url, { "group_characters": groupCharactersIds.join(',') })
       .done(function(data) {
-        var template = '<div class="modal-dialog" style="width: 1015px"><div class="modal-content">' + data + '</div></div>';
-        $('#remote-modal').html(template)
-          .modal('show')
-          .find('.modal-dialog').css('width', '600px');
+        var header = '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button><h4 class="modal-title">Calcular iniciativas</h4></div>',
+            body =   '<div class="modal-body">' + data + '</div>'
+            footer = '<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button></div>',
+            template = '<div class="modal-dialog" style="width: 600px">' +
+                       '  <div class="modal-content">' + header + body + footer + '</div>' +
+                       '</div>';
+
+        $('#remote-modal').html(template).modal('show');
 
         $('#initiative-character-list').select2({ width: '370px' });
         self._prepareEvents();
@@ -82,6 +102,7 @@ define('initiative', ['compose-post-dice-control'], function(ComposePostDiceCont
     } else {
       var character = this.characters.where({ id: characterId });
       $('#initiative-container ul').append(this._parseTemplate(character));
+      this._calculateButtonVisibility();
     }
   };
 
@@ -115,6 +136,11 @@ define('initiative', ['compose-post-dice-control'], function(ComposePostDiceCont
   fn._rollInitiative = function () {
     var characters = this._characterListWithInitative(),
         template = "[dices=Iniciativas]";
+
+    if (characters.length == 0) {
+      NotyMessage.show('Escolha os personagens para calcular as iniciativas', 2000);
+      return;
+    }
 
     $.each(characters, function(index, character) {
       template += "\n" + (index + 1) + ". " + character.name + " = " + character.initiative;
