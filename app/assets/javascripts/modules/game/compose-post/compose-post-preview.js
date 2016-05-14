@@ -1,4 +1,4 @@
-define('compose-post-preview', [], function() {
+define('compose-post-preview', ['bbcode'], function(BBCode) {
   function ComposePostPreview(button, container) {
     this.previewButton = $(button);
     this.container = $(container);
@@ -29,6 +29,8 @@ define('compose-post-preview', [], function() {
           .html(data)
           .find('.post-preview-modal')
           .modal('show');
+
+        new BBCode();
       }
     });
   };
