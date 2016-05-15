@@ -10,7 +10,7 @@
       "show_on_posts": false,
       "instructions": "<p>Preencha os dados básicos de seu personagem. Como a temática desta sala é crossover, todas as raças e classes são permitidas, mas em caso de dúvida entre em contato com o mestre.</p>",
       "character_attributes": [
-        { "name": "Nome", "content": "Palave" },
+        { "name": "Nome", "content": "Palace" },
         { "name": "Nascimento", "content": "27 de março de 2000" },
         { "name": "Local", "content": "Suíça" },
         { "name": "Sexo", "content": "Feminino" },

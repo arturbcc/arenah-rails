@@ -24,5 +24,7 @@ page.at('game/posts#new game/posts#edit', function() {
       composePost = new ComposePost(game, recipients),
       composePostDice = new ComposePostDice();
 
+  window.game = game;
+
   new Editor();
 });

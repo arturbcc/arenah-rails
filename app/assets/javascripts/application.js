@@ -26,12 +26,9 @@ $(document).on('ready page:load', function() {
 
   var ModalResize = require('modal-resize'),
       ModalReuse = require('modal-reuse'),
-      BBCode = require('bbcode'),
-      SheetsController = require('sheets-controller');
+      BBCode = require('bbcode');
 
   new BBCode();
   new ModalResize();
   new ModalReuse();
-
-  new SheetsController();
 });
