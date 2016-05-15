@@ -32,6 +32,17 @@ class Character < ActiveRecord::Base
   #   self[:sheet] = sheet.as_json
   # end
 
+  def life_attribute
+    return nil unless game.system.life.present?
+
+    game.system.life.tap do |life|
+      group_name = life.life.base_attribute_group
+      attribute_name = life.base_attribute_name
+    end
+
+    sheet.find_character_attribute(group_name, life_attribute_name)
+  end
+
   private
 
   def apply_attributes_relationship_on(sheet)

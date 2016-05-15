@@ -1,0 +1,28 @@
+<li>
+  <div class="character" data-id="<%= character.id %>">
+    <div class="pull-left">
+      <%= avatar(character, class: 'character-avatar tiny-avatar') %>
+      <%
+        fake_character = character.dup
+        fake_character.avatar = 'AVATAR.png'
+      %>
+      <img data-path="<%= avatar_path(fake_character) %>" class="hidden damage-avatar-template" />
+    </div>
+
+    <div class="pull-left character-options">
+      <select class="action-list"></select>
+
+      <div class="clear"></div>
+
+      <div class="panel-collapse collapse in formula-fields">
+        <div class="panel-body">
+          <div class="dice-user-input">
+            <input type="text" id="damage-dice-expression" maxlength="30" placeholder="Ex.: 1D10 * 2 + 1" />
+            <button type="button" id="damage-roll-dice" class="btn btn-danger btn-sm">Rolar</button>
+          </div>
+          <div id="dice-results"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

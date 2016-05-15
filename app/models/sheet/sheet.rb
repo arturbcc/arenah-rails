@@ -35,7 +35,7 @@ module Sheet
       group = find_attributes_group(group_name)
       return nil unless group
 
-      group.character_attributes.detect {|attr| attr.name == attribute_name }
+      group.character_attributes.detect { |attr| attr.name == attribute_name }
     end
 
     # Public: link all attributes' groups and build the

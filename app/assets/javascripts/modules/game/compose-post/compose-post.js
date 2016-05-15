@@ -1,5 +1,5 @@
-define('compose-post', ['compose-post-accordion', 'compose-post-preview', 'impersonate', 'initiative'],
-  function(ComposePostAccordion, ComposePostPreview, Impersonate, Initiative) {
+define('compose-post', ['compose-post-accordion', 'compose-post-preview', 'impersonate', 'initiative', 'damage'],
+  function(ComposePostAccordion, ComposePostPreview, Impersonate, Initiative, Damage) {
 
   function ComposePost(game, recipients) {
     new ComposePostPreview('#preview', '#preview-modal');
@@ -9,6 +9,7 @@ define('compose-post', ['compose-post-accordion', 'compose-post-preview', 'imper
       $.markItUp({ replaceWith: initiativeText });
       $('.modal').modal('hide');
     });
+    new Damage(game);
 
     this.composePostAccordion = new ComposePostAccordion();
 

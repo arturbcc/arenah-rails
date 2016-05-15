@@ -1,0 +1,89 @@
+<div id="damage-container">
+  <div class="pull-left victims">
+    <label>Vítimas:</label>
+    <select id="damage-victims">
+      <option value="0">Selecione um personagem...</option>
+      <% @game.characters.each do |character| %>
+        <% unless character.game_master? %>
+          <option value="<%= character.id %>"><%= character.name %></option>
+        <% end %>
+      <% end %>
+    </select>
+
+    <div id="victims-list">
+      <% @selected_characters.each do |character| %>
+        <div class="pull-left victim" data-character-id="<%= id %>">
+          <button type="button" class="close">×</button>
+          <div class="pull-left">
+            <%= avatar(character, class: 'character-avatar') %>
+          </div>
+          <div class="pull-left life-data"></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="pull-left options">
+    <label>Atacante:</label>
+    <select id="damage-character-list">
+      <option value="0">Selecione um personagem...</option>
+      <optgroup label="Personagens do grupo">
+        <% @selected_characters.each do |character| %>
+          <option value="<%= character.id %>"><%= character.name %></option>
+        <% end %>
+      </optgroup>
+
+      <optgroup label="Demais personagens">
+        <% @game.pcs.each do |character| %>
+          <% unless @ids.include?(character.id) %>
+            <option value="<%= character.id %>"><%= character.name %></option>
+          <% end %>
+        <% end %>
+      </optgroup>
+      <optgroup label="NPCs">
+        <% @game.npcs.each do |character| %>
+          <option value="<%= character.id %>"><%= character.name %></option>
+        <% end %>
+      </optgroup>
+    </select>
+  </div>
+
+  <div class="pull-left items-container">
+    <ul>
+      <%= render 'damage_item', character: @selected_characters.first if @selected_characters.length > 0 %>
+    </ul>
+  </div>
+
+  <div id="result-area">
+    <div id="result-panel" class="pull-left"></div>
+
+    <div class="pull-left">
+      <input type="checkbox" id="remove-life" checked class="pull-left" />Tirar vida automaticamente
+    </div>
+    <div class="pull-right calculate-container">
+      <button type="button" class="btn btn-success calculate-damage" data-url="<%= game_cause_damage_path(@game, @topic) %>">Enviar</button>
+    </div>
+  </div>
+
+  <div id="victim-template">
+    <div class="pull-left victim">
+      <button type="button" class="close">×</button>
+      <div class="pull-left">
+        <%
+          fake_character = @game.masters.first.dup
+          fake_character.avatar = 'AVATAR.png'
+        %>
+        <img data-path="<%= avatar_path(fake_character) %>" />
+      </div>
+      <div class="pull-left life-data"></div>
+    </div>
+  </div>
+
+  <div id="attacker-template">
+    <%= render 'damage_item', character: @game.masters.first %>
+  </div>
+</div>
+<!--
+<script>
+  Damage.load();
+</script> -->

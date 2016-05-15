@@ -10,6 +10,10 @@ module Sheet
       self.tables.detect {|table| table.name == table_name }
     end
 
+    def life_defined?
+      life.base_attribute_group.present? && life.base_attribute_name.present?
+    end
+
     private
 
     def nested_attributes
