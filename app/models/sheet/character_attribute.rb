@@ -26,11 +26,15 @@ module Sheet
     def value
       if cost
         cost.to_i
-      elsif points
-        base_points = base_attribute.present? ? base_attribute.value.to_i : 0
-        points.to_i + base_points + equipment_modifier.to_i
-      else
+      elsif total
+        total.to_i
+      # elsif points
+      #   base_points = base_attribute.present? ? base_attribute.value.to_i : 0
+      #   points.to_i + base_points + equipment_modifier.to_i
+      elsif content
         content.to_i
+      else
+        points.to_i
       end
     end
 

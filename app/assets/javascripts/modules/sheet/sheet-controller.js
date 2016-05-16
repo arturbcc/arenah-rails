@@ -1,6 +1,7 @@
 define('sheet-controller', ['compose-post-attribute-selection'], function(ComposePostAttributeSelection) {
   function SheetController() {
     this.game = window.game;
+    this.composePostAttributeSelection = new ComposePostAttributeSelection(this.game);
 
     this._bindEvents();
   };
@@ -15,8 +16,7 @@ define('sheet-controller', ['compose-post-attribute-selection'], function(Compos
     var callback;
 
     if (this._isComposePost()) {
-      var selector = new ComposePostAttributeSelection(this.game);
-      callback = selector.selectionCallback;
+      callback = this.composePostAttributeSelection.selectionCallback;
     }
 
     return callback;

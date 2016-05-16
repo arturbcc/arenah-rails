@@ -47,10 +47,14 @@
       SheetAttributeSelector = require('sheet-attribute-selector');
 
   var sheet = new Sheet();
-      controller = new SheetController(),
+      controller = window.sheetController ? window.sheetController : new SheetController(),
       attributeSelector = new SheetAttributeSelector({
         'onSelect': controller.attributeSelectorCallback(controller.selectedAttribute)
       });
+
+  if (!window.sheetController) {
+    window.sheetController = controller;
+  }
 
   //
   // < % if ((Model.Identity.CurrentRole == Identity.Role.PlayerLogged && character.Id == Model.Identity.Character.Id && character.Status == Character.StatusType.ACTIVE) || (Model.Identity.CurrentRole == Identity.Role.GameMasterLogged)) { %>

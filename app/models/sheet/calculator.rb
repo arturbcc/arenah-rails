@@ -24,7 +24,7 @@ module Sheet
     private
 
     def variable_format(group_name, attribute_name)
-      "#{group_name.parameterize}__#{attribute_name.parameterize}"
+      "#{group_name.gsub(' ', '_').parameterize}__#{attribute_name.gsub(' ', '').parameterize}"
     end
 
     def valid_formula(formula)

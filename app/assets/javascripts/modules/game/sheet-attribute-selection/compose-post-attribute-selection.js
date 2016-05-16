@@ -1,7 +1,6 @@
 define('compose-post-attribute-selection', [], function() {
   function ComposePostAttributeSelection(game) {
     this.game = game;
-    this.sheet = $('#sheet');
     this.attributes = [];
 
     this._bindEvents();
@@ -27,7 +26,7 @@ define('compose-post-attribute-selection', [], function() {
   };
 
   fn._attributeData = function(attribute) {
-    var id = parseInt(this.sheet.data('character-id')),
+    var id = parseInt($('#sheet').data('character-id')),
         character = this.game.characters.where({ id: id }),
         groupName = attribute.parents('[data-group-name]').data('group-name'),
         attributeName = attribute.data('attribute-name'),
@@ -78,10 +77,11 @@ define('compose-post-attribute-selection', [], function() {
     if (this.attributes.length % 2 == 1)
       template.addClass('odd');
 
-    if (this.attributes.length == 0)
+    if (this.attributes.length == 0) {
       $('#attributes-area').html(template);
-    else
+    } else {
       $('#attributes-area').append(template);
+    }
 
     this.attributes.push(data);
     this._attributesCount();
