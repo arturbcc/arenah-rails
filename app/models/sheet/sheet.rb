@@ -52,11 +52,12 @@ module Sheet
       calculate_equipment_modifiers
       calculate_group_points
       calculate_based_attributes
+      calculate_attributes_formula
 
-      # TODO: I need to remember to never modify the points of any attribute. Save
+      # TODO: remember to never modify the points of any attribute. Save
       # in separated fields and use the method `value` to sum them up
 
-      # TODO: I must never let an attribute be based on another based attribute
+      # TODO: never let an attribute be based on another based attribute
       # Can it be based on a type=table group? To do that I need to parse the table
       # groups before everything, but the points will not be ready yet
       self
@@ -167,6 +168,27 @@ module Sheet
               attribute.equipment_modifier = 0 if attribute.equipment_modifier.blank?
               attribute.equipment_modifier += modifier.value if attribute
             end
+          end
+        end
+      end
+    end
+
+    # Private: the group can apply a formula to calculate the `total` of its
+    # attributes or the attributes themselves can have a custom formula. This
+    # `calculate_attributes_formula` method sets the `total` value with the
+    # formula result, considering also any based attributes it may have
+    #
+    # The group formula has piority over the attribute formula, in case both
+    # are set
+    def calculate_attributes_formula
+      attributes_groups.each do |group|
+        next unless group.character_attributes
+
+        group.character_attributes.each do |attribute|
+          if group.attributes_points_formula.present?
+            attribute.total = self.calculator.evaluate(group.attributes_points_formula.gsub('points', attribute.points.to_s))
+          elsif attribute.formula.present?
+            attribute.total = self.calculator.evaluate(attribute.formula)
           end
         end
       end

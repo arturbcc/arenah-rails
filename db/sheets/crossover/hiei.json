@@ -218,10 +218,10 @@
       "show_title_on_posts": true,
       "source_type": "fixed",
       "character_attributes": [
-        { "name": "Vida", "points": 1, "total": 100, "order": 1, "type": "bar", "master_only": true, "description": "Indica quantos pontos de vida o personagem possui. Quando chegar a zero, o personagem desmaia e algo deve ser feito ou ele morrerá (ao atingir -5 pontos)", "formula": "ceiling((#{Atributos:Força} + #{Atributos:Constituição}) / 2) + #{Dados:Nível} - 1" },
-        { "name": "Magia", "points": 70, "total": 100, "order": 2, "type": "bar", "master_only": true, "description": "Poder arcano do personagem. Quanto mais pontos de magia, mais magias diferentes o mago pode invocar e mais fortes elas serão." },
+        { "name": "Vida", "points": 1, "order": 1, "type": "bar", "master_only": true, "description": "Indica quantos pontos de vida o personagem possui. Quando chegar a zero, o personagem desmaia e algo deve ser feito ou ele morrerá (ao atingir -5 pontos)", "formula": "ceil((atributos=>força + atributos=>constituição) / 2) + dados=>nível - 1" },
+        { "name": "Magia", "points": 70, "order": 2, "type": "bar", "master_only": true, "description": "Poder arcano do personagem. Quanto mais pontos de magia, mais magias diferentes o mago pode invocar e mais fortes elas serão.", "formula": "100" },
         { "name": "XP", "points": 7921, "order": 3, "type": "name_value", "master_only": true, "description": "Pontos de experiência do personagem." },
-        { "name": "PH", "points": 9, "order": 4, "type": "name_value", "master_only": true, "description": "Pontos heróicos funcionam como um reforço aos PVs do Personagem. São pontos que podem ser usados em situações que envolvam atos heróicos. O Personagem os adquire através de treino em artes marciais.", "formula": "is_present(#{Aprimoramentos:Pontos Heróicos}) * #{Aprimoramentos:Pontos Heróicos} * #{Dados:Nível}" },
+        { "name": "PH", "points": 9, "order": 4, "type": "name_value", "master_only": true, "description": "Pontos heróicos funcionam como um reforço aos PVs do Personagem. São pontos que podem ser usados em situações que envolvam atos heróicos. O Personagem os adquire através de treino em artes marciais.", "formula": "aprimoramentos=>pontos_heroicos * dados=>nivel" },
         { "name": "Recursos", "points": 1200, "order": 5, "type": "character", "master_only": true, "description": "Dinheiro do personagem", "prefix": "$" },
         { "name": "Anime", "content": "Yuyu Hakusho", "order": 6, "type": "text" }
       ]

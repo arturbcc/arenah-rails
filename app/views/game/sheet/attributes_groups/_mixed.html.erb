@@ -8,6 +8,8 @@
         <%= render "game/sheet/attributes_types/#{partial}",
           attribute: attribute %>
       <% end %>
+
+      <%= render 'game/sheet/attributes_groups/empty_group' if group.character_attributes.count == 0 %>
     </tbody>
   </table>
 <% end %>

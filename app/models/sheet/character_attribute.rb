@@ -27,10 +27,11 @@ module Sheet
       if cost
         cost.to_i
       elsif points
-        base_points = base_attribute.present? ? base_attribute.value.to_i : 0
-        points.to_i + base_points + equipment_modifier.to_i
-      else
+        points.to_i + base_attribute.try(:value).to_i + equipment_modifier.to_i
+      elsif content
         content.to_i
+      else
+        points.to_i
       end
     end
 
@@ -42,7 +43,7 @@ module Sheet
       params = {
         attribute_name: name,
         points: points,
-        value: value
+        value: total || value
       }
       params[:base_attribute_group] = base_attribute_group if base_attribute_group.present?
       params[:base_attribute_name] = base_attribute_name if base_attribute_name.present?

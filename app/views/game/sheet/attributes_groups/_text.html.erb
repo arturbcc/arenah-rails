@@ -6,6 +6,8 @@
       <% group.character_attributes.each do |attribute| %>
         <%= render 'game/sheet/attributes_types/text', attribute: attribute %>
       <% end %>
+
+      <%= render 'game/sheet/attributes_groups/empty_group' if group.character_attributes.count == 0 %>
     </tbody>
   </table>
 

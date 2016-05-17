@@ -10,6 +10,10 @@ define('modal-reuse', [], function() {
   };
 
   fn._allowModalReuse = function(e) {
+    var img = $('<img>').attr('src', '/images/loader.gif');
+    var loading = $('<div />').addClass('loading-modal').append(img);
+
+    $('.modal-content').html(loading);
     $(this).removeData('bs.modal');
   };
 

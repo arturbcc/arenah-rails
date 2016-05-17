@@ -6,6 +6,8 @@
       <% group.equipments.each do |equipment| %>
         <%= render 'game/sheet/attributes_types/equipment', equipment: equipment %>
       <% end %>
+
+      <%= render 'game/sheet/attributes_groups/empty_group', text: 'Sem equipamentos' if group.equipments.count == 0 %>
     </tbody>
   </table>
 <% end %>
