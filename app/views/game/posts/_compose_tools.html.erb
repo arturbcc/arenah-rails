@@ -53,9 +53,16 @@
             <div class="clear"></div>
             <hr />
             <% @game.npcs.each do |character| %>
-              <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = character.Slug }) %>" data-toggle="modal" data-target="#remote-modal" data-width="1015px" class="other-character" data-id="< %: character.Id %>">
-                < %: Html.Avatar(character, "character-avatar") %>
-              </a -->
+              <%= link_to game_sheet_path(character.slug),
+                    class: 'other-character',
+                    data: {
+                      id: character.id,
+                      toggle: 'modal',
+                      target: '#remote-modal',
+                      width:'975px'
+                    } do %>
+                  <%= avatar(character, class: 'character-avatar') %>
+                <% end %>
             <% end %>
           <% end %>
         </div>
