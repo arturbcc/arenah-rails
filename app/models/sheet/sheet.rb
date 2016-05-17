@@ -185,10 +185,6 @@ module Sheet
         next unless group.character_attributes
 
         group.character_attributes.each do |attribute|
-          attribute.total = attribute.points.to_i +
-            attribute.base_attribute.try(:value).to_i +
-            attribute.equipment_modifier.to_i
-
           if group.attributes_points_formula.present?
             attribute.total = self.calculator.evaluate(group.attributes_points_formula.gsub('points', attribute.points.to_s))
           elsif attribute.formula.present?
