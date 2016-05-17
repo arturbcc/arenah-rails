@@ -24,5 +24,7 @@
         </table>
       </div>
     <% end %>
+
+    <%= render 'game/sheet/attributes_groups/empty_group' if group.character_attributes.count == 0 %>
   </div>
 <% end %>

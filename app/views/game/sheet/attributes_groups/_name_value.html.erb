@@ -4,12 +4,10 @@
   <table class="table table-condensed name-value-attributes" data-accept-edit-mode>
     <tbody>
       <% group.character_attributes.each do |attribute| %>
-        <% if attribute.total.present? %>
-          <%= render 'game/sheet/attributes_types/name_value_total', attribute: attribute %>
-        <% else %>
-          <%= render 'game/sheet/attributes_types/name_value', attribute: attribute %>
-        <% end %>
+        <%= render 'game/sheet/attributes_types/name_value', attribute: attribute %>
       <% end %>
+
+      <%= render 'game/sheet/attributes_groups/empty_group' if group.character_attributes.count == 0 %>
     </tbody>
   </table>
 

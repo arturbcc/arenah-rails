@@ -12,6 +12,8 @@
       <textarea class="hidden"><%= attribute.content %></textarea>
     </div>
   <% end %>
+
+  <%= render 'game/sheet/attributes_groups/empty_group' if group.character_attributes.count == 0 %>
 <% end %>
 
 <script src="//cdn.ckeditor.com/4.4.3/full/ckeditor.js"></script>
