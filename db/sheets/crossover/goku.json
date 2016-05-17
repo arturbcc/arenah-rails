@@ -97,7 +97,7 @@
           "abbreviation": "Con",
           "order": 2,
           "description": "Determina o vigor, saúde e condição física do Personagem. De modo geral, um Personagem com um baixo valor em Constituição é franzino e feio, enquanto um valor alto garante uma boa aparência — ou um aspecto de brutamontes, você decide. Isso não significa necessariamente que o Personagem seja forte ou fraco; isso é determinado pela Força. A Constituição determina a quantidade de Pontos de Vida — quanto mais alta a CON, mais PVs o Personagem terá. Também serve para testar a resistência a venenos, fadiga e rigores climáticos e físicos.",
-          "points": 18
+          "points": 17
         },
         {
           "name": "Destreza",
@@ -111,7 +111,7 @@
           "abbreviation": "Agi",
           "order": 4,
           "description": "Ao contrário da Destreza, a Agilidade não é válida para coisas feitas com as mãos — mas sim para o corpo todo. Com um alto valor em Agilidade um Personagem pode correr mais rápido, equilibrar-se melhor sobre um muro, dançar com mais graça, esquivar-se de ataques... É importante fixar a diferença entre Destreza e Agilidade para fins de jogo.",
-          "points": 18
+          "points": 20
         },
         {
           "name": "Inteligência",
@@ -125,7 +125,7 @@
           "abbreviation": "Will",
           "order": 6,
           "description": "Esta é a capacidade de concentração e determinação do Personagem. Uma alta Força de Vontade fará com que um Personagem resista a coisas como tortura, hipnose, pânico, tentações e controle da mente. O Mestre também pode exigir Testes de Força de Vontade para verificar se um Personagem não fica apavorado diante de uma situação amedrontadora. Também está relacionada com a Magia e poderes psíquicos.",
-          "points": 18
+          "points": 20
         },
         {
           "name": "Percepção",
@@ -220,7 +220,7 @@
       "source_type": "fixed",
       "character_attributes": [
         { "name": "Vida", "points": 60, "order": 1, "type": "bar", "master_only": true, "description": "Indica quantos pontos de vida o personagem possui. Quando chegar a zero, o personagem desmaia e algo deve ser feito ou ele morrerá (ao atingir -5 pontos)", "formula": "ceil((atributos=>força + atributos=>constituição) / 2) + dados=>nível - 1" },
-        { "name": "Magia", "points": 100, "order": 2, "type": "bar", "master_only": true, "description": "Poder arcano do personagem. Quanto mais pontos de magia, mais magias diferentes o mago pode invocar e mais fortes elas serão." },
+        { "name": "Magia", "points": 100, "order": 2, "type": "bar", "master_only": true, "description": "Poder arcano do personagem. Quanto mais pontos de magia, mais magias diferentes o mago pode invocar e mais fortes elas serão.", "formula": "100" },
         { "name": "XP", "points": 9921, "order": 3, "type": "name_value", "master_only": true, "description": "Pontos de experiência do personagem." },
         { "name": "PH", "points": 99, "order": 4, "type": "name_value", "master_only": true, "description": "Pontos heróicos funcionam como um reforço aos PVs do Personagem. São pontos que podem ser usados em situações que envolvam atos heróicos. O Personagem os adquire através de treino em artes marciais.", "formula": "aprimoramentos=>pontos_heroicos * dados=>nivel" },
         { "name": "Recursos", "points": 100, "order": 5, "type": "character", "master_only": true, "description": "Dinheiro do personagem", "prefix": "$" },
