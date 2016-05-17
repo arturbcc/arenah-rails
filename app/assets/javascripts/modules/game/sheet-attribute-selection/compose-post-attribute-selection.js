@@ -1,7 +1,14 @@
-define('compose-post-attribute-selection', [], function() {
+define('compose-post-attribute-selection', ['rules-panel'], function(RulesPanel) {
   function ComposePostAttributeSelection(game) {
+    var self = this;
+
     this.game = game;
     this.attributes = [];
+
+    this.rulesPanel = new RulesPanel({
+      onClear: function() { self.attributes = []; },
+      findAttribute: $.proxy(self._findAttribute, this)
+    });
 
     this._bindEvents();
   };
@@ -9,7 +16,7 @@ define('compose-post-attribute-selection', [], function() {
   var fn = ComposePostAttributeSelection.prototype;
 
   fn._bindEvents = function() {
-    $.proxyAll(this, 'selectionCallback', '_removeAttribute');
+    $.proxyAll(this, 'selectionCallback', '_removeAttribute', '_findAttribute');
 
     $('#attributes-area').on('click', '[data-remove-attribute]', this._removeAttribute);
   };
@@ -105,51 +112,23 @@ define('compose-post-attribute-selection', [], function() {
         line = element.parents('.character-attribute-line'),
         originalPosition = $('[data-original-position]', line).val(),
         attribute = this._findAttribute(originalPosition),
-        index = this.attributes.indexOf(attribute);
+        index = this.attributes.indexOf(attribute),
+        self = this;
 
     line.fadeOut();
     this.attributes.splice(index, 1);
     this._attributesCount();
 
     if (this.attributes.length === 0) {
-      this._clear();
+      this.rulesPanel.clear();
     }
 
     line.remove();
-    this._recalculatePositions();
-  };
-
-  fn._clear = function() {
-    this.attributes = [];
-    $('#attributes-area').html('<div class="splash"><i class="fa fa-spinner fa-spin"></i> Escolha os atributos nas fichas</div>');
-    $('.tests-result.on').removeClass('on');
-    $('.tests-result').html('').css('background-color', 'transparent');
+    this.rulesPanel.recalculatePositions();
   };
 
   fn._findAttribute = function(originalPosition) {
     return $.grep(this.attributes, function (e) { return e.originalPosition == originalPosition; })[0];
-  };
-
-  fn._recalculatePositions = function() {
-    var self = this,
-        index = 0;
-
-    $('#attributes-area .character-attribute-line').each(function (_, item) {
-      var position = index + 1,
-          originalPosition = $('[data-original-position]', item).val(),
-          attribute = self._findAttribute(originalPosition);
-
-      if (attribute) {
-        attribute.position = position;
-        $('.attribute-position', item).text(position);
-
-        if (index % 2 == 1) {
-          $(item).addClass('odd');
-        }
-
-        index += 1;
-      }
-    });
   };
 
   return ComposePostAttributeSelection;
