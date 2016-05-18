@@ -64,10 +64,10 @@
       topics = new Topics('.game-topics');
 
   <% unless @identity.unlogged? %>
-    topics.unreadPostsCheck();
+    <!-- topics.unreadPostsCheck(); -->
 
     <% if @identity.game_master? %>
-      topics.initializeAdminTools();
+      <!-- topics.initializeAdminTools(); -->
     <% end %>
   <% end %>
 <% end %>
