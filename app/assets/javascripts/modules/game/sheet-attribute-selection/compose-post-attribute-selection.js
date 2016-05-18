@@ -1,6 +1,11 @@
+// This component answers to an interface. It must respond to `selectionCallback`
+//
+// * selectionCallback: the method that will be triggered when an attribute is
+//   selected in the character sheet;
+//
 define('compose-post-attribute-selection', ['rules-panel'], function(RulesPanel) {
   function ComposePostAttributeSelection(game) {
-    this.rulesPanel = new RulesPanel();
+    this.rulesPanel = new RulesPanel(game);
     this.game = game;
 
     $.proxyAll(this, 'selectionCallback');

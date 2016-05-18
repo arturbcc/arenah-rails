@@ -1,13 +1,15 @@
-//TODO: Loose this coupling between rules-panel and compose-post-attribute-selection
-define('rules-panel', [], function() {
-  function RulesPanel(options) {
+define('rules-panel', ['rules-panel-calculator'], function(RulesPanelCalculator) {
+  function RulesPanel(game) {
+    this.calculator = new RulesPanelCalculator(game);
+
+    this.game = game;
     this.attributes = [];
 
     this.container = $('#collapseFour');
     this.attributesArea = $('#attributes-area');
     this.results = $('.tests-result');
     this.clearButton = this.container.find('.btn-danger');
-    this.rollButton = this.container.find('btn-success');
+    this.rollButton = this.container.find('.btn-success');
     this.attributeTemplate = $('.character-attribute-line-template');
 
     this._bindEvents();
@@ -29,6 +31,8 @@ define('rules-panel', [], function() {
     // binding is made outside this if
     if (!this.container.data('loaded')) {
       this.clearButton.on('click', this._clear);
+      this.rollButton.on('click', this._roll);
+      //   self.attributesTest();
 
       this.attributesArea.sortable({
         stop: function (event, ui) {
@@ -89,10 +93,6 @@ define('rules-panel', [], function() {
 
     this.attributes.push(data);
     this._updateBadgeCount();
-  };
-
-  fn.roll = function() {
-
   };
 
   fn._clear = function() {
@@ -172,10 +172,9 @@ define('rules-panel', [], function() {
     return $.grep(this.attributes, function (e) { return e.originalPosition == originalPosition; })[0];
   };
 
-// $("#collapseFour .btn-success").on("click", function () {
-//   self.attributesTest();
-// });
-//
+  fn._roll = function() {
+    this.calculator.roll();
+  };
 
   return RulesPanel;
 });
