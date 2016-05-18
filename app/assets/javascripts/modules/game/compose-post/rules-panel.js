@@ -110,7 +110,7 @@ define('rules-panel', ['rules-panel-calculator'], function(RulesPanelCalculator)
     return $('<div>')
       .addClass('splash')
       .append(icon)
-      .append(' Escolha os atributos nas fichas');
+      .append(' Escolha atributos nas fichas dos personagens');
   };
 
   fn._updateBadgeCount = function() {

@@ -121,8 +121,8 @@ define('rules-panel-calculator', ['compose-post-dice-control'], function(Compose
 
       if (self._evaluateResult(resultRule, chance, result)) {
         data = {
-          'name': rule.name,
-          'color': rule.color
+          'name': resultRule.name,
+          'color': resultRule.color
         };
       }
       index += 1;
@@ -143,19 +143,19 @@ define('rules-panel-calculator', ['compose-post-dice-control'], function(Compose
     }
 
     switch (resultRule.signal) {
-      case 0:
+      case '>':
         status = result > expression;
         break;
-      case 1:
+      case '>=':
         status = result >= expression;
         break;
-      case 2:
+      case '<':
         status = result < expression;
         break;
-      case 3:
+      case '<=':
         status = result <= expression;
         break;
-      case 4:
+      case '=':
         status = result == expression;
         break;
     }
@@ -166,7 +166,7 @@ define('rules-panel-calculator', ['compose-post-dice-control'], function(Compose
   fn._rollAttributesTest = function(attributeValues) {
     var data = { "formula": "" },
         rulesSet = this._currentRulesSet(),
-        test = this._getTestRule(rulesSet, $('.character-attribute-line').length);
+        test = this._getTestRule(rulesSet, $('.character-attribute-line').length - 1);
 
     if (test && test.formula.length > 0) {
       data.formula = test.formula;
@@ -180,7 +180,7 @@ define('rules-panel-calculator', ['compose-post-dice-control'], function(Compose
       try {
         var expr = Parser.parse(data.formula);
         data.chance = expr.evaluate(attributeValues);
-        data.result = this.diceControl.replaceDiceVariables(data.dice);
+        data.result = parseInt(this.diceControl.replaceDiceVariables(data.dice));
       } catch (e) {
         data.error = "Não foi possível calcular os testes. Verifique se os valores estão corretos e tente novamente";
         data.delay = 3000;
