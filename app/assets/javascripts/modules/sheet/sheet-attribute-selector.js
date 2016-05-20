@@ -1,5 +1,5 @@
 define('sheet-attribute-selector', [], function() {
-  function SheetAttributeSelector(options = {}) {
+  function SheetAttributeSelector(options) {
     this.selectedAttribute = null;
     this.callback = options['onSelect'];
     this.sheet = $('#sheet');
