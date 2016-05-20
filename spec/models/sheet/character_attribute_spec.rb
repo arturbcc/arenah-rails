@@ -427,8 +427,8 @@ describe Sheet::CharacterAttribute do
       expect(group.character_attributes.count).to eq(6)
 
       expected = [
-        { name: 'Vida', points: 49, total: 100 },
-        { name: 'Magia', points: 9, total: 100  },
+        { name: 'Vida', points: 49 },
+        { name: 'Magia', points: 9  },
         { name: 'XP', points: 2636 },
         { name: 'PH', points: 10 },
         { name: 'Recursos', points: 1252 },
