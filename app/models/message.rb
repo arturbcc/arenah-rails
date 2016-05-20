@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'html/sanitizer'
+# require 'html/sanitizer'
 
 class Message < ActiveRecord::Base
   belongs_to :sender, class_name: 'Character'
@@ -9,7 +9,7 @@ class Message < ActiveRecord::Base
   FROM_ARENAH = 0
 
   def excerpt(length)
-    content = HTML::FullSanitizer.new.sanitize(body)
+    content = Rails::Html::FullSanitizer.new.sanitize(body)
     content.truncate(length)
   end
 end
