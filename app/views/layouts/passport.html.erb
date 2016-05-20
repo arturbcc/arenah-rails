@@ -20,7 +20,7 @@
     <%= yield %>
   </div>
 
-  <%= render 'shared/tracking_scripts' %>
+  <%= render 'shared/tracking_scripts', game: @game %>
 
   <% if alert.present? %>
     <%= render 'shared/flash_message', message: alert %>

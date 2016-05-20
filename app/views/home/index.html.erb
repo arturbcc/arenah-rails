@@ -57,6 +57,6 @@
 
   <%= render 'shared/flash_message', message: alert, message_type: 'success' %>
   <%= render 'shared/flash_message', message: notice, message_type: 'success' unless invalid_notice?(notice) %>
-  <%= render 'shared/tracking_scripts' %>
+  <%= render 'shared/tracking_scripts', game: @game %>
 </body>
 </html>
