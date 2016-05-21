@@ -34,6 +34,7 @@ define('compose-post', ['compose-post-accordion', 'compose-post-preview', 'imper
   fn.autoComplete = function() {
     var panels = this.composePostAccordion;
 
+    this.recipients.container.parent().show();
     this.recipients.container.select2({
       data: this.characters.pcs,
       width: this.recipientsWidth,
