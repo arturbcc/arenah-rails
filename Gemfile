@@ -31,6 +31,7 @@ gem 'jquery-rails'
 
 gem 'dentaku'
 gem 'rails-html-sanitizer'
+gem 'newrelic_rpm'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -70,5 +71,4 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'newrelic_rpm'
 end
