@@ -24,7 +24,7 @@ module CharacterAttributeHelper
     divisor = 100 / attribute.images.count
     image_name = (images[(percentage / divisor).floor] || images.last).name
 
-    image_tag "/games/#{game_slug}/images/images_attributes/#{image_name}"
+    image_tag "#{ENV['CDN_URL']}/games/#{game_slug}/images/images_attributes/#{image_name}"
   end
 
   def editable_link(options = {})

@@ -30,7 +30,7 @@ module GameHelper
   end
 
   def custom_css(game)
-    "<link href='/games/#{game.slug}/css/custom.css' rel='stylesheet'>".html_safe if game.present?
+    "<link href='#{ENV['CDN_URL']}/games/#{game.slug}/css/custom.css' rel='stylesheet'>".html_safe if game.present?
   end
 
   def roman_number(number)
@@ -68,7 +68,7 @@ module GameHelper
   private
 
   def banner_path(game)
-    "/games/#{game.slug}/images/banners/#{game.banner}"
+    "#{ENV['CDN_URL']}/games/#{game.slug}/images/banners/#{game.banner}"
   end
 
   def default_banner_path

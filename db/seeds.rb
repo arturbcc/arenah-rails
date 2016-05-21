@@ -56,7 +56,7 @@ crossover = Game.create!(
                 'Crossover é uma técnica literária de misturar personagens de núcleos diversos interagindo entre eles. Revistas em Quadrinhos e desenhos animados fazem esta união quase que constantemente e são constantes os encontros entre personagens da DC Comics (a qual pertencem famosos personagens como Super-Homem, Batman, Mulher-Maravilha, etc.) e Marvel Comics (a qual pertencem personagens famosos como Homem-Aranha, Hulk, Quarteto Fantástico, X-Men, etc.). \n\n ' +
                 'Um crossover ficcional ocorre quando dois ou mais personagens de diferentes histórias e universos interagem um com o outro. A maior parte dos crossovers dá-se em histórias nas quais estes dois ou mais personagens se encontram e se reúnem para enfrentar uma ameaça, ou mesmo se tornam inimigos.\n\n ' +
                 'É comum que crossovers sejam realizados entre produtos de uma mesma empresa, pessoa ou equipe de produção, seja no ramo de quadrinhos, na televisão ou na literatura, já que eles seriam os detentores dos direitos autorais e não existiriam problemas de violação destes direitos. Também é comum que personagens que já estão em domínio público participem de novas histórias (Sherlock Holmes e Drácula são apenas dois exemplos). Também é comum que acontecem crossovers como uma maneira de criar publicidade para algum produto ou atração. \n\n' +
-                '[center][img]/games/crossover/images/banners/capa.png[/img][/center]',
+                '[center][img]http://www.arenah.com.br/cdn/games/crossover/images/banners/capa.png[/img][/center]',
   banner: 'crossover.jpg',
   subtitle: 'Onde os mundos se cruzam',
   system: load_system('crossover'))

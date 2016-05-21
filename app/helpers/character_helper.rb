@@ -14,7 +14,7 @@ module CharacterHelper
   end
 
   def avatar_path(character)
-    "/games/#{character.game.slug}/images/avatars/#{character.avatar}"
+    "#{ENV['CDN_URL']}/games/#{character.game.slug}/images/avatars/#{character.avatar}"
   end
 
   private

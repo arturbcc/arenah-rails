@@ -24,6 +24,6 @@ module EquipmentHelper
   private
 
   def image_path(game_slug, image_name)
-    "/games/#{game_slug}/images/equipments/#{image_name}"
+    "#{ENV['CDN_URL']}/games/#{game_slug}/images/equipments/#{image_name}"
   end
 end
