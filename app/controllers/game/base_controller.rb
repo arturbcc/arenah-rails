@@ -14,6 +14,12 @@ class Game::BaseController < ApplicationController
     @character
   end
 
+  def current_topic
+    @current_topic ||= Topic.find_by(
+      slug: params[:topic],
+      game_id: current_game.id)
+  end
+
   protected
 
   def load_game

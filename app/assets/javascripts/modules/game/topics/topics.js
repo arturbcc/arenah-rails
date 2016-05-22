@@ -10,7 +10,9 @@ define('topics', [], function() {
   var fn = Topics.prototype;
 
   fn._bindEvents = function() {
-    this.topicGroups.on('click', $.proxy(this._changeTopicGroup, this));
+    $.proxyAll(this, '_changeTopicGroup');
+
+    this.topicGroups.on('click', this._changeTopicGroup);
   };
 
   fn.checkForUnreadPosts = function () {
@@ -61,70 +63,6 @@ define('topics', [], function() {
     }
   };
 
-  /* TODO: Should this method be here in this class? */
-  fn.initializeAdminTools = function () {
-    var self = this;
-
-    $(".topic-info").sortable({
-      start: function(event, ui) {
-        $(ui.helper).addClass('notransition');
-      },
-
-      stop: function(event, ui) {
-        $(ui.helper).removeClass('notransition');
-        self._reorderTopics();
-      }
-    });
-
-    $('.topics-groups').sortable({
-      stop: function(event, ui) {
-        self._reorderTopicsGroups();
-      }
-    });
-
-    $('.fm-nav .fa-trash').on('click', function() {
-      var topicId = $(this).parents('[data-topic-id]').attr('data-topic-id');
-      var self = this;
-      bootbox.confirm('Tem certeza que deseja excluir o tópico? Todos os posts serão apagados e esta operação não poderá ser desfeita.', function (result) {
-        if (result) {
-          $(self).parents('.fm-nav').remove();
-          $.ajax({
-            url: gameRoomUrl() + 'topico/' + topicId + '/apagar',
-            type: 'POST',
-            success: function (data) {
-              if (data.Status != 'OK') {
-                NotyMessage.show('Não foi possível excluir o tópico');
-              }
-            }
-          });
-        }
-      });
-    });
-
-    $('.topics-groups .fa-trash').on('click', function () {
-      var topicGroupId = $(this).parents('li[data-topic-group-id]').attr('data-topic-group-id'),
-          self = this;
-
-      bootbox.confirm('Tem certeza que deseja excluir a categoria? Todos os tópicos e posts serão apagados e esta operação não poderá ser desfeita.', function (result) {
-        if (result) {
-          $(self).parents('li').remove();
-
-          $.ajax({
-            url: gameRoomUrl() + 'grupo-de-topicos/' + topicGroupId + '/apagar',
-            type: 'POST',
-            success: function (data) {
-              if (data.Status != 'OK') {
-                NotyMessage.show('Não foi possível excluir a categoria');
-              } else {
-                $('.topics-groups li:first').trigger('click');
-              }
-            }
-          });
-        }
-      });
-    });
-  };
-
   fn._changeTopicGroup = function(event) {
     var el = $(event.target).parent();
     var topicGroupId = el.attr("data-topic-group-id");
@@ -161,28 +99,6 @@ define('topics', [], function() {
 
     return valid;
   };
-
-  fn._reorderTopics = function() {
-    var changes = {};
-
-    $.each($('.subgroup-visible .fm-nav'), function (index) {
-      changes[$(this).attr('data-topic-id')] = index + 1;
-    });
-
-    $.ajax({
-      url: gameRoomUrl() + 'topicos/reordenar',
-      traditional: true,
-      data: {
-        'changes': JSON.stringify(changes)
-      },
-      type: 'POST',
-      success: function (data) {
-        if (data.Status !== 'OK') {
-          NotyMessage.show('Não foi possível reordenar os tópicos');
-        }
-      }
-    });
-  },
 
   fn._reorderTopicsGroups = function() {
     var changes = {};

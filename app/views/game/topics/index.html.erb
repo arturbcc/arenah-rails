@@ -11,30 +11,11 @@
         <div class="inner">
           <div class="sidemenu fm-menu fm-animated">
             <div class="fm-wrapper">
-              <% if @identity.game_master? %>
-                <%= link_to game_new_topic_path, data: { toggle: 'modal', target: '#remote-modal', width: '365px' } do %>
-                  <button type="button" class="btn btn-success">
-                    <%= icon('plus') %> Novo
-                  </button>
-                <% end %>
-              <% end %>
+              <%= render 'new_topic_button' %>
 
               <ul class="fm-first-level topics-groups <%= 'game-master' if @identity.game_master? %>">
                 <% @game.topic_groups.each_with_index do |group, index| %>
-                  <li data-topic-group-id="<%= group.id %>" class="<%= index == 0 ? 'active' : '' %>">
-                    <% if @identity.game_master? %>
-                      <div class="extra-options">
-
-                        <%= link_to game_edit_topic_group_path(@game, group), data: { toggle: 'modal', target: '#remote-modal', width: '365px' } do %>
-                          <%= icon('edit') %>
-                        <% end %>
-
-                        <%= icon('trash') %>
-                      </div>
-                    <% end %>
-
-                    <a href="javascript:;"><%= group.name %></a>
-                  </li>
+                  <%= render 'group_item', group: group, index: index %>
                 <% end %>
               </ul>
 
@@ -48,7 +29,6 @@
                   <% end %>
                 </div>
               <% end %>
-
             </div>
           </div>
         </div>
@@ -60,14 +40,12 @@
 <%= content_for :javascripts do %>
   <%= render 'shared/flash_message' %>
 
-  var Topics = require('topics'),
-      topics = new Topics('.game-topics');
-
   <% unless @identity.unlogged? %>
     <!-- topics.unreadPostsCheck(); -->
 
     <% if @identity.game_master? %>
-      <!-- topics.initializeAdminTools(); -->
+      var TopicsController = require('topics-controller');
+      new TopicsController('.game-topics');
     <% end %>
   <% end %>
 <% end %>

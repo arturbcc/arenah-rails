@@ -44,10 +44,4 @@ class Game::DamagesController < Game::BaseController
   def selected_characters
     current_game.characters.select { |character| @ids.include?(character.id) }
   end
-
-  def current_topic
-    @current_topic ||= Topic.find_by(
-      slug: params[:topic],
-      game_id: current_game.id)
-  end
 end

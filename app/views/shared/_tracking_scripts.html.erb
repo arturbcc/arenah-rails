@@ -12,7 +12,7 @@
     ga('send', 'pageview');
 
     <% if local_assigns[:game].present? %>
-      ga('create', '< %= @game.GoogleAnalyticsCode %>', 'auto', { 'name': 'userTracker' });
+      ga('create', '<%= @game.google_analytics_code %>', 'auto', { 'name': 'userTracker' });
     <% end %>
   </script>
 <% end %>

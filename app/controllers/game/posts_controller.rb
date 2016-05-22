@@ -70,12 +70,6 @@ class Game::PostsController < Game::BaseController
     @topic = current_topic
   end
 
-  def current_topic
-    @current_topic ||= Topic.find_by(
-      slug: params[:topic],
-      game_id: current_game.id)
-  end
-
   def current_post
     @current_post ||= Post.find_by(topic: @topic, id: params[:id])
   end

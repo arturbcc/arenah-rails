@@ -1,0 +1,14 @@
+<%= content_tag(:li, data: { topic_group_id: group.id }, class: (index == 0 ? 'active' : '')) do %>
+  <% if @identity.game_master? %>
+    <div class="extra-options">
+      <%= link_to game_edit_topic_group_path(@game, group),
+        data: { toggle: 'modal', target: '#remote-modal', width: '365px' } do %>
+        <%= icon('edit') %>
+      <% end %>
+
+      <%= icon('trash') %>
+      </div>
+  <% end %>
+
+  <a href="javascript:;"><%= group.name %></a>
+<% end %>

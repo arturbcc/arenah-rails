@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
     get ':game/inscreva-se', to: 'subscription#show', as: :subscription
     get ':game/topicos', to: 'topics#index', as: :topics
+    delete ':game/topicos/:topic', to: 'topics#destroy', as: :delete_topic
     get ':game/topico/:id/editar', to: 'topics#edit', as: :edit_topic
     get ':game/grupo-de-topicos/:id/editar', to: 'topic_group#edit', as: :edit_topic_group
     get ':game/personagens', to: 'characters#index', as: :characters
