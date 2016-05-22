@@ -26,7 +26,7 @@ module ApplicationHelper
     "#{controller}##{view}"
   end
 
-  def icon(icon)
-    content_tag :i, '', class: "fa fa-#{icon}"
+  def icon(icon, data = {})
+    content_tag :i, '', class: "fa fa-#{icon}", data: data
   end
 end

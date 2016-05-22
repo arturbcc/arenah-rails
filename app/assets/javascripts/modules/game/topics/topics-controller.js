@@ -1,6 +1,8 @@
 define('topics-controller', [], function() {
   function TopicsController(container) {
+    //TODO maybe we don't need the container.
     this.container = $(container);
+    this.adminTools = $('.admin-tools-for-topic');
 
     this._bindEvents();
   };
@@ -13,7 +15,7 @@ define('topics-controller', [], function() {
     this._allowGroupSorting();
     this._allowTopicSorting();
 
-    this.container.on('click', '.fm-nav .fa-trash', this._delete);
+    this.adminTools.on('click', '.fa-remove', this._delete);
 
     // $('.topics-groups .fa-trash').on('click', function () {
     //   var topicGroupId = $(this).parents('li[data-topic-group-id]').attr('data-topic-group-id'),
@@ -51,11 +53,13 @@ define('topics-controller', [], function() {
     $('.topic-info').sortable({
       start: function(event, ui) {
         $(ui.helper).addClass('notransition');
+        this.adminTools.hide();
       },
 
       stop: function(event, ui) {
         $(ui.helper).removeClass('notransition');
         self._reorderTopics();
+        this.adminTools.show();
       }
     });
   };
@@ -63,15 +67,13 @@ define('topics-controller', [], function() {
   fn._delete = function(e) {
     var element = $(e.target),
         topicId = element.parents('[data-topic-id]').data('topic-id'),
-        url = element.parent().data('delete-url'),
+        url = element.data('delete-url'),
         self = this,
         message = 'Tem certeza que deseja excluir o tópico? ' +
           'Todos os posts serão apagados e esta operação não poderá ser desfeita.';
 
     bootbox.confirm(message, function(result) {
       if (result) {
-        $(self).parents('.fm-nav').remove();
-
         $.ajax({
           url: url,
           type: 'DELETE',
@@ -79,7 +81,9 @@ define('topics-controller', [], function() {
             if (data.status !== 200) {
               NotyMessage.show('Não foi possível excluir o tópico');
             } else {
-              element.parents('[data-topic-id]').remove();
+              var topicLine = self.container.find('[data-topic-id="' + element.data('topic-id') + '"]')
+              element.parent().remove();
+              topicLine.remove();
             }
           }
         });

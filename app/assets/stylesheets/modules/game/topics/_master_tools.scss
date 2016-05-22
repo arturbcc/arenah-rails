@@ -1,0 +1,74 @@
+.game-topics {
+  .extra-options {
+    position: absolute;
+    width: 30px;
+    top: 13px;
+    left: -35px;
+    font-size: 13px;
+    text-align: center;
+    color: #403e2e;
+    border-right: 1px solid #1b1b1b;
+
+    &.move {
+      cursor: move;
+      border-right: 4px solid #770606;
+      height: 40px;
+    }
+  }
+
+  .fm-nav.game-master a {
+    cursor: move;
+  }
+
+  .fm-nav {
+    position: relative;
+  }
+
+  .fm-nav .title {
+    cursor: pointer !important;
+  }
+
+  .notransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    -ms-transition: none !important;
+    transition: none !important;
+  }
+
+  .topics-groups.game-master a {
+     cursor: move;
+  }
+
+  .topics-groups.game-master li {
+    position: relative;
+  }
+
+  .topics-groups.game-master li .extra-options {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    display: none;
+    width: 100%;
+    border-left: 1px solid #1b1b1b;
+    border-bottom: 1px solid #1b1b1b;
+  }
+
+  .topics-groups.game-master li.active .extra-options {
+    display: block !important;
+  }
+
+  .admin-tools-for-topic {
+    background-color: #0E0E0E;
+    padding: 0 7px;
+    margin-bottom: 10px;
+    color: #403e2e;
+
+    .fa-remove,
+    .fa-edit {
+      color: #403e2e;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+  }
+}
