@@ -94,25 +94,28 @@ define('topics-controller', [], function() {
   };
 
   fn._reorderTopics = function() {
-    var changes = {};
+    var changes = {},
+        url = $('.topic-info').data('topic-sorting-url');
 
     $.each($('.subgroup-visible .fm-nav'), function (index) {
-      changes[$(this).attr('data-topic-id')] = index + 1;
+      changes[$(this).data('topic-id')] = index + 1;
     });
 
-    // $.ajax({
-    //   url: gameRoomUrl() + 'topicos/reordenar',
-    //   traditional: true,
-    //   data: {
-    //     'changes': JSON.stringify(changes)
-    //   },
-    //   type: 'POST',
-    //   success: function (data) {
-    //     if (data.status !== 200) {
-    //       NotyMessage.show('Não foi possível reordenar os tópicos');
-    //     }
-    //   }
-    // });
+    $.ajax({
+      url: url,
+      traditional: true,
+      data: {
+        changes: JSON.stringify(changes)
+      },
+      type: 'POST',
+      success: function (data) {
+        if (data.status !== 200) {
+          NotyMessage.show('Não foi possível reordenar os tópicos');
+        } else {
+          NotyMessage.show('Tópicos ordenados com sucesso!', 3000, 'success');
+        }
+      }
+    });
   };
 
   return TopicsController;

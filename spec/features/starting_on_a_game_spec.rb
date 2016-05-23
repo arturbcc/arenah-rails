@@ -6,7 +6,7 @@ feature 'Subscribe to a game' do
   let!(:user) { create(:user) }
   let!(:crossover) { create(:game, name: 'Crossover') }
 
-  scenario 'navigate to a game and Subscribe', js: true do
+  xscenario 'navigate to a game and Subscribe', js: true do
     visit root_path
 
     expect(page).to have_css('[data-game] h3', text: crossover.name)

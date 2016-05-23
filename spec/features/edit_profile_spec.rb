@@ -5,7 +5,7 @@ require 'rails_helper'
 feature 'Edit Profile' do
   let!(:user) { create(:user) }
 
-  scenario 'Open the profile and change user data', js: true do
+  xscenario 'Open the profile and change user data', js: true do
     sign_in user, true
     visit root_path
 

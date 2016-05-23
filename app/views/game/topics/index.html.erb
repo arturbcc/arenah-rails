@@ -21,7 +21,7 @@
 
               <% @game.topic_groups.each_with_index do |group, index| %>
                 <div class="<%= index == 0 ? 'subgroup-visible' : 'subgroup-invisible' %> topic-info"
-                      data-topic-group-id="<%= group.id %>">
+                      data-topic-group-id="<%= group.id %>" data-topic-sorting-url="<%= game_sort_topics_path(@game) %>">
 
                   <%# TODO: Remove rails logic from view %>
                   <% Topic.by_group_id(group.id).each_with_index do |topic, roman_index| %>

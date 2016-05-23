@@ -20,4 +20,19 @@ class Game::TopicsController < Game::BaseController
 
     render json: { status: status }
   end
+
+  def sort
+    status = 403
+
+    if @identity.game_master?
+      JSON.parse(params['changes']).each do |topic_id, position|
+        current_game.topics.find { |topic| topic.id == topic_id.to_i }
+          .update(position: position)
+      end
+
+      status = 200
+    end
+
+    render json: { status: status }
+  end
 end

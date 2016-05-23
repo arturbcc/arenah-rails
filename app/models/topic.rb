@@ -14,7 +14,7 @@ class Topic < ActiveRecord::Base
   validates :game_id, :slug, presence: true
 
   scope :by_group_id, ->(group_id) { joins(:topic_group)
-    .where('topic_groups.id = ?', group_id).order('topic_groups.position')
+    .where('topic_groups.id = ?', group_id).order('topics.position')
   }
 
   # TODO: check if this method is necessary. If so, maybe it should be in a
