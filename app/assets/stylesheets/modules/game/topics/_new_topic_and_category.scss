@@ -1,0 +1,33 @@
+.game-topics {
+  #title, #subtitle {
+    width: 300px;
+    margin-bottom: 10px;
+    clear: both;
+  }
+
+  .topic-fields label {
+    margin-bottom: 0;
+  }
+
+  .topic-fields {
+    padding: 10px;
+    background-color: #eee;
+  }
+
+  #content-type-container {
+    float: left;
+    width: 100%;
+  }
+
+  .content-type {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .content-type label {
+    display: inline;
+    font-weight: normal;
+    cursor: pointer;
+  }
+}

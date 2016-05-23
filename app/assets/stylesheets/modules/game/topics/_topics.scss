@@ -347,37 +347,20 @@
     animation-name: fadeInRight;
   }
 
-  /* New Topic and Category */
-
-  #title, #subtitle {
-    width: 300px;
-    margin-bottom: 10px;
-    clear: both;
-  }
-
-  .topic-fields label {
-    margin-bottom: 0;
-  }
-
-  .topic-fields {
+  .topic-info {
     padding: 10px;
-    background-color: #eee;
+
+    &.sorting {
+      border: 1px solid #ccc;
+
+      .topic-line {
+        border: 1px dashed #eee;
+      }
+    }
   }
 
-  #content-type-container {
-    float: left;
-    width: 100%;
-  }
-
-  .content-type {
-    float: left;
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
-
-  .content-type label {
-    display: inline;
-    font-weight: normal;
-    cursor: pointer;
+  .topic-line.with-gutter {
+    margin: 5px;
+    padding: 5px;
   }
 }

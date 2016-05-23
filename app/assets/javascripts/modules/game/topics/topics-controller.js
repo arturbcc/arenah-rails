@@ -50,16 +50,18 @@ define('topics-controller', [], function() {
   };
 
   fn._allowTopicSorting = function() {
+    var self = this;
+
     $('.topic-info').sortable({
       start: function(event, ui) {
         $(ui.helper).addClass('notransition');
-        this.adminTools.hide();
+        $(this).addClass('sorting');
       },
 
       stop: function(event, ui) {
         $(ui.helper).removeClass('notransition');
+        $(this).removeClass('sorting');
         self._reorderTopics();
-        this.adminTools.show();
       }
     });
   };
@@ -98,19 +100,19 @@ define('topics-controller', [], function() {
       changes[$(this).attr('data-topic-id')] = index + 1;
     });
 
-    $.ajax({
-      url: gameRoomUrl() + 'topicos/reordenar',
-      traditional: true,
-      data: {
-        'changes': JSON.stringify(changes)
-      },
-      type: 'POST',
-      success: function (data) {
-        if (data.status !== 200) {
-          NotyMessage.show('Não foi possível reordenar os tópicos');
-        }
-      }
-    });
+    // $.ajax({
+    //   url: gameRoomUrl() + 'topicos/reordenar',
+    //   traditional: true,
+    //   data: {
+    //     'changes': JSON.stringify(changes)
+    //   },
+    //   type: 'POST',
+    //   success: function (data) {
+    //     if (data.status !== 200) {
+    //       NotyMessage.show('Não foi possível reordenar os tópicos');
+    //     }
+    //   }
+    // });
   };
 
   return TopicsController;

@@ -1,30 +1,32 @@
-<nav class="active fm-nav <%= 'game-master' if @identity.game_master? %>"
-  data-last-post-id="<%= topic.post_id %>"
-  data-topic-id="<%= topic.id %>">
+<section class='topic-line <%= 'with-gutter' if @identity.game_master? %>' data-sortable-topic>
+  <nav class="active fm-nav <%= 'game-master' if @identity.game_master? %>"
+    data-last-post-id="<%= topic.post_id %>"
+    data-topic-id="<%= topic.id %>">
 
-  <%= link_to game_posts_path(game, topic), data: { 'fm-index' => roman_number(index) }, class: 'animated fadeInLeft' do %>
-    <span class="title"><%= topic.title %></span>
-    <span class="subtitle"><%= topic.description %></span>
-  <% end %>
-
-  <% if @identity.game_master? %>
-    <div class="extra-options move">
-
-    </div>
-  <% end %>
-</nav>
-
-<% if @identity.game_master? %>
-  <div class="admin-tools-for-topic">
-    <%= link_to game_edit_topic_path(game, topic),
-      data: {
-        toggle: 'modal',
-        target: '#remote-modal',
-        width: '365px'
-      } do %>
-      <%= icon('edit') %>
+    <%= link_to game_posts_path(game, topic), data: { 'fm-index' => roman_number(index) }, class: 'animated fadeInLeft' do %>
+      <span class="title"><%= topic.title %></span>
+      <span class="subtitle"><%= topic.description %></span>
     <% end %>
 
-    <%= icon('remove', { topic_id: topic.id, delete_url: game_delete_topic_path(@game, topic) }) %>
-  </div>
-<% end %>
+    <% if @identity.game_master? %>
+      <div class="extra-options move">
+
+      </div>
+    <% end %>
+  </nav>
+
+  <% if @identity.game_master? %>
+    <div class="admin-tools-for-topic">
+      <%= link_to game_edit_topic_path(game, topic),
+        data: {
+          toggle: 'modal',
+          target: '#remote-modal',
+          width: '365px'
+        } do %>
+        <%= icon('edit') %>
+      <% end %>
+
+      <%= icon('remove', { topic_id: topic.id, delete_url: game_delete_topic_path(@game, topic) }) %>
+    </div>
+  <% end %>
+</section>
