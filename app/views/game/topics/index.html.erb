@@ -13,7 +13,8 @@
             <div class="fm-wrapper">
               <%= render 'new_topic_button' %>
 
-              <ul class="fm-first-level topics-groups <%= 'game-master' if @identity.game_master? %>">
+              <ul class="fm-first-level topics-groups <%= 'game-master admin-tools-for-groups' if @identity.game_master? %>"
+                data-group-sorting-url="<%= game_sort_groups_path(@game) %>">
                 <% @game.topic_groups.each_with_index do |group, index| %>
                   <%= render 'group_item', group: group, index: index %>
                 <% end %>
@@ -44,8 +45,8 @@
     <!-- topics.unreadPostsCheck(); -->
 
     <% if @identity.game_master? %>
-      var TopicsController = require('topics-controller');
-      new TopicsController('.game-topics');
+      var AdminTopics = require('admin-topics');
+      new AdminTopics('.game-topics');
     <% end %>
   <% end %>
 <% end %>

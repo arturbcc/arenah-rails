@@ -36,10 +36,6 @@
     transition: none !important;
   }
 
-  .topics-groups.game-master a {
-     cursor: move;
-  }
-
   .topics-groups.game-master li {
     position: relative;
   }
@@ -69,6 +65,16 @@
       color: #403e2e;
       cursor: pointer;
       margin-right: 5px;
+    }
+  }
+
+  .admin-tools-for-groups {
+    .fa-arrows-alt {
+      cursor: move;
+    }
+
+    .fa-remove {
+      cursor: pointer;
     }
   }
 }

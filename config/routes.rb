@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     delete ':game/topicos/:topic', to: 'topics#destroy', as: :delete_topic
     get ':game/topico/:id/editar', to: 'topics#edit', as: :edit_topic
     get ':game/grupo-de-topicos/:id/editar', to: 'topic_group#edit', as: :edit_topic_group
+    delete ':game/grupo-de-topicos/:id/apagar', to: 'topic_groups#destroy', as: :delete_topic_group
+    post ':game/grupo-de-topicos/reordenar', to: 'topic_groups#sort', as: :sort_groups
     get ':game/personagens', to: 'characters#index', as: :characters
     # TODO: What is the differente between the route above and below?
     get ':game/personagens/lista', to: 'characters#list', as: :characters_list

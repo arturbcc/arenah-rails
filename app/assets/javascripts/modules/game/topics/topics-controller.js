@@ -1,6 +1,5 @@
 define('topics-controller', [], function() {
   function TopicsController(container) {
-    //TODO maybe we don't need the container.
     this.container = $(container);
     this.adminTools = $('.admin-tools-for-topic');
 
@@ -12,41 +11,9 @@ define('topics-controller', [], function() {
   fn._bindEvents = function() {
     $.proxyAll(this, '_delete');
 
-    this._allowGroupSorting();
     this._allowTopicSorting();
 
     this.adminTools.on('click', '.fa-remove', this._delete);
-
-    // $('.topics-groups .fa-trash').on('click', function () {
-    //   var topicGroupId = $(this).parents('li[data-topic-group-id]').attr('data-topic-group-id'),
-    //       self = this;
-    //
-    //   bootbox.confirm('Tem certeza que deseja excluir a categoria? Todos os tópicos e posts serão apagados e esta operação não poderá ser desfeita.', function (result) {
-    //     if (result) {
-    //       $(self).parents('li').remove();
-    //
-    //       $.ajax({
-    //         url: gameRoomUrl() + 'grupo-de-topicos/' + topicGroupId + '/apagar',
-    //         type: 'POST',
-    //         success: function (data) {
-    //           if (data.Status != 'OK') {
-    //             NotyMessage.show('Não foi possível excluir a categoria');
-    //           } else {
-    //             $('.topics-groups li:first').trigger('click');
-    //           }
-    //         }
-    //       });
-    //     }
-    //   });
-    // });
-  };
-
-  fn._allowGroupSorting = function() {
-    $('.topics-groups').sortable({
-      stop: function(event, ui) {
-        self._reorderTopicsGroups();
-      }
-    });
   };
 
   fn._allowTopicSorting = function() {
@@ -57,12 +24,12 @@ define('topics-controller', [], function() {
         $(ui.helper).addClass('notransition');
         $(this).addClass('sorting');
       },
-
       stop: function(event, ui) {
         $(ui.helper).removeClass('notransition');
         $(this).removeClass('sorting');
-        self._reorderTopics();
-      }
+        self._sort();
+      },
+      tolerance: 'pointer',
     });
   };
 
@@ -93,7 +60,7 @@ define('topics-controller', [], function() {
     });
   };
 
-  fn._reorderTopics = function() {
+  fn._sort = function() {
     var changes = {},
         url = $('.topic-info').data('topic-sorting-url');
 
