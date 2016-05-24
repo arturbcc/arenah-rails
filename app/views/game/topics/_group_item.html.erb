@@ -1,6 +1,6 @@
 <%= content_tag(:li, data: { topic_group_id: group.id }, class: (index == 0 ? 'active' : '')) do %>
   <% if @identity.game_master? %>
-    <div class="extra-options" data-delete-url="<%= game_delete_topic_group_path(@game, group) %>">
+    <div class="extra-options">
       <%= icon('arrows-alt') %>
 
       <%= link_to game_edit_topic_group_path(@game, group),
@@ -8,7 +8,7 @@
         <%= icon('edit') %>
       <% end %>
 
-      <%= icon('remove') %>
+      <%= icon('remove', { topic_group_id: group.id, delete_url: game_delete_topic_group_path(@game, group) }) %>
     </div>
   <% end %>
 

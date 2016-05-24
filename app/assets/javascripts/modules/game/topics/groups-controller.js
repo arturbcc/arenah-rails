@@ -56,30 +56,27 @@ define('groups-controller', [], function() {
   };
 
   fn._delete = function(e) {
-    // var element = $(e.target),
-    //     topicId = element.parents('[data-topic-id]').data('topic-id'),
-    //     url = element.data('delete-url'),
-    //     self = this,
-    //     message = 'Tem certeza que deseja excluir o tópico? ' +
-    //       'Todos os posts serão apagados e esta operação não poderá ser desfeita.';
-    //
-    // bootbox.confirm(message, function(result) {
-    //   if (result) {
-    //     $.ajax({
-    //       url: url,
-    //       type: 'DELETE',
-    //       success: function (data) {
-    //         if (data.status !== 200) {
-    //           NotyMessage.show('Não foi possível excluir o tópico');
-    //         } else {
-    //           var topicLine = self.container.find('[data-topic-id="' + element.data('topic-id') + '"]')
-    //           element.parent().remove();
-    //           topicLine.remove();
-    //         }
-    //       }
-    //     });
-    //   }
-    // });
+    var element = $(e.target),
+        url = element.data('delete-url'),
+        self = this,
+        message = 'Tem certeza que deseja excluir a categoria? ' +
+          'Todos os tópicos e posts serão apagados e esta operação não poderá ser desfeita.';
+
+    bootbox.confirm(message, function(result) {
+      if (result) {
+        $.ajax({
+          url: url,
+          type: 'DELETE',
+          success: function (data) {
+            if (data.status !== 200) {
+              NotyMessage.show('Não foi possível excluir a categoria');
+            } else {
+              element.parents('li').remove();
+            }
+          }
+        });
+      }
+    });
   };
 
   fn._sort = function() {

@@ -7,6 +7,16 @@ class Game::TopicGroupsController < Game::BaseController
   end
 
   def destroy
+    status = 422
+
+    if @identity.game_master?
+      group = current_game.topic_groups.find { |group| group.slug == params[:id] }
+      group.destroy! if group
+
+      status = 200
+    end
+
+    render json: { status: status }
   end
 
   def sort
