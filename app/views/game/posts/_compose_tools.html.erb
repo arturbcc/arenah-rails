@@ -10,15 +10,17 @@
       </div>
       <div id="collapseOne" class="panel-collapse collapse">
         <div class="panel-body">
-          <% @game.pcs.each do |character| %>
-            <%= link_to game_sheet_path(character.slug),
-                  class: 'group-character',
-                  data: {
-                    id: character.id,
-                    toggle: 'modal',
-                    target: '#remote-modal',
-                    width:'975px'
-                  } do %>
+          <% game.pcs.each do |character| %>
+            <%=
+              link_to game_sheet_path(character.slug),
+                class: 'group-character',
+                data: {
+                  id: character.id,
+                  toggle: 'modal',
+                  target: '#remote-modal',
+                  width:'975px'
+                } do
+              %>
               <%= avatar(character, class: 'character-avatar') %>
             <% end %>
           <% end %>
@@ -36,7 +38,7 @@
       </div>
       <div id="collapseTwo" class="panel-collapse collapse">
         <div class="panel-body">
-          <% @game.pcs.each do |character| %>
+          <% game.pcs.each do |character| %>
             <%= link_to game_sheet_path(character.slug),
                   class: 'other-character',
                   data: {
@@ -52,7 +54,7 @@
           <% if @identity.game_master? %>
             <div class="clear"></div>
             <hr />
-            <% @game.npcs.each do |character| %>
+            <% game.npcs.each do |character| %>
               <%= link_to game_sheet_path(character.slug),
                     class: 'other-character',
                     data: {
@@ -114,8 +116,8 @@
 
           <div class="upper-actions">
             <% if @identity.game_master? %>
-              <button type="button" id="damage" data-url="<%= game_damages_path(@game, @topic) %>" class="btn btn-xs btn-default">Dano</button>
-              <button type="button" id="initiative" data-url="<%= game_initiatives_path(@game, @topic) %>" class="btn btn-xs btn-default">Iniciativa</button>
+              <button type="button" id="damage" data-url="<%= game_damages_path(game, topic) %>" class="btn btn-xs btn-default">Dano</button>
+              <button type="button" id="initiative" data-url="<%= game_initiatives_path(game, topic) %>" class="btn btn-xs btn-default">Iniciativa</button>
             <% end %>
           </div>
 
@@ -123,7 +125,7 @@
             <span>Conjunto de regras:</span>
             <div class="clear"></div>
             <select class="rules-set">
-              <% @game.system.dice_roll_rules.each do |rule| %>
+              <% game.system.dice_roll_rules.each do |rule| %>
                 <option value="<%= rule.name %>"><%= rule.name %></option>
               <% end %>
             </select>
@@ -148,7 +150,7 @@
 
 <div class="character-attribute-line character-attribute-line-template">
   <div class="attribute-position">1</div>
-  <img data-path="<%= avatar_path(Character.new(game_id: @game.id, avatar: 'AVATAR.png')) %>" />
+  <img data-path="<%= avatar_path(Character.new(game_id: game.id, avatar: 'AVATAR.png')) %>" />
   <select class="attribute">
     <option value="17">40 [Valor]</option>
     <option value="10">10 [Pontos]</option>

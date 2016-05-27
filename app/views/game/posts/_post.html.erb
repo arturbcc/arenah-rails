@@ -8,17 +8,18 @@
       <ul class="actions">
         <% if ability.can_delete? %>
           <li class="btn btn-dark btn-xs">
-            <%= link_to 'Excluir', 'javascript:;',
-                  data: {
-                    'post-id' => post.id,
-                    'delete-post' => game_delete_post_path(game, topic, post)
-                  }
+            <%=
+              link_to 'Excluir', 'javascript:;',
+                data: {
+                  'post-id' => post.id,
+                  'delete-post' => game_delete_post_path(game, topic, post)
+                }
             %>
           </li>
         <% end %>
         <% if ability.can_edit? %>
           <li class="btn btn-dark btn-xs">
-            <%= link_to 'Editar', game_edit_post_path(game, topic, post) %>
+            <%= link_to 'Editar', game_edit_post_path(game, topic, post, page: @current_page) %>
           </li>
         <% end %>
 
@@ -31,7 +32,8 @@
       <div>
         <% if post.character.pc? %>
             por
-            <%= link_to post.character.name, game_sheet_path(post.character.slug), data: {
+            <%=
+              link_to post.character.name, game_sheet_path(post.character.slug), data: {
                 toggle: 'modal',
                 target: '#remote-modal',
                 width: '975px'

@@ -3,13 +3,15 @@
 class Game::PostsController < Game::BaseController
   PER_PAGE = 10
 
-  before_action :get_topic
+  attr_accessor :current_page
+
+  before_action :get_topic, :get_current_page
   before_action :load_recipients, only: [:new, :edit]
   before_action :authenticate_user!, except: :index
 
   def index
     @area = Area.new(:posts)
-    @posts = current_topic.posts.paginate(page: params[:page], per_page: PER_PAGE)
+    @posts = paginated_posts
   end
 
   def new
@@ -27,7 +29,8 @@ class Game::PostsController < Game::BaseController
     if current_user_ability.can_write_post?
       if create_post
         # @topic.recalculate_last_post
-        redirect_to game_posts_path(current_game, current_topic)
+        pages = paginated_posts.total_pages
+        redirect_to game_posts_path(current_game, current_topic, page: pages)
       else
         redirect_to game_new_post_path(current_game, current_topic),
           flash: 'Não foi possível enviar a mensagem'
@@ -40,7 +43,7 @@ class Game::PostsController < Game::BaseController
   def update
     if current_user_ability.can_edit?
       if update_post
-        redirect_to game_posts_path(current_game, current_topic)
+        redirect_to game_posts_path(current_game, current_topic, page: current_page)
       else
         redirect_to game_edit_post_path(current_game, current_topic, current_post),
           flash: 'Não foi possível editar a mensagem'
@@ -129,5 +132,13 @@ class Game::PostsController < Game::BaseController
       character_type: 1)
 
     npc || current_character
+  end
+
+  def paginated_posts
+    current_topic.posts.paginate(page: current_page, per_page: PER_PAGE)
+  end
+
+  def get_current_page
+    @current_page = params[:page] || 1
   end
 end

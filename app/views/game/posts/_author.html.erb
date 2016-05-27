@@ -72,13 +72,4 @@
       </div>
     <% end %>
   <% end %>
-
-  <!-- % if (author.Sheet.AttributesGroups.Count > 0 && author.Type == Character.CharacterType.PC) { %>
-     < % foreach (AttributesGroup group in author.Sheet.FindToShow()) { %>
-      <div class="attributes">
-        < % group.FlatVersion = false; %>
-        < % Html.RenderPartial("Sheet/AttributesGroups/" + group.Type, group); %>
-      </div>
-     < % end %>
-  < % end % -->
 </section>
