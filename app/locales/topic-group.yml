@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    errors:
+      models:
+        topic_group:
+          attributes:
+            name:
+              too_long: 'muito longo'

@@ -39,7 +39,6 @@ class Game::TopicGroupsController < Game::BaseController
   end
 
   def update
-    debugger
     if @identity.game_master?
       current_topic_group.update(topic_group_params)
     end
