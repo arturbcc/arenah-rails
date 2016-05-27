@@ -1,9 +1,12 @@
-define('topics', [], function() {
+define('topics', ['topic-group-storage'], function(TopicGroupStorage) {
   function Topics(container) {
+    this.topicGroupStorage = new TopicGroupStorage();
+
     this.container = $(container);
     this.topicGroups = this.container.find('.fm-first-level li');
 
     this._bindEvents();
+    this._loadActiveGroup();
   };
 
   var fn = Topics.prototype;
@@ -54,6 +57,8 @@ define('topics', [], function() {
   fn._underlineCurrentMenu = function (element) {
     this.container.find('.active').removeClass('active');
     element.addClass("active");
+
+    this.topicGroupStorage.save(element.data('topic-group-id'));
   };
 
   fn._showTopics = function (topicGroupId) {
@@ -61,6 +66,13 @@ define('topics', [], function() {
 
     visibleGroup.swapClasses('subgroup-visible', 'subgroup-invisible');
     this.container.find(".fm-wrapper div[data-topic-group-id='" + topicGroupId + "']").swapClasses('subgroup-invisible', 'subgroup-visible');
+  };
+
+  fn._loadActiveGroup = function() {
+    var id = this.topicGroupStorage.current_id(),
+        groupSelector = '.topics-groups > [data-topic-group-id=' + id + '] [data-group-name]';
+
+    this.container.find(groupSelector).trigger('click');
   };
 
   return Topics;
