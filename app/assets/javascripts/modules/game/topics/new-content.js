@@ -7,12 +7,16 @@ define('new-content', [], function() {
 
   fn._validForm = function() {
     var option = this.container.find('[data-new-content-option]:checked').val(),
-        title = $.trim(this.container.find('#title').val()),
-        valid = true;
+        titleInput = this.container.find('#title'),
+        nameInput = this.container.find('#name'),
+        valid = false;
 
-    if (title === '') {
-      valid = false;
+    if (titleInput.length > 0 && $.trim(titleInput.val()) === '') {
       NotyMessage.show('O título é obrigatório', 2000);
+    } else if (nameInput.length > 0 && $.trim(nameInput.val()) === '') {
+      NotyMessage.show('O nome é obrigatório', 2000);
+    } else {
+      valid = true;
     }
 
     return valid;
