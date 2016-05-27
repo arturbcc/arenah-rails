@@ -1,12 +1,12 @@
 .game-topics {
   #game-description .outer {
     width: 500px;
-    height: 325px;
+    min-height: 325px;
   }
 
   #game-description .inner {
     width: 375px;
-    height: 325px;
+    min-height: 325px;
     margin: 0 auto;
   }
 
