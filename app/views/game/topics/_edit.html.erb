@@ -1,0 +1,3 @@
+<%= form_tag game_topic_path(@game, @topic), method: 'PATCH', id: 'topic-content-form' do %>
+  <%= render 'form', topic: @topic, groups: [], group: nil %>
+<% end %>

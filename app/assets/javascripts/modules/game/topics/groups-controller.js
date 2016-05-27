@@ -14,29 +14,6 @@ define('groups-controller', [], function() {
     this._allowGroupSorting();
 
     this.adminTools.on('click', '.fa-remove', this._delete);
-
-    // $('.topics-groups .fa-trash').on('click', function () {
-    //   var topicGroupId = $(this).parents('li[data-topic-group-id]').attr('data-topic-group-id'),
-    //       self = this;
-    //
-    //   bootbox.confirm('Tem certeza que deseja excluir a categoria? Todos os tópicos e posts serão apagados e esta operação não poderá ser desfeita.', function (result) {
-    //     if (result) {
-    //       $(self).parents('li').remove();
-    //
-    //       $.ajax({
-    //         url: gameRoomUrl() + 'grupo-de-topicos/' + topicGroupId + '/apagar',
-    //         type: 'POST',
-    //         success: function (data) {
-    //           if (data.Status != 'OK') {
-    //             NotyMessage.show('Não foi possível excluir a categoria');
-    //           } else {
-    //             $('.topics-groups li:first').trigger('click');
-    //           }
-    //         }
-    //       });
-    //     }
-    //   });
-    // });
   };
 
   fn._allowGroupSorting = function() {

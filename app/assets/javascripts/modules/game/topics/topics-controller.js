@@ -35,11 +35,11 @@ define('topics-controller', [], function() {
 
   fn._delete = function(e) {
     var element = $(e.target),
-        topicId = element.parents('[data-topic-id]').data('topic-id'),
+        name = element.parents('.topic-line').find('.title').text(),
         url = element.data('delete-url'),
-        self = this,
-        message = 'Tem certeza que deseja excluir o tópico? ' +
-          'Todos os posts serão apagados e esta operação não poderá ser desfeita.';
+        container = this.container,
+        message = 'Tem certeza que deseja excluir o tópico <b>' + name + '</b>? ' +
+          'Todos os posts do tópico serão apagados e esta operação não poderá ser desfeita.';
 
     bootbox.confirm(message, function(result) {
       if (result) {
@@ -50,7 +50,7 @@ define('topics-controller', [], function() {
             if (data.status !== 200) {
               NotyMessage.show('Não foi possível excluir o tópico');
             } else {
-              var topicLine = self.container.find('[data-topic-id="' + element.data('topic-id') + '"]')
+              var topicLine = container.find('[data-topic-id="' + element.data('topic-id') + '"]')
               element.parent().remove();
               topicLine.remove();
             }

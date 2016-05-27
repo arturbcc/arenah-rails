@@ -1,5 +1,5 @@
 <% if @identity.game_master? %>
-  <%= link_to game_new_topic_path,
+  <%= link_to new_game_topic_path,
       data: { toggle: 'modal', target: '#remote-modal', width: '365px' } do %>
     <button type="button" class="btn btn-success">
       <%= icon('plus') %> Novo

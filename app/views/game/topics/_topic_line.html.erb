@@ -17,7 +17,7 @@
 
   <% if @identity.game_master? %>
     <div class="admin-tools-for-topic">
-      <%= link_to game_edit_topic_path(game, topic),
+      <%= link_to edit_game_topic_path(game, topic),
         data: {
           toggle: 'modal',
           target: '#remote-modal',
@@ -26,7 +26,7 @@
         <%= icon('edit') %>
       <% end %>
 
-      <%= icon('remove', { topic_id: topic.id, delete_url: game_delete_topic_path(@game, topic) }) %>
+      <%= icon('remove', { topic_id: topic.id, delete_url: game_topic_path(@game, topic) }) %>
     </div>
   <% end %>
 </section>

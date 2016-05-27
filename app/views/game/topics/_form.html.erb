@@ -1,0 +1,51 @@
+<% unless @topic.new_record? %>
+  <input type="hidden" name="id" value="<%= @topic.id %>" />
+<% end %>
+
+<input type="hidden" name="topic_group_id" id="topic-group-id" />
+
+<% if !topic.new_record? && groups.length >= 4 %>
+  <div class="alert alert-warning">
+    Máximo de categorias atingido.
+  </div>
+<% end %>
+
+<div id="content-type-container" class="<%= 'hidden' unless topic.new_record? %>">
+  <div class="content-type">
+    <label>
+      <input type="radio" name="type" id="new-topic" data-new-content-option
+        value="topic" <%= 'checked' if topic.present? %>>
+      Tópico
+    </label>
+  </div>
+
+  <div class="content-type">
+    <label>
+      <input type="radio" name="type" id="new-category"
+        value="category" data-new-content-option
+        <%= 'checked' unless group.try(:new_record?) %>
+        <%= 'disabled' if group.try(:new_record?) && groups.length >= 4 %>>
+      Categoria
+    </label>
+  </div>
+</div>
+
+<fieldset class="topic-fields">
+  <%
+    title = topic.present? ? topic.title : group.title
+    description = topic.present? ? topic.description : ''
+  %>
+
+  <label>Título</label><br />
+  <input type="text" name="title" id="title" value="<%= title %>" /><br />
+
+  <div id="description-container">
+    <label>Descrição</label><br />
+    <input type="text" name="description" id="description" value="<%= description %>" />
+  </div>
+</fieldset>
+
+<script>
+  var NewContent = require('new-content'),
+      newContent = new NewContent('#topic-content-form');
+</script>

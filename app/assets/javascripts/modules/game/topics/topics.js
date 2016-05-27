@@ -2,7 +2,6 @@ define('topics', [], function() {
   function Topics(container) {
     this.container = $(container);
     this.topicGroups = this.container.find('.fm-first-level li');
-    this.topicForm = this.container.find('#topic-content-form');
 
     this._bindEvents();
   };
@@ -44,25 +43,6 @@ define('topics', [], function() {
     // });
   };
 
-  fn.initializeModal = function () {
-    // var subtitleContainer = this.container.find('#subtitle-container');
-    // $('#content-type-container input[type=radio]').on('change', function () {
-    //   var id = $(this).val();
-    //
-    //   if (id === 'topic') {
-    //     subtitleContainer.show();
-    //   } else if (id === 'category') {
-    //     subtitleContainer.hide();
-    //   }
-    // });
-  };
-
-  fn.saveContent = function () {
-    // if (this._validForm()) {
-    //   this.topicForm.submit();
-    // }
-  };
-
   fn._changeTopicGroup = function(event) {
     var el = $(event.target).parent();
     var topicGroupId = el.data('topic-group-id');
@@ -81,23 +61,6 @@ define('topics', [], function() {
 
     visibleGroup.swapClasses('subgroup-visible', 'subgroup-invisible');
     this.container.find(".fm-wrapper div[data-topic-group-id='" + topicGroupId + "']").swapClasses('subgroup-invisible', 'subgroup-visible');
-  };
-
-  fn._validForm = function() {
-    // var option = this.container.find('#content-type-container input[type=radio]:checked').val(),
-    //     title = $.trim(this.container.find('#title').val()),
-    //     subtitle = $.trim(this.container.find('#subtitle').val()),
-    //     valid = false;
-    //
-    // if (option === 'topic' && (title === '' || subtitle === '')) {
-    //   NotyMessage.show('Todos os campos são obrigatórios', 2000);
-    // } else if (option === 'category' && title === '') {
-    //   NotyMessage.show('O título é obrigatório', 2000);
-    // } else {
-    //   valid = true;
-    // }
-    //
-    // return valid;
   };
 
   return Topics;

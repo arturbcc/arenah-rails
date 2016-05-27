@@ -14,7 +14,7 @@
               <%= render 'new_topic_button' %>
 
               <ul class="fm-first-level topics-groups <%= 'game-master admin-tools-for-groups' if @identity.game_master? %>"
-                data-group-sorting-url="<%= game_sort_groups_path(@game) %>">
+                data-group-sorting-url="<%= sort_game_topic_groups_path(@game) %>">
                 <% @game.topic_groups.each_with_index do |group, index| %>
                   <%= render 'group_item', group: group, index: index %>
                 <% end %>
@@ -22,9 +22,8 @@
 
               <% @game.topic_groups.each_with_index do |group, index| %>
                 <div class="<%= index == 0 ? 'subgroup-visible' : 'subgroup-invisible' %> topic-info"
-                      data-topic-group-id="<%= group.id %>" data-topic-sorting-url="<%= game_sort_topics_path(@game) %>">
+                      data-topic-group-id="<%= group.id %>" data-topic-sorting-url="<%= sort_game_topics_path(@game) %>">
 
-                  <%# TODO: Remove rails logic from view %>
                   <% Topic.by_group_id(group.id).each_with_index do |topic, roman_index| %>
                     <%= render 'topic_line', game: @game, index: roman_index + 1, topic: topic %>
                   <% end %>
