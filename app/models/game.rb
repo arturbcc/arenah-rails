@@ -16,6 +16,8 @@ class Game < ActiveRecord::Base
   validates :short_description, length: { maximum: 320 }
   validates :name, :slug, presence: true
 
+  scope :active, -> { where(status: :active) }
+
   enum status: [:inactive, :active]
 
   def system
