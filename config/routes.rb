@@ -32,21 +32,9 @@ Rails.application.routes.draw do
       post 'reordenar', to: 'topics#sort', on: :collection, as: :sort
     end
 
-    # get ':game/topicos', to: 'topics#index', as: :topics
-    # post ':game/topicos/reordenar', to: 'topics#sort', as: :sort_topics
-    # delete ':game/topicos/:topic', to: 'topics#destroy', as: :delete_topic
-    # get ':game/topico/novo', to: 'topics#new', as: :new_topic
-    # post ':game/topico/criar', to: 'topics#create', as: :create_topic
-    # get ':game/topico/:id/editar', to: 'topics#edit', as: :edit_topic
-
-    resources :topic_groups, path: ':game/grupo-de-topicos' do
+    resources :topic_groups, path: ':game/grupo-de-topicos', param: :topic_group do
       post 'reordenar', to: 'topic_groups#sort', on: :collection, as: 'sort'
     end
-    # get ':game/grupo-de-topicos/:id/editar', to: 'topic_group#edit', as: :edit_topic_group
-    # delete ':game/grupo-de-topicos/:id/apagar', to: 'topic_groups#destroy', as: :delete_topic_group
-    # post ':game/grupo-de-topicos/reordenar', to: 'topic_groups#sort', as: :sort_groups
-    # get ':game/grupo-de-topicos/novo', to: 'topic_groups#new', as: :new_topic_group
-    # post ':game/grupo-de-topicos/criar', to: 'topic_groups#create', as: :create_topic_group
 
     get ':game/personagens', to: 'characters#index', as: :characters
     # TODO: What is the differente between the route above and below?
