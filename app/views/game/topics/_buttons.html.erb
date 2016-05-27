@@ -3,13 +3,14 @@
 
   <%= link_to new_game_topic_path, data: data do %>
     <button type="button" class="btn btn-danger">
-      <%= icon('plus') %> Novo tópico
+      <%= icon('plus') %> <span>Novo tópico</span>
     </button>
   <% end %>
 
   <%= link_to new_game_topic_group_path, data: data do %>
     <button type="button" class="btn btn-gold">
-      <%= icon('plus') %> Nova categoria
+      <%= icon('plus') %>
+      <span>Nova categoria (<%= @game.topic_groups.length %>/<%= TopicGroup::TOPIC_GROUP_LIMIT %>)</span>
     </button>
   <% end %>
 <% end %>

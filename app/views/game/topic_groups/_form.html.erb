@@ -1,8 +1,4 @@
-<% unless topic_group.new_record? %>
-  <input type="hidden" name="id" value="<%= topic_group.id %>" />
-<% end %>
-
-<% if groups.length >= 4 %>
+<% if limit_reached %>
   <div class="alert alert-warning">
     Máximo de categorias atingido.
   </div>
@@ -10,7 +6,7 @@
 
 <fieldset class="topic-fields">
   <label>Nome</label><br />
-  <input type="text" name="name" id="name" value="<%= topic_group.name %>" /><br />
+  <input type="text" name="name" id="name" value="<%= topic_group.name %>" <%= 'disabled' if limit_reached %> />
 </fieldset>
 
 <script>

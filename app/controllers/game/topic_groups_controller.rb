@@ -4,25 +4,32 @@ class Game::TopicGroupsController < Game::BaseController
   before_action :authenticate_user!
   before_action :set_area
 
-  skip_before_action :verify_authenticity_token, only: [:create, :update]
-
   def new
     @topic_group = TopicGroup.new
-    @groups = current_game.topic_groups
+    @limit_reached = limit_reached?
 
     render partial: 'shared/modal', locals: {
       partial_name: 'new',
-      save_button: true,
+      save_button: !limit_reached?,
       save_method: 'newContent.save.bind(newContent)'
     }
   end
 
   def create
+    if @identity.game_master? && !limit_reached?
+      group = TopicGroup.new(topic_group_params).tap do |group|
+        group.game = current_game
+        group.position = TopicGroup.count+ 1
+      end
+
+      group.save!
+    end
+
+    redirect_to game_topics_path(current_game)
   end
 
   def edit
     @topic_group = current_topic_group
-    @groups = current_game.topic_groups
 
     render partial: 'shared/modal', locals: {
       partial_name: 'edit',
@@ -32,6 +39,12 @@ class Game::TopicGroupsController < Game::BaseController
   end
 
   def update
+    debugger
+    if @identity.game_master?
+      current_topic_group.update(topic_group_params)
+    end
+
+    redirect_to game_topics_path(current_game)
   end
 
   def destroy
@@ -69,11 +82,15 @@ class Game::TopicGroupsController < Game::BaseController
   end
 
   def topic_group_params
-    params.permit(:id, :title)
+    params.permit(:id, :name)
   end
 
   def current_topic_group
     @current_topic_group ||=
       current_game.topic_groups.find { |group| group.slug == topic_group_params[:id] }
+  end
+
+  def limit_reached?
+    current_game.topic_groups.length >= TopicGroup::TOPIC_GROUP_LIMIT
   end
 end

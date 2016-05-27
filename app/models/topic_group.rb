@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TopicGroup < ActiveRecord::Base
+  TOPIC_GROUP_LIMIT = 4
+
   extend FriendlyId
   friendly_id :name, :use => :slugged
 

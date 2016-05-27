@@ -4,8 +4,6 @@ class Game::TopicsController < Game::BaseController
   before_action :authenticate_user!, except: :index
   before_action :set_area
 
-  skip_before_action :verify_authenticity_token, only: [:create, :update]
-
   def index
   end
 

@@ -11,7 +11,7 @@
         <div class="inner">
           <div class="sidemenu fm-menu fm-animated">
             <div class="fm-wrapper">
-              <%= render 'new_topic_button' %>
+              <%= render 'buttons' %>
 
               <ul class="fm-first-level topics-groups <%= 'game-master admin-tools-for-groups' if @identity.game_master? %>"
                 data-group-sorting-url="<%= sort_game_topic_groups_path(@game) %>">

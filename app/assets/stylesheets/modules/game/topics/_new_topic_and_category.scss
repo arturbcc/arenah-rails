@@ -5,6 +5,10 @@
     clear: both;
   }
 
+  #name:disabled {
+    background-color: #efefef;
+  }
+
   .topic-fields label {
     margin-bottom: 0;
   }
@@ -29,5 +33,9 @@
     display: inline;
     font-weight: normal;
     cursor: pointer;
+  }
+
+  h4 b {
+    color: $main-red;
   }
 }

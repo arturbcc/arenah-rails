@@ -1,6 +1,10 @@
 define('new-content', [], function() {
   function NewContent(container) {
     this.container = $(container);
+    this.activeGroup = $('[data-topic-group-id].active');
+
+    var title = 'Novo tópico em <b>' + this.activeGroup.find('[data-group-name]').text() + '</b>';
+    this.container.find('h4').html(title);
   };
 
   var fn = NewContent.prototype;
@@ -24,8 +28,7 @@ define('new-content', [], function() {
 
   fn.save = function() {
     if (this._validForm()) {
-      var activeGroup = $('[data-topic-group-id].active');
-      this.container.find('#topic-group-id').val(activeGroup.data('topic-group-id'));
+      this.container.find('#topic-group-id').val(this.activeGroup.data('topic-group-id'));
 
       this.container.submit();
     }

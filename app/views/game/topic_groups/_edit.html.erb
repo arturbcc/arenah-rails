@@ -1,3 +1,3 @@
 <%= form_tag game_topic_group_path(@game, @topic_group.id), method: 'PATCH', id: 'topic-content-form' do %>
-  <%= render 'form', topic_group: @topic_group, groups: @groups %>
+  <%= render 'form', topic_group: @topic_group, limit_reached: false %>
 <% end %>

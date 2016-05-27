@@ -6,12 +6,12 @@
     left: -35px;
     font-size: 13px;
     text-align: center;
-    color: #403e2e;
+    color: $brownie-gray;
     border-right: 1px solid #1b1b1b;
 
     &.move {
       cursor: move;
-      border-right: 4px solid #770606;
+      border-right: 4px solid $dark-red;
       height: 40px;
     }
   }
@@ -58,11 +58,11 @@
     background-color: #0E0E0E;
     padding: 0 7px;
     margin-bottom: 10px;
-    color: #403e2e;
+    color: $brownie-gray;
 
     .fa-remove,
     .fa-edit {
-      color: #403e2e;
+      color: $brownie-gray;
       cursor: pointer;
       margin-right: 5px;
     }
@@ -82,7 +82,7 @@
     }
 
     .fa-edit {
-      color: #403e2e;
+      color: $brownie-gray;
     }
 
     a {
