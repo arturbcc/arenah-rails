@@ -16,15 +16,11 @@ page.at('game/posts#new game/posts#edit', function() {
   var Recipients = require('recipients'),
       ComposePost = require('compose-post'),
       Editor = require('editor'),
-      ComposePostDice = require('compose-post-dice'),
-      Game = require('game');
+      ComposePostDice = require('compose-post-dice')
 
   var recipients = new Recipients('input[type=text]#post_recipients'),
-      game = new Game('#game_system_url'),
       composePost = new ComposePost(game, recipients),
       composePostDice = new ComposePostDice();
-
-  window.game = game;
 
   new Editor();
 });

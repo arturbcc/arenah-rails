@@ -37,6 +37,10 @@
 
   <input type='hidden' id='environment' value='<%= Rails.env %>'/>
 
+  <% if @game %>
+    <%= hidden_field :game_system, :url, value: game_system_path(@game) %>
+  <% end %>
+
   <script>
     <%= yield :javascripts %>
   </script>
