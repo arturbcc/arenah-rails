@@ -50,8 +50,7 @@ class Game::TopicGroupsController < Game::BaseController
     status = 422
 
     if @identity.game_master?
-      group = current_game.topic_groups.find { |group| group.slug == params[:id] }
-      group.destroy! if group
+      current_topic_group.destroy!
 
       status = 200
     end
@@ -81,12 +80,12 @@ class Game::TopicGroupsController < Game::BaseController
   end
 
   def topic_group_params
-    params.permit(:id, :name)
+    params.permit(:name)
   end
 
   def current_topic_group
     @current_topic_group ||=
-      current_game.topic_groups.find { |group| group.slug == topic_group_params[:id] }
+      current_game.topic_groups.find { |group| group.slug == params[:topic_group] }
   end
 
   def limit_reached?
