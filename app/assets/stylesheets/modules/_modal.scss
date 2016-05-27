@@ -11,13 +11,14 @@
 }
 
 .loading-modal {
-  height: 420px;
+  max-height: 420px;
   width: 99%;
   text-align: center;
   border: 7px double #eee;
   margin: 4px;
 
   img {
-    width: 100%;
+    max-height: 405px;
+    max-width: 100%;
   }
 }
