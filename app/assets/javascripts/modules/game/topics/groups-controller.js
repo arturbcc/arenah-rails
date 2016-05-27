@@ -9,7 +9,11 @@ define('groups-controller', [], function() {
   var fn = GroupsController.prototype;
 
   fn._bindEvents = function() {
-    $.proxyAll(this, '_delete', '_updateButtonCounter');
+    $.proxyAll(this,
+      '_delete',
+      '_updateButtonCounter',
+      '_setGroupsFontSize'
+    );
 
     this._allowGroupSorting();
 
@@ -51,27 +55,13 @@ define('groups-controller', [], function() {
             } else {
               element.parents('li').remove();
               self._updateButtonCounter();
-
-              var activeGroup = $('[data-topic-group-id].active');
-              if (activeGroup.length == 0) {
-                $('[data-topic-group-id]:first').trigger('click');
-              }
+              self._setGroupsFontSize();
+              self._activateFirstGroup();
             }
           }
         });
       }
     });
-  };
-
-  fn._updateButtonCounter = function() {
-    var label = $('.btn-gold span'),
-        text = $.trim(label.text()),
-        index = text.search(/\(\d\/\d\)/i),
-        match = text.slice(index),
-        current = parseInt(match[1]),
-        newText = this._replaceAt(text, (current - 1) + '', index + 1);
-
-    label.text(newText);
   };
 
   fn._sort = function() {
@@ -97,9 +87,38 @@ define('groups-controller', [], function() {
     });
   };
 
+  fn._updateButtonCounter = function() {
+    var label = $('.btn-gold span'),
+    text = $.trim(label.text()),
+    index = text.search(/\(\d\/\d\)/i),
+    match = text.slice(index),
+    current = parseInt(match[1]),
+    newText = this._replaceAt(text, (current - 1) + '', index + 1);
+
+    label.text(newText);
+  };
+
   fn._replaceAt = function(text, character, index) {
     return text.substr(0, index) + character + text.substr(index + character.length);
   }
+
+  fn._setGroupsFontSize = function() {
+    var container = this.container.find('.topics-groups:first'),
+        groupsCount = container.find('[data-topic-group-id]').length,
+        limit = parseInt(container.data('limit'));
+
+    if (groupsCount < limit) {
+      container.removeClass('small-font-size');
+    }
+  };
+
+  fn._activateFirstGroup = function() {
+    var activeGroup = $('[data-topic-group-id].active');
+    if (activeGroup.length == 0) {
+      $('[data-topic-group-id]:first')
+        .find('[data-group-name]').trigger('click');
+    }
+  };
 
   return GroupsController;
 });

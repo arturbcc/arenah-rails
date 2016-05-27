@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TopicGroup < ActiveRecord::Base
-  TOPIC_GROUP_LIMIT = 4
+  TOPIC_GROUP_LIMIT = 3
 
   extend FriendlyId
   friendly_id :name, :use => :slugged
@@ -10,6 +10,6 @@ class TopicGroup < ActiveRecord::Base
   has_many :topics, dependent: :delete_all
   belongs_to :game
 
-  validates :name, length: { maximum: 100 }
+  validates :name, length: { maximum: 20 }
   validates :game_id, :name, :slug, presence: true
 end

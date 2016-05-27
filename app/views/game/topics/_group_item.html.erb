@@ -8,7 +8,7 @@
         <%= icon('edit') %>
       <% end %>
 
-      <%= icon('remove', { topic_group_id: group.id, delete_url: game_topic_group_path(@game, group) }) %>
+      <%= icon('remove', { delete_url: game_topic_group_path(@game, group) }) %>
     </div>
   <% end %>
 

@@ -13,9 +13,16 @@
             <div class="fm-wrapper">
               <%= render 'buttons' %>
 
-              <ul class="fm-first-level topics-groups <%= 'game-master admin-tools-for-groups' if @identity.game_master? %>"
+              <%
+                groups = @game.topic_groups
+                group_classes = ['fm-first-level topics-groups']
+                group_classes << 'game-master admin-tools-for-groups' if @identity.game_master?
+                group_classes << 'small-font-size' if groups.length >= 3
+              %>
+              <ul class="<%= group_classes.join(' ') %>"
+                data-limit="<%= TopicGroup::TOPIC_GROUP_LIMIT %>"
                 data-group-sorting-url="<%= sort_game_topic_groups_path(@game) %>">
-                <% @game.topic_groups.each_with_index do |group, index| %>
+                <% groups.each_with_index do |group, index| %>
                   <%= render 'group_item', group: group, index: index %>
                 <% end %>
               </ul>

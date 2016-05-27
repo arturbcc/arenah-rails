@@ -5,8 +5,8 @@
 <% end %>
 
 <fieldset class="topic-fields">
-  <label>Nome</label><br />
-  <input type="text" name="name" id="name" value="<%= topic_group.name %>" <%= 'disabled' if limit_reached %> />
+  <label>Nome (máximo de 20 caracteres)</label><br />
+  <input type="text" name="name" maxlength="20" id="name" value="<%= topic_group.name %>" <%= 'disabled' if limit_reached %> />
 </fieldset>
 
 <script>
