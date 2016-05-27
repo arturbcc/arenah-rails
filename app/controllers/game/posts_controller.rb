@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class Game::PostsController < Game::BaseController
+  PER_PAGE = 10
+
   before_action :get_topic
   before_action :load_recipients, only: [:new, :edit]
   before_action :authenticate_user!, except: :index
 
   def index
     @area = Area.new(:posts)
-    @posts = current_topic.posts
+    @posts = current_topic.posts.paginate(page: params[:page], per_page: PER_PAGE)
   end
 
   def new

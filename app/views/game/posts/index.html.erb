@@ -14,7 +14,7 @@
   <%= render 'breadcrumb', game: @game, topic: @topic %>
 
   <div class="reply-paging-line">
-    <%= render 'pagination' %>
+    <%= render 'pagination', posts: @posts %>
   </div>
 
   <div class="clear"></div>
@@ -23,7 +23,7 @@
     <%= render 'post', game: @game, topic: @topic, post: post, character: @character, klass: cycle('even', 'odd') %>
   <% end %>
 
-  <%= render 'buttons_and_pagination', game: @game, topic: @topic %>
+  <%= render 'buttons_and_pagination', game: @game, topic: @topic, posts: @posts %>
   <%= render 'players_list', game: @game %>
 
   <% unless @identity.read_only? %>
