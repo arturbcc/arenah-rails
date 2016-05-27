@@ -1,8 +1,15 @@
 <% if @identity.game_master? %>
-  <%= link_to new_game_topic_path,
-      data: { toggle: 'modal', target: '#remote-modal', width: '365px' } do %>
-    <button type="button" class="btn btn-success">
-      <%= icon('plus') %> Novo
+  <% data = { toggle: 'modal', target: '#remote-modal', width: '365px' } %>
+
+  <%= link_to new_game_topic_path, data: data do %>
+    <button type="button" class="btn btn-danger">
+      <%= icon('plus') %> Novo tópico
+    </button>
+  <% end %>
+
+  <%= link_to new_game_topic_group_path, data: data do %>
+    <button type="button" class="btn btn-gold">
+      <%= icon('plus') %> Nova categoria
     </button>
   <% end %>
 <% end %>
