@@ -60,6 +60,17 @@
       }
     }
   }
+
+  .no-posts {
+    min-height: 300px;
+    text-align: center;
+    margin-top: 25px;
+
+    img {
+      margin: 25px 0;
+      max-width: 400px;
+    }
+  }
 }
 
 section.author .attributes-group-instructions {

@@ -1,0 +1,19 @@
+<section class="no-posts">
+  <p>
+    Ainda não há posts neste tópico.
+  </p>
+
+  <p>
+    Seja o primeiro a participar!
+  </p>
+
+  <%= link_to game_new_post_path(game, topic) do %>
+    <div class="btn btn-dark pull-center reply">
+        Escrever
+    </div>
+  <% end %>
+
+  <p>
+    <%= keep_calm_image %>
+  </p>
+</section>

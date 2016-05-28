@@ -19,11 +19,16 @@
 
   <div class="clear"></div>
 
-  <% @posts.each do |post| %>
-    <%= render 'post', game: @game, topic: @topic, post: post, character: @character, klass: cycle('even', 'odd') %>
+  <% if @posts.empty? %>
+    <%= render 'no_posts_warning', game: @game, topic: @topic %>
+  <% else %>
+    <% @posts.each do |post| %>
+      <%= render 'post', game: @game, topic: @topic, post: post, character: @character, klass: cycle('even', 'odd') %>
+    <% end %>
+
+    <%= render 'buttons_and_pagination', game: @game, topic: @topic, posts: @posts %>
   <% end %>
 
-  <%= render 'buttons_and_pagination', game: @game, topic: @topic, posts: @posts %>
   <%= render 'players_list', game: @game %>
 
   <% unless @identity.read_only? %>

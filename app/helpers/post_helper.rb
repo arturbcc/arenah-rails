@@ -8,4 +8,9 @@ module PostHelper
   def recipients_ids(post)
     post.recipients.map(&:id).join(', ')
   end
+
+  def keep_calm_image
+    pic_number = rand(0..4) + 1
+    image_tag "/images/keep-calm/keep-calm-#{pic_number}.png"
+  end
 end
