@@ -23,9 +23,10 @@ class Game::TopicGroupsController < Game::BaseController
       end
 
       group.save!
+      redirect_to game_topics_path(current_game)
+    else
+      raise Exceptions::Unauthorized.new
     end
-
-    redirect_to game_topics_path(current_game)
   end
 
   def edit
@@ -41,9 +42,10 @@ class Game::TopicGroupsController < Game::BaseController
   def update
     if @identity.game_master?
       current_topic_group.update(topic_group_params)
+      redirect_to game_topics_path(current_game)
+    else
+      raise Exceptions::Unauthorized.new
     end
-
-    redirect_to game_topics_path(current_game)
   end
 
   def destroy

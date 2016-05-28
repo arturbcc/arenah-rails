@@ -27,9 +27,10 @@ class Game::TopicsController < Game::BaseController
       end
 
       topic.save!
+      redirect_to game_topics_path(current_game)
+    else
+      raise Exceptions::Unauthorized.new
     end
-
-    redirect_to game_topics_path(current_game)
   end
 
   def edit
@@ -45,9 +46,10 @@ class Game::TopicsController < Game::BaseController
   def update
     if @identity.game_master?
       current_topic.update(topic_params)
+      redirect_to game_topics_path(current_game)
+    else
+      raise Exceptions::Unauthorized.new
     end
-
-    redirect_to game_topics_path(current_game)
   end
 
   def destroy
