@@ -17,6 +17,7 @@
             %>
           </li>
         <% end %>
+
         <% if ability.can_edit? %>
           <li class="btn btn-dark btn-xs">
             <%= link_to 'Editar', game_edit_post_path(game, topic, post, page: @current_page) %>
@@ -29,7 +30,7 @@
             </li>
         <% end %>
       </ul>
-      <div>
+      <div name="post<%= post.id %>">
         <% if post.character.pc? %>
             por
             <%=

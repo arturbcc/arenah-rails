@@ -2,7 +2,8 @@ page.at('game/posts#index', function() {
   var OnlineUsers = require('online-users'),
       PlayersList = require('players-list'),
       Tooltip = require('tooltip'),
-      Post = require('post');
+      Post = require('post'),
+      PostAnchor = require('post-anchor');
 
   new OnlineUsers('[online-users]');
   new PlayersList({ container: '#sidePanel' });
@@ -10,6 +11,7 @@ page.at('game/posts#index', function() {
 
   var topic = $("#topic-slug").val();
   new Post(topic);
+  new PostAnchor();
 });
 
 page.at('game/posts#new game/posts#edit', function() {

@@ -27,10 +27,13 @@ class Game::PostsController < Game::BaseController
 
   def create
     if current_user_ability.can_write_post?
-      if create_post
+      if post = create_post
         # @topic.recalculate_last_post
         pages = paginated_posts.total_pages
-        redirect_to game_posts_path(current_game, current_topic, page: pages)
+        redirect_to game_posts_path(current_game,
+          current_topic,
+          page: pages,
+          anchor: anchor_to_post(post))
       else
         redirect_to game_new_post_path(current_game, current_topic),
           flash: 'Não foi possível enviar a mensagem'
@@ -42,8 +45,11 @@ class Game::PostsController < Game::BaseController
 
   def update
     if current_user_ability.can_edit?
-      if update_post
-        redirect_to game_posts_path(current_game, current_topic, page: current_page)
+      if post = update_post
+        redirect_to game_posts_path(current_game,
+          current_topic,
+          page: current_page,
+          anchor: anchor_to_post(current_post))
       else
         redirect_to game_edit_post_path(current_game, current_topic, current_post),
           flash: 'Não foi possível editar a mensagem'
@@ -140,5 +146,9 @@ class Game::PostsController < Game::BaseController
 
   def get_current_page
     @current_page = params[:page] || 1
+  end
+
+  def anchor_to_post(post)
+    "post#{post.id}"
   end
 end
