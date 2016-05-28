@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
     resources :topics, path: ':game/topicos', param: :topic do
       post 'reordenar', to: 'topics#sort', on: :collection, as: :sort
+      get 'entrar', to: 'last_post#show', on: :member, as: :redirect_to_last_post
     end
 
     resources :topic_groups, path: ':game/grupo-de-topicos', param: :topic_group do
