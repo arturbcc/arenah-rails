@@ -22,7 +22,7 @@
 
           <% if ability.can_send_alert? %>
             <li>
-              <a href="#"><i class="fa fa-bell"></i> Enviar alerta</a>
+              <!-- <a href="#"><i class="fa fa-bell"></i> Enviar alerta</a> -->
               <!-- a href="< %: Url.Action("New", "Alerts", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = author.Slug })%>" data-toggle="modal" data-target="#remote-modal" data-width="600px">
                 <i class="fa fa-bell"></i> Enviar alerta
               </a -->
@@ -32,7 +32,7 @@
 
         <% if ability.can_send_message? %>
           <li>
-            <a href="#"><i class="fa fa-envelope"></i> Enviar mensagem</a>
+            <!-- <a href="#"><i class="fa fa-envelope"></i> Enviar mensagem</a> -->
             <!-- a href="< %: Url.Action("New", "Inbox", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = Model.Identity.Character.Slug, action = "compose", to = author.Slug }) %>" data-toggle="modal" data-target="#remote-modal" data-width="600px">
               <i class="fa fa-envelope"></i> Enviar mensagem
             </a -->
