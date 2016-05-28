@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Game::PostsController < Game::BaseController
-  PER_PAGE = 10
-
   attr_accessor :current_page
 
   before_action :get_topic, :get_current_page
@@ -141,7 +139,7 @@ class Game::PostsController < Game::BaseController
   end
 
   def paginated_posts
-    current_topic.posts.paginate(page: current_page, per_page: PER_PAGE)
+    current_topic.posts.paginate(page: current_page, per_page: Post::PER_PAGE)
   end
 
   def get_current_page

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Post < ActiveRecord::Base
+  PER_PAGE = 10
+
   belongs_to :topic
   belongs_to :character
   has_many :post_recipients

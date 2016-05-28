@@ -3,7 +3,10 @@
     data-last-post-id="<%= topic.post_id %>"
     data-topic-id="<%= topic.id %>">
 
-    <%= link_to game_posts_path(game, topic), data: { 'fm-index' => roman_number(index) }, class: 'animated fadeInLeft' do %>
+    <%=
+      link_to link_to_last_post(game, topic),
+        data: { 'fm-index' => roman_number(index) },
+        class: 'animated fadeInLeft' do %>
       <span class="title"><%= topic.title %></span>
       <span class="subtitle"><%= topic.description %></span>
     <% end %>
