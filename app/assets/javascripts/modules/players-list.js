@@ -7,7 +7,7 @@ define('players-list', [], function() {
 
     this.container = $(options.container);
 
-    this.avatars = $(options.avatar);
+    this.avatars = $(options.avatars);
     this.panelHide = $(options.panelHide);
     this.panelHandle = $(options.panelHandle);
     this.panelContent = $(options.panelContent);
