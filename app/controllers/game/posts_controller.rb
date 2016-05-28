@@ -8,8 +8,6 @@ class Game::PostsController < Game::BaseController
   before_action :authenticate_user!, except: :index
 
   def index
-    raise Exceptions::Unauthorized.new
-
     @area = Area.new(:posts)
     @posts = paginated_posts
   end

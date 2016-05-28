@@ -6,7 +6,7 @@ feature 'Send a message to game master' do
   let!(:user) { create(:user) }
   let!(:game) { create(:game, name: 'Crossover') }
 
-  scenario 'Enter in a game and send a message' do
+  xscenario 'Enter in a game and send a message' do
     visit game_new_contact_path(game)
     expect(page.body).to have_css('.login-section')
 

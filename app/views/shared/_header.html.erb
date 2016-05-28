@@ -38,7 +38,8 @@
         </li>
       <% end %>
 
-      <% if game.present? && @identity.player? && !area.profile? %>
+      <%#= TODO Remove this false %>
+      <% if false && game.present? && @identity.player? && !area.profile? %>
         <li class="dropdown user-dropdown hide-on-small-screen">
           <% iconGold = is_saga ? ' icon-gold' : ''; %>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -59,41 +60,40 @@
               </li>
             <% end %>
 
-            <li>
+            <!-- <li> -->
               <!-- a href="< %: Url.Action("Show", "CharacterSheet", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = Model.Identity.Character.Slug }) %>" data-toggle="modal" data-target="#remote-modal" data-width="1015px">
                 <i class="fa fa-file-text-o"></i> Ficha
               </a -->
-            </li>
+            <!-- </li> -->
 
-            <li>
+            <!-- <li> -->
               <!-- a href="< %: Url.Action("Show", "Equipment", new { gameRoomSlug = Model.Game.Room.Slug, characterSlug = Model.Identity.Character.Slug }) %>" data-toggle="modal" data-target="#remote-modal" data-width="600px">
                 <i class="fa fa-suitcase"></i> Inventário
               </a -->
-            </li>
+            <!-- </li> -->
           </ul>
         </li>
       <% end %>
 
       <% if @identity.game_master? && !area.panel? %>
-        <li class="dropdown user-dropdown hide-on-small-screen">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-newspaper-o"></i> Painel da sala <%= game.name %> <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <%= link_to admin_game_path(game) do %>
+        <!-- <li class="dropdown user-dropdown hide-on-small-screen"> -->
+          <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-newspaper-o"></i> Painel da sala < %= game.name %> <b class="caret"></b>
+          </a> -->
+          <!-- <ul class="dropdown-menu"> -->
+            <!-- <li>
+              < %= link_to admin_game_path(game) do %>
                 <i class="fa fa-dashboard"></i> Painel
-              <% end %>
-            </li>
+              < % end %>
+            </li> -->
             <!-- li><a href="< %: Url.Action("Index", "GameRoomConfiguration", new { gameRoomSlug = Model.Game.Room.Slug }) %>"><i class="fa fa-gear"></i> Sala</a></li>
             <li><a href="< %: Url.Action("Index", "GameRoomCharacters", new { gameRoomSlug = Model.Game.Room.Slug, t = "pcs" }) %>"><i class="fa fa-meh-o"></i> Pcs</a></li>
             <li><a href="< %: Url.Action("Index", "GameRoomCharacters", new { gameRoomSlug = Model.Game.Room.Slug, t = "npcs" }) %>"><i class="fa fa-wrench"></i> Npcs</a></li -->
-          </ul>
-        </li>
+          <!-- </ul> -->
+        <!-- </li> -->
       <% end %>
 
       <% if @identity.logged? %>
-
         <% if area.panel? %>
           <li class="dropdown characters-dropdown hide-on-small-screen">
             <%= link_to admin_game(game) do %>
@@ -109,11 +109,11 @@
             </a>
 
             <div class="dropdown-menu" id="my-characters">
-              <% game.characters.each do |character| %>
-                <% if character.active? && !character.game.nil? && character.game.active? %>
-                  <!-- a href="/personagem/trocar/< %: character.GameRoom.Slug %>/< %: character.Slug %>">
-                    <img src="< %: Html.AvatarUrl(character) %>" title="<strong>Nome: </strong>< %: character.Name %><br /><strong>Sala: </strong>< %: character.GameRoom.Name %>" />
-                  </a -->
+              <% current_user.characters.each do |character| %>
+                <% if character.active_pc? || character.active_game_master? %>
+                  <%= link_to game_change_character_path(character.game, character) do %>
+                    <%= avatar(character, title: "#{character.name} - #{character.game.name}") %>
+                  <% end %>
                  <% end %>
               <% end %>
             </div>
@@ -149,6 +149,9 @@
               </li>
             <% end %>
 
+            <li>
+              <%= link_to 'Sobre a Arenah', about_path %>
+            </li>
             <li class="divider"></li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>

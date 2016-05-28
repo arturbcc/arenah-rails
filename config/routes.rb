@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   devise_for :users
-  # devise_for :users, path: 'auth', path_names: {
-  #   sign_in: 'login', sign_out: 'logout', password: 'secret',
-  #   confirmation: 'verification', unlock: 'unblock', registration: 'register',
-  #   sign_up: 'cmon_let_me_in' }
 
   get 'sobre', to: 'about#show', as: :about
   get 'arquivo', to: 'archive#index', as: :archive
@@ -23,10 +19,12 @@ Rails.application.routes.draw do
     post ':game/:topic/post/', to: 'posts#create', as: :create_post
     post ':game/:topic/post/preview', to: 'post_preview#show', as: :preview_post
 
+    # Check if we still need this route
+    resources :posts, only: :destroy
+
     get ':game/:topic/post/iniciativas', to: 'initiatives#show', as: :initiatives
     get ':game/:topic/post/danos', to: 'damages#show', as: :damages
     post ':game/:topic/post/causar-danos', to: 'damages#create', as: :cause_damage
-
 
     resources :topics, path: ':game/topicos', param: :topic do
       post 'reordenar', to: 'topics#sort', on: :collection, as: :sort
@@ -59,19 +57,13 @@ Rails.application.routes.draw do
     get 'sala/criar', to: 'home#new', as: :new
 
     resources :sheet, only: :show, param: :character_slug, path: '/ficha'
+
+    get 'personagem/trocar-para/:game/:character', to: 'change_character#show', as: :change_character
   end
 
-  resources :posts, only: :destroy
 
   get 'tour/mestres', to: 'tours#for_masters', as: :masters_tour
   get 'tour/jogadores', to: 'tours#for_players', as: :players_tour
-
-  # namespace :passport, as: :passport, path: 'passaporte' do
-  #   get 'register', path: 'registro'
-  #   get 'login'
-  #   get 'logout'
-  # end
-  #
   resources :profile, only: [:edit, :update], path: 'perfil'
 
   root 'home#index'

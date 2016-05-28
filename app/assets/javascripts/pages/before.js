@@ -1,5 +1,6 @@
 page.at(':before', function() {
-  var Game = require('game');
+  var Game = require('game'),
+      HeaderMenu = require('header-menu');
 
   // Load the window.game with the current system in all game pages.
   // the game_system_url is defined on the application.html.erb, inside the
@@ -9,4 +10,6 @@ page.at(':before', function() {
   if ($('#game_system_url').length > 0) {
     window.game = new Game('#game_system_url');
   }
+
+  new HeaderMenu();
 });

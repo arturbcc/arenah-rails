@@ -30,5 +30,12 @@ describe CharacterHelper do
         expect(helper.avatar(character, class: 'custom')).to include('class="custom"')
       end
     end
+
+    context 'with custom title' do
+      it 'adds a custom title' do
+        character = build(:character)
+        expect(helper.avatar(character, title: 'new title')).to include('title="new title"')
+      end
+    end
   end
 end

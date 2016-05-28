@@ -2,7 +2,7 @@
 
 module CharacterHelper
   def avatar(character, options = {})
-    options = options.merge(alt: character.name, title: character.name)
+    options = { alt: character.name, title: character.name }.merge(options)
 
     if character.avatar.present?
       image_tag avatar_path(character), options

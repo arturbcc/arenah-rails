@@ -43,7 +43,19 @@ class Character < ActiveRecord::Base
     sheet.find_character_attribute(group_name, life_attribute_name)
   end
 
+  def active_pc?
+    active? && pc? && belongs_to_active_game?
+  end
+
+  def active_game_master?
+    active? && game_master? && belongs_to_active_game?
+  end
+
   private
+
+  def belongs_to_active_game?
+    game.present? && game.active?
+  end
 
   def apply_attributes_relationship_on(sheet)
     sheet.apply_attributes_relationship!
