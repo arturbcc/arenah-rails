@@ -36,10 +36,10 @@
   <% end %>
 </section>
 
-<%= content_for :javascripts do %>
-  <% unless @identity.unlogged? %>
+<!-- < %= content_for :javascripts do %>
+  < % unless @identity.unlogged? %>
     /*$(document).ready(function () {
-      new UnreadPosts.Checker('<%= @topic.post_id %>').storeLastPostId();
+      new UnreadPosts.Checker('< %= @topic.posts.last.id %>').storeLastPostId();
     });*/
-  <% end %>
-<% end %>
+  < % end %>
+< % end %> -->

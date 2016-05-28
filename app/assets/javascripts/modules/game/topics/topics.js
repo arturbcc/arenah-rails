@@ -18,6 +18,9 @@ define('topics', ['topic-group-storage'], function(TopicGroupStorage) {
   };
 
   fn.checkForUnreadPosts = function () {
+    // note: I removed the data attribute data-last-post-id="<%= topic.post_id %>"
+    // from the _topic_line.html.erb
+
     // var topics = this.container.find("nav[data-last-post-id]");
     //
     // topics.each(function() {
