@@ -61,6 +61,7 @@ group :development do
 
   gem 'puma'
   gem 'quiet_assets'
+  gem 'rack-mini-profiler'
 end
 
 group :test do
