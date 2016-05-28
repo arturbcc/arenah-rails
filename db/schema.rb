@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151231145324) do
+ActiveRecord::Schema.define(version: 20160528142124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,7 +133,6 @@ ActiveRecord::Schema.define(version: 20151231145324) do
     t.string   "title",          limit: 100,             null: false
     t.string   "description"
     t.integer  "position",                   default: 0
-    t.integer  "post_id"
     t.string   "slug",                                   null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
@@ -141,7 +140,6 @@ ActiveRecord::Schema.define(version: 20151231145324) do
 
   add_index "topics", ["character_id"], name: "index_topics_on_character_id", using: :btree
   add_index "topics", ["game_id"], name: "index_topics_on_game_id", using: :btree
-  add_index "topics", ["post_id"], name: "index_topics_on_post_id", using: :btree
   add_index "topics", ["slug"], name: "index_topics_on_slug", unique: true, using: :btree
   add_index "topics", ["topic_group_id"], name: "index_topics_on_topic_group_id", using: :btree
 
