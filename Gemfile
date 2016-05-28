@@ -62,6 +62,7 @@ group :development do
   gem 'puma'
   gem 'quiet_assets'
   gem 'rack-mini-profiler'
+  gem 'rubocop', '~> 0.40.0'
 end
 
 group :test do

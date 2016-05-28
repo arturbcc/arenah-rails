@@ -77,9 +77,9 @@ describe Sheet::Sheet do
     end
 
     context 'attributes based on tables' do
-      it 'does not set the value of an attribute based on a table before applying table data' do
+      it 'does not set the value of an attribute based on a table before
+        applying table data' do
         speed = @sheet.find_character_attribute('Dados Extras', 'Velocidade')
-        agility = @sheet.find_character_attribute('Atributos', 'Agilidade')
         expect(speed.points.to_i).to eq(0)
       end
 
@@ -87,14 +87,14 @@ describe Sheet::Sheet do
         @sheet.apply_table_data!(@system)
 
         speed = @sheet.find_character_attribute('Dados Extras', 'Velocidade')
-        agility = @sheet.find_character_attribute('Atributos', 'Agilidade')
 
         expect(speed.points.to_i).to eq(2)
       end
     end
 
     describe '#posts_attributes_groups' do
-      it 'filters only the attributes groups market to be displayed on posts, sorted by the order_on_posts' do
+      it 'filters only the attributes groups market to be displayed on posts,
+        sorted by the order_on_posts' do
         groups = @sheet.posts_attributes_groups
         expect(groups.map(&:name)).to eq(['Status'])
       end
