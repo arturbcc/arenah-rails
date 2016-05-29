@@ -52,6 +52,7 @@ GEM
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
     cliver (0.3.2)
+    colorize (0.7.7)
     concurrent-ruby (1.0.2)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
@@ -152,6 +153,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (11.1.2)
+    rake-progressbar (0.0.5)
     rdoc (4.2.2)
       json (~> 1.4)
     responders (2.2.0)
@@ -242,6 +244,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara
+  colorize
   database_cleaner
   dentaku
   devise
@@ -260,6 +263,7 @@ DEPENDENCIES
   rails (= 4.2.6)
   rails-html-sanitizer
   rails_12factor
+  rake-progressbar
   rspec-rails
   rubocop (~> 0.40.0)
   ruby-bbcode
