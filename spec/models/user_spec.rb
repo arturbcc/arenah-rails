@@ -6,7 +6,6 @@ require_relative '../support/shared_examples/sluggable'
 describe User, type: :model do
   it { should have_many :characters }
   it { should have_many :subscriptions }
-  it { should validate_length_of(:name).is_at_most(25) }
   it { should validate_presence_of :name }
   it { should validate_presence_of :password }
 
