@@ -4,12 +4,12 @@ require 'csv'
 
 namespace :import do
   desc 'Imports the Users to the new database format'
-  task users: :environment do
+  task legacy: :environment do
     require 'rake-progressbar'
-    require 'rake_tools'
+    require 'legacy/importer_tools'
     require 'legacy/legacy_user'
 
-    RakeTools.display_logo
+    Legacy::ImporterTools.display_logo
     show_disclaimer
 
     CSV_OPTIONS = { headers: false, col_sep: ',', encoding: 'UTF-8' }.freeze
@@ -58,16 +58,16 @@ namespace :import do
   end
 
   def show_usage
-    puts "USAGE: bin/rake import:users USERS_PATH='path/to/users.csv'"
+    puts "USAGE: bin/rake import:legacy USERS_PATH='path/to/users.csv'"
     puts ''
   end
 
   def show_disclaimer
-    RakeTools.instructions(
-      title: '',
-      description: ''
-    )
+    Legacy::ImporterTools.instructions
 
-    RakeTools.heroku_command('import:users', "USERS_PATH=#{path_params[:users]}")
+    Legacy::ImporterTools.heroku_command(
+      'import:legacy',
+      "USERS_PATH=#{path_params[:users]}"
+    )
   end
 end

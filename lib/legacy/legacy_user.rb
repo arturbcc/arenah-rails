@@ -24,6 +24,7 @@ module Legacy
   # 22 `BeforeLastLoginDate`,
   # 23 `InvitedByUserId`
   class LegacyUser
+    ID = 0
     NAME = 1
     BIRTH_DATE = 2
     PASSWORD = 6
@@ -31,9 +32,10 @@ module Legacy
     EMAIL = 10
     CREATED_AT = 17
 
-    attr_reader :name, :email
+    attr_reader :id, :name, :email, :user
 
-    def initialize(name:, password:, status:, email:, created_at:)
+    def initialize(id:, name:, password:, status:, email:, created_at:)
+      @id = id
       @name = name
       @password = password
       @status = status
@@ -51,6 +53,7 @@ module Legacy
 
     def self.build_from_row(row)
       LegacyUser.new(
+        id: row[ID].to_i,
         name: row[NAME],
         password: row[PASSWORD],
         status: row[STATUS] == 'A',
@@ -60,7 +63,7 @@ module Legacy
     end
 
     def create!
-      User.create!(
+      @user = User.create!(
         email: @email,
         name: @name,
         password: generate_password,
