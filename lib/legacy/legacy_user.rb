@@ -1,3 +1,5 @@
+require 'legacy/legacy_model'
+
 module Legacy
   # 0 `UserId`,
   # 1 `FullName`,
@@ -23,7 +25,7 @@ module Legacy
   # 21 `ProfilePageView`,
   # 22 `BeforeLastLoginDate`,
   # 23 `InvitedByUserId`
-  class LegacyUser
+  class LegacyUser < LegacyModel
     ID = 0
     NAME = 1
     BIRTH_DATE = 2
@@ -33,15 +35,6 @@ module Legacy
     CREATED_AT = 17
 
     attr_reader :id, :name, :email, :user
-
-    def initialize(id:, name:, password:, status:, email:, created_at:)
-      @id = id
-      @name = name
-      @password = password
-      @status = status
-      @email = email
-      @created_at = created_at
-    end
 
     def active?
       @status

@@ -38,6 +38,13 @@ namespace :import do
       bar.finished
 
       puts "#{User.count} users created"
+
+      # Import characters
+      # Import game rooms
+      # Create folder structure for game
+      # Copy avatars and banners
+      # Create game system
+      # Import subforuns, topics and posts
     end
   end
 
