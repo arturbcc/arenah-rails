@@ -2,6 +2,7 @@ config/database.yml
 log/*.log
 coverage
 tmp/*
+misc/csvs
 
 public/games/*
 .env
