@@ -16,6 +16,8 @@ module Legacy
   # `PostCount`
   # `Gender`
   class LegacyCharacter < LegacyModel
+    USER_ACCOUNT_ID = 0
+    USER_PARTNER_ID = 1
     USER_ID = 3
     NAME = 4
     AVATAR = 5
@@ -27,11 +29,16 @@ module Legacy
     POST_COUNT = 14
     GENDER = 15
 
-    attr_reader :user_id
+    attr_reader :id, :user_id, :user_partner_id, :name, :arenah_character
 
     def self.build_from_row(row)
       LegacyCharacter.new(
+        id: row[USER_ACCOUNT_ID],
         user_id: row[USER_ID].to_i,
+        # user partner is a duplication of the passport user to that specific product.
+        # There was a concept of partners in the legacy code. For all aspects,
+        # we can consider this table useless after the migration
+        user_partner_id: row[USER_PARTNER_ID],
         name: row[NAME],
         avatar: row[AVATAR], # I NEED TO COPY THE IMAGE TO THE NEW SERVER
         forum_id: row[FORUM_ID],
@@ -72,7 +79,7 @@ module Legacy
     # * Name: the name of the character could be an empty string before. It
     # will not be valid anymore and those cases will use the name 'Sem nome'
     def create!(user)
-      Character.create!(
+      @arenah_character = Character.create!(
         user: user,
         name: @name.present? ? @name : 'Sem nome',
         avatar: @avatar,

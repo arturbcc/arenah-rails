@@ -41,7 +41,7 @@ module Legacy
     end
 
     def invalid?
-      !active? || @name == 'qa'
+      @name == 'qa'
     end
 
     def self.build_from_row(row)

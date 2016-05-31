@@ -2,7 +2,8 @@ module Legacy
   class ImporterParams
     EXPECTED_PARAMS = [
       :users,
-      :characters
+      :characters,
+      :games
     ].freeze
 
     def path_params

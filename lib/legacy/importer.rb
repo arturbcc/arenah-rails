@@ -1,6 +1,7 @@
 require 'rake-progressbar'
 require 'legacy/legacy_user'
 require 'legacy/legacy_character'
+require 'legacy/legacy_game'
 
 module Legacy
   class Importer
@@ -17,11 +18,10 @@ module Legacy
         delete_records
         create_users
         create_characters
-
-        # TODO: only 270 characters were created?
+        create_game_rooms
 
         # Import game rooms
-        # Create folder structure for game
+        # Create folder structure for the game
         # Copy avatars and banners
         # Create game system and set system on the characters
         # Set game on the characters
@@ -65,6 +65,20 @@ module Legacy
       puts "#{Character.count} characters created"
     end
 
+    def create_game_rooms
+      puts '4. Creating game rooms...'
+      bar = RakeProgressbar.new(games.count)
+      games.each do |game|
+        character = characters.find { |character| character.user_partner_id == game.author_id }
+        game.create!(character.arenah_character)
+
+        bar.inc
+      end
+
+      bar.finished
+      puts "#{Game.count} games created"
+    end
+
     def users
       @users ||= CSV.foreach(params[:users], CSV_OPTIONS).map do |row|
         Legacy::LegacyUser.build_from_row(row)
@@ -74,6 +88,12 @@ module Legacy
     def characters
       @characters ||= CSV.foreach(params[:characters], CSV_OPTIONS).map do |row|
         Legacy::LegacyCharacter.build_from_row(row)
+      end
+    end
+
+    def games
+      @games ||= CSV.foreach(params[:games], CSV_OPTIONS).map do |row|
+        Legacy::LegacyGame.build_from_row(row)
       end
     end
   end
