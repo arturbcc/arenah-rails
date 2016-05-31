@@ -23,7 +23,7 @@ namespace :import do
   end
 
   def show_usage(params)
-    puts "USAGE: bin/rake import:legacy #{params.to_usage_params}"
+    puts 'USAGE: bin/rake import:legacy'
     puts ''
   end
 
@@ -44,6 +44,8 @@ namespace :import do
     puts '**  Make sure that:                                                       **'
     puts '**  1) The csv is separated by comma (,)                                  **'
     puts '**  2) The csv is encoded in UTF-8                                        **'
+    puts '**                                                                        **'
+    puts '**  All csv files must be under misc/csvs folder                          **'
     puts '**                                                                        **'
     puts '****************************************************************************'
     puts ''

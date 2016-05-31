@@ -3,6 +3,7 @@ module Legacy
     EXPECTED_PARAMS = [
       :users,
       :characters,
+      :user_partners,
       :games
     ].freeze
 
@@ -11,17 +12,11 @@ module Legacy
         path_params = {}
 
         EXPECTED_PARAMS.each do |key|
-          path_params[key] = ENV.fetch("#{key.to_s.upcase}_PATH", "#{key.to_s.downcase}.csv")
+          path_params[key] = "misc/csvs/#{key.to_s.downcase}.csv"
         end
 
         path_params
       end
-    end
-
-    def to_usage_params
-      EXPECTED_PARAMS.map do |param|
-        "#{param.to_s.upcase}_PATH='path/to/#{param.to_s.downcase}.csv'"
-      end.join(' ')
     end
 
     def valid_path?
