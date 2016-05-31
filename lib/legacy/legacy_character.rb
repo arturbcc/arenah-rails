@@ -15,7 +15,7 @@ module Legacy
   # `TopicCount`
   # `PostCount`
   # `Gender`
-  class LegacyCharacter
+  class LegacyCharacter < LegacyModel
     USER_ID = 3
     NAME = 4
     AVATAR = 5
@@ -27,14 +27,16 @@ module Legacy
     POST_COUNT = 14
     GENDER = 15
 
+    attr_reader :user_id
+
     def self.build_from_row(row)
       LegacyCharacter.new(
-        user_id: row[USER_ID],
+        user_id: row[USER_ID].to_i,
         name: row[NAME],
         avatar: row[AVATAR], # I NEED TO COPY THE IMAGE TO THE NEW SERVER
         forum_id: row[FORUM_ID],
         status: row[STATUS].to_i,
-        character_type: 1 - row[CHARACTER_TYPE].to_i,
+        character_type: row[CHARACTER_TYPE].to_i,
         created_at: Date.parse(row[CREATED_AT]),
         signature: row[SIGNATURE],
         post_count: row[POST_COUNT].to_i,
@@ -56,23 +58,31 @@ module Legacy
 
     # It creates a new character based on a legacy character.
     #
-    # There are a few attributes that are different, though:
+    # There are a few attributes issues to be known:
     #
-    # Status: the status is the inverse of the legacy status. While 0 was
-    # active and 1 inactive, it is now the opposite: 0 is inactive and
-    # 1 is active, because it makes more sense.
+    # * Status: prior to this migration, the status code followed these rules:
+    #   - Active = 0,
+    #   - Deleted = 1,
+    #   - Closed = 2,
+    #   - Blocked = 3
+    #
+    # From now on, 0 will be inactive and 1 is active, because it simply makes
+    # more sense.
+    #
+    # * Name: the name of the character could be an empty string before. It
+    # will not be valid anymore and those cases will use the name 'Sem nome'
     def create!(user)
-      status = 1 - self.status
-
       Character.create!(
         user: user,
-        name: @name,
-        avatar: 'inuyasha.jpg',
+        name: @name.present? ? @name : 'Sem nome',
+        avatar: @avatar,
         post_count: @post_count,
         signature: @signature,
         last_post_date: Time.now,
-        sheet: load_sheet('crossover', 'inuyasha'),
-        status: 1 - @status
+        sheet: '{}',
+        status: @status == 0 ? 1 : 0,
+        character_type: @character_type,
+        created_at: @created_at
       )
     end
   end

@@ -14,45 +14,65 @@ module Legacy
 
     def start
       User.transaction do
-        puts '1. Deleting existing records... '
-        User.delete_all
+        delete_records
+        create_users
+        create_characters
 
-        puts "2. Importing data from #{params[:users]}..."
-        users = load_users
+        # TODO: only 270 characters were created?
 
-        puts '3. Creating users...'
-        bar = RakeProgressbar.new(users.count)
-        users.each do |user|
-          next if user.invalid?
-
-          bar.inc
-          user.create!
-        end
-
-        bar.finished
-        puts "#{User.count} users created"
-
-        puts '4. Creating characters...'
-
-        # Import characters
         # Import game rooms
         # Create folder structure for game
         # Copy avatars and banners
-        # Create game system
+        # Create game system and set system on the characters
+        # Set game on the characters
         # Import subforuns, topics and posts
       end
     end
 
     private
 
-    def load_users
-      CSV.foreach(params[:users], CSV_OPTIONS).map do |row|
+    def delete_records
+      puts '1. Deleting existing records... '
+      User.delete_all
+      Character.delete_all
+    end
+
+    def create_users
+      puts '2. Creating users...'
+      bar = RakeProgressbar.new(users.count)
+      users.each do |user|
+        next if user.invalid?
+
+        user.create!
+        bar.inc
+      end
+
+      bar.finished
+      puts "#{User.count} users created"
+    end
+
+    def create_characters
+      puts '3. Creating characters...'
+      bar = RakeProgressbar.new(characters.count)
+      characters.each do |character|
+        user = users.find { |user| user.id == character.user_id }
+        character.create!(user.arenah_user)
+
+        bar.inc
+      end
+
+      bar.finished
+      puts "#{Character.count} characters created"
+    end
+
+    def users
+      @users ||= CSV.foreach(params[:users], CSV_OPTIONS).map do |row|
         Legacy::LegacyUser.build_from_row(row)
       end
     end
 
-    def load_characters
-      CSV.foreach(params[:characters], CSV_OPTIONS).map do |row|
+    def characters
+      @characters ||= CSV.foreach(params[:characters], CSV_OPTIONS).map do |row|
         Legacy::LegacyCharacter.build_from_row(row)
       end
     end

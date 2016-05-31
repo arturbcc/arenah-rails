@@ -34,7 +34,7 @@ module Legacy
     EMAIL = 10
     CREATED_AT = 17
 
-    attr_reader :id, :name, :email, :user
+    attr_reader :id, :name, :email, :arenah_user
 
     def active?
       @status
@@ -56,7 +56,7 @@ module Legacy
     end
 
     def create!
-      @user = User.create!(
+      @arenah_user = User.create!(
         email: @email,
         name: @name,
         password: generate_password,

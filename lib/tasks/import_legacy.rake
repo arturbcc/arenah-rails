@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-require 'csv'
-
 namespace :import do
   desc 'Imports the Users to the new database format'
   task legacy: :environment do
-    require 'legacy/importer_tools'
+    require 'csv'
+    require 'colorize'
     require 'legacy/importer_params'
     require 'legacy/importer'
 
     params = Legacy::ImporterParams.new
 
-    show_disclaimer
+    display_logo
+    instructions
 
     unless params.valid_path?
       show_usage(params)
@@ -27,13 +27,25 @@ namespace :import do
     puts ''
   end
 
-  def show_disclaimer
-    Legacy::ImporterTools.display_logo
-    Legacy::ImporterTools.instructions
+  def display_logo
+    puts ' █████╗ ██████╗ ███████╗███╗   ██╗ █████╗ ██╗  ██╗'.yellow
+    puts '██╔══██╗██╔══██╗██╔════╝████╗  ██║██╔══██╗██║  ██║'
+    puts '███████║██████╔╝█████╗  ██╔██╗ ██║███████║███████║'
+    puts '██╔══██║██╔══██╗██╔══╝  ██║╚██╗██║██╔══██║██╔══██║'
+    puts '██║  ██║██║  ██║███████╗██║ ╚████║██║  ██║██║  ██║'
+    puts '╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝'
+    puts ''
+  end
 
-    # Legacy::ImporterTools.heroku_command(
-    #   'import:legacy',
-    #   "USERS_PATH=#{path_params[:users]}"
-    # )
+  def instructions
+    puts "**************************** Import database *******************************"
+    puts '**                  Import data the new database format                   **'
+    puts '**                                                                        **'
+    puts '**  Make sure that:                                                       **'
+    puts '**  1) The csv is separated by comma (,)                                  **'
+    puts '**  2) The csv is encoded in UTF-8                                        **'
+    puts '**                                                                        **'
+    puts '****************************************************************************'
+    puts ''
   end
 end
