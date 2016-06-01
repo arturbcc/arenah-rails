@@ -35,10 +35,6 @@ module Legacy
       LegacyCharacter.new(
         id: row[USER_ACCOUNT_ID],
         user_id: row[USER_ID].to_i,
-        # user partner is a duplication of the passport user to that specific product.
-        # There was a concept of partners in the legacy code. For all aspects,
-        # we can consider this table useless after the migration
-        user_partner_id: row[USER_PARTNER_ID],
         name: row[NAME],
         avatar: row[AVATAR], # I NEED TO COPY THE IMAGE TO THE NEW SERVER
         forum_id: row[FORUM_ID],

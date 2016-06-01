@@ -54,7 +54,7 @@ module Legacy
         user_id: row[USER_ID].to_i,
         parent_forum_id: row[PARENT_FORUM_ID],
         game_system_id: row[GAME_SYSTEM_ID],
-        banner_url: row[BANNER_URL]  # I NEED TO COPY THE IMAGE TO THE NEW SERVER
+        banner_url: row[BANNER_URL] # I NEED TO COPY THE IMAGE TO THE NEW SERVER
       )
     end
 
@@ -62,8 +62,12 @@ module Legacy
       @title
     end
 
-    def game?
-      @forum_id == '00000000-0000-0000-0000-000000000000'
+    def id
+      @forum_id
+    end
+
+    def root?
+      @parent_forum_id == '00000000-0000-0000-0000-000000000000'
     end
 
 

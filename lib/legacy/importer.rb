@@ -2,6 +2,7 @@ require 'rake-progressbar'
 require 'legacy/legacy_user'
 require 'legacy/legacy_character'
 require 'legacy/legacy_game'
+require 'legacy/legacy_user_partner'
 
 module Legacy
   class Importer
@@ -18,6 +19,7 @@ module Legacy
         delete_records
         create_users
         create_characters
+        create_game_masters
         create_game_rooms
 
         # Import game rooms
@@ -35,6 +37,7 @@ module Legacy
       puts '1. Deleting existing records... '
       User.delete_all
       Character.delete_all
+      Game.delete_all
     end
 
     def create_users
@@ -61,15 +64,43 @@ module Legacy
         bar.inc
       end
 
+
       bar.finished
       puts "#{Character.count} characters created"
     end
 
+    def create_game_masters
+      characters_count = Character.count
+
+      puts '4. Creating game masters...'
+      bar = RakeProgressbar.new(user_partners.count)
+
+      user_partners.each do |user_partner|
+        next if user_partner.invalid?
+
+        character = user_partner.build_legacy_character
+        user = users.find { |user| user.id == user_partner.user_id }
+
+        characters << character
+        debugger if user.arenah_user.nil?
+        character.create!(user.arenah_user)
+
+        bar.inc
+      end
+
+      bar.finished
+      total = Character.count
+      puts "#{total - characters_count} characters created. Total: #{total}"
+    end
+
     def create_game_rooms
-      puts '4. Creating game rooms...'
+      puts '5. Creating game rooms...'
       bar = RakeProgressbar.new(games.count)
-      games.each do |game|
-        character = characters.find { |character| character.user_partner_id == game.author_id }
+      root_games = games.select { |game| game.root? }
+
+      root_games.each do |game|
+        user_partner = user_partners.find { |user| user.id == game.author_id }
+        character = characters.find { |character| character.user_partner_id == user_partner.id }
         game.create!(character.arenah_character)
 
         bar.inc
@@ -88,6 +119,12 @@ module Legacy
     def characters
       @characters ||= CSV.foreach(params[:characters], CSV_OPTIONS).map do |row|
         Legacy::LegacyCharacter.build_from_row(row)
+      end
+    end
+
+    def user_partners
+      @user_partners ||= CSV.foreach(params[:user_partners], CSV_OPTIONS).map do |row|
+        Legacy::LegacyUserPartner.build_from_row(row)
       end
     end
 
