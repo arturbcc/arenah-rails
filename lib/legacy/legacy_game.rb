@@ -41,7 +41,7 @@ module Legacy
     IS_GAME_ROOM = 22
     BANNER_URL = 24
 
-    attr_reader :user_id, :author_id, :title
+    attr_reader :user_id, :author_id, :title, :parent_forum_id, :arenah_game
 
     def self.build_from_row(row)
       LegacyGame.new(
@@ -76,6 +76,10 @@ module Legacy
       @is_game_room == 1
     end
 
+    def active?
+      @status == 0
+    end
+
     # It creates a new game based on a legacy forum.
     #
     # There are a few attributes issues to be known:
@@ -89,7 +93,7 @@ module Legacy
     # From now on, 0 will be inactive and 1 is active, because it simply makes
     # more sense.
     def create!(character)
-      Game.create!(
+      @arenah_game = Game.create!(
         name: @title,
         status: @status == 0 ? 1 : 0,
         character: character,
