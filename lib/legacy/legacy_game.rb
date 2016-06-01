@@ -38,6 +38,7 @@ module Legacy
     USER_ID = 20
     PARENT_FORUM_ID = 21
     GAME_SYSTEM_ID = 23
+    IS_GAME_ROOM = 22
     BANNER_URL = 24
 
     attr_reader :user_id, :author_id, :title
@@ -48,13 +49,14 @@ module Legacy
         author_id: row[AUTHOR_ID],
         title: row[TITLE],
         description: row[DESCRIPTION],
-        status: row[STATUS],
+        status: row[STATUS].to_i,
         display_order: row[DISPLAY_ORDER].to_i,
         created_at: Date.parse(row[CREATED_AT]),
         user_id: row[USER_ID].to_i,
         parent_forum_id: row[PARENT_FORUM_ID],
         game_system_id: row[GAME_SYSTEM_ID],
-        banner_url: row[BANNER_URL] # I NEED TO COPY THE IMAGE TO THE NEW SERVER
+        banner_url: row[BANNER_URL], # I NEED TO COPY THE IMAGE TO THE NEW SERVER
+        is_game_room: row[IS_GAME_ROOM].to_i
       )
     end
 
@@ -70,6 +72,9 @@ module Legacy
       @parent_forum_id == '00000000-0000-0000-0000-000000000000'
     end
 
+    def game_room?
+      @is_game_room == 1
+    end
 
     # It creates a new game based on a legacy forum.
     #

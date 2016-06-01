@@ -22,12 +22,13 @@ module Legacy
         create_game_masters
         create_game_rooms
 
-        # Import game rooms
+        # Import subforuns
+        # Import topics
+        # Import posts
         # Create folder structure for the game
         # Copy avatars and banners
         # Create game system and set system on the characters
         # Set game on the characters
-        # Import subforuns, topics and posts
       end
     end
 
@@ -99,6 +100,8 @@ module Legacy
       root_games = games.select { |game| game.root? }
 
       root_games.each do |game|
+        next unless game.game_room?
+
         user_partner = user_partners.find { |user| user.id == game.author_id }
         character = characters.find { |character| character.user_partner_id == user_partner.id }
         game.create!(character.arenah_character)
