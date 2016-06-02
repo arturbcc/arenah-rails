@@ -4,7 +4,8 @@ module Legacy
       :users,
       :characters,
       :user_partners,
-      :games
+      :games,
+      :topics
     ].freeze
 
     def path_params

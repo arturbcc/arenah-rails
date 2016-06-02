@@ -3,6 +3,7 @@ require 'legacy/legacy_user'
 require 'legacy/legacy_character'
 require 'legacy/legacy_game'
 require 'legacy/legacy_user_partner'
+require 'legacy/legacy_topic'
 
 module Legacy
   class Importer
@@ -22,9 +23,8 @@ module Legacy
         create_game_masters
         create_game_rooms
         create_topic_groups
+        create_topics
 
-        # Import subforuns
-        # Import topics
         # Import posts
         # Create folder structure for the game
         # Copy avatars and banners
@@ -129,38 +129,66 @@ module Legacy
         next unless game.game_room?
 
         puts "* #{game.name}"
-        subforums = games.select { |g| g.parent_forum_id == game.id && g.active? }
+        subforums = games.select { |g| g.parent_forum_id == game.id && g.valid? }
 
         if subforums.count <= 2
           #create two group with the name of the subforums and one "geral"
 
           index = 1
           subforums.each do |forum|
-            TopicGroup.create!(game: game.arenah_game, name: truncate(forum.title), position: index)
+            forum.group_to_save_topics = TopicGroup.create!(game: game.arenah_game, name: truncate(forum.title), position: index)
             puts "  Group '#{forum.title}' created at position #{index}"
             index += 1
           end
 
-          TopicGroup.create!(game: game.arenah_game, name: 'Geral', position: index)
+          game.group_to_save_topics = TopicGroup.create!(game: game.arenah_game, name: 'Geral', position: index)
           puts "  Group 'Geral' created at position #{index}"
         elsif subforums.count == 3
-          #create three groups with the name of the subforums and send general topics to the first one
+          #create three groups with the name of the subforums and send general topics to the last one
 
           subforums.each_with_index do |forum, index|
-            TopicGroup.create!(game: game.arenah_game, name: truncate(forum.title), position: index + 1)
+            forum.group_to_save_topics = TopicGroup.create!(game: game.arenah_game, name: truncate(forum.title), position: index + 1)
             puts "  Group '#{forum.title}' created at position #{index + 1}"
           end
+          game.group_to_save_topics = subforums[2].group_to_save_topics
         else
           #create two groups: "geral" and "jogo"
 
-          TopicGroup.create!(game: game.arenah_game, name: 'Geral', position: 1)
+          game.group_to_save_topics = TopicGroup.create!(game: game.arenah_game, name: 'Geral', position: 1)
           puts "  Group 'Geral' created at position 1"
-          TopicGroup.create!(game: game.arenah_game, name: 'Jogo', position: 2)
+          group = TopicGroup.create!(game: game.arenah_game, name: 'Jogo', position: 2)
+          subforums.each { |forum| forum.group_to_save_topics = group }
           puts "  Group 'Jogo' created at position 2"
         end
 
         puts ''
       end
+    end
+
+    def create_topics
+      puts '7. Creating topics...'
+      bar = RakeProgressbar.new(games.count)
+      ignore_list = []
+
+      topics.each do |topic|
+        game = games.find { |g| g.forum_id == topic.forum_id && g.valid? }
+        group = game.group_to_save_topics
+
+        if !game || !group
+          ignore_list << "[#{topic.id}] #{topic.name}, de #{topic.author_name}"
+          next
+        end
+
+        puts "Saving #{topic.name} on #{group.name}"
+
+        bar.inc
+      end
+      bar.finished
+      puts "#{Topic.count} topics created"
+      puts ''
+      puts "#{ignore_list.count} topics ignored:"
+      ignore_list.each { |topic| puts topic }
+      puts ''
     end
 
     def users
@@ -186,6 +214,13 @@ module Legacy
         Legacy::LegacyGame.build_from_row(row)
       end
     end
+
+    def topics
+      @topics ||= CSV.foreach(params[:topics], CSV_OPTIONS).map do |row|
+        Legacy::LegacyTopic.build_from_row(row)
+      end
+    end
+
 
     def truncate(str, length = 20)
       return str if str.length <= length

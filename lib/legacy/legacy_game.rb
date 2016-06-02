@@ -32,6 +32,7 @@ module Legacy
     AUTHOR_ID = 3 # Character => Guid.
     TITLE = 5
     DESCRIPTION = 6
+    AUTHOR_NAME = 9
     STATUS = 10
     DISPLAY_ORDER = 11
     CREATED_AT = 14
@@ -41,7 +42,9 @@ module Legacy
     IS_GAME_ROOM = 22
     BANNER_URL = 24
 
-    attr_reader :user_id, :author_id, :title, :parent_forum_id, :arenah_game
+    attr_reader :user_id, :author_id, :title, :parent_forum_id, :arenah_game, :forum_id
+
+    attr_accessor :group_to_save_topics
 
     def self.build_from_row(row)
       LegacyGame.new(
@@ -56,7 +59,8 @@ module Legacy
         parent_forum_id: row[PARENT_FORUM_ID],
         game_system_id: row[GAME_SYSTEM_ID],
         banner_url: row[BANNER_URL], # I NEED TO COPY THE IMAGE TO THE NEW SERVER
-        is_game_room: row[IS_GAME_ROOM].to_i
+        is_game_room: row[IS_GAME_ROOM].to_i,
+        author_name: row[AUTHOR_NAME]
       )
     end
 
@@ -78,6 +82,10 @@ module Legacy
 
     def active?
       @status == 0
+    end
+
+    def valid?
+      @author_name != 'Artur Teste' || active?
     end
 
     # It creates a new game based on a legacy forum.

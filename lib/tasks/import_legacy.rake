@@ -14,7 +14,7 @@ namespace :import do
     instructions
 
     unless params.valid_path?
-      show_usage(params)
+      show_usage
       exit 1
     end
 
@@ -22,8 +22,12 @@ namespace :import do
     importer.start
   end
 
-  def show_usage(params)
+  def show_usage
     puts 'USAGE: bin/rake import:legacy'
+    puts 'Check if all csv\'s are on the misc folder:'
+    Legacy::ImporterParams::EXPECTED_PARAMS.each do |param|
+      puts "  * #{param}.csv"
+    end
     puts ''
   end
 
