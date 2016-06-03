@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Legacy
   class ImporterParams
     EXPECTED_PARAMS = [
@@ -5,7 +7,8 @@ module Legacy
       :characters,
       :user_partners,
       :games,
-      :topics
+      :topics,
+      :posts
     ].freeze
 
     def path_params

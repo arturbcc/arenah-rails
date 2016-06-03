@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Legacy
   # `UserId`
   # `PartnerId`
@@ -48,6 +50,7 @@ module Legacy
 
     def build_legacy_character
       Legacy::LegacyCharacter.new(
+        id: @id,
         user_id: @user_id,
         user_partner_id: @id,
         name: @name,

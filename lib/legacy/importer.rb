@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 require 'rake-progressbar'
 require 'legacy/legacy_user'
 require 'legacy/legacy_character'
 require 'legacy/legacy_game'
 require 'legacy/legacy_user_partner'
 require 'legacy/legacy_topic'
+require 'legacy/legacy_post'
 
 module Legacy
   class Importer
@@ -24,12 +27,12 @@ module Legacy
         create_game_rooms
         create_topic_groups
         create_topics
+        create_posts
 
-        # Import posts
+        # Set game on the characters
         # Create folder structure for the game
         # Copy avatars and banners
         # Create game system and set system on the characters
-        # Set game on the characters
       end
     end
 
@@ -42,6 +45,7 @@ module Legacy
       Game.delete_all
       TopicGroup.delete_all
       Topic.delete_all
+      Post.delete_all
       puts ''
     end
 
@@ -88,9 +92,8 @@ module Legacy
         character = user_partner.build_legacy_character
         user = users.find { |user| user.id == user_partner.user_id }
 
-        characters << character
-        debugger if user.arenah_user.nil?
         character.create!(user.arenah_user)
+        characters << character
 
         bar.inc
       end
@@ -167,8 +170,8 @@ module Legacy
 
     def create_topics
       puts '7. Creating topics...'
-      bar = RakeProgressbar.new(games.count)
       ignore_list = []
+      positions = {}
 
       topics.each do |topic|
         game = games.find { |g| g.forum_id == topic.forum_id && g.valid? }
@@ -179,15 +182,47 @@ module Legacy
           next
         end
 
+        parent_forum_id = game.parent_forum_id
+        game = games.find { |game| game.id == parent_forum_id } unless game.root?
+
         puts "Saving #{topic.name} on #{group.name}"
 
-        bar.inc
+        character = characters.find { |c| c.id == topic.author_id }
+        positions[group.id] = 1 unless positions.include?(group.id)
+
+        topic.create!(game.arenah_game, group, character.arenah_character, positions[group.id])
+
+        positions[group.id] += 1
       end
-      bar.finished
+
       puts "#{Topic.count} topics created"
       puts ''
+
       puts "#{ignore_list.count} topics ignored:"
       ignore_list.each { |topic| puts topic }
+
+      puts ''
+    end
+
+    def create_posts
+      puts '8. Creating posts...'
+      bar = RakeProgressbar.new(posts.count)
+
+      posts.each do |post|
+        bar.inc
+
+        next unless post.active?
+
+        topic = topics.find { |topic| topic.id == post.topic_id }
+        character = characters.find { |c| c.id == post.author_id }
+
+        next unless topic && topic.arenah_topic
+        post.create!(topic.arenah_topic, character.arenah_character)
+      end
+
+      bar.finished
+      puts "#{Post.count} posts created"
+
       puts ''
     end
 
@@ -221,6 +256,11 @@ module Legacy
       end
     end
 
+    def posts
+      @posts ||= CSV.foreach(params[:posts], CSV_OPTIONS).map do |row|
+        Legacy::LegacyPost.build_from_row(row)
+      end
+    end
 
     def truncate(str, length = 20)
       return str if str.length <= length

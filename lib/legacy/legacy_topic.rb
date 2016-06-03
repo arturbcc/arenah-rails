@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Legacy
   # `TopicId`
   # `PartnerId`
@@ -33,7 +35,7 @@ module Legacy
     # Game = 3
     TOPIC_TYPE = 17
 
-    attr_reader :arenah_topic, :forum_id, :id, :author_name
+    attr_reader :arenah_topic, :forum_id, :id, :author_name, :author_id
 
     def self.build_from_row(row)
       LegacyTopic.new(
@@ -54,7 +56,7 @@ module Legacy
 
     def create!(game, topic_group, character, position)
       @arenah_topic = Topic.create!(
-        title: @title,
+        title: @title ||'Sem título' ,
         description: '',
         topic_group: topic_group,
         game: game,
