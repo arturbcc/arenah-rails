@@ -29,7 +29,8 @@ module Legacy
         create_topics
         create_posts
 
-        # Set game on the characters
+        subscribe_characters
+
         # Create folder structure for the game
         # Copy avatars and banners
         # Create game system and set system on the characters
@@ -74,7 +75,6 @@ module Legacy
         bar.inc
       end
 
-
       bar.finished
       puts "#{Character.count} characters created"
       puts ''
@@ -115,6 +115,8 @@ module Legacy
         user_partner = user_partners.find { |user| user.id == game.author_id }
         character = characters.find { |character| character.user_partner_id == user_partner.id }
         game.create!(character.arenah_character)
+
+        user_partner.game_id = game.id
 
         bar.inc
       end
@@ -223,6 +225,28 @@ module Legacy
       bar.finished
       puts "#{Post.count} posts created"
 
+      puts ''
+    end
+
+    def subscribe_characters
+      puts '9. Subscribe characters...'
+
+      characters.each do |character|
+        next unless character.active?
+
+        if character.post_count == 0
+          puts "Skipping #{character.name}"
+          next
+        end
+
+        game = games.find { |game| game.id == character.forum_id }
+        unless game
+          user_partner = user_partners.find { |up| up.id == character.user_partner_id }
+          game = games.find { |game| game.id == user_partner.game_id }
+        end
+
+        character.arenah_character.update(game: game.arenah_game)
+      end
       puts ''
     end
 

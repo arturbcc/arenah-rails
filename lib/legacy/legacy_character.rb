@@ -31,7 +31,8 @@ module Legacy
     POST_COUNT = 14
     GENDER = 15
 
-    attr_reader :id, :user_id, :user_partner_id, :name, :arenah_character
+    attr_reader :id, :user_id, :user_partner_id, :name,
+      :arenah_character, :forum_id, :character_type, :post_count
 
     def self.build_from_row(row)
       LegacyCharacter.new(
@@ -58,7 +59,7 @@ module Legacy
     end
 
     def active?
-      status = 0
+      @status == 1
     end
 
     # It creates a new character based on a legacy character.
