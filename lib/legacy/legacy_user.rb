@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'legacy/legacy_model'
-
 module Legacy
   # 0 `UserId`,
   # 1 `FullName`,

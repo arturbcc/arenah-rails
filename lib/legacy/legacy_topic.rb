@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'legacy/legacy_model'
 module Legacy
   # `TopicId`
   # `PartnerId`
