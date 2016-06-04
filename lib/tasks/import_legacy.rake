@@ -49,8 +49,8 @@ namespace :import do
     puts '**  1) The csv is separated by comma (,)                                  **'
     puts '**  2) The csv is encoded in UTF-8                                        **'
     puts '**                                                                        **'
-    puts '**  All csv files must be under the ./misc/csvs folder                    **'
-    puts '**                                                                        **'
+    puts '**  All csv files must be under the ./misc/csvs folder. The games\'        **'
+    puts '**  assets will be saved on /tmp/imported_data                            **'
     puts '****************************************************************************'
     puts ''
   end

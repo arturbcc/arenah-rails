@@ -2,6 +2,7 @@
 
 require 'rake-progressbar'
 
+require 'legacy/importers/assets_importer'
 require 'legacy/importers/characters_importer'
 require 'legacy/importers/game_masters_importer'
 require 'legacy/importers/game_rooms_importer'
@@ -34,7 +35,6 @@ module Legacy
       subscribe_characters
       build_game_folder_structure
 
-      # Create folder structure for the game
       # Copy avatars and banners
       # Create game system and set system on the characters
     end
@@ -85,7 +85,7 @@ module Legacy
     end
 
     def build_game_folder_structure
-      # FileUtils.copy_entry "#{Rails.root}/misc/games/", "#{Rails.root}/public/games/"
+      Legacy::Importers::AssetsImporter.new(characters).import
     end
 
     def users

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'legacy/legacy_character'
+require 'legacy/legacy_user_partner'
 module Legacy
   module Importers
     class GameMastersImporter

@@ -17,6 +17,8 @@ module Legacy
 
         bar.finished
         puts "#{Character.count} characters created"
+        puts "#{Character.where(status: 1).count} active characters"
+        puts "#{Character.where(status: 0).count} inactive characters"
         puts ''
       end
     end

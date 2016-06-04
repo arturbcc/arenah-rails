@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'legacy/legacy_model'
+require 'fileutils'
 module Legacy
   # `UserAccountId`
   # `UserPartnerId`
@@ -32,8 +33,11 @@ module Legacy
     POST_COUNT = 14
     GENDER = 15
 
+    DEFAULT_AVATAR = '130x130_avatar.jpg'.freeze
+
     attr_reader :id, :user_id, :user_partner_id, :name,
-      :arenah_character, :forum_id, :character_type, :post_count
+      :arenah_character, :forum_id, :character_type, :post_count,
+      :avatar
 
     def self.build_from_row(row)
       LegacyCharacter.new(
@@ -60,7 +64,11 @@ module Legacy
     end
 
     def active?
-      @status == 1
+      @status == 1 || @stauts == 2
+    end
+
+    def has_avatar?
+      @avatar.present? && @avatar != DEFAULT_AVATAR
     end
 
     # It creates a new character based on a legacy character.
@@ -91,6 +99,15 @@ module Legacy
         character_type: @character_type,
         created_at: @created_at
       )
+
+      update_avatar
+    end
+
+    def update_avatar
+      return unless @avatar
+
+      extension = File.extname(@avatar)
+      @arenah_character.update(avatar: "#{@arenah_character.slug}#{extension}")
     end
   end
 end
