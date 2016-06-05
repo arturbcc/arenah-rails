@@ -104,7 +104,7 @@ module Legacy
     def create!(user)
       @arenah_character = Character.create!(
         user: user,
-        name: @name.present? ? @name : 'Sem nome',
+        name: @name.present? ? @name.strip : 'Sem nome',
         avatar: @avatar,
         post_count: @post_count,
         signature: @signature,

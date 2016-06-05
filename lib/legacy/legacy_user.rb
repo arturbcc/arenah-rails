@@ -59,7 +59,7 @@ module Legacy
     def create!
       @arenah_user = User.create!(
         email: @email,
-        name: @name,
+        name: @name.strip,
         password: generate_password,
         legacy_password: @password,
         confirmed_at: @created_at,

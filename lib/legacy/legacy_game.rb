@@ -105,7 +105,7 @@ module Legacy
     # more sense.
     def create!(character)
       @arenah_game = Game.create!(
-        name: @title,
+        name: @title.strip,
         status: @status == 0 ? 1 : 0,
         character: character,
         short_description: '', # crop from the legacy description?

@@ -31,7 +31,7 @@ module Legacy
     PASSPORT_ID = 19
     POST_COUNT = 4
 
-    attr_reader :id, :user_id, :game_id
+    attr_reader :id, :user_id, :game_id, :name
 
     def self.build_from_row(row)
       LegacyUserPartner.new(

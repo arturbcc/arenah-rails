@@ -67,7 +67,7 @@ module Legacy
     end
 
     def create_game_masters
-      Legacy::Importers::GameMastersImporter.import(user_partners, users, characters, moderators)
+      Legacy::Importers::GameMastersImporter.import(user_partners, users, characters, moderators, games)
     end
 
     def create_game_rooms

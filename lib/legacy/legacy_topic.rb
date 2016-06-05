@@ -57,7 +57,7 @@ module Legacy
 
     def create!(game, topic_group, character, position)
       @arenah_topic = Topic.create!(
-        title: @title ||'Sem título' ,
+        title: @title.try(:strip) ||'Sem título',
         description: '',
         topic_group: topic_group,
         game: game,
