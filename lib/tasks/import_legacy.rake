@@ -42,6 +42,13 @@ namespace :import do
   end
 
   def instructions
+    args = [
+      'DISABLE_SPRING=1',
+      'DATABASE_URL=`heroku config:get DATABASE_URL`',
+      'bin/rake import:legacy'
+    ]
+    cmd = args.join(' ')
+
     puts "**************************** Import database *******************************"
     puts '**                  Import data the new database format                   **'
     puts '**                                                                        **'
@@ -52,6 +59,9 @@ namespace :import do
     puts '**  All csv files must be under the ./misc/csvs folder. The games\'        **'
     puts '**  assets will be saved on /tmp/imported_data                            **'
     puts '****************************************************************************'
+    puts ''
+    puts 'To run this rake on heroku, execute:'
+    puts cmd
     puts ''
   end
 end
