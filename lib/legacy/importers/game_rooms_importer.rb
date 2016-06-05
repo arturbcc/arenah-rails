@@ -12,11 +12,13 @@ module Legacy
         root_games.each do |game|
           next unless game.game_room?
 
-          user_partner = user_partners.find { |user| user.id == game.author_id }
-          character = characters.find { |character| character.user_partner_id == user_partner.id }
-          game.create!(character.arenah_character)
+          character = characters.find { |character| character.id == game.author_id}
 
-          user_partner.game_id = game.id
+          if !character
+            games.reject! { |g| g.id == game.id }
+          else
+            game.create!(character.arenah_character)
+          end
 
           bar.inc
         end

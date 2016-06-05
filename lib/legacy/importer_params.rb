@@ -8,7 +8,8 @@ module Legacy
       :user_partners,
       :games,
       :topics,
-      :posts
+      :posts,
+      :moderators
     ].freeze
 
     def path_params

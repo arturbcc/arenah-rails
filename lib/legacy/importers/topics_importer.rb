@@ -8,10 +8,12 @@ module Legacy
         puts '7. Creating topics...'
         ignore_list = []
         positions = {}
+        bar = RakeProgressbar.new(topics.count)
 
         topics.each do |topic|
+          bar.inc
           game = games.find { |g| g.forum_id == topic.forum_id && g.valid? }
-          group = game.group_to_save_topics
+          group = game.try(:group_to_save_topics)
 
           if !game || !group
             ignore_list << "[#{topic.id}] #{topic.name}, de #{topic.author_name}"
@@ -21,8 +23,6 @@ module Legacy
           parent_forum_id = game.parent_forum_id
           game = games.find { |game| game.id == parent_forum_id } unless game.root?
 
-          puts "Saving #{topic.name} on #{group.name}"
-
           character = characters.find { |c| c.id == topic.author_id }
           positions[group.id] = 1 unless positions.include?(group.id)
 
@@ -31,6 +31,7 @@ module Legacy
           positions[group.id] += 1
         end
 
+        bar.finished
         puts "#{Topic.count} topics created"
         puts ''
 

@@ -12,6 +12,8 @@ require 'legacy/importers/topic_groups_importer'
 require 'legacy/importers/topics_importer'
 require 'legacy/importers/users_importer'
 
+require 'legacy/legacy_forum_moderator'
+
 module Legacy
   class Importer
     CSV_OPTIONS = { headers: false, col_sep: ',', encoding: 'UTF-8' }.freeze
@@ -37,6 +39,7 @@ module Legacy
 
       # Copy avatars and banners
       # Create game system and set system on the characters
+      # List games and characters
     end
 
     private
@@ -61,7 +64,7 @@ module Legacy
     end
 
     def create_game_masters
-      Legacy::Importers::GameMastersImporter.import(user_partners, users, characters)
+      Legacy::Importers::GameMastersImporter.import(user_partners, users, characters, moderators)
     end
 
     def create_game_rooms
@@ -81,7 +84,7 @@ module Legacy
     end
 
     def subscribe_characters
-      Legacy::Importers::SubscriptionsImporter.import(characters, games, user_partners)
+      Legacy::Importers::SubscriptionsImporter.import(characters, games, user_partners, moderators)
     end
 
     def build_game_folder_structure
@@ -121,6 +124,12 @@ module Legacy
     def posts
       @posts ||= CSV.foreach(params[:posts], CSV_OPTIONS).map do |row|
         Legacy::LegacyPost.build_from_row(row)
+      end
+    end
+
+    def moderators
+      @moderators ||= CSV.foreach(params[:moderators], CSV_OPTIONS).map do |row|
+        Legacy::LegacyForumModerator.build_from_row(row)
       end
     end
   end

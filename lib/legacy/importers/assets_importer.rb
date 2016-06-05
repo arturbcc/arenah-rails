@@ -41,7 +41,7 @@ module Legacy
 
         # bar = RakeProgressbar.new(games.count)
 
-        games.each do |game|
+        games.sort_by(&:name).each do |game|
           create_folders(game)
           create_css(game)
           copy_avatars(game)

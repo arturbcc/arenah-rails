@@ -30,6 +30,7 @@ module Legacy
     CHARACTER_TYPE = 8
     CREATED_AT = 9
     SIGNATURE = 11
+    TOPIC_COUNT = 13
     POST_COUNT = 14
     GENDER = 15
 
@@ -37,11 +38,12 @@ module Legacy
 
     attr_reader :id, :user_id, :user_partner_id, :name,
       :arenah_character, :forum_id, :character_type, :post_count,
-      :avatar
+      :avatar, :status, :topic_count
 
     def self.build_from_row(row)
       LegacyCharacter.new(
         id: row[USER_ACCOUNT_ID],
+        user_partner_id: row[USER_PARTNER_ID],
         user_id: row[USER_ID].to_i,
         name: row[NAME],
         avatar: row[AVATAR], # I NEED TO COPY THE IMAGE TO THE NEW SERVER
@@ -50,9 +52,22 @@ module Legacy
         character_type: row[CHARACTER_TYPE].to_i,
         created_at: Date.parse(row[CREATED_AT]),
         signature: row[SIGNATURE],
+        topic_count: row[TOPIC_COUNT].to_i,
         post_count: row[POST_COUNT].to_i,
         gender: row[GENDER].to_i
       )
+    end
+
+    def pc?
+      @character_type == 0
+    end
+
+    def npc?
+      @character_type == 1
+    end
+
+    def master?
+      @character_type == 2
     end
 
     def male?

@@ -5,18 +5,17 @@ require 'legacy/legacy_user_partner'
 module Legacy
   module Importers
     class GameMastersImporter
-      def self.import(user_partners, users, characters)
+      def self.import(user_partners, users, characters, moderators)
         characters_count = Character.count
 
         puts '4. Creating game masters...'
         bar = RakeProgressbar.new(user_partners.count)
 
-        user_partners.each do |user_partner|
-          next if user_partner.invalid?
+        moderators.each do |moderator|
+          user_partner = user_partners.find { |user_partner| user_partner.id == moderator.user_id }
 
-          character = user_partner.build_legacy_character
           user = users.find { |user| user.id == user_partner.user_id }
-
+          character = user_partner.build_legacy_character
           character.create!(user.arenah_user)
           characters << character
 
