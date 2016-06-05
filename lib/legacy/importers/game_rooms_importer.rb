@@ -18,6 +18,7 @@ module Legacy
             games.reject! { |g| g.id == game.id }
           else
             game.create!(character.arenah_character)
+            character.arenah_character.update(game: game.arenah_game)
           end
 
           bar.inc

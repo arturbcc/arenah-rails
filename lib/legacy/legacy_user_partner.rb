@@ -53,11 +53,12 @@ module Legacy
       @game_id = id
     end
 
-    def build_legacy_character
+    def build_legacy_character(forum_id)
       Legacy::LegacyCharacter.new(
         id: @id,
         user_id: @user_id,
         user_partner_id: @id,
+        forum_id: forum_id,
         name: @name,
         avatar: @avatar, # I NEED TO COPY THE IMAGE TO THE NEW SERVER
         status: @status,

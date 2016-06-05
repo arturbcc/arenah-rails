@@ -13,6 +13,7 @@ require 'legacy/importers/topics_importer'
 require 'legacy/importers/users_importer'
 
 require 'legacy/legacy_forum_moderator'
+require 'legacy/report'
 
 module Legacy
   class Importer
@@ -40,6 +41,8 @@ module Legacy
       # Copy avatars and banners
       # Create game system and set system on the characters
       # List games and characters
+
+      Legacy::Report.new.show
     end
 
     private

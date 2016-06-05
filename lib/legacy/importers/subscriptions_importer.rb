@@ -14,7 +14,7 @@ module Legacy
 
         characters.each do |character|
           bar.inc
-          next unless character.pc?
+          next if character.master?
 
           game = games.find { |game| game.id == character.forum_id }
 
@@ -35,13 +35,20 @@ module Legacy
 
         moderators.each do |moderator|
           game = games.find { |game| game.id == moderator.forum_id }
+          next unless game.root?
+
 
           user_partner = user_partners.find { |up| up.id == moderator.user_id }
-          character = characters.find { |char| char.user_partner_id == user_partner.id }
+          character = characters.find do |char|
+            char.user_partner_id == user_partner.id &&
+            char.master? &&
+            char.forum_id == moderator.forum_id
+          end
           character.arenah_character.update(game: game.arenah_game)
           bar.inc
         end
 
+        bar.finished
         puts ''
       end
     end
