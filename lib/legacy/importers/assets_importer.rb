@@ -20,6 +20,7 @@ module Legacy
         puts '9. Copying assets...'
         create_initial_folder
         copy_assets
+        # TODO: Set avatar and banner as null if the download failed
         puts ''
       end
 

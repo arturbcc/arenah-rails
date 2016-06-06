@@ -24,8 +24,9 @@ module Legacy
     CREATED_AT = 8
     AUTHOR_NAME = 10
     USER_ID = 11
+    USER_ACCOUNT_ID = 12
 
-    attr_reader :topic_id, :author_id, :id, :author_name
+    attr_reader :topic_id, :author_id, :id, :author_name, :user_account_id
 
     def self.build_from_row(row)
       LegacyPost.new(
@@ -38,7 +39,8 @@ module Legacy
         # Deleted = 2
         status: row[STATUS].to_i,
         user_id: row[USER_ID].to_i,
-        author_name: row[AUTHOR_NAME]
+        author_name: row[AUTHOR_NAME],
+        user_account_id: row[USER_ACCOUNT_ID] == 'NULL' ? nil : row[USER_ACCOUNT_ID]
       )
     end
 

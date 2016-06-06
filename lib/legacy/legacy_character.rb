@@ -116,6 +116,8 @@ module Legacy
       )
 
       update_avatar
+
+      @arenah_character
     end
 
     def update_avatar

@@ -62,7 +62,7 @@ module Legacy
         user_id: row[USER_ID].to_i,
         parent_forum_id: row[PARENT_FORUM_ID],
         game_system_id: row[GAME_SYSTEM_ID],
-        banner_url: row[BANNER_URL], # I NEED TO COPY THE IMAGE TO THE NEW SERVER
+        banner_url: row[BANNER_URL] == 'NULL' ? nil : row[BANNER_URL],
         is_game_room: row[IS_GAME_ROOM].to_i,
         author_name: row[AUTHOR_NAME]
       )
