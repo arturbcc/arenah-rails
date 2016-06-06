@@ -3,6 +3,7 @@
 require 'fileutils'
 require 'open-uri'
 require 'colorize'
+require 'uri'
 module Legacy
   module Importers
     class AssetsImporter
@@ -39,16 +40,12 @@ module Legacy
       def copy_assets
         games = Game.all
 
-        # bar = RakeProgressbar.new(games.count)
-
         games.sort_by(&:name).each do |game|
           create_folders(game)
           create_css(game)
           copy_avatars(game)
-          # bar.inc
+          copy_banner(game)
         end
-
-        # bar.finished
       end
 
       def create_folders(game)
@@ -109,6 +106,24 @@ module Legacy
         legacy_character = characters.find { |char| char.arenah_character.id == character.id }
 
         legacy_character.avatar
+      end
+
+      def copy_banner(game)
+        return unless game.banner
+
+        puts ''
+        puts 'Copying banner'
+        path = File.join(Rails.root, PATH, game.slug, 'images', 'banners')
+        download_path = URI.join(ORIGINAL_ASSETS_URL, '/resources/banners/rooms/', URI.encode(game.banner))
+        puts "Downloading #{download_path}"
+
+        begin
+          open("#{path}/#{game.banner}", 'wb') do |file|
+            file << open(download_path).read
+          end
+        rescue
+          puts "Could not download banner for #{game.name}".red
+        end
       end
     end
   end

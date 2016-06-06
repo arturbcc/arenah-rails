@@ -83,7 +83,7 @@ module Legacy
     end
 
     def create_posts
-      Legacy::Importers::PostsImporter.import(posts, topics, characters)
+      Legacy::Importers::PostsImporter.import(posts, topics, characters, games, user_partners)
     end
 
     def subscribe_characters

@@ -27,7 +27,6 @@ module Legacy
           positions[group.id] = 1 unless positions.include?(group.id)
 
           topic.create!(game.arenah_game, group, character.arenah_character, positions[group.id])
-          topic.forum = game
 
           positions[group.id] += 1
         end

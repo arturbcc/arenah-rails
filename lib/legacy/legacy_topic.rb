@@ -38,8 +38,6 @@ module Legacy
 
     attr_reader :arenah_topic, :forum_id, :id, :author_name, :author_id
 
-    attr_accessor :forum
-
     def self.build_from_row(row)
       LegacyTopic.new(
         id: row[TOPIC_ID],

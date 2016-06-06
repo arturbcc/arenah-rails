@@ -45,7 +45,8 @@ module Legacy
     IS_GAME_ROOM = 22
     BANNER_URL = 24
 
-    attr_reader :user_id, :author_id, :title, :parent_forum_id, :arenah_game, :forum_id
+    attr_reader :user_id, :author_id, :title, :parent_forum_id,
+      :arenah_game, :forum_id
 
     attr_accessor :group_to_save_topics
 

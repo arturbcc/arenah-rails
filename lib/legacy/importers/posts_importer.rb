@@ -4,7 +4,7 @@ require 'legacy/legacy_post'
 module Legacy
   module Importers
     class PostsImporter
-      def self.import(posts, topics, characters)
+      def self.import(posts, topics, characters, games, user_partners)
         puts '8. Creating posts...'
         bar = RakeProgressbar.new(posts.count)
 
@@ -15,11 +15,10 @@ module Legacy
           next unless post.active?
 
           topic = topics.find { |topic| topic.id == post.topic_id }
+          game = games.find { |game| game.id == topic.forum_id }
+          game = games.find { |g| g.id == game.parent_forum_id } unless game.root?
 
-          character = characters.find do |c|
-            c.user_partner_id == post.author_id &&
-              (c.name == post.author_name || c.forum_id == topic.try(:forum).try(:id))
-          end
+          character = characters.find { |c| c.user_partner_id == post.author_id && c.forum_id == game.id }
 
           next unless topic && topic.arenah_topic
 
