@@ -38,10 +38,7 @@ module Legacy
       subscribe_characters
       build_game_folder_structure
 
-      # Copy avatars and banners
       # Create game system and set system on the characters
-      # List games and characters
-
       Legacy::Report.new.show
     end
 

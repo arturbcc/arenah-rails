@@ -93,6 +93,7 @@ module Legacy
             end
           rescue
             puts "Could not download avatar for #{character.slug}".red
+            character.arenah_character.update(avatar: nil)
           end
         end
       end
@@ -124,6 +125,7 @@ module Legacy
           end
         rescue
           puts "Could not download banner for #{game.name}".red
+          game.arenah_game.update(banner: nil)
         end
       end
     end
