@@ -15,9 +15,14 @@ module Legacy
           next unless post.active?
 
           topic = topics.find { |topic| topic.id == post.topic_id }
-          character = characters.find { |c| c.user_partner_id == post.author_id }
+
+          character = characters.find do |c|
+            c.user_partner_id == post.author_id &&
+              (c.name == post.author_name || c.forum_id == topic.try(:forum).try(:id))
+          end
 
           next unless topic && topic.arenah_topic
+
           if !character || !character.arenah_character
             errors << post
           else

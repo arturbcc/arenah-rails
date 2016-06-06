@@ -16,7 +16,6 @@ module Legacy
           game = games.find { |game| game.id == moderator.forum_id}
           next unless game.root?
 
-
           user_partner = user_partners.find { |user_partner| user_partner.id == moderator.user_id }
           user = users.find { |user| user.id == user_partner.user_id }
           character = user_partner.build_legacy_character(moderator.forum_id)

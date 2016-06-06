@@ -22,9 +22,10 @@ module Legacy
     TEXT = 5
     STATUS = 6
     CREATED_AT = 8
+    AUTHOR_NAME = 10
     USER_ID = 11
 
-    attr_reader :topic_id, :author_id, :id
+    attr_reader :topic_id, :author_id, :id, :author_name
 
     def self.build_from_row(row)
       LegacyPost.new(
@@ -36,8 +37,8 @@ module Legacy
         # Pending = 1,
         # Deleted = 2
         status: row[STATUS].to_i,
-        # created_at: Date.parse(row[CREATED_AT]),
-        user_id: row[USER_ID].to_i
+        user_id: row[USER_ID].to_i,
+        author_name: row[AUTHOR_NAME]
       )
     end
 
