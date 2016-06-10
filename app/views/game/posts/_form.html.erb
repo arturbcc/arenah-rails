@@ -23,7 +23,7 @@
           <%= avatar(character, class: 'character-avatar') %>
         <% end %>
 
-        <% game.npcs.each do |npc| %>
+        <% game.npcs.active.each do |npc| %>
           <%= link_to 'javascript:;', data: { id: npc.id }, class: 'impersonate' do %>
             <%= avatar(npc, class: 'toggle-panel') %>
           <% end %>

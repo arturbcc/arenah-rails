@@ -11,7 +11,7 @@
         <h1>Personagens</h1>
 
         <div id="charactersList" class="bookshelf">
-          <% @game.pcs.each do |character| %>
+          <% @game.pcs.active.each do |character| %>
             <div class="view-cover book">
               <%= link_to game_sheet_path(character.slug),
                 data: { toggle: 'modal', target: '#remote-modal', width: '975px' } do %>

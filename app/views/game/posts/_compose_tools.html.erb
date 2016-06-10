@@ -10,7 +10,7 @@
       </div>
       <div id="collapseOne" class="panel-collapse collapse">
         <div class="panel-body">
-          <% game.pcs.each do |character| %>
+          <% game.pcs.active.each do |character| %>
             <%=
               link_to game_sheet_path(character.slug),
                 class: 'group-character',
@@ -38,7 +38,7 @@
       </div>
       <div id="collapseTwo" class="panel-collapse collapse">
         <div class="panel-body">
-          <% game.pcs.each do |character| %>
+          <% game.pcs.active.each do |character| %>
             <%= link_to game_sheet_path(character.slug),
                   class: 'other-character',
                   data: {
@@ -54,7 +54,7 @@
           <% if @identity.game_master? %>
             <div class="clear"></div>
             <hr />
-            <% game.npcs.each do |character| %>
+            <% game.npcs.active.each do |character| %>
               <%= link_to game_sheet_path(character.slug),
                     class: 'other-character',
                     data: {

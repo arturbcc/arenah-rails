@@ -2,21 +2,21 @@
   <div class="pull-left options">
     <select id="initiative-character-list">
       <optgroup label="Personagens do grupo">
-        <% @game.pcs.each do |character| %>
+        <% @game.pcs.active.each do |character| %>
           <% if @ids.include?(character.id) %>
             <option value="<%= character.id %>"><%= character.name %></option>
           <% end %>
         <% end %>
       </optgroup>
       <optgroup label="Demais personagens">
-        <% @game.pcs.each do |character| %>
+        <% @game.pcs.active.each do |character| %>
           <% if !@ids.include?(character.id) %>
             <option value="<%= character.id %>"><%= character.name %></option>
           <% end %>
         <% end %>
       </optgroup>
       <optgroup label="NPCs">
-        <% @game.npcs.each do |character| %>
+        <% @game.npcs.active.each do |character| %>
           <option value="<%= character.id %>"><%= character.name %></option>
         <% end %>
       </optgroup>
@@ -26,7 +26,7 @@
 
   <div class="pull-left items-container">
     <ul>
-      <% @game.pcs.each do |character| %>
+      <% @game.pcs.active.each do |character| %>
         <%= render 'initiative_item', character: character if @ids.include?(character.id) %>
       <% end %>
     </ul>

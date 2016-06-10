@@ -34,14 +34,14 @@
       </optgroup>
 
       <optgroup label="Demais personagens">
-        <% @game.pcs.each do |character| %>
+        <% @game.pcs.active.each do |character| %>
           <% unless @ids.include?(character.id) %>
             <option value="<%= character.id %>"><%= character.name %></option>
           <% end %>
         <% end %>
       </optgroup>
       <optgroup label="NPCs">
-        <% @game.npcs.each do |character| %>
+        <% @game.npcs.active.each do |character| %>
           <option value="<%= character.id %>"><%= character.name %></option>
         <% end %>
       </optgroup>
