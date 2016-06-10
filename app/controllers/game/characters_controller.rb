@@ -9,6 +9,6 @@ class Game::CharactersController < Game::BaseController
   end
 
   def list
-    render json: { list: @game.characters, pcs: @game.pcs }
+    render json: { list: @game.characters.active, pcs: @game.pcs.active }
   end
 end
