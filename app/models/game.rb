@@ -56,7 +56,6 @@ class Game < ActiveRecord::Base
   def find_by_type(type)
     characters
       .where('characters.character_type = ?', type)
-      .active
       .order('characters.name')
   end
 end
