@@ -106,7 +106,7 @@ module Legacy
     # more sense.
     def create!(character)
       @arenah_game = Game.create!(
-        name: @title.strip,
+        name: game_title,
         status: @status == 0 ? 1 : 0,
         character: character,
         short_description: truncate(@description, 320),
@@ -116,6 +116,11 @@ module Legacy
         system: '{}',
         created_at: @created_at
       )
+    end
+
+    def game_title
+      name = @title.strip,
+      name == 'Medievalesca' ? 'Medievalesca 1' : name
     end
   end
 end

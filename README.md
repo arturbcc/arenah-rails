@@ -27,17 +27,11 @@ inline css: http://templates.mailchimp.com/resources/inline-css/
 
 * Video Chat: check the conference.txt file on the root folder
 
-* Carousel - Home (js?)
-* Tooltip not working on posts
-  >> Change all markup to pass data through data attributes. The Tooltip.js class will handle it.
-  >> Check al valid parameters to pass and provide default behavior
 * http://colorschemedesigner.com/csd-3.5/#
 * minimalist theme
 * responsive layout
 * single typeface for the whole layout
 
-* Use Devise?
-* Use Cancancan? Aparently no
 * Use Rolify? https://github.com/RolifyCommunity/rolify Can be!
 
 
