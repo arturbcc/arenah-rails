@@ -7,11 +7,10 @@
     line-height: 1.5;
 
     img.avatar {
-      float: left;
       width: 60px;
-      margin: 8px 15px 0px 5px;
+      margin: 5px;
       border: 1px solid #2E2E2E;
-      border-radius: 10px;
+      border-radius: 20px;
     }
 
     header {
@@ -20,13 +19,23 @@
       min-height: 65px;
       padding: 5px;
       margin-bottom: 10px;
-      background-color: #1E1D1C;
     }
 
     article {
       padding: 20px;
-      border: 1px solid #1E1D1C;
+      background-color: #fff;
+      color: #000;
       border-radius: 10px;
+      min-height: 245px;
+
+      .masters-line {
+        width: 100%;
+        clear: both;
+        margin-top: 20px;
+      }
+      h4 {
+        font-weight: bold;
+      }
     }
   }
 
@@ -39,7 +48,7 @@
 #game-description {
   float: left;
   width: 755px;
-  min-height: 215px;
+  min-height: 330px;
   padding-right: 0;
   padding: 0 20px;
   margin-bottom: 30px;
