@@ -46,9 +46,9 @@ module Legacy
     BANNER_URL = 24
 
     attr_reader :user_id, :author_id, :title, :parent_forum_id,
-      :arenah_game, :forum_id
+      :arenah_game, :forum_id, :game_system_id
 
-    attr_accessor :group_to_save_topics
+    attr_accessor :group_to_save_topics, :system
 
     def self.build_from_row(row)
       LegacyGame.new(
@@ -61,7 +61,7 @@ module Legacy
         created_at: Date.parse(row[CREATED_AT]),
         user_id: row[USER_ID].to_i,
         parent_forum_id: row[PARENT_FORUM_ID],
-        game_system_id: row[GAME_SYSTEM_ID],
+        game_system_id: row[GAME_SYSTEM_ID].to_i,
         banner_url: row[BANNER_URL] == 'NULL' ? nil : row[BANNER_URL],
         is_game_room: row[IS_GAME_ROOM].to_i,
         author_name: row[AUTHOR_NAME]

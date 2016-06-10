@@ -6,6 +6,7 @@ require 'legacy/importers/assets_importer'
 require 'legacy/importers/characters_importer'
 require 'legacy/importers/game_masters_importer'
 require 'legacy/importers/game_rooms_importer'
+require 'legacy/importers/games_systems_importer'
 require 'legacy/importers/posts_importer'
 require 'legacy/importers/subscriptions_importer'
 require 'legacy/importers/topic_groups_importer'
@@ -14,6 +15,10 @@ require 'legacy/importers/users_importer'
 
 require 'legacy/legacy_forum_moderator'
 require 'legacy/report'
+
+require 'legacy/rpg_system/legacy_character_sheet'
+require 'legacy/rpg_system/legacy_sheet_attributes'
+require 'legacy/rpg_system/legacy_sheet_data'
 
 module Legacy
   class Importer
@@ -37,8 +42,8 @@ module Legacy
 
       subscribe_characters
       build_game_folder_structure
+      create_games_systems
 
-      # Create game system and set system on the characters
       Legacy::Report.new.show
     end
 
@@ -91,6 +96,11 @@ module Legacy
       Legacy::Importers::AssetsImporter.new(characters).import
     end
 
+    def create_games_systems
+      Legacy::Importers::GamesSystemsImporter.new(
+        games, characters, sheets, sheet_attributes, sheet_data).import
+    end
+
     def users
       @users ||= CSV.foreach(params[:users], CSV_OPTIONS).map do |row|
         Legacy::LegacyUser.build_from_row(row)
@@ -130,6 +140,24 @@ module Legacy
     def moderators
       @moderators ||= CSV.foreach(params[:moderators], CSV_OPTIONS).map do |row|
         Legacy::LegacyForumModerator.build_from_row(row)
+      end
+    end
+
+    def sheets
+      @sheets ||= CSV.foreach(params[:sheets], CSV_OPTIONS).map do |row|
+        Legacy::RpgSystem::LegacyCharacterSheet.build_from_row(row)
+      end
+    end
+
+    def sheet_attributes
+      @sheet_attributes ||= CSV.foreach(params[:sheet_attributes], CSV_OPTIONS).map do |row|
+        Legacy::RpgSystem::LegacySheetAttributes.build_from_row(row)
+      end
+    end
+
+    def sheet_data
+      @sheet_data ||= CSV.foreach(params[:sheet_data], CSV_OPTIONS).map do |row|
+        Legacy::RpgSystem::LegacySheetData.build_from_row(row)
       end
     end
   end

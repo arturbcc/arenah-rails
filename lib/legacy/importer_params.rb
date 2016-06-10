@@ -9,7 +9,10 @@ module Legacy
       :games,
       :topics,
       :posts,
-      :moderators
+      :moderators,
+      :sheets,
+      :sheet_attributes,
+      :sheet_data
     ].freeze
 
     def path_params

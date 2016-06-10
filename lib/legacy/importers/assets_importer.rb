@@ -17,10 +17,9 @@ module Legacy
       end
 
       def import
-        puts '9. Copying assets...'
+        puts '11. Copying assets...'
         create_initial_folder
         copy_assets
-        # TODO: Set avatar and banner as null if the download failed
         puts ''
       end
 
@@ -93,7 +92,7 @@ module Legacy
             end
           rescue
             puts "Could not download avatar for #{character.slug}".red
-            character.arenah_character.update(avatar: nil)
+            character.update(avatar: nil)
           end
         end
       end
@@ -125,7 +124,7 @@ module Legacy
           end
         rescue
           puts "Could not download banner for #{game.name}".red
-          game.arenah_game.update(banner: nil)
+          game.update(banner: nil)
         end
       end
     end

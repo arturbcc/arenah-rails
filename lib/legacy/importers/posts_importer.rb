@@ -26,7 +26,7 @@ module Legacy
           next unless topic && topic.arenah_topic
 
           if !character || !character.arenah_character
-            character = create_character(post, game.id, user_partners, users)
+            character = create_character(post, game.id, user_partners, users, characters)
           end
 
           post.create!(topic.arenah_topic, character.arenah_character)
@@ -38,11 +38,12 @@ module Legacy
         puts ''
       end
 
-      def self.create_character(post, forum_id, user_partners, users)
+      def self.create_character(post, forum_id, user_partners, users, characters)
         user_partner = user_partners.find { |up| up.id == post.author_id }
         user = users.find { |user| user.id == user_partner.user_id }
         character = user_partner.build_legacy_character(forum_id)
         character.create!(user.arenah_user)
+        characters << character
 
         character
       end
