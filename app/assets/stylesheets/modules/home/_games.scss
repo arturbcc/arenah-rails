@@ -76,8 +76,10 @@
   header {
     position: relative;
 
-    img {
-      max-width: 95%;
+    & > img {
+      max-width: 100%;
+      min-height: 95px;
+      border-bottom: 1px solid #443f3f;
 
       &:hover + .author-avatar {
         opacity: 1;
@@ -88,4 +90,8 @@
 
 .game-rooms-section {
   display: inline-block;
+
+  section {
+    color: $gold;
+  }
 }
