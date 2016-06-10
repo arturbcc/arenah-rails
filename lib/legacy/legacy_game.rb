@@ -119,7 +119,7 @@ module Legacy
     end
 
     def game_title
-      name = @title.strip,
+      name = @title.strip
       name == 'Medievalesca' ? 'Medievalesca 1' : name
     end
   end
