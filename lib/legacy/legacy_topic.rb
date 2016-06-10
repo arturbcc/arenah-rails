@@ -45,7 +45,7 @@ module Legacy
         author_id: row[AUTHOR_ID],
         forum_id: row[FORUM_ID],
         status: row[STATUS].to_i,
-        created_at: Date.parse(row[CREATED_AT]),
+        created_at: DateTime.parse(row[CREATED_AT]),
         topic_type: row[TOPIC_TYPE].to_i,
         author_name: row[AUTHOR_NAME]
       )

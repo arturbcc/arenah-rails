@@ -26,7 +26,7 @@ module Legacy
     USER_ID = 11
     USER_ACCOUNT_ID = 12
 
-    attr_reader :topic_id, :author_id, :id, :author_name, :user_account_id
+    attr_reader :topic_id, :author_id, :id, :author_name, :user_account_id, :created_at
 
     def self.build_from_row(row)
       LegacyPost.new(
@@ -40,7 +40,8 @@ module Legacy
         status: row[STATUS].to_i,
         user_id: row[USER_ID].to_i,
         author_name: row[AUTHOR_NAME],
-        user_account_id: row[USER_ACCOUNT_ID] == 'NULL' ? nil : row[USER_ACCOUNT_ID]
+        user_account_id: row[USER_ACCOUNT_ID] == 'NULL' ? nil : row[USER_ACCOUNT_ID],
+        created_at: DateTime.parse(row[CREATED_AT])
       )
     end
 
@@ -55,7 +56,8 @@ module Legacy
         topic: topic,
         character: character,
         message: @text,
-        recipients: []
+        recipients: [],
+        created_at: @created_at
       )
     end
   end

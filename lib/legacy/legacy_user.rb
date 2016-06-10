@@ -52,7 +52,7 @@ module Legacy
         password: row[PASSWORD],
         status: row[STATUS] == 'A',
         email: row[EMAIL],
-        created_at: Date.parse(row[CREATED_AT])
+        created_at: DateTime.parse(row[CREATED_AT])
       )
     end
 

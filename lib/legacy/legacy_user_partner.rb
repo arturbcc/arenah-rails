@@ -40,7 +40,7 @@ module Legacy
         name: row[NAME],
         avatar: row[AVATAR_URL],
         status: row[STATUS].to_i,
-        created_at: Date.parse(row[CREATED_AT]),
+        created_at: DateTime.parse(row[CREATED_AT]),
         post_count: row[POST_COUNT].to_i
       )
     end

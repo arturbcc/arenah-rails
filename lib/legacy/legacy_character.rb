@@ -50,7 +50,7 @@ module Legacy
         forum_id: row[FORUM_ID],
         status: row[STATUS].to_i,
         character_type: row[CHARACTER_TYPE].to_i,
-        created_at: Date.parse(row[CREATED_AT]),
+        created_at: DateTime.parse(row[CREATED_AT]),
         signature: row[SIGNATURE],
         topic_count: row[TOPIC_COUNT].to_i,
         post_count: row[POST_COUNT].to_i,

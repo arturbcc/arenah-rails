@@ -16,7 +16,8 @@ module Legacy
           },
           sheet: {
             pages: [
-              { number: 1, number_of_columns: 2, show_header: true, show_footer: true }
+              { number: 1, number_of_columns: 2, show_header: true, show_footer: false },
+              { number: 2, number_of_columns: 1, show_header: true, show_footer: false },
             ],
             attributes_groups: [
               {
@@ -31,9 +32,10 @@ module Legacy
                 character_attributes: [
                   { 'name': 'Nome', 'description': 'Nome do personagem', 'order': 1 },
                   { 'name': 'XP', 'description': '', 'order': 2 },
-                  { 'name': 'Classe', 'description': 'Consulte o mestre antes de escolher as classes', 'order': 3 },
+                  { 'name': 'Classe', 'description': '', 'order': 3 },
                   { 'name': 'Dinheiro', 'description': '', 'order': 4 },
-                  { 'name': 'Nível', 'description': '', 'order': 5 }
+                  { 'name': 'Nível', 'description': '', 'order': 5 },
+                  { 'name': 'Raça', 'description': '', 'order': 6 }
                 ]
               },
               {
@@ -51,9 +53,9 @@ module Legacy
               },
               {
                 name: 'História',
-                page: 1,
+                page: 2,
                 order: 1,
-                position: 'footer',
+                position: 'header',
                 type: 'rich_text',
                 source_type: 'open',
                 instructions: 'A história do <b>personagem</b> é importante para torná-lo mais real, para que se possa compreendê-lo de forma mais profunda e detalhada. Escreva o que achar relevante sobre o passado, o presente e as ambições para o futuro, bem como a aparência, suas principais habilidades e os eventos pelos quais se tornou famoso.',
@@ -66,7 +68,7 @@ module Legacy
                 position: 'column_2',
                 type: 'mixed',
                 show_on_posts: true,
-                order_on_posts: 1,
+                order_on_posts: 2,
                 show_title_on_posts: true,
                 source_type: 'fixed',
                 character_attributes: [

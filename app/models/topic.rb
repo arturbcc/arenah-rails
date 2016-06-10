@@ -6,7 +6,7 @@ class Topic < ActiveRecord::Base
 
   # TODO: on delete, we must recount the post count of all characters
   # It should belongs to game room, or we need to remove the has_many topics from the game room
-  has_many :posts, dependent: :delete_all
+  has_many :posts, -> { order(:created_at) }, dependent: :delete_all
   belongs_to :topic_group
   belongs_to :game
 

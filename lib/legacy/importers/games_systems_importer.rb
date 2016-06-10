@@ -4,6 +4,7 @@ require 'legacy/importers/system_builder'
 module Legacy
   module Importers
     class GamesSystemsImporter
+      DATA = 0
       ATTRIBUTES = 1
       BACKGROUND = 2
       STATUS = 3
@@ -47,13 +48,14 @@ module Legacy
       end
 
       def attributes_for(game)
-        game_system = Legacy::Importers::SystemBuilder.system
+        game_system = Legacy::Importers::SystemBuilder.system.dup
         attributes = yield(game.forum_id)
 
         (1..10).each do |i|
+          next unless name = attributes["attribute#{i}".to_sym]
           game_system[:sheet][:attributes_groups][ATTRIBUTES][:character_attributes].push(
             {
-              name: attributes["attribute#{i}".to_sym] || "atributo #{i}",
+              name: name,
               abbreviation: attributes["abbreviation#{i}".to_sym].to_s,
               order: i,
               description: ''
@@ -91,62 +93,47 @@ module Legacy
 
       def replicate_sheet_to_characters
         @characters.each do |character|
-          game = game_for(character)
-          data = @sheet_data.find { |sheet_data| sheet_data.user_account_id == character.id }
+          game = games.find { |game| game.id == character.forum_id }
 
-          unless game.present?
+          if game.present?
+            puts "Saving system on #{character.name} - #{game.name}"
+            save_character_sheet(character, game)
+          else
             puts "Could not find data for #{character.name} on #{game.try(:name)}".red
-            next
           end
-
-          unless data.present?
-            character.arenah_character.update(sheet: default_sheet(game, character))
-            puts "Saving default data for #{character.name} on #{game.try(:name)}".yellow
-            next
-          end
-
-          puts "Saving system on #{character.name} - #{game.name}"
-          sheet = game.system.dup[:sheet][:attributes_groups]
-          attributes = sheet[ATTRIBUTES][:character_attributes]
-
-          attributes[0][:content] = character.name
-          attributes[1][:content] = data.xp
-          attributes[3][:content] = data.cash.to_i
-          attributes[4][:content] = data.level.to_i
-
-          # background = sheet[BACKGROUND][:character_attributes]
-          sheet_content = @sheets.find { |sheet| sheet.user_account_id == character.id }
-          sheet[BACKGROUND][:character_attributes] = [{
-            content: Parsers::Post.parse(sheet_content.try(:sheet).to_s)
-          }]
-
-          status = sheet[STATUS][:character_attributes]
-          status[0][:total] = data.total_life
-          status[0][:points] = data.life
-          status[1][:total] = data.total_mana
-          status[1][:points] = data.mana
-
-          sheet = { attributes_groups: sheet }
-          character.arenah_character.update(sheet: sheet.to_json)
         end
       end
 
-      def game_for(character)
-        games.find { |game| game.id == character.forum_id }
-      end
-
-      def default_sheet(game, character)
+      def save_character_sheet(character, game)
+        data = @sheet_data.find { |sheet_data| sheet_data.user_account_id == character.id }
         sheet = game.system.dup[:sheet][:attributes_groups]
-        background = sheet[BACKGROUND][:character_attributes]
-        background = { content:'' }
+        attributes = sheet[DATA][:character_attributes]
+
+        attributes[0][:content] = character.name
+        attributes[1][:content] = data.try(:xp) || 0
+        attributes[2][:content] = ''
+        attributes[3][:content] = data.try(:cash).to_i
+        attributes[4][:content] = data.try(:level).to_i
+        attributes[5][:content] = ''
+
+        sheet_content = @sheets.find { |sheet| sheet.user_account_id == character.id }
+        sheet[BACKGROUND][:character_attributes] = [{
+          content: Parsers::Post.parse(sheet_content.try(:sheet).to_s)
+        }]
 
         status = sheet[STATUS][:character_attributes]
-        status[0][:total] = 0
-        status[0][:points] = 0
-        status[1][:total] = 0
-        status[1][:points] = 0
+        status[0][:total] = data.try(:total_life).to_i
+        status[0][:points] = data.try(:life).to_i
+        status[1][:total] = data.try(:total_mana).to_i
+        status[1][:points] = data.try(:mana).to_i
 
-        { attributes_groups: sheet }
+        attributes = sheet[ATTRIBUTES][:character_attributes]
+        (1..10).each do |index|
+          attributes[index - 1][:points] = data.try(:public_send, "attribute#{index}").to_i
+        end
+
+        sheet = { attributes_groups: sheet }
+        character.arenah_character.update(sheet: sheet.to_json)
       end
     end
   end

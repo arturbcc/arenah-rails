@@ -8,7 +8,7 @@ module Legacy
         puts '8. Creating posts...'
         bar = RakeProgressbar.new(posts.count)
 
-        posts.each do |post|
+        posts.sort_by { |post| post.created_at }.each do |post|
           bar.inc
 
           next unless post.active?

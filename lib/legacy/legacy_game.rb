@@ -58,7 +58,7 @@ module Legacy
         description: row[DESCRIPTION],
         status: row[STATUS].to_i,
         display_order: row[DISPLAY_ORDER].to_i,
-        created_at: Date.parse(row[CREATED_AT]),
+        created_at: DateTime.parse(row[CREATED_AT]),
         user_id: row[USER_ID].to_i,
         parent_forum_id: row[PARENT_FORUM_ID],
         game_system_id: row[GAME_SYSTEM_ID].to_i,

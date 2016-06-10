@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Post < ActiveRecord::Base
-  PER_PAGE = 10
+  PER_PAGE = 15
 
   belongs_to :topic
   belongs_to :character
