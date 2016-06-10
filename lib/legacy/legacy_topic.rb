@@ -36,7 +36,7 @@ module Legacy
     # Game = 3
     TOPIC_TYPE = 17
 
-    attr_reader :arenah_topic, :forum_id, :id, :author_name, :author_id
+    attr_reader :arenah_topic, :forum_id, :id, :author_name, :author_id, :topic_type
 
     def self.build_from_row(row)
       LegacyTopic.new(
@@ -62,7 +62,8 @@ module Legacy
         topic_group: topic_group,
         game: game,
         character_id: character.id,
-        position: position
+        position: position,
+        created_at: @created_at
       )
     end
   end
