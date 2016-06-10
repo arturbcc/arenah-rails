@@ -9,13 +9,7 @@
     <div class="col-md-9" id="game-description">
       <section class="content">
         <header>
-          <div class="pull-right">
-            <% @game.masters.each do |master| %>
-              <%= avatar(master, class: 'avatar') %>
-            <% end %>
-          </div>
-
-          <div class="pull-left game-title">
+          <div class="text-center game-title">
             <h1>
               <%= link_to @game.name, game_home_path(@game) %>
             </h1>
@@ -27,6 +21,13 @@
 
         <article>
           <%= Parsers::Post.parse(@game.description) %>
+          <div class="text-right masters-line">
+            <% masters = @game.masters %>
+            <h4><%= masters.count > 1 ? 'Mestres' : 'Mestre' %></h4>
+            <% masters.each do |master| %>
+              <%= avatar(master, class: 'avatar') %>
+            <% end %>
+          </div>
         </article>
       </section>
     </div>
