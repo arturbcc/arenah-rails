@@ -109,7 +109,7 @@ module Legacy
         name: @title.strip,
         status: @status == 0 ? 1 : 0,
         character: character,
-        short_description: '', # crop from the legacy description?
+        short_description: truncate(@description, 320),
         description: @description,
         banner: @banner_url,
         subtitle: '',

@@ -18,7 +18,7 @@ module Legacy
 
             index = 1
             subforums.each do |forum|
-              forum.group_to_save_topics = TopicGroup.create!(game: game.arenah_game, name: truncate(forum.title), position: index)
+              forum.group_to_save_topics = TopicGroup.create!(game: game.arenah_game, name: forum.truncate(forum.title), position: index)
               puts "  Group '#{forum.title}' created at position #{index}"
               index += 1
             end
@@ -29,7 +29,7 @@ module Legacy
             #create three groups with the name of the subforums and send general topics to the last one
 
             subforums.each_with_index do |forum, index|
-              forum.group_to_save_topics = TopicGroup.create!(game: game.arenah_game, name: truncate(forum.title), position: index + 1)
+              forum.group_to_save_topics = TopicGroup.create!(game: game.arenah_game, name: forum.truncate(forum.title), position: index + 1)
               puts "  Group '#{forum.title}' created at position #{index + 1}"
             end
             game.group_to_save_topics = subforums[2].group_to_save_topics
@@ -45,14 +45,6 @@ module Legacy
 
           puts ''
         end
-      end
-
-      private
-
-      def self.truncate(str, length = 20)
-        return str if str.length <= length
-
-        str[0..length - 4] + '...'
       end
     end
   end

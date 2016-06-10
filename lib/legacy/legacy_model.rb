@@ -8,5 +8,11 @@ module Legacy
         instance_variable_set("@#{key}", value)
       end
     end
+
+    def truncate(str, length = 20)
+      return str if str.length <= length
+
+      str[0..length - 4] + '...'
+    end
   end
 end
