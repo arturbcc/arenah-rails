@@ -16,7 +16,7 @@
             <%= link_to game_home_path(game) do %>
               <%= banner(game) %>
               <div class="carousel-caption">
-                Sala <%= game.name %>
+                <%= game.short_description %>
               </div>
             <% end %>
           </div>

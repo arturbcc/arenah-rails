@@ -12,9 +12,14 @@
 
 .carousel-caption {
   height: 45px;
-  padding-top: 8px;
-  font-size: 20px;
-  color: #FCE627;
+  font-size: 17px;
+  font-family: 'Open Sans';
   background-color: rgba(0, 0, 0, 0.55);
   border-radius: 10px;
+  top: 140px;
+}
+
+.item {
+  min-height: 300px;
+  border: 1px solid #ccc;
 }
