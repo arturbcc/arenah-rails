@@ -68,7 +68,7 @@ module Legacy
 
       def copy_avatars(game)
         puts ''
-        puts "Copying avatars for game #{game.name.yellow}"
+        puts "Copying avatars for game #{game.name.yellow}. Characters: #{game.characters.count} (#{game.characters.active.count} active)"
         path = File.join(Rails.root, PATH, game.slug, 'images', 'avatars')
 
         if game.characters.count == 0
@@ -78,6 +78,7 @@ module Legacy
         game.characters.each do |character|
           unless avatar?(character)
             puts "Using default avatar for #{character.name}"
+            character.update(avatar: nil)
             next
           end
 

@@ -53,7 +53,7 @@ module Legacy
         character.status = 1
         character.character_type = 0
         character.create!(user.arenah_user)
-        character.arenah_character.game_id = game.arenah_game.id
+        character.arenah_character.update(game_id: game.arenah_game.id)
         characters << character
 
         character

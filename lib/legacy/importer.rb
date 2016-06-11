@@ -46,6 +46,7 @@ module Legacy
 
       remove_admin_test_game
       disable_old_medievalesca
+      remove_unused_characters
 
       Legacy::Report.new.show
     end
@@ -114,6 +115,10 @@ module Legacy
         character.update(status: 0)
       end
       game.update(status: 0)
+    end
+
+    def remove_unused_characters
+      Character.where(name: 'Stölz Des Jager', post_count: 0).first.destroy
     end
 
     def users
