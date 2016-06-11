@@ -45,8 +45,8 @@ module Legacy
       create_games_systems
 
       remove_admin_test_game
-      disable_old_medievalesca
       remove_unused_characters
+      deactivate_old_game_rooms
 
       Legacy::Report.new.show
     end
@@ -109,12 +109,12 @@ module Legacy
       Game.find_by(name: 'Administração - o jogo').destroy
     end
 
-    def disable_old_medievalesca
-      game = Game.find_by(name: 'Medievalesca 1')
-      game.characters.each do |character|
-        character.update(status: 0)
+    def deactivate_old_game_rooms
+      old_games = ['Caos, Morte e Dolly', 'Medievalesca 1']
+
+      old_games.each do |game|
+        game.inactive!
       end
-      game.update(status: 0)
     end
 
     def remove_unused_characters
