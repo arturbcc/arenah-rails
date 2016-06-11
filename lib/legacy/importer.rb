@@ -44,6 +44,9 @@ module Legacy
       build_game_folder_structure
       create_games_systems
 
+      remove_admin_test_game
+      disable_old_medievalesca
+
       Legacy::Report.new.show
     end
 
@@ -99,6 +102,18 @@ module Legacy
     def create_games_systems
       Legacy::Importers::GamesSystemsImporter.new(
         games, characters, sheets, sheet_attributes, sheet_data).import
+    end
+
+    def remove_admin_test_game
+      Game.find_by(name: 'Administração - o jogo').destroy
+    end
+
+    def disable_old_medievalesca
+      game = Game.find_by(name: 'Medievalesca 1')
+      game.characters.each do |character|
+        character.update(status: 0)
+      end
+      game.update(status: 0)
     end
 
     def users

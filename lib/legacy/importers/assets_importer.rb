@@ -116,12 +116,14 @@ module Legacy
         puts 'Copying banner'
         path = File.join(Rails.root, PATH, game.slug, 'images', 'banners')
         download_path = URI.join(ORIGINAL_ASSETS_URL, '/resources/banners/rooms/', URI.encode(game.banner))
+        extension = File.extname(game.banner)
         puts "Downloading #{download_path}"
 
         begin
-          open("#{path}/#{game.banner}", 'wb') do |file|
+          open("#{path}/main-banner#{extension}", 'wb') do |file|
             file << open(download_path).read
           end
+          game.update(banner: "main-banner#{extension}")
         rescue
           puts "Could not download banner for #{game.name}".red
           game.update(banner: nil)

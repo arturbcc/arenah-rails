@@ -19,8 +19,10 @@ module Legacy
 
       def import
         puts '12. Configuring RPG system'
+        bar = RakeProgressbar.new(games.count)
 
         games.each do |game|
+          bar.inc
           system_id = game.game_system_id.to_i
 
           game_system = attributes_for(game) do
@@ -37,7 +39,9 @@ module Legacy
           end
         end
 
+        bar.finished
         puts ''
+
         replicate_sheet_to_characters
       end
 
@@ -110,16 +114,21 @@ module Legacy
       end
 
       def replicate_sheet_to_characters
+        puts 'Adding sheets on characters'
+        bar = RakeProgressbar.new(@characters.count)
+
         @characters.each do |character|
+          bar.inc
           game = games.find { |game| game.id == character.forum_id }
 
           if game.present?
-            puts "Saving system on #{character.name} - #{game.name}"
             save_character_sheet(character, game)
           else
             puts "Could not find data for #{character.name} on #{game.try(:name)}".red
           end
         end
+        bar.finished
+        puts ''
       end
 
       def save_character_sheet(character, game)
