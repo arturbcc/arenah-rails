@@ -58,10 +58,12 @@ module Legacy
 
         return game_system unless attributes
 
+        valid_attributes = 0
         (1..10).each do |i|
           name = attributes["attribute#{i}".to_sym]
 
           next if name.nil? || name == 'NULL'
+          valid_attributes += 1
           game_system[:sheet][:attributes_groups][ATTRIBUTES][:character_attributes].push(
             {
               name: name,
@@ -71,6 +73,8 @@ module Legacy
             }
           )
         end
+
+        game_system[:sheet][:attributes_groups][ATTRIBUTES][:show_on_posts] = false if valid_attributes == 0
 
         game_system
       end
