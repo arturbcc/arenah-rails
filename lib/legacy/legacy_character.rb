@@ -37,8 +37,10 @@ module Legacy
     DEFAULT_AVATAR = '130x130_avatar.jpg'.freeze
 
     attr_reader :id, :user_id, :user_partner_id, :name,
-      :arenah_character, :forum_id, :character_type, :post_count,
-      :avatar, :status, :topic_count
+      :arenah_character, :forum_id, :post_count,
+      :avatar, :topic_count
+
+    attr_accessor :status, :character_type
 
     def self.build_from_row(row)
       LegacyCharacter.new(

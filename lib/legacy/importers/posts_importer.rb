@@ -15,18 +15,26 @@ module Legacy
 
           topic = topics.find { |topic| topic.id == post.topic_id }
 
+          game = nil
+
           if post.user_account_id
             character = characters.find { |c| c.id == post.user_account_id }
           else
             game = games.find { |game| game.id == topic.forum_id }
             game = games.find { |g| g.id == game.parent_forum_id } unless game.root?
-            character = characters.find { |c| c.user_partner_id == post.author_id && c.forum_id == game.id && c.master? }
+            candidates = characters.select { |c| c.user_partner_id == post.author_id && c.forum_id == game.id }
+
+            if candidates.count == 1
+              character = candidates.first
+            else
+              character = candidates.find { |c| c.master? }
+            end
           end
 
           next unless topic && topic.arenah_topic
 
           if !character || !character.arenah_character
-            character = create_character(post, game.id, user_partners, users, characters)
+            character = create_character(post, game, user_partners, users, characters)
           end
 
           post.create!(topic.arenah_topic, character.arenah_character)
@@ -38,11 +46,14 @@ module Legacy
         puts ''
       end
 
-      def self.create_character(post, forum_id, user_partners, users, characters)
+      def self.create_character(post, game, user_partners, users, characters)
         user_partner = user_partners.find { |up| up.id == post.author_id }
         user = users.find { |user| user.id == user_partner.user_id }
-        character = user_partner.build_legacy_character(forum_id)
+        character = user_partner.build_legacy_character(game.id)
+        character.status = 1
+        character.character_type = 0
         character.create!(user.arenah_user)
+        character.arenah_character.game_id = game.arenah_game.id
         characters << character
 
         character

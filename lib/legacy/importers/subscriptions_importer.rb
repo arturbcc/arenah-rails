@@ -14,7 +14,7 @@ module Legacy
 
         characters.each do |character|
           bar.inc
-          next if character.master?
+          next if character.master? || character.arenah_character.game_id.present?
 
           game = games.find { |game| game.id == character.forum_id }
 
