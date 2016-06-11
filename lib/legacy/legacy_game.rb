@@ -89,7 +89,7 @@ module Legacy
     end
 
     def valid?
-      @author_name != 'Artur Teste' || active?
+      @author_name != 'Artur Teste' && active?
     end
 
     # It creates a new game based on a legacy forum.
