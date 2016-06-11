@@ -113,8 +113,8 @@ module Legacy
       old_games = ['Caos, Morte e Dolly', 'Medievalesca 1', 'Lym',
         'Guardians of steel', 'Os Sonhadores']
 
-      old_games.each do |game|
-        game.inactive!
+      old_games.each do |name|
+        Game.find_by(name: name).inactive!
       end
     end
 
