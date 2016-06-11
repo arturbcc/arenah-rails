@@ -110,7 +110,8 @@ module Legacy
     end
 
     def deactivate_old_game_rooms
-      old_games = ['Caos, Morte e Dolly', 'Medievalesca 1']
+      old_games = ['Caos, Morte e Dolly', 'Medievalesca 1', 'Lym',
+        'Guardians of steel', 'Os Sonhadores']
 
       old_games.each do |game|
         game.inactive!
