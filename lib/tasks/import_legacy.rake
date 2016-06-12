@@ -7,6 +7,7 @@ namespace :import do
     require 'colorize'
     require 'legacy/importer_params'
     require 'legacy/importer'
+    require 'fileutils'
 
     params = Legacy::ImporterParams.new
 
@@ -20,6 +21,8 @@ namespace :import do
 
     importer = Legacy::Importer.new(params.path_params)
     importer.start
+
+    FileUtils.copy_entry "#{Rails.root}/tmp/imported_data/", "#{Rails.root}/public/games/"
   end
 
   def show_usage
