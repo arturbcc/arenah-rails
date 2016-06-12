@@ -114,7 +114,12 @@ module Legacy
         'Guardians of steel', 'Os Sonhadores']
 
       old_games.each do |name|
-        Game.find_by(name: name).inactive!
+        game = Game.find_by(name: name)
+        if game
+          game.inactive!
+        else
+          puts "Cannot inactive game #{game}"
+        end
       end
     end
 
