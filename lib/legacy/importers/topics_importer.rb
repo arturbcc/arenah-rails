@@ -46,14 +46,20 @@ module Legacy
       end
 
       def self.reorder_topics
-        puts ''
-        Game.all.each do |game|
+        puts 'Reordering topics...'
+        games = Game.all
+        bar = RakeProgressbar.new(games.count)
+
+        games.each do |game|
           game.topic_groups.each do |group|
-            Topic.by_group_id(group.id).sort_by {|t| t.created_at}.reverse.each_with_index do |topic, index|
+            Topic.by_group_id(group.id).sort_by { |t| t.created_at }.reverse.each_with_index do |topic, index|
               topic.update(position: index + 1)
             end
           end
+          bar.inc
         end
+
+        bar.finished
         puts 'Topics reordered'
         puts ''
       end
