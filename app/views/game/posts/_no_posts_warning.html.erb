@@ -3,14 +3,16 @@
     Ainda não há posts neste tópico.
   </p>
 
-  <p>
-    Seja o primeiro a participar!
-  </p>
+  <% if Ability.new(@identity, nil).can_write_post? %>
+    <p>
+      Seja o primeiro a participar!
+    </p>
 
-  <%= link_to game_new_post_path(game, topic) do %>
-    <div class="btn btn-dark pull-center reply">
-        Escrever
-    </div>
+    <%= link_to game_new_post_path(game, topic) do %>
+      <div class="btn btn-dark pull-center reply">
+          Escrever
+      </div>
+    <% end %>
   <% end %>
 
   <p>
