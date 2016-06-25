@@ -44,7 +44,7 @@ define('transform', [], function() {
 
     input.spinner({
       spin: function (event, ui) {
-        data = this.sheetEditor.currentAttributesGroupData(this);
+        data = self.sheetEditor.currentAttributesGroupData(this);
 
         var currentValue = $(this).spinner('value'),
             newValue = ui.value,
@@ -55,14 +55,14 @@ define('transform', [], function() {
         var exceededLimit = data.points && data.usedPoints > data.points,
             decreasedAttributeValue = newValue < attributeOriginalPoints;
 
-        if (this.sheetEditor.isMaster || this.sheetEditor.freeMode) {
+        if (self.sheetEditor.isMaster || self.sheetEditor.freeMode) {
           decreasedAttributeValue = false;
         }
 
         if (exceededLimit || decreasedAttributeValue) {
           return false;
         } else {
-          this.sheetEditor.changeAttributePoins(data);
+          self.sheetEditor.changeAttributePoins(data);
         }
       }
     });
