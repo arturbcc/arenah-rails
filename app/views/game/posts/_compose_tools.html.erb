@@ -127,7 +127,7 @@
             <select class="rules-set">
               <% game.system.dice_roll_rules.each do |rule| %>
                 <option value="<%= rule.name %>"><%= rule.name %></option>
-              <% end %>
+              <% end if game.system.dice_roll_rules %>
             </select>
             <div id="attributes-area">
               <div class="splash">
