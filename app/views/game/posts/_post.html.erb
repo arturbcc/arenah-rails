@@ -34,7 +34,7 @@
         <% if post.character.pc? %>
             por
             <%=
-              link_to post.character.name, game_sheet_path(post.character.slug), data: {
+              link_to post.character.name, game_sheet_path(game, post.character.slug), data: {
                 toggle: 'modal',
                 target: '#remote-modal',
                 width: '975px'

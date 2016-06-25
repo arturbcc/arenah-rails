@@ -12,7 +12,7 @@
         <div class="panel-body">
           <% game.pcs.active.each do |character| %>
             <%=
-              link_to game_sheet_path(character.slug),
+              link_to game_sheet_path(game, character.slug),
                 class: 'group-character',
                 data: {
                   id: character.id,
@@ -39,7 +39,7 @@
       <div id="collapseTwo" class="panel-collapse collapse">
         <div class="panel-body">
           <% game.pcs.active.each do |character| %>
-            <%= link_to game_sheet_path(character.slug),
+            <%= link_to game_sheet_path(game, character.slug),
                   class: 'other-character',
                   data: {
                     id: character.id,
@@ -55,7 +55,7 @@
             <div class="clear"></div>
             <hr />
             <% game.npcs.active.each do |character| %>
-              <%= link_to game_sheet_path(character.slug),
+              <%= link_to game_sheet_path(game, character.slug),
                     class: 'other-character',
                     data: {
                       id: character.id,

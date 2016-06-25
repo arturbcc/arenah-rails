@@ -1,6 +1,6 @@
 <%
   show_title = !group.quick_access || group.show_title_on_posts
-  show_edit_button = !group.quick_access && group.type == 'table'
+  show_edit_button = !group.quick_access && group.type != 'table'
   show_points_counter = group.total_points != 0 && !group.quick_access
 %>
 

@@ -1,21 +1,22 @@
-define('sheet-edition', [], function() {
-  function SheetEdition() {
-    this.isMaster = false;
-    this.isSheetOwner = false;
-    this.freeMode = false;
-    this.equipmentsUrl = '';
+define('sheet-editor', [], function() {
+  function SheetEditor(options = {}) {
+    this.isMaster = options.isMaster || false;
+    this.isSheetOwner = options.isSheetOwner || false;
+    this.freeMode = options.freeMode || false;
+    this.equipmentsUrl = options.equipmentsUrl || '';
+
     this.currentEditable = null;
     this._backupData = null;
 
     this.editButtons = $('.editable-edit');
     this.saveButtons = $('.editable-submit');
     this.cancelButtons = $('.editable-cancel');
-    this._authorize();
 
+    this._authorize();
     this._bindEvents();
   };
 
-  var fn = SheetEdition.prototype;
+  var fn = SheetEditor.prototype;
 
   fn._bindEvents = function() {
     $.proxyAll(
@@ -137,7 +138,7 @@ define('sheet-edition', [], function() {
     }
 
     if (!this.isMaster && !this.freeMode) {
-      this.removeNotEditableFields();
+      this._removeNotEditableFields();
     }
 
     if (!this.isMaster) {
@@ -182,5 +183,5 @@ define('sheet-edition', [], function() {
     }
   };
 
-  return SheetEdition;
+  return SheetEditor;
 });

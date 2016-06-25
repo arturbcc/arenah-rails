@@ -7,7 +7,7 @@
     <ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
       <% game.pcs.active.each do |character| %>
         <li>
-          <%= link_to game_sheet_path(character.slug),
+          <%= link_to game_sheet_path(game, character.slug),
             data: { toggle: 'modal', target: '#remote-modal', width: '975px' } do %>
             <div class="image-wrapper player-unselected" players-list-avatar>
               <%= avatar(character, alt: '', title: '') %>

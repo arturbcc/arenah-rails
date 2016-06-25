@@ -11,7 +11,7 @@
       <ul class="options">
         <% if author.pc? %>
           <li>
-            <%= link_to game_sheet_path(author.slug), data: {
+            <%= link_to game_sheet_path(author.game, author.slug), data: {
                 toggle: 'modal',
                 target: '#remote-modal',
                 width: '975px'
