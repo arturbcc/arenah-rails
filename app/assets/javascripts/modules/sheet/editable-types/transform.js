@@ -11,7 +11,7 @@ define('transform', [], function() {
 
   var fn = Transform.prototype;
 
-  fn.toCKEditor = function() {
+  fn.toCKEditor = function(editable) {
     var name = editable.$element.data('name');
     editable.input.$input.attr('name', name)
     var content = editable.$element.siblings('textarea').val();
@@ -32,7 +32,7 @@ define('transform', [], function() {
     });
   };
 
-  fn.toSpinner = function() {
+  fn.toSpinner = function(editable) {
     var inputSpinners = editable.$element.parent().find('input');
 
     this.inputToSpinner(inputSpinners);

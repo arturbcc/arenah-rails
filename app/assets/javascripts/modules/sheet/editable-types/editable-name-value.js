@@ -14,9 +14,9 @@ define('editable-name-value', ['transform', 'source-type-list'], function(Transf
   fn._initialize = function(data) {
     var sourceType = data.attributesGroup.data('source-type');
 
-    if (sourceType === 'List') {
+    if (sourceType === 'list') {
       return new SourceTypeList(this.sheetEditor, data);
-    } else if (sourceType === 'Fixed') {
+    } else if (sourceType === 'fixed') {
       this.transform = this.transformer.toSpinner;
     }
   };

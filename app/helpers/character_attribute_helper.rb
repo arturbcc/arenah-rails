@@ -36,7 +36,7 @@ module CharacterAttributeHelper
     value = options[:value] || 0
     master_only = options[:master_only] || false
 
-    value = if formula.present?
+    value = if !formula.present?
       link_to text,
         'javascript:;',
         class: klass.present? ? klass : '',

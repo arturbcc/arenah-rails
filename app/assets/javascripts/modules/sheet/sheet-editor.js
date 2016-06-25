@@ -1,4 +1,8 @@
-define('sheet-editor', [], function() {
+define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character-card',
+  'editable-equipments', 'editable-mixed', 'editable-name-value', 'editable-rich-text',
+  'editable-text'], function(EditableBased, EditableBullet, EditableCharacterCard,
+  EditableEquipments, EditableMixed, EditableNameValue, EditableRichText, EditableText) {
+
   function SheetEditor(options = {}) {
     this.isMaster = options.isMaster || false;
     this.isSheetOwner = options.isSheetOwner || false;
@@ -7,6 +11,16 @@ define('sheet-editor', [], function() {
 
     this.currentEditable = null;
     this._backupData = null;
+    this.editableTypes = {
+      based: EditableBased,
+      bullet: EditableBullet,
+      character_card: EditableCharacterCard,
+      equipments: EditableEquipments,
+      mixed: EditableMixed,
+      name_value: EditableNameValue,
+      rich_text: EditableRichText,
+      text: EditableText
+    };
 
     this.editButtons = $('.editable-edit');
     this.saveButtons = $('.editable-submit');
@@ -41,12 +55,10 @@ define('sheet-editor', [], function() {
     this.editButtons.hide();
 
     if (groupType) {
-      var jsClass = 'Editable' + groupType.replace('AttributesGroup', '');
       this.currentEditable = null;
 
-      if (window[jsClass]) {
-        // TODO: how to use all sheet classes in here? Use as dependencies?
-        this.currentEditable = window[jsClass].initialize(this, data);
+      if (this.editableTypes[groupType]) {
+        this.currentEditable = new this.editableTypes[groupType](this, data);
       }
     }
 
@@ -115,8 +127,8 @@ define('sheet-editor', [], function() {
       mode: 'inline',
       emptytext: '',
     }).on('shown', function(e, editable) {
-      if (this.currentEditable && this.currentEditable.transform && typeof this.currentEditable.transform == "function") {
-        this.currentEditable.transform(editable);
+      if (self.currentEditable && self.currentEditable.transform && typeof self.currentEditable.transform === 'function') {
+        self.currentEditable.transform(editable);
       }
     });
 

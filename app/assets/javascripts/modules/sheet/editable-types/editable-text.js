@@ -7,9 +7,9 @@ define('editable-text', ['transform', 'source-type-list', 'source-type-open'],
 
     var sourceType = data.attributesGroup.data('source-type');
 
-    if (sourceType === 'List') {
+    if (sourceType === 'list') {
       return new SourceTypeList(this.sheetEditor, data);
-    } else if (sourceType === 'Open') {
+    } else if (sourceType === 'open') {
       return new SourceTypeOpen(this.sheetEditor, data);
     }
   };
