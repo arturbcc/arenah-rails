@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528142124) do
+ActiveRecord::Schema.define(version: 20160626133250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,12 +115,13 @@ ActiveRecord::Schema.define(version: 20160528142124) do
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "topic_groups", force: :cascade do |t|
-    t.integer  "game_id",                            null: false
-    t.string   "name",       limit: 100,             null: false
-    t.integer  "position",               default: 0
-    t.string   "slug",                               null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.integer  "game_id",                                            null: false
+    t.string   "name",                       limit: 100,             null: false
+    t.integer  "position",                               default: 0
+    t.string   "slug",                                               null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.integer  "default_topics_destination",             default: 1, null: false
   end
 
   add_index "topic_groups", ["game_id"], name: "index_topic_groups_on_game_id", using: :btree
@@ -136,6 +137,7 @@ ActiveRecord::Schema.define(version: 20160528142124) do
     t.string   "slug",                                   null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.integer  "destination",                default: 1, null: false
   end
 
   add_index "topics", ["character_id"], name: "index_topics_on_character_id", using: :btree

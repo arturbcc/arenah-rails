@@ -88,6 +88,6 @@ class Game::TopicsController < Game::BaseController
   end
 
   def topic_params
-    params.permit(:title, :description, :topic_group_id)
+    params.permit(:title, :description, :topic_group_id, :destination)
   end
 end

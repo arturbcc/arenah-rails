@@ -9,6 +9,17 @@
     <label>Descrição</label><br />
     <input type="text" name="description" id="description"
       value="<%= topic.description %>" />
+    <label>Por padrão, ao entrar nos tópicos deste grupo devemos ir para: </label>
+    <% default_destination = topic.new_record? ?  2 : topic.destination %>
+    <%=
+      select_tag 'destination',
+        options_for_select([
+          ['A página indicada pela regra do grupo', 2],
+          ['A última página', 1],
+          ['A primeira página', 0]
+        ], default_destination),
+        { id: 'topic_destination' }
+    %>
   </div>
 </fieldset>
 
