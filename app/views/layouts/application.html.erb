@@ -13,6 +13,8 @@
   <link rel="icon" href="/favicon.ico" type="image/ico" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600,700" rel="stylesheet" />
 
+  <%= yield :fonts %>
+
   <%= custom_css(@game) unless Rails.env.test? %>
 
   <%= yield :head %>
