@@ -2,14 +2,8 @@
   <nav class="active fm-nav <%= 'game-master' if @identity.game_master? %>"
     data-topic-id="<%= topic.id %>">
 
-    <%
-      url = topic.redirect_to_last_page? ?
-        redirect_to_last_post_game_topic_path(game, topic) :
-        game_posts_path(game, topic)
-    %>
-
     <%=
-      link_to url,
+      link_to redirect_to_topic_destination_page_game_topic_path(game, topic),
         data: { 'fm-index' => roman_number(index) },
         class: 'animated fadeInLeft' do %>
       <span class="title"><%= topic.title %></span>
