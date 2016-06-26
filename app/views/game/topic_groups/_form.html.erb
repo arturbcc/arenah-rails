@@ -8,6 +8,18 @@
   <label>Nome (máximo de 20 caracteres)</label><br />
   <input type="text" name="name" maxlength="20" id="name"
     value="<%= topic_group.name %>" <%= 'disabled' if limit_reached %> />
+  <label>Por padrão, ao entrar nos tópicos deste grupo devemos ir para: </label>
+  <%=
+    select(
+      'topic_group',
+      'default_topics_destination',
+      [['A última página', 1], ['A primeira página', 0]],
+      {},
+      {
+        name: 'default_topics_destination'
+      }
+    )
+  %>
 </fieldset>
 
 <script>

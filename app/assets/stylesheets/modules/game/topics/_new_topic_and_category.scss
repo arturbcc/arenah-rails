@@ -1,5 +1,9 @@
 #topic-content-form {
-  #title, #description, #name {
+  #title,
+  #description,
+  #name,
+  #topic_group_default_topics_destination,
+  #topic_destination {
     width: 300px;
     margin-bottom: 10px;
     clear: both;
@@ -7,6 +11,12 @@
 
   #name:disabled {
     background-color: #efefef;
+  }
+
+  #topic_group_default_topics_destination,
+  #topic_destination {
+    height: 30px;
+    background-color: #fff;
   }
 
   .topic-fields label {

@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+# Public: Represents a group of topics
+#
+# The default_topics_destination attribute decides where to redirect the user
+# when he/she enters in a topic. The possible values are:
+#
+# * 0: redirects to first page
+# * 1: redirects to last page and last post
 class TopicGroup < ActiveRecord::Base
   TOPIC_GROUP_LIMIT = 3
 

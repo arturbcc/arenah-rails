@@ -82,7 +82,7 @@ class Game::TopicGroupsController < Game::BaseController
   end
 
   def topic_group_params
-    params.permit(:name)
+    params.permit(:name, :default_topics_destination)
   end
 
   def current_topic_group
