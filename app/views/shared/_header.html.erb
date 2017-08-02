@@ -93,7 +93,7 @@
         <!-- </li> -->
       <% end %>
 
-      <% if @identity.logged? %>
+      <% if @identity.logged? && current_user %>
         <% if area.panel? %>
           <li class="dropdown characters-dropdown hide-on-small-screen">
             <%= link_to admin_game(game) do %>
