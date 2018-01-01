@@ -1,4 +1,4 @@
-* [ ] How can I know my current character? It lacks visual information.
+* [X] How can I know my current character? It lacks visual information.
 * [ ] Character sheet edition needs to work
 * [ ] Build the admin
 * [ ] Game room chat using a GO server

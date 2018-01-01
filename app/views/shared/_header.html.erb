@@ -121,6 +121,9 @@
         <% end %>
 
         <% if !area.profile? && !area.panel? && @character.present? %>
+          <li>
+            <%= avatar(@character, title: "#{@character.name} - #{@character.game.name}", style: 'padding: 5px 15px; max-height: 50px; height: 100%') %>
+          </li>
 
           <!-- % Html.RenderPartial("HeaderMessages", Model); %>
 

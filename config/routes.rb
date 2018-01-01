@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get 'arquivo', to: 'archive#index', as: :archive
   get 'mestres', to: 'home#masters', as: :masters
 
-  namespace :admin do
-    get ':game/admin', to: 'games#index', as: :game
+  scope :admin do
+    get ':game', to: 'game/games#index', as: :game
   end
 
   namespace :game, path: '' do
@@ -52,7 +52,7 @@ Rails.application.routes.draw do
     post ':game/subscribe', to: 'subscription#create', as: :subscribe
     delete ':game/unsubscribe', to: 'subscription#destroy', as: :unsubscribe
 
-    get ':game/sistema', to: 'game#show', as: :system
+    get ':game/sistema', to: 'games#show', as: :system
 
     get 'sala/criar', to: 'home#new', as: :new
 
