@@ -26,6 +26,8 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     this.saveButtons = $('.editable-submit');
     this.cancelButtons = $('.editable-cancel');
 
+    this.attributesGroups = $('.attributes-group');
+
     this._authorize();
     this._bindEvents();
   };
@@ -50,6 +52,8 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     var element = $(event.currentTarget),
         data = this.currentAttributesGroupData(element),
         groupType = data.attributesGroup.data('type');
+
+    this._focusOnGroup(data.attributesGroup);
 
     this._backup(data);
     this.editButtons.hide();
@@ -81,6 +85,8 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
   };
 
   fn._cancel = function(event) {
+    this._restoreGroupsOpacity();
+
     this.editButtons.show();
 
     var data = this.currentAttributesGroupData($(event.currentTarget));
@@ -193,6 +199,15 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
         pointsCounter.addClass('exceeded-points');
       }
     }
+  };
+
+  fn._focusOnGroup = function(group) {
+    this.attributesGroups.css({ opacity: 0.2 });
+    group.css({ opacity: 1 });
+  };
+
+  fn._restoreGroupsOpacity = function() {
+    this.attributesGroups.css({ opacity: 1 });
   };
 
   return SheetEditor;
