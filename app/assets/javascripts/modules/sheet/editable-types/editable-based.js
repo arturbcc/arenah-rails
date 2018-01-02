@@ -53,7 +53,7 @@ define('editable-based', ['transform', 'source-type-list'], function(Transform, 
     }
   };
 
-  fn._onCancel = function(data) {
+  fn.onCancel = function(data) {
     data.attributesGroup.find('.based-warning').hide();
     data.attributesGroup.find('.attributes-with-base').show();
 

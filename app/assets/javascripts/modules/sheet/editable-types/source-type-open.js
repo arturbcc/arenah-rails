@@ -29,7 +29,7 @@ define('source-type-open', [], function() {
     data.attributesGroup.find('[data-accept-edit-mode]').hide();
   };
 
-  fn._onCancel = function(data) {
+  fn.onCancel = function(data) {
     data.attributesGroup.find('[data-accept-edit-mode]').show();
     data.attributesGroup.find('.editable-list-group').addClass('hidden');
     data.attributesGroup.find('[data-editable-attribute]').each(function() {
