@@ -46,11 +46,19 @@
 }
 
 .editable-drop-item-area {
-  padding-top: 8px;
-  height: 40px;
+  padding-top: 18px;
+  height: 60px;
   text-align: center;
   border: 1px dashed #000;
-  background-color: #D28181;
+  color: #fff;
+
+  background: repeating-linear-gradient(
+    45deg,
+    #222,
+    #222 10px,
+    #333 10px,
+    #333 20px
+  )
 }
 
 .editable-current-item-description {

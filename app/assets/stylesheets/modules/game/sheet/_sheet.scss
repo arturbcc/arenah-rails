@@ -130,3 +130,14 @@
 .equipped-item {
   color: $main-green;
 }
+
+.ui-state-hover {
+  background: repeating-linear-gradient(
+    45deg,
+    $gold,
+    $gold 10px,
+    #F4DD6B 10px,
+    #F4DD6B 20px
+  )
+
+}
