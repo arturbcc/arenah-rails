@@ -122,7 +122,7 @@ define('source-type-list', ['source-list'], function(SourceList) {
       accept: validDraggableItems,
       hoverClass: 'ui-state-hover',
       drop: function(event, ui) {
-        var points = parseInt(ui.draggable.data('points'));
+        var points = parseInt(ui.draggable.data('value'));
 
         data.usedPoints = data.usedPoints - points;
         self.sheetEditor.changeAttributePoints(data);
