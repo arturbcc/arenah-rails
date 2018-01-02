@@ -2,18 +2,17 @@ define('editable-based', ['transform', 'source-type-list'], function(Transform, 
   function EditableBased(sheetEditor, data) {
     this.sheetEditor = sheetEditor;
     this.transformer = new Transform(sheetEditor);
-
-    this.sourceTypeList = new SourceTypeList(sheetEditor);
+    this.sourceTypeList = new SourceTypeList(sheetEditor, data);
 
     this._initialize(data);
   };
 
   var fn = EditableBased.prototype;
 
-  fn.initialize = function(data) {
+  fn._initialize = function(data) {
     var sourceType = data.attributesGroup.attr('data-source-type');
 
-    this.transform = this.tranformer.toSpinner;
+    this.transform = this.transformer.toSpinner;
     data.attributesGroup.find('.based-warning').show();
 
     if (sourceType === 'List') {

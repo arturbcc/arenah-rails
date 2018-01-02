@@ -12,7 +12,7 @@
 //
 //= require jquery/dist/jquery.min
 //= require jquery_ujs
-//= require bootstrap/dist/js/bootstrap.min
+//= require bootstrap-sprockets
 //= require_tree ../../../vendor/assets/javascripts/admin/
 
 //= require page

@@ -1,5 +1,5 @@
 //= require jquery/dist/jquery.min
-//= require bootstrap/dist/js/bootstrap.min
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require_tree ../../../vendor/assets/javascripts/
 

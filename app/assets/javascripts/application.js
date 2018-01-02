@@ -12,7 +12,8 @@
 //
 //= require jquery/dist/jquery.min
 //= require jquery_ujs
-//= require bootstrap/dist/js/bootstrap.min
+//= require jquery-ui
+//= require bootstrap-sprockets
 //= require_tree ../../../vendor/assets/javascripts/
 
 //= require page

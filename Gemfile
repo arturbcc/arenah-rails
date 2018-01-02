@@ -21,21 +21,23 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'friendly_id', '~> 5.1.0'
-
-gem 'ruby-bbcode'
-
 gem 'devise'
 gem 'devise-encryptable'
-gem 'jquery-rails'
+gem 'friendly_id', '~> 5.1.0'
 
+gem 'bootstrap-sass'
+gem 'colorize', require: false
 gem 'dentaku'
-gem 'rails-html-sanitizer'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'font-awesome-rails'
 gem 'newrelic_rpm'
+gem 'rails-html-sanitizer'
+gem 'rake-progressbar', require: false
+gem 'ruby-bbcode'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
-gem 'rake-progressbar', require: false
-gem 'colorize', require: false
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -8,7 +8,7 @@ define('source-type-list', ['source-list'], function(SourceList) {
 
   var fn = SourceTypeList.prototype;
 
-  fn._initialize = function(datta) {
+  fn._initialize = function(data) {
     this._setEditMode(data);
     // this._loadSources(data);
     this._startDragAndDrop(data);
