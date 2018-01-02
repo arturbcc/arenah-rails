@@ -1,5 +1,6 @@
 * [X] How can I know my current character? It lacks visual information.
 * [ ] Character sheet edition needs to work
+* [ ] Test sheet on locked mode
 * [ ] Build the admin
 * [ ] Game room chat using a GO server
 * [ ] Upgrade ruby and rails

@@ -169,7 +169,7 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
 
   fn._rollback = function() {
     if (this._backupData) {
-      this.changeAttributePoins(this._backupData);
+      this.changeAttributePoints(this._backupData);
       this._clearStash();
     }
   };
@@ -178,7 +178,7 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     this._backupData = null;
   },
 
-  fn.changeAttributePoins = function(data) {
+  fn.changeAttributePoints = function(data) {
     data.attributesGroup.attr('data-used-points', data.usedPoints);
     var pointsCounter = data.attributesGroup.find('.points-counter');
 

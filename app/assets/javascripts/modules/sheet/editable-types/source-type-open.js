@@ -56,7 +56,8 @@ define('source-type-open', [], function() {
     var editContainer = data.attributesGroup.find('.editable-list-group');
         garbage = editContainer.find('.editable-drop-item-area');
         tooltips = editContainer.find('.smart-description');
-        validDraggableItems = '.editable-list-group[data-group-name=' + data.attributesGroup.data('group-name') + "] tr:not('.prevent-delete')";
+        validDraggableItems = '.editable-list-group[data-group-name=' + data.attributesGroup.data('group-name') + "] tr:not('.prevent-delete')",
+        self = this;
 
     if (!this.sheetEditor.isMaster && !this.sheetEditor.freeMode) {
       $(validDraggableItems).not('[data-state=new]').addClass('prevent-delete');
@@ -80,7 +81,7 @@ define('source-type-open', [], function() {
       drop: function(event, ui) {
         var points = parseInt(ui.draggable.data('points'));
         data.usedPoints = data.usedPoints - points;
-        this.sheetEditor._changeAttributePoins(data);
+        self.sheetEditor.changeAttributePoints(data);
         ui.draggable.remove();
       }
     });

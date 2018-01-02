@@ -62,7 +62,7 @@ define('transform', [], function() {
         if (exceededLimit || decreasedAttributeValue) {
           return false;
         } else {
-          self.sheetEditor.changeAttributePoins(data);
+          self.sheetEditor.changeAttributePoints(data);
         }
       }
     });
