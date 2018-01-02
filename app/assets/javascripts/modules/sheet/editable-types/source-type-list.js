@@ -38,7 +38,7 @@ define('source-type-list', ['source-list'], function(SourceList) {
     this._rollback(data);
   };
 
-  fn._transform = function(editable) {
+  fn.transform = function(editable) {
     editable.$element.editable('hide');
   };
 

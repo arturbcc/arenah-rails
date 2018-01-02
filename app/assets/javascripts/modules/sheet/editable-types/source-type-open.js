@@ -38,7 +38,7 @@ define('source-type-open', [], function() {
     this._rollback(data);
   };
 
-  fn._transform = function(editable) {
+  fn.transform = function(editable) {
     editable.$element.editable('hide');
   };
 
