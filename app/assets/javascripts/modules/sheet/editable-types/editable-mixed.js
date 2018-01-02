@@ -2,7 +2,6 @@ define('editable-mixed', ['transform'], function(Transform) {
   function EditableMixed(sheetEditor, data) {
     this.sheetEditor = sheetEditor;
     this.transformer = new Transform(sheetEditor);
-
   };
 
   var fn = EditableMixed.prototype;

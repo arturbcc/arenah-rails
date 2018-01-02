@@ -6,7 +6,7 @@ define('editable-name-value', ['transform', 'source-type-list'], function(Transf
     this.onCancel = null;
     this.transform = null;
 
-    this._initialize(data);
+    return this._initialize(data);
   };
 
   var fn = EditableNameValue.prototype;
@@ -18,6 +18,7 @@ define('editable-name-value', ['transform', 'source-type-list'], function(Transf
       return new SourceTypeList(this.sheetEditor, data);
     } else if (sourceType === 'fixed') {
       this.transform = this.transformer.toSpinner;
+      return this;
     }
   };
 
