@@ -22,14 +22,13 @@ define('transform', [], function() {
       delete CKEDITOR.instances[name];
     }
 
-    // TODO: ckeditor-config is inside vendor/assets/javascripts/admin. How to
-    // link it here?
     CKEDITOR.replace(name, {
       width: '890px',
       height: '700px',
-      toolbar: 'short',
-      customConfig: '/Scripts/External/ckeditor-config.js'
+      toolbar: 'short'
     });
+
+    CKEDITOR.instances[name].setData(content);
   };
 
   fn.toSpinner = function(editable) {

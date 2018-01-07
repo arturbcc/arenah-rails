@@ -63,16 +63,15 @@
       li {
         margin-bottom: 6px;
         list-style-type: none;
-        padding: 8px;
 
         &:hover {
           background-color: #f5f5dc;
-          padding: 8px;
         }
 
         a {
           font: 300 11px Verdana;
           color: #000;
+          padding: 8px;
         }
       }
     }

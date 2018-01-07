@@ -56,7 +56,17 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (1.2.2)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+    ckeditor (4.2.4)
+      cocaine
+      orm_adapter (~> 0.5.0)
+    climate_control (0.2.0)
     cliver (0.3.2)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     colorize (0.7.7)
     concurrent-ruby (1.0.2)
     database_cleaner (1.5.3)
@@ -107,6 +117,7 @@ GEM
     mime-types (3.0)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0221)
+    mini_magick (4.8.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.12.0)
@@ -254,6 +265,8 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   capybara
+  carrierwave
+  ckeditor
   colorize
   database_cleaner
   dentaku
@@ -266,6 +279,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
+  mini_magick
   newrelic_rpm
   pg
   poltergeist

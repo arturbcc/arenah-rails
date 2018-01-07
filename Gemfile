@@ -26,18 +26,20 @@ gem 'devise-encryptable'
 gem 'friendly_id', '~> 5.1.0'
 
 gem 'bootstrap-sass'
+gem 'carrierwave'
 gem 'colorize', require: false
+gem 'ckeditor'
 gem 'dentaku'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
+gem 'mini_magick'
 gem 'newrelic_rpm'
 gem 'rails-html-sanitizer'
 gem 'rake-progressbar', require: false
 gem 'ruby-bbcode'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

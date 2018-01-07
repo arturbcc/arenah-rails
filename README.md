@@ -15,6 +15,10 @@ To run the tests with a coverages report, run:
 
 `COVERAGE=true rspec`
 
+# Dependencies
+
+* brew install imagemagick
+
 
 == Resources ==
 

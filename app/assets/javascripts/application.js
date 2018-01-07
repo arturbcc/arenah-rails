@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap-sprockets
+//= require ckeditor/init
 //= require_tree ../../../vendor/assets/javascripts/
 
 //= require page
