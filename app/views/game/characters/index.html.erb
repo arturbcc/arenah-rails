@@ -14,7 +14,7 @@
           <% characters = @game.active? ? @game.pcs.active : @game.pcs %>
           <% characters.each do |character| %>
             <div class="view-cover book">
-              <%= link_to game_sheet_path(character.slug),
+              <%= link_to game_sheet_path(@game, character.slug),
                 data: { toggle: 'modal', target: '#remote-modal', width: '975px' } do %>
                 <div class="main">
                   <div class="book-font">

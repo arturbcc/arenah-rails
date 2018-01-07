@@ -33,20 +33,19 @@ module CharacterAttributeHelper
     klass = options[:class]
     type = options[:type]
     text = options[:text] || ''
-    value = options[:value] || 0
     master_only = options[:master_only] || false
 
-    value = if formula.present?
-      link_to text,
+    if formula.present?
+      value = text
+    else
+      value = link_to(text,
         'javascript:;',
         class: klass.present? ? klass : '',
         data: {
           editable_attribute: type,
           master_only: master_only,
           value: value
-        }
-    else
-      text
+        })
     end
 
     content_tag :span do

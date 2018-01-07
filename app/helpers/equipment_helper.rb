@@ -14,7 +14,7 @@ module EquipmentHelper
   }
 
   def equipment_image(game_slug, image_name, options = {})
-    image_tag image_path(game_slug, image_name), options
+    image_tag equipment_image_path(game_slug, image_name), options
   end
 
   def slot_name(slot)
@@ -23,7 +23,7 @@ module EquipmentHelper
 
   private
 
-  def image_path(game_slug, image_name)
+  def equipment_image_path(game_slug, image_name)
     "#{ENV['CDN_URL']}/games/#{game_slug}/images/equipments/#{image_name}"
   end
 end

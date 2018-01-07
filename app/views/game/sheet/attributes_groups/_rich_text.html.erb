@@ -4,8 +4,8 @@
 
   <% group.character_attributes.each do |attribute| %>
     <div>
-      <%= link_to 'javascript:;', class: 'ckeditor-attribute',
-        data: { type: attribute.type, name: attribute.name, 'editable-attribute': 'ckeditor' } do %>
+      <% data = { type: attribute.type, name: "ckeditor-#{group.name.parameterize}", editable_attribute: 'ckeditor' } %>
+      <%= link_to 'javascript:;', class: 'ckeditor-attribute', data: data do %>
         <%= raw(attribute.content) %>
       <% end %>
 
@@ -13,5 +13,3 @@
     </div>
   <% end %>
 <% end %>
-
-<script src="//cdn.ckeditor.com/4.4.3/full/ckeditor.js"></script>

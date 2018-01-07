@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   devise_for :users
 
   get 'sobre', to: 'about#show', as: :about
@@ -38,7 +39,7 @@ Rails.application.routes.draw do
     get ':game/personagens', to: 'characters#index', as: :characters
     # TODO: What is the differente between the route above and below?
     get ':game/personagens/lista', to: 'characters#list', as: :characters_list
-    get ':game/personagem/:character/ficha', to: 'characters#sheet', as: :character_sheet
+    # get ':game/personagem/:character/ficha', to: 'characters#sheet', as: :sheet
 
     get ':game/duelos', to: 'duels#index', as: :duels
     get ':game/duelo/:id', to: 'duels#show', as: :duel
@@ -56,7 +57,7 @@ Rails.application.routes.draw do
 
     get 'sala/criar', to: 'home#new', as: :new
 
-    resources :sheet, only: :show, param: :character_slug, path: '/ficha'
+    resources :sheet, only: :show, param: :character_slug, path: ':game/ficha'
 
     get 'personagem/trocar-para/:game/:character', to: 'change_character#show', as: :change_character
   end

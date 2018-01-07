@@ -3,6 +3,7 @@ log/*.log
 coverage
 tmp/*
 misc/csvs
+public/uploads
 
 public/games/*
 .env

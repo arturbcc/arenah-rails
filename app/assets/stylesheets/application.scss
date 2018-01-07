@@ -1,15 +1,19 @@
-/* External */
-@import 'bootstrap/dist/css/bootstrap';
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
 @import 'bootstrap-editable';
 @import 'variables';
 @import 'colpick';
 @import 'font-awesome';
 @import 'jquery.qtip';
-@import 'jquery-ui-1.10.4';
 @import 'markitup';
 @import 'morris';
 @import 'select2';
 @import 'mixins';
+
+@import 'jquery-ui';
+@import 'jquery-ui/core';
+@import 'jquery-ui/theme';
+
 
 @import 'modules/bbcode/bbcode-dice';
 @import 'modules/bbcode/bbcode-dices';
@@ -56,6 +60,7 @@
 @import 'modules/game/sheet/mixed';
 @import 'modules/game/sheet/rich_text';
 @import 'modules/game/sheet/instructions';
+@import 'modules/game/sheet/spinner';
 @import 'modules/game/sheet/sheet';
 @import 'modules/game/sheet/tooltips';
 

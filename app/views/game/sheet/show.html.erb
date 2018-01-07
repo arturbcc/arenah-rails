@@ -52,6 +52,17 @@
         'onSelect': controller.attributeSelectorCallback(controller.selectedAttribute)
       });
 
+  <% if @identity.game_master? || @identity.player? %>
+    var SheetEditor = require('sheet-editor');
+
+    controller.sheetEditor = new SheetEditor({
+      isMaster: <%= @identity.game_master? %>,
+      isSheetOwner: <%= @identity.player? %>,
+      freeMode: true,
+      equipmentsUrl: ''
+    });
+  <% end %>
+
   if (!window.sheetController) {
     window.sheetController = controller;
   }
