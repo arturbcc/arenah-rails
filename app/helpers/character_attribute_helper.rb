@@ -33,7 +33,6 @@ module CharacterAttributeHelper
     klass = options[:class]
     type = options[:type]
     text = options[:text] || ''
-    value = options[:value] || 0
     master_only = options[:master_only] || false
 
     if formula.present?

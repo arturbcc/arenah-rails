@@ -10,7 +10,7 @@ define('source-type-open', [], function() {
 
   fn._initialize = function(data) {
     this._setEditMode(data);
-    // this.loadSources(data);
+    this._newItemEvents(data);
     this._startDragAndDrop(data);
     this._backup(data);
   };
@@ -42,15 +42,15 @@ define('source-type-open', [], function() {
     editable.$element.editable('hide');
   };
 
-  // fn._loadSources = function(data) {
-  //   var self = this,
-  //       editContainer = data.attributesGroup.find('.editable-list-group'),
-  //       select = editContainer.find('select'),
-  //       gameSlug = $('#game-room').val(),
-  //       groupName = data.attributesGroup.data('group-name');
-  //
-  //   self._newItem(data);
-  // };
+  fn._newItemEvents = function(data) {
+    // var self = this,
+    //     editContainer = data.attributesGroup.find('.editable-list-group'),
+    //     select = editContainer.find('select'),
+    //     gameSlug = $('#game-room').val(),
+    //     groupName = data.attributesGroup.data('group-name');
+
+    this._newItem(data);
+  };
 
   fn._startDragAndDrop = function(data) {
     var editContainer = data.attributesGroup.find('.editable-list-group');
