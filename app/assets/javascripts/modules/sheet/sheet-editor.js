@@ -1,3 +1,8 @@
+// SheetEditor is responsible to deal with changes on the character sheets.
+//
+// It knows which class to call when the user edits a specific attributes group,
+// and is also responsible to change between view and edit mode. All classes to
+// deal with groups can be found at ./editable-types/*.js
 define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character-card',
   'editable-equipments', 'editable-mixed', 'editable-name-value', 'editable-rich-text',
   'editable-text'], function(EditableBased, EditableBullet, EditableCharacterCard,

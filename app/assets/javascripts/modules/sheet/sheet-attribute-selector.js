@@ -1,3 +1,8 @@
+// Sheet Attribute Selector shows up when the user clicks on an attribute to
+// use it. The behavior can change depending on the context, so the function that
+// will run is set via callbacks.
+//
+// The callback must be passed in the options param, inside the key `onSelect`
 define('sheet-attribute-selector', [], function() {
   function SheetAttributeSelector(options) {
     this.selectedAttribute = null;

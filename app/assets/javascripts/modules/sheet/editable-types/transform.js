@@ -1,3 +1,6 @@
+// Transform converts a field into another element. It will turn the character
+// history into a CKEditor, for example. Each method is used to one particular
+// transformation.
 define('transform', [], function() {
   function Transform(sheetEditor) {
     this.sheetEditor = sheetEditor;
@@ -12,9 +15,10 @@ define('transform', [], function() {
   var fn = Transform.prototype;
 
   fn.toCKEditor = function(editable) {
-    var name = editable.$element.data('name');
+    var name = editable.$element.data('name'),
+        content = editable.$element.siblings('textarea').val();
+
     editable.input.$input.attr('name', name)
-    var content = editable.$element.siblings('textarea').val();
     editable.input.$input.val(content);
 
     var editor = CKEDITOR.instances[name];
