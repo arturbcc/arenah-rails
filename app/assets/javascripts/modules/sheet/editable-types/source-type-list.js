@@ -118,9 +118,9 @@ define('source-type-list', ['attributes-list', 'game-system'], function(Attribut
   fn._usedAttributes = function(editContainer) {
     var usedAttributes = [];
 
-    $.each(editContainer.find('[data-attribute-name] td a.smart-description'), function() {
-      var item = $($(this)[0]),
-          text = $.trim(item.text());
+    $.each(editContainer.find('[data-attribute-name]'), function() {
+      var item = $($(this)[0]).data('attribute-name'),
+          text = $.trim(item);
 
       if (text !== '') {
         usedAttributes.push(text);
