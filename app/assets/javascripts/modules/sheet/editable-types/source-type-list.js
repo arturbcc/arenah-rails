@@ -1,32 +1,37 @@
-define('source-type-list', ['source-list'], function(SourceList) {
+define('source-type-list', ['attributes-list', 'game-system'], function(AttributesList, GameSystem) {
   function SourceTypeList(sheetEditor, data) {
     this.sheetEditor = sheetEditor;
     this._backupContent = null;
+    this.data = data;
 
     this._initialize(data);
   };
 
   var fn = SourceTypeList.prototype;
 
-  fn._initialize = function(data) {
-    this._setEditMode(data);
-    // this._loadSources(data);
-    this._startDragAndDrop(data);
-    this._backup(data);
+  fn._initialize = function() {
+    this._setEditMode();
+
+    var select = this._loadNewItemsList();
+    this._bindSelectEvent(select);
+
+    this._startDragAndDrop();
+    this._configureNewItem();
+    this._backup();
   };
 
-  fn._backup = function(data) {
-    this._backupContent = data.attributesGroup.find('.editable-list-group').html();
+  fn._backup = function() {
+    this._backupContent = this.data.attributesGroup.find('.editable-list-group').html();
   };
 
   fn._rollback = function(data) {
     data.attributesGroup.find('.editable-list-group').html(this._backupContent);
   };
 
-  fn._setEditMode = function(data) {
-    var editContainer = data.attributesGroup.find('.editable-list-group');
+  fn._setEditMode = function() {
+    var editContainer = this.data.attributesGroup.find('.editable-list-group');
     editContainer.addClass('edit-mode').removeClass('hidden');
-    data.attributesGroup.find('[data-accept-edit-mode]').hide();
+    this.data.attributesGroup.find('[data-accept-edit-mode]').hide();
   };
 
   fn.onCancel = function(data) {
@@ -35,6 +40,7 @@ define('source-type-list', ['source-list'], function(SourceList) {
     data.attributesGroup.find('[data-editable-attribute]').each(function() {
       $(this).editable('hide');
     });
+
     this._rollback(data);
   };
 
@@ -42,64 +48,103 @@ define('source-type-list', ['source-list'], function(SourceList) {
     editable.$element.editable('hide');
   };
 
-  // fn._loadSources = function(data) {
-  //   var self = this,
-  //       editContainer = data.attributesGroup.find('.editable-list-group'),
-  //       select = editContainer.find('select'),
-  //       gameSlug = $('#game-room').val(),
-  //       groupName = data.attributesGroup.data('group-name'),
-  //       groupId = data.attributesGroup.data('group-id');
-  //
-  //   $.post("/" + gameSlug + "/atributos/fontes", { "attributesGroupId": groupId }).done(function (sources) {
-  //     select.html("<option value='0'>Selecione...</option>");
-  //     var sourceList = new SourceList(self);
-  //
-  //     $.each(sources, function () {
-  //       var item = $(this).get(0);
-  //       sourceList.add(item);
-  //     });
-  //
-  //     select.append(sourceList.toString());
-  //     select = select.select2({ width: "70%" });
-  //     self.configureNewItem(data);
-  //
-  //     select.on("change", function () {
-  //       var index = select.prop("selectedIndex");
-  //       var descriptionContainer = $(this).siblings(".editable-current-item-description");
-  //       descriptionContainer.html("");
-  //       if (index > 0) {
-  //         var name = $(this).select2('data').text;
-  //         var parts = $(this).val().split("_");
-  //         var points = parts[1];
-  //         var abbreviation = parts.length > 2 ? parts[2] : "";
-  //         name = self._removeAbbreviation(name, abbreviation);
-  //         var style = "width: 90%; margin: 5px auto; padding: 5px; border: 1px solid #000; background-color: #fff; box-shadow: 3px 3px 3px #675D5D";
-  //         var content = '<table style="' + style + '"><tr><td>' +
-  //           '<div class="qtip-titlebar">' + name + '</div>' +
-  //           '<div class="qtip-content">' + self._fetchItemDescription(sources, name) + '</div>' +
-  //           '</td></tr></table>';
-  //         descriptionContainer.html(content);
-  //       }
-  //     });
-  //   });
-  // };
+  fn._loadNewItemsList = function() {
+    var gameSystem = new GameSystem(),
+        editContainer = this.data.attributesGroup.find('.editable-list-group'),
+        select = editContainer.find('[data-select-new-attribute]'),
+        groupName = this.data.attributesGroup.data('group-name'),
+        unusedAttributes = gameSystem.unusedAttributesList(groupName, this._usedAttributes(editContainer)),
+        attributesList = new AttributesList(unusedAttributes),
+        self = this;
 
-  // fn._removeAbbreviation = function(name, abbreviation) {
-  //   var abbreviation = " (" + (abbreviation == "" ? "0" : abbreviation) + ")";
-  //   return name.replace(abbreviation, "");
-  // };
-  //
-  // fn._fetchItemDescription = function(list, name) {
-  //   var item = $.grep(list, function (item) { return item.Name == name; });
-  //   return item != undefined && item[0].Description ? item[0].Description : "Sem descrição";
-  // };
-  //
+    this._removeSelect2Fields();
+    select.empty();
+    select.append('<option value="0">Selecione...</option>');
+    select.append(attributesList.toString());
+    select = select.select2({ width: '70%', dropdownParent: $('.modal') });
 
-  fn._startDragAndDrop = function(data) {
-    var editContainer = data.attributesGroup.find('.editable-list-group'),
+    return select;
+  };
+
+  fn._removeSelect2Fields = function() {
+    $('.select2-container').remove();
+  };
+
+  fn._bindSelectEvent = function(select) {
+    var self = this,
+        gameSystem = new GameSystem(),
+        groupName = this.data.attributesGroup.data('group-name');
+
+    select.on('change', function() {
+      var index = select.prop('selectedIndex'),
+          descriptionContainer = $(this).siblings('.editable-current-item-description');
+
+      descriptionContainer.html('');
+
+      if (index > 0) {
+        var parts = $(this).val().split('_'),
+            name = parts[0],
+            points = parts[1],
+            abbreviation = parts.length > 2 ? parts[2] : '';
+
+        name = self._removeAbbreviation(name, abbreviation);
+
+        var style = {
+          width: '90%',
+          margin: '5px auto',
+          padding: '5px',
+          border: '1px solid #000',
+          backgroundColor: '#fff',
+          boxShadow: '3px 3px 3px #675D5D'
+        };
+
+        var table = $('<table>'),
+            tr = $('<tr>'),
+            td = $('<td>'),
+            qtipTitle = $('<div>'),
+            qtipContent = $('<div>');
+
+        qtipTitle.addClass('qtip-titlebar').html(name);
+        qtipContent.addClass('qtip-content').html(self._fetchItemDescription(gameSystem.listOfAttributes(groupName), name));
+        td.append(qtipTitle).append(qtipContent);
+        tr.append(td);
+        table.append(tr).css(style);
+
+        descriptionContainer.html(table);
+      }
+    });
+  };
+
+  fn._usedAttributes = function(editContainer) {
+    var usedAttributes = [];
+
+    $.each(editContainer.find('[data-attribute-name] td a.smart-description'), function() {
+      var item = $($(this)[0]),
+          text = $.trim(item.text());
+
+      if (text !== '') {
+        usedAttributes.push(text);
+      }
+    });
+
+    return usedAttributes;
+  };
+
+  fn._removeAbbreviation = function(name, abbreviation) {
+    var abbreviation = ' (' + (abbreviation == '' ? '0' : abbreviation) + ')';
+    return name.replace(abbreviation, '');
+  };
+
+  fn._fetchItemDescription = function(list, name) {
+    var item = $.grep(list, function (item) { return item.name === name; });
+    return item != undefined && item[0].description ? item[0].description : 'Sem descrição';
+  };
+
+  fn._startDragAndDrop = function() {
+    var editContainer = this.data.attributesGroup.find('.editable-list-group'),
         garbage = editContainer.find('.editable-drop-item-area'),
         tooltips = editContainer.find('.smart-description'),
-        validDraggableItems = '.editable-list-group[data-group-name=' + data.attributesGroup.data('group-name') + "] tr:not('.prevent-delete')",
+        validDraggableItems = '.editable-list-group[data-group-name=' + this.data.attributesGroup.data('group-name') + "] tr:not('.prevent-delete')",
         self = this;
 
     if (!this.sheetEditor.isMaster && !this.sheetEditor.freeMode) {
@@ -124,49 +169,50 @@ define('source-type-list', ['source-list'], function(SourceList) {
       drop: function(event, ui) {
         var points = parseInt(ui.draggable.data('points') || ui.draggable.data('value'));
 
-        data.usedPoints = data.usedPoints - points;
-        self.sheetEditor.changeAttributePoints(data);
+        self.data.usedPoints = self.data.usedPoints - points;
+        self.sheetEditor.changeAttributePoints(self.data);
         ui.draggable.remove();
       }
     });
   };
 
-  fn._configureNewItem = function(data) {
-    var editContainer = data.attributesGroup.find('.editable-list-group'),
+  fn._configureNewItem = function() {
+    var editContainer = this.data.attributesGroup.find('.editable-list-group'),
         select = editContainer.find('select'),
         addButton = editContainer.find('.add-editable-list-item'),
         self = this;
 
     addButton.unbind().click(function () {
       var index = select.prop('selectedIndex'),
-          name = select.select2('data').text,
+          // name = select.select2('data').text,
           parts = select.val().split('_'),
+          name = parts[0],
           points = parseInt(parts[1]),
-          abbreviation = parts.length > 2 ? parts[2] : '';
+          abbreviation = parts.length > 2 ? parts[2] : '',
+          exceededLimit = self.data.points && self.data.usedPoints + points > self.data.points;
 
       name = self._removeAbbreviation(name, abbreviation);
 
-      var exceededLimit = data.points && data.usedPoints + points > data.points;
-
-      if (this.sheetEditor.isMaster) {
+      if (self.sheetEditor.isMaster) {
         exceededLimit = false;
       }
 
       if (index > 0) {
         if (!exceededLimit) {
-          var template = $(".editable-list-group[data-group-name=" + data.attributesGroup.attr("data-group-name") + "]").find(".template.hidden:first").clone(),
-              items = editContainer.find(".name-value-attributes"),
-              description = editContainer.find(".editable-current-item-description .qtip-content").html(),
+          var template = $('.editable-list-group[data-group-name=' + self.data.attributesGroup.attr('data-group-name') + ']').find('.template.hidden:first').clone(),
+              items = editContainer.find('.name-value-attributes'),
+              description = editContainer.find('.editable-current-item-description .qtip-content').html(),
               newItem = self._fillTemplate(template, name, abbreviation, points, description);
 
           items.append(newItem);
 
-          data.usedPoints = data.usedPoints + parseInt(points);
-          self.sheetEditor.changeAttributePoints(data);
+          self.data.usedPoints = self.data.usedPoints + parseInt(points);
+          self.sheetEditor.changeAttributePoints(self.data);
           self._newItemTooltip(editContainer, template);
           self._newItemMouseOver(template);
-          self.startDragAndDrop(data);
+          self._startDragAndDrop();
           editContainer.find('.editable-current-item-description').html('');
+          self._loadNewItemsList();
           select.select2('val', '0');
 
           if (self.onNewItem && typeof self.onNewItem == "function") {
@@ -182,8 +228,24 @@ define('source-type-list', ['source-list'], function(SourceList) {
   };
 
   fn._newItemTooltip = function(editContainer, template) {
-    var columns = editContainer.parents('[data-columns]:first').attr('data-columns');
-    SheetTools.initializeTooltips(template.find('.smart-description'), columns);
+    var columns = editContainer.parents('[data-columns]:first').attr('data-columns'),
+        item = template.find('.smart-description');
+
+    $(item).qtip({
+      style: {
+        classes: 'qtip-bootstrap qtip-bootstrap-' + columns + '-columns'
+      },
+      content: {
+        text: function (event, api) {
+          var row = $(item).parent().parent();
+          return row.find('.hidden').html();
+        }
+      },
+      position: {
+        my: 'top left',
+        at: 'bottom left'
+      }
+    });
   };
 
   fn._newItemMouseOver = function(template) {
@@ -210,7 +272,7 @@ define('source-type-list', ['source-list'], function(SourceList) {
     var textRight = template.find('.text-right');
 
     if (textRight.length > 0) {
-      this.inputNewItem(textRight, points);
+      this._inputNewItem(textRight, points);
     }
 
     template.find('.qtip-titlebar').text(name);

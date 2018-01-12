@@ -1,6 +1,6 @@
 <div class="hidden editable-list-group type-<%= group.source_type %>" data-group-name="<%= group.name %>">
   <% if group.source_type == 'list' %>
-    <select>
+    <select data-select-new-attribute>
       <option value="0">Selecione...</option>
     </select>
   <% elsif group.source_type == 'open' %>
