@@ -1,37 +1,36 @@
-define('source-type-list', ['attributes-list', 'game-system'], function(AttributesList, GameSystem) {
+define('source-type-list', ['attributes-list', 'game-system', 'transform', 'positive-negative-method', 'based-attribute-method'], function(AttributesList, GameSystem, Transform, PositiveNegativeMethod, BasedAttributeMethod) {
   function SourceTypeList(sheetEditor, data) {
     this.sheetEditor = sheetEditor;
     this._backupContent = null;
-    this.data = data;
 
     this._initialize(data);
   };
 
   var fn = SourceTypeList.prototype;
 
-  fn._initialize = function() {
-    this._setEditMode();
+  fn._initialize = function(data) {
+    this._setEditMode(data);
 
-    var select = this._loadNewItemsList();
+    var select = this._loadNewAttributesList(data);
     this._bindSelectEvent(select);
 
-    this._startDragAndDrop();
-    this._configureNewItem();
-    this._backup();
+    this._startDragAndDrop(data);
+    this._configureNewItem(data);
+    this._backup(data);
   };
 
-  fn._backup = function() {
-    this._backupContent = this.data.attributesGroup.find('.editable-list-group').html();
+  fn._backup = function(data) {
+    this._backupContent = data.attributesGroup.find('.editable-list-group').html();
   };
 
   fn._rollback = function(data) {
     data.attributesGroup.find('.editable-list-group').html(this._backupContent);
   };
 
-  fn._setEditMode = function() {
-    var editContainer = this.data.attributesGroup.find('.editable-list-group');
+  fn._setEditMode = function(data) {
+    var editContainer = data.attributesGroup.find('.editable-list-group');
     editContainer.addClass('edit-mode').removeClass('hidden');
-    this.data.attributesGroup.find('[data-accept-edit-mode]').hide();
+    data.attributesGroup.find('[data-accept-edit-mode]').hide();
   };
 
   fn.onCancel = function(data) {
@@ -48,13 +47,14 @@ define('source-type-list', ['attributes-list', 'game-system'], function(Attribut
     editable.$element.editable('hide');
   };
 
-  fn._loadNewItemsList = function() {
+  fn._loadNewAttributesList = function(data) {
     var gameSystem = new GameSystem(),
-        editContainer = this.data.attributesGroup.find('.editable-list-group'),
+        editContainer = data.attributesGroup.find('.editable-list-group'),
+        groupMethod = this._groupMethod(editContainer),
         select = editContainer.find('[data-select-new-attribute]'),
-        groupName = this.data.attributesGroup.data('group-name'),
+        groupName = data.attributesGroup.data('group-name'),
         unusedAttributes = gameSystem.unusedAttributesList(groupName, this._usedAttributes(editContainer)),
-        attributesList = new AttributesList(unusedAttributes),
+        attributesList = new AttributesList(groupMethod, unusedAttributes),
         self = this;
 
     this._removeSelect2Fields();
@@ -71,9 +71,10 @@ define('source-type-list', ['attributes-list', 'game-system'], function(Attribut
   };
 
   fn._bindSelectEvent = function(select) {
-    var self = this,
-        gameSystem = new GameSystem(),
-        groupName = this.data.attributesGroup.data('group-name');
+    var gameSystem = new GameSystem(),
+        data = this.sheetEditor.currentAttributesGroupData(select),
+        groupName = data.attributesGroup.data('group-name'),
+        self = this;
 
     select.on('change', function() {
       var index = select.prop('selectedIndex'),
@@ -140,11 +141,11 @@ define('source-type-list', ['attributes-list', 'game-system'], function(Attribut
     return item != undefined && item[0].description ? item[0].description : 'Sem descrição';
   };
 
-  fn._startDragAndDrop = function() {
-    var editContainer = this.data.attributesGroup.find('.editable-list-group'),
+  fn._startDragAndDrop = function(data) {
+    var editContainer = data.attributesGroup.find('.editable-list-group'),
         garbage = editContainer.find('.editable-drop-item-area'),
         tooltips = editContainer.find('.smart-description'),
-        validDraggableItems = '.editable-list-group[data-group-name=' + this.data.attributesGroup.data('group-name') + "] tr:not('.prevent-delete')",
+        validDraggableItems = '.editable-list-group[data-group-name=' + data.attributesGroup.data('group-name') + "] tr:not('.prevent-delete')",
         self = this;
 
     if (!this.sheetEditor.isMaster && !this.sheetEditor.freeMode) {
@@ -167,29 +168,39 @@ define('source-type-list', ['attributes-list', 'game-system'], function(Attribut
       accept: validDraggableItems,
       hoverClass: 'ui-state-hover',
       drop: function(event, ui) {
-        var points = parseInt(ui.draggable.data('points') || ui.draggable.data('value'));
+        var points = 0,
+            data = self.sheetEditor.currentAttributesGroupData(this);
 
-        self.data.usedPoints = self.data.usedPoints - points;
-        self.sheetEditor.changeAttributePoints(self.data);
+        var currentInput = ui.draggable.find('input');
+        if (currentInput.length > 0) {
+          points = parseInt(currentInput.val());
+        } else {
+          points = parseInt(ui.draggable.data('points') || ui.draggable.data('value'))
+        }
+
+        data.usedPoints = data.usedPoints - points;
+        self.sheetEditor.changeAttributePoints(data);
         ui.draggable.remove();
+
+        self._loadNewAttributesList(data);
       }
     });
   };
 
-  fn._configureNewItem = function() {
-    var editContainer = this.data.attributesGroup.find('.editable-list-group'),
+  fn._configureNewItem = function(data) {
+    var editContainer = data.attributesGroup.find('.editable-list-group'),
         select = editContainer.find('select'),
         addButton = editContainer.find('.add-editable-list-item'),
         self = this;
 
-    addButton.unbind().click(function () {
-      var index = select.prop('selectedIndex'),
-          // name = select.select2('data').text,
+    addButton.off('click').on('click', function() {
+      var data = self.sheetEditor.currentAttributesGroupData(this),
+          index = select.prop('selectedIndex'),
           parts = select.val().split('_'),
           name = parts[0],
           points = parseInt(parts[1]),
           abbreviation = parts.length > 2 ? parts[2] : '',
-          exceededLimit = self.data.points && self.data.usedPoints + points > self.data.points;
+          exceededLimit = data.points && data.usedPoints + points > data.points;
 
       name = self._removeAbbreviation(name, abbreviation);
 
@@ -199,20 +210,20 @@ define('source-type-list', ['attributes-list', 'game-system'], function(Attribut
 
       if (index > 0) {
         if (!exceededLimit) {
-          var template = $('.editable-list-group[data-group-name=' + self.data.attributesGroup.attr('data-group-name') + ']').find('.template.hidden:first').clone(),
+          var template = $('.editable-list-group[data-group-name=' + data.attributesGroup.attr('data-group-name') + ']').find('.template.hidden:first').clone(),
               items = editContainer.find('.name-value-attributes'),
               description = editContainer.find('.editable-current-item-description .qtip-content').html(),
-              newItem = self._fillTemplate(template, name, abbreviation, points, description);
+              newItem = self._fillTemplate(data, template, name, abbreviation, points, description);
 
           items.append(newItem);
 
-          self.data.usedPoints = self.data.usedPoints + parseInt(points);
-          self.sheetEditor.changeAttributePoints(self.data);
+          data.usedPoints = data.usedPoints + parseInt(points);
+          self.sheetEditor.changeAttributePoints(data);
           self._newItemTooltip(editContainer, template);
           self._newItemMouseOver(template);
-          self._startDragAndDrop();
+          self._startDragAndDrop(data);
           editContainer.find('.editable-current-item-description').html('');
-          self._loadNewItemsList();
+          self._loadNewAttributesList(data);
           select.select2('val', '0');
 
           if (self.onNewItem && typeof self.onNewItem == "function") {
@@ -256,11 +267,41 @@ define('source-type-list', ['attributes-list', 'game-system'], function(Attribut
     });
   };
 
-  fn._inputNewItem = function(container, points) {
-    container.text(points);
-  },
+  fn._inputNewItem = function(data, container, points) {
+    var editContainer = data.attributesGroup.find('.editable-list-group'),
+        type = editContainer.parent().data('type'),
+        self = this;
 
-  fn._fillTemplate = function(template, name, abbreviation, points, description) {
+    if (type === 'based') {
+      var span = $('<span>'), link = $('<a>');
+
+      link.attr({
+        'data-editable-attribute': 'spinner',
+        'data-master-only': false,
+        'data-value': points,
+        'href': 'javascript:;'
+      }).text(points);
+
+      span.append(link);
+      container.append(span);
+
+      link.editable({
+        toggle: 'manual',
+        showbuttons: false,
+        onblur: 'ignore',
+        mode: 'inline',
+        emptytext: '',
+      }).on('shown', function(e, editable) {
+        var transformer = new Transform(self.sheetEditor);
+        transformer.toSpinner(editable);
+      }).editable('show');
+    } else {
+      container.text(points);
+    }
+  };
+
+  fn._fillTemplate = function(data, template, name, abbreviation, points, description) {
+    points = points || 0;
     template.removeClass('template').removeClass('hidden');
     template.attr('data-attribute-name', name);
     template.attr('data-attribute-abbreviation', abbreviation);
@@ -272,13 +313,17 @@ define('source-type-list', ['attributes-list', 'game-system'], function(Attribut
     var textRight = template.find('.text-right');
 
     if (textRight.length > 0) {
-      this._inputNewItem(textRight, points);
+      this._inputNewItem(data, textRight, points);
     }
 
     template.find('.qtip-titlebar').text(name);
     template.find('.qtip-content').html(description);
 
     return template;
+  };
+
+  fn._groupMethod = function(container) {
+    return container.parent().data('type') == 'based' ? new BasedAttributeMethod() : new PositiveNegativeMethod();
   };
 
   return SourceTypeList;

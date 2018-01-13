@@ -56,6 +56,7 @@ define('editable-based', ['transform', 'source-type-list'], function(Transform, 
   fn.onCancel = function(data) {
     data.attributesGroup.find('.based-warning').hide();
     data.attributesGroup.find('.attributes-with-base').show();
+    data.attributesGroup.find('.editable-current-item-description').hide();
 
     var editContainer = data.attributesGroup.find('.editable-list-group');
     editContainer.removeClass('edit-mode').addClass('hidden');

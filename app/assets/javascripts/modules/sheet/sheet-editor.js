@@ -108,6 +108,9 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     }
   };
 
+  // Public: Format data based on the data attributes of the group that contains
+  // the given element. Every method that controls points during sheet edition
+  // should use this method to retrieve data.
   fn.currentAttributesGroupData = function(element) {
     var attributesGroup = $(element).parents('.attributes-group'),
         manageContainer = attributesGroup.find('.manage-attributes-group'),

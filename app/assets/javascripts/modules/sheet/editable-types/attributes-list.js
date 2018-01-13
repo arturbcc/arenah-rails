@@ -1,7 +1,12 @@
 define('attributes-list', [], function() {
-  function AttributesList(items = []) {
-    this.positives = '';
-    this.negatives = '';
+  // The `groupMethod` are an instance of a class used to group attributes in
+  // the selects with the lists of new items to be added in an attributes group (
+  // like Perícias or Aprimoramentos, for example).
+  //
+  // Each one is specialized in a specific type of grouping.
+  function AttributesList(groupMethod, items = []) {
+    this.groupMethod = groupMethod;
+    this.unclassified = [];
 
     var self = this;
     $.each(items, function() { self.add(this); });
@@ -10,35 +15,55 @@ define('attributes-list', [], function() {
   var fn = AttributesList.prototype;
 
   fn.add = function(item) {
-    //parent
-    var name = item.name;
+    var attribute = this._getAttribute(item);
 
-    // if (parent.onSelectItemName && typeof parent.onSelectItemName === 'function') {
-    //   name = parent.onSelectItemName(item);
-    // }
-
-    var abbreviation = item.abbreviation ? '_' + item.abbreviation : '',
-        value = item.cost, //  || item.points
-        text = value ? name + ' ' + value : name;
-
-    if (value >= 0) {
-      this.positives += "<option value='" + item.name + "_" + value + abbreviation + "'>" + text + "</option>";
-    }
-    else {
-      this.negatives += "<option value='" + item.name + "_" + value + abbreviation + "'>" + text + "</option>";
+    if (this.groupMethod.accept(item)) {
+      this.groupMethod.add(attribute, item);
+    } else {
+      this._addToUnclassifiedList(attribute);
     }
   };
 
-  fn.toString = function() {
-    if (this.positives === '' || this.negatives === '') {
-      return this.positives + this.negatives;
-    } else {
-      var list = "<optgroup label='Positivos'>" + this.positives + "</optgroup>" +
-        "<optgroup label='Negativos'>" + this.negatives + "</optgroup>";
+  fn._getAttribute = function(item) {
+    var attribute = '';
 
-      return list;
+    if (this.groupMethod.buildAttribute && typeof this.groupMethod.buildAttribute === 'function') {
+      // This callback allows groupers to build their own options for the select.
+      attribute = this.groupMethod.buildAttribute(item);
+    } else {
+      // If no callback is provided, the attributes-list will use the default
+      // option attribute, which is below in this file and looks like this:
+      //
+      // <option value="Herbalismo_0">Herbalismo</option>
+      attribute = this._buildAttribute(item);
     }
-  }
+
+    return attribute;
+  };
+
+  fn.toString = function() {
+    var keys = Object.keys(this.groupMethod.data),
+        list = this.unclassified,
+        self = this;
+
+    $.each(keys, function(_, key) {
+      list += "<optgroup label='" + self.groupMethod.data[key].label + "'>" + self.groupMethod.data[key].list + "</optgroup>";
+    });
+
+    return list;
+  };
+
+  fn._addToUnclassifiedList = function(attribute) {
+    this.unclassified.push(attribute);
+  };
+
+  fn._buildAttribute = function(item) {
+    var abbreviation = item.abbreviation ? '_' + item.abbreviation : '',
+        value = item.cost || 0,
+        text = value ? item.name + ' ' + value : item.name;
+
+    return "<option value='" + item.name + "_" + value + abbreviation + "'>" + text + "</option>";
+  };
 
   return AttributesList;
 });

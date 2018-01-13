@@ -34,11 +34,12 @@ module CharacterAttributeHelper
     type = options[:type]
     text = options[:text] || ''
     master_only = options[:master_only] || false
+    value = options[:value]
 
     if formula.present?
-      value = text
+      content = text
     else
-      value = link_to(text,
+      content = link_to(text,
         'javascript:;',
         class: klass.present? ? klass : '',
         data: {
@@ -50,7 +51,7 @@ module CharacterAttributeHelper
 
     content_tag :span do
       concat(prefix) if prefix.present?
-      concat(value)
+      concat(content)
     end
   end
 
