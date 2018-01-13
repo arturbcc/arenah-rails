@@ -1,4 +1,4 @@
-define('source-type-list', ['attributes-list', 'game-system', 'transform', 'positive-negative-method', 'based-attribute-method'], function(AttributesList, GameSystem, Transform, PositiveNegativeMethod, BasedAttributeMethod) {
+define('source-type-list', ['attributes-list', 'game-system', 'positive-negative-method', 'based-attribute-method', 'source-type-list-new-item'], function(AttributesList, GameSystem, PositiveNegativeMethod, BasedAttributeMethod, SourceTypeListNewItem) {
   function SourceTypeList(sheetEditor, data) {
     this.sheetEditor = sheetEditor;
     this._backupContent = null;
@@ -11,11 +11,13 @@ define('source-type-list', ['attributes-list', 'game-system', 'transform', 'posi
   fn._initialize = function(data) {
     this._setEditMode(data);
 
-    var select = this._loadNewAttributesList(data);
+    var select = this.loadNewAttributesList(data);
     this._bindSelectEvent(select);
+    this.startDragAndDrop(data);
 
-    this._startDragAndDrop(data);
-    this._configureNewItem(data);
+    var newItemsController = new SourceTypeListNewItem(this.sheetEditor, this);
+    newItemsController.initialize(data);
+
     this._backup(data);
   };
 
@@ -47,7 +49,7 @@ define('source-type-list', ['attributes-list', 'game-system', 'transform', 'posi
     editable.$element.editable('hide');
   };
 
-  fn._loadNewAttributesList = function(data) {
+  fn.loadNewAttributesList = function(data) {
     var gameSystem = new GameSystem(),
         editContainer = data.attributesGroup.find('.editable-list-group'),
         groupMethod = this._groupMethod(editContainer),
@@ -88,7 +90,7 @@ define('source-type-list', ['attributes-list', 'game-system', 'transform', 'posi
             points = parts[1],
             abbreviation = parts.length > 2 ? parts[2] : '';
 
-        name = self._removeAbbreviation(name, abbreviation);
+        name = self.removeAbbreviation(name, abbreviation);
 
         var style = {
           width: '90%',
@@ -131,7 +133,7 @@ define('source-type-list', ['attributes-list', 'game-system', 'transform', 'posi
     return usedAttributes;
   };
 
-  fn._removeAbbreviation = function(name, abbreviation) {
+  fn.removeAbbreviation = function(name, abbreviation) {
     var abbreviation = ' (' + (abbreviation == '' ? '0' : abbreviation) + ')';
     return name.replace(abbreviation, '');
   };
@@ -141,7 +143,7 @@ define('source-type-list', ['attributes-list', 'game-system', 'transform', 'posi
     return item != undefined && item[0].description ? item[0].description : 'Sem descrição';
   };
 
-  fn._startDragAndDrop = function(data) {
+  fn.startDragAndDrop = function(data) {
     var editContainer = data.attributesGroup.find('.editable-list-group'),
         garbage = editContainer.find('.editable-drop-item-area'),
         tooltips = editContainer.find('.smart-description'),
@@ -182,144 +184,9 @@ define('source-type-list', ['attributes-list', 'game-system', 'transform', 'posi
         self.sheetEditor.changeAttributePoints(data);
         ui.draggable.remove();
 
-        self._loadNewAttributesList(data);
+        self.loadNewAttributesList(data);
       }
     });
-  };
-
-  fn._configureNewItem = function(data) {
-    var editContainer = data.attributesGroup.find('.editable-list-group'),
-        select = editContainer.find('select'),
-        addButton = editContainer.find('.add-editable-list-item'),
-        self = this;
-
-    addButton.off('click').on('click', function() {
-      var data = self.sheetEditor.currentAttributesGroupData(this),
-          index = select.prop('selectedIndex'),
-          parts = select.val().split('_'),
-          name = parts[0],
-          points = parseInt(parts[1]),
-          abbreviation = parts.length > 2 ? parts[2] : '',
-          exceededLimit = data.points && data.usedPoints + points > data.points;
-
-      name = self._removeAbbreviation(name, abbreviation);
-
-      if (self.sheetEditor.isMaster) {
-        exceededLimit = false;
-      }
-
-      if (index > 0) {
-        if (!exceededLimit) {
-          var template = $('.editable-list-group[data-group-name=' + data.attributesGroup.attr('data-group-name') + ']').find('.template.hidden:first').clone(),
-              items = editContainer.find('.name-value-attributes'),
-              description = editContainer.find('.editable-current-item-description .qtip-content').html(),
-              newItem = self._fillTemplate(data, template, name, abbreviation, points, description);
-
-          items.append(newItem);
-
-          data.usedPoints = data.usedPoints + parseInt(points);
-          self.sheetEditor.changeAttributePoints(data);
-          self._newItemTooltip(editContainer, template);
-          self._newItemMouseOver(template);
-          self._startDragAndDrop(data);
-          editContainer.find('.editable-current-item-description').html('');
-          self._loadNewAttributesList(data);
-          select.select2('val', '0');
-
-          if (self.onNewItem && typeof self.onNewItem == "function") {
-            self.onNewItem(newItem);
-          }
-        } else {
-          NotyMessage.show('Você não possui pontos para adicionar este atributo', 3000);
-        }
-      } else {
-        NotyMessage.show('Escolha um item na lista antes de adicioná-lo', 3000, 'info');
-      }
-    });
-  };
-
-  fn._newItemTooltip = function(editContainer, template) {
-    var columns = editContainer.parents('[data-columns]:first').attr('data-columns'),
-        item = template.find('.smart-description');
-
-    $(item).qtip({
-      style: {
-        classes: 'qtip-bootstrap qtip-bootstrap-' + columns + '-columns'
-      },
-      content: {
-        text: function (event, api) {
-          var row = $(item).parent().parent();
-          return row.find('.hidden').html();
-        }
-      },
-      position: {
-        my: 'top left',
-        at: 'bottom left'
-      }
-    });
-  };
-
-  fn._newItemMouseOver = function(template) {
-    $(template).mouseenter(function() {
-      $(this).addClass('success');
-    }).mouseleave(function() {
-      $(this).removeClass('success');
-    });
-  };
-
-  fn._inputNewItem = function(data, container, points) {
-    var editContainer = data.attributesGroup.find('.editable-list-group'),
-        type = editContainer.parent().data('type'),
-        self = this;
-
-    if (type === 'based') {
-      var span = $('<span>'), link = $('<a>');
-
-      link.attr({
-        'data-editable-attribute': 'spinner',
-        'data-master-only': false,
-        'data-value': points,
-        'href': 'javascript:;'
-      }).text(points);
-
-      span.append(link);
-      container.append(span);
-
-      link.editable({
-        toggle: 'manual',
-        showbuttons: false,
-        onblur: 'ignore',
-        mode: 'inline',
-        emptytext: '',
-      }).on('shown', function(e, editable) {
-        var transformer = new Transform(self.sheetEditor);
-        transformer.toSpinner(editable);
-      }).editable('show');
-    } else {
-      container.text(points);
-    }
-  };
-
-  fn._fillTemplate = function(data, template, name, abbreviation, points, description) {
-    points = points || 0;
-    template.removeClass('template').removeClass('hidden');
-    template.attr('data-attribute-name', name);
-    template.attr('data-attribute-abbreviation', abbreviation);
-    template.attr('data-points', points);
-    template.attr('data-state', 'new');
-    template.removeClass('prevent-delete');
-    template.find('.smart-description').text(name);
-
-    var textRight = template.find('.text-right');
-
-    if (textRight.length > 0) {
-      this._inputNewItem(data, textRight, points);
-    }
-
-    template.find('.qtip-titlebar').text(name);
-    template.find('.qtip-content').html(description);
-
-    return template;
   };
 
   fn._groupMethod = function(container) {
