@@ -1,6 +1,6 @@
 // SourceTypeListNewItem deals with new attributes. All logic related to the
 // behavior of the attribute group when a new item is added from a list is here.
-define('source-type-list-new-item', ['transform'], function(Transform) {
+define('source-type-list-new-item', ['transform', 'game-system'], function(Transform, GameSystem) {
   function SourceTypeListNewItem(sheetEditor, sourceTypeList) {
     this.sheetEditor = sheetEditor;
     this.sourceTypeList = sourceTypeList;
@@ -25,9 +25,7 @@ define('source-type-list-new-item', ['transform'], function(Transform) {
         select = editContainer.find('select'),
         index = select.prop('selectedIndex'),
         selectedValue = select.find(':selected'),
-        name = selectedValue.data('name'),
-        abbreviation = selectedValue.data('abbreviation') || '',
-        points = selectedValue.data('value'),
+        points = selectedValue.data('value') || 0,
         exceededLimit = data.points && data.usedPoints + points > data.points;
 
     if (this.sheetEditor.isMaster) {
@@ -39,7 +37,7 @@ define('source-type-list-new-item', ['transform'], function(Transform) {
         var template = $('.editable-list-group[data-group-name=' + data.attributesGroup.attr('data-group-name') + ']').find('.template.hidden:first').clone(),
             items = editContainer.find('.name-value-attributes'),
             description = editContainer.find('.editable-current-item-description .qtip-content').html(),
-            newItem = this._fillTemplate(data, template, name, abbreviation, points, description);
+            newItem = this._fillTemplate(data, template, description, selectedValue);
 
         items.append(newItem);
 
@@ -127,15 +125,18 @@ define('source-type-list-new-item', ['transform'], function(Transform) {
     }
   };
 
-  fn._fillTemplate = function(data, template, name, abbreviation, points, description) {
-    points = points || 0;
+  fn._fillTemplate = function(data, template, description, selectedValue) {
+    var name = selectedValue.data('name'),
+        abbreviation = selectedValue.data('abbreviation') || '',
+        points = selectedValue.data('value') || 0;
+
     template.removeClass('template').removeClass('hidden');
     template.attr('data-attribute-name', name);
     template.attr('data-attribute-abbreviation', abbreviation);
     template.attr('data-points', points);
     template.attr('data-state', 'new');
     template.removeClass('prevent-delete');
-    template.find('.smart-description').text(name);
+    template.find('.smart-description').text(this._nameWithBaseAbbreviation(selectedValue));
 
     var textRight = template.find('.text-right');
 
@@ -147,6 +148,23 @@ define('source-type-list-new-item', ['transform'], function(Transform) {
     template.find('.qtip-content').html(description);
 
     return template;
+  };
+
+  fn._nameWithBaseAbbreviation = function(selectedValue) {
+    var name = selectedValue.data('name'),
+        baseAttributeGroup = selectedValue.data('base-attribute-group'),
+        baseAttributeName = selectedValue.data('base-attribute-name'),
+        suffix = '';
+
+    if (baseAttributeGroup && baseAttributeName) {
+      var baseAttribute = new GameSystem().getAttribute(baseAttributeGroup, baseAttributeName);
+
+      if (baseAttribute.abbreviation) {
+        suffix = ' (' + baseAttribute.abbreviation + ')';
+      }
+    }
+
+    return name + suffix;
   };
 
   return SourceTypeListNewItem;
