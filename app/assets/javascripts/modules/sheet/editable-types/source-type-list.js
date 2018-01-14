@@ -1,22 +1,25 @@
-define('source-type-list', ['attributes-list', 'game-system', 'positive-negative-method', 'based-attribute-method', 'source-type-list-new-item'], function(AttributesList, GameSystem, PositiveNegativeMethod, BasedAttributeMethod, SourceTypeListNewItem) {
+define('source-type-list', ['source-type-list-new-item', 'source-type-list-select'], function(SourceTypeListNewItem, SourceTypeListSelect) {
   function SourceTypeList(sheetEditor, data) {
     this.sheetEditor = sheetEditor;
     this._backupContent = null;
+    this._selectController = new SourceTypeListSelect(this.sheetEditor, this);
+    this._newAttributeController = new SourceTypeListNewItem(this.sheetEditor, this);
 
     this._initialize(data);
   };
 
   var fn = SourceTypeList.prototype;
 
+  fn.transform = function(editable) {
+    editable.$element.editable('hide');
+  };
+
   fn._initialize = function(data) {
     this._setEditMode(data);
-
-    var select = this.loadNewAttributesList(data);
-    this._bindSelectEvent(select);
     this.startDragAndDrop(data);
 
-    var newItemsController = new SourceTypeListNewItem(this.sheetEditor, this);
-    newItemsController.initialize(data);
+    this._selectController.initialize(data);
+    this._newAttributeController.initialize(data);
 
     this._backup(data);
   };
@@ -43,104 +46,6 @@ define('source-type-list', ['attributes-list', 'game-system', 'positive-negative
     });
 
     this._rollback(data);
-  };
-
-  fn.transform = function(editable) {
-    editable.$element.editable('hide');
-  };
-
-  fn.loadNewAttributesList = function(data) {
-    var gameSystem = new GameSystem(),
-        editContainer = data.attributesGroup.find('.editable-list-group'),
-        groupMethod = this._groupMethod(editContainer),
-        select = editContainer.find('[data-select-new-attribute]'),
-        groupName = data.attributesGroup.data('group-name'),
-        unusedAttributes = gameSystem.unusedAttributesList(groupName, this._usedAttributes(editContainer)),
-        attributesList = new AttributesList(groupMethod, unusedAttributes),
-        self = this;
-
-    this._removeSelect2Fields();
-    select.empty();
-    select.append('<option value="0">Selecione...</option>');
-    select.append(attributesList.toString());
-    select = select.select2({ width: '70%', dropdownParent: $('.modal') });
-
-    return select;
-  };
-
-  fn._removeSelect2Fields = function() {
-    $('.select2-container').remove();
-  };
-
-  fn._bindSelectEvent = function(select) {
-    var gameSystem = new GameSystem(),
-        data = this.sheetEditor.currentAttributesGroupData(select),
-        groupName = data.attributesGroup.data('group-name'),
-        self = this;
-
-    select.on('change', function() {
-      var index = select.prop('selectedIndex'),
-          descriptionContainer = $(this).siblings('.editable-current-item-description');
-
-      descriptionContainer.html('');
-
-      if (index > 0) {
-        var parts = $(this).val().split('_'),
-            name = parts[0],
-            points = parts[1],
-            abbreviation = parts.length > 2 ? parts[2] : '';
-
-        name = self.removeAbbreviation(name, abbreviation);
-
-        var style = {
-          width: '90%',
-          margin: '5px auto',
-          padding: '5px',
-          border: '1px solid #000',
-          backgroundColor: '#fff',
-          boxShadow: '3px 3px 3px #675D5D'
-        };
-
-        var table = $('<table>'),
-            tr = $('<tr>'),
-            td = $('<td>'),
-            qtipTitle = $('<div>'),
-            qtipContent = $('<div>');
-
-        qtipTitle.addClass('qtip-titlebar').html(name);
-        qtipContent.addClass('qtip-content').html(self._fetchItemDescription(gameSystem.listOfAttributes(groupName), name));
-        td.append(qtipTitle).append(qtipContent);
-        tr.append(td);
-        table.append(tr).css(style);
-
-        descriptionContainer.html(table);
-      }
-    });
-  };
-
-  fn._usedAttributes = function(editContainer) {
-    var usedAttributes = [];
-
-    $.each(editContainer.find('[data-attribute-name]'), function() {
-      var item = $($(this)[0]).data('attribute-name'),
-          text = $.trim(item);
-
-      if (text !== '') {
-        usedAttributes.push(text);
-      }
-    });
-
-    return usedAttributes;
-  };
-
-  fn.removeAbbreviation = function(name, abbreviation) {
-    var abbreviation = ' (' + (abbreviation == '' ? '0' : abbreviation) + ')';
-    return name.replace(abbreviation, '');
-  };
-
-  fn._fetchItemDescription = function(list, name) {
-    var item = $.grep(list, function (item) { return item.name === name; });
-    return item != undefined && item[0].description ? item[0].description : 'Sem descrição';
   };
 
   fn.startDragAndDrop = function(data) {
@@ -183,14 +88,13 @@ define('source-type-list', ['attributes-list', 'game-system', 'positive-negative
         data.usedPoints = data.usedPoints - points;
         self.sheetEditor.changeAttributePoints(data);
         ui.draggable.remove();
-
         self.loadNewAttributesList(data);
       }
     });
   };
 
-  fn._groupMethod = function(container) {
-    return container.parent().data('type') == 'based' ? new BasedAttributeMethod() : new PositiveNegativeMethod();
+  fn.loadNewAttributesList = function(data) {
+    this._selectController.loadNewAttributesList(data);
   };
 
   return SourceTypeList;

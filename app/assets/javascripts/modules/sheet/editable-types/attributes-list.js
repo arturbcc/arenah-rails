@@ -58,11 +58,19 @@ define('attributes-list', [], function() {
   };
 
   fn._buildAttribute = function(item) {
-    var abbreviation = item.abbreviation ? '_' + item.abbreviation : '',
-        value = item.cost || 0,
-        text = value ? item.name + ' ' + value : item.name;
+    var value = item.cost || 0,
+        text = value ? item.name + ' ' + value : item.name,
+        option = $('<option>');
 
-    return "<option value='" + item.name + "_" + value + abbreviation + "'>" + text + "</option>";
+    option.attr({
+      'data-name': item.name,
+      'data-value': value,
+      'data-abbreviation': item.abbreviation,
+      'data-base-attribute-group': item.base_attribute_group,
+      'data-base-attribute-name': item.base_attribute_name,
+    }).text(text);
+
+    return option.get(0).outerHTML;
   };
 
   return AttributesList;

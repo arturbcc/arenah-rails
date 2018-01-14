@@ -1,3 +1,5 @@
+// SourceTypeListNewItem deals with new attributes. All logic related to the
+// behavior of the attribute group when a new item is added from a list is here.
 define('source-type-list-new-item', ['transform'], function(Transform) {
   function SourceTypeListNewItem(sheetEditor, sourceTypeList) {
     this.sheetEditor = sheetEditor;
@@ -22,13 +24,11 @@ define('source-type-list-new-item', ['transform'], function(Transform) {
         editContainer = data.attributesGroup.find('.editable-list-group'),
         select = editContainer.find('select'),
         index = select.prop('selectedIndex'),
-        parts = select.val().split('_'),
-        name = parts[0],
-        points = parseInt(parts[1]),
-        abbreviation = parts.length > 2 ? parts[2] : '',
+        selectedValue = select.find(':selected'),
+        name = selectedValue.data('name'),
+        abbreviation = selectedValue.data('abbreviation') || '',
+        points = selectedValue.data('value'),
         exceededLimit = data.points && data.usedPoints + points > data.points;
-
-    name = this.sourceTypeList.removeAbbreviation(name, abbreviation);
 
     if (this.sheetEditor.isMaster) {
       exceededLimit = false;
