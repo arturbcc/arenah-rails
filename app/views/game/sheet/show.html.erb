@@ -58,7 +58,7 @@
     controller.sheetEditor = new SheetEditor({
       isMaster: <%= @identity.game_master? %>,
       isSheetOwner: <%= @identity.player? %>,
-      freeMode: <%= @sheet.character.free_mode? %>,
+      sheetMode: '<%= @sheet.character.sheet_mode %>',
       equipmentsUrl: ''
     });
   <% end %>

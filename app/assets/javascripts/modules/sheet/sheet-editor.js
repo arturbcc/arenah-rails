@@ -1,8 +1,8 @@
 // SheetEditor is responsible to deal with changes on the character sheets.
 //
-// It knows which class to call when the user edits a specific attributes group,
-// and is also responsible to change between view and edit mode. All classes to
-// deal with groups can be found at ./editable-types/*.js
+// It knows which component to call when the user edits a specific attributes
+// group, and is also responsible to change between view and edit mode. All
+// classes that deal with groups can be found at ./editable-types/*.js
 define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character-card',
   'editable-equipments', 'editable-mixed', 'editable-name-value', 'editable-rich-text',
   'editable-text'], function(EditableBased, EditableBullet, EditableCharacterCard,
@@ -11,8 +11,11 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
   function SheetEditor(options = {}) {
     this.isMaster = options.isMaster || false;
     this.isSheetOwner = options.isSheetOwner || false;
-    this.freeMode = options.freeMode || false;
     this.equipmentsUrl = options.equipmentsUrl || '';
+
+    // Valid sheet modes are: game_master_mode, free_mode and game_mode
+    this.sheetMode = options.sheetMode || 'game_master_mode';
+    this._createAliasForSheetModes();
 
     this.currentEditable = null;
     this._backupData = null;
@@ -30,10 +33,9 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     this.editButtons = $('.editable-edit');
     this.saveButtons = $('.editable-submit');
     this.cancelButtons = $('.editable-cancel');
-
     this.attributesGroups = $('.attributes-group');
 
-    this._authorize();
+    this._defineAuthorizationLevel();
     this._bindEvents();
   };
 
@@ -53,6 +55,71 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     this.cancelButtons.on('click', this._cancel);
   };
 
+  // All changes in the attributes should pass through this method. It grants
+  // the modifications change the DOM in the correct form and this ensures that
+  // the `currentAttributesGroupData` method will always return the correct
+  // data.
+  //
+  // The `data` parameter is expected to have the structure returned by the
+  // `currentAttributesGroupData` method.
+  fn.changeAttributePoints = function(data) {
+    data.attributesGroup.attr('data-used-points', data.usedPoints);
+    var pointsCounter = data.attributesGroup.find('.points-counter');
+
+    if (pointsCounter) {
+      pointsCounter.html(data.usedPoints);
+      pointsCounter.removeClass('exceeded-points').removeClass('available-points');
+
+      if (data.usedPoints < data.points) {
+        pointsCounter.addClass('available-points');
+      }
+      else if (data.usedPoints > data.points) {
+        pointsCounter.addClass('exceeded-points');
+      }
+    }
+  };
+
+  // Public: Format data based on the data attributes of the group that contains
+  // the given element. Every method that controls points during sheet edition
+  // should use this method to retrieve data. The current state of the group's
+  // points are managed through data attributes.
+  //
+  // - element: any element inside the attributes group from which we are trying
+  //   to fetch data.
+  //
+  // Example:
+  //
+  // var data = this.sheetEditor.currentAttributesGroupData(select);
+  //
+  // => {
+  //      attributesGroup: ...,
+  //      cancel: ...,
+  //      edit: ...,
+  //      points: 7,
+  //      save: ...,
+  //      usedPoints: 5
+  //    }
+  fn.currentAttributesGroupData = function(element) {
+    var attributesGroup = $(element).parents('.attributes-group'),
+        manageContainer = attributesGroup.find('.manage-attributes-group'),
+        edit = manageContainer.find('.editable-edit'),
+        save = manageContainer.find('.editable-submit'),
+        cancel = manageContainer.find('.editable-cancel'),
+        points = parseInt(attributesGroup.attr('data-points')),
+        usedPoints = parseInt(attributesGroup.attr('data-used-points'));
+
+    return {
+      'attributesGroup': attributesGroup,
+      'edit': edit,
+      'save': save,
+      'cancel': cancel,
+      'points': points,
+      'usedPoints': usedPoints
+    };
+  };
+
+  // Change the attributes group to edit mode, allowing users to add, modify and
+  // remove attributes. It will respect the sheet_mode restrictions.
   fn._edit = function(event) {
     var element = $(event.currentTarget),
         data = this.currentAttributesGroupData(element),
@@ -74,6 +141,8 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     this._changeToEditMode(data);
   };
 
+  // Save the current changes in the character sheet. The changes cannot be
+  // undone. Once the group is saved, it will leave the edit mode.
   fn._save = function(event) {
     var element = $(event.currentTarget);
 
@@ -89,6 +158,8 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     }
   };
 
+  // Undo all the current changes. Once the changes are cancelled, the group
+  // will leave the edit mode.
   fn._cancel = function(event) {
     this._restoreGroupsOpacity();
 
@@ -106,28 +177,6 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     if (this.currentEditable && this.currentEditable.onCancel && typeof this.currentEditable.onCancel == "function") {
       this.currentEditable.onCancel(data);
     }
-  };
-
-  // Public: Format data based on the data attributes of the group that contains
-  // the given element. Every method that controls points during sheet edition
-  // should use this method to retrieve data.
-  fn.currentAttributesGroupData = function(element) {
-    var attributesGroup = $(element).parents('.attributes-group'),
-        manageContainer = attributesGroup.find('.manage-attributes-group'),
-        edit = manageContainer.find('.editable-edit'),
-        save = manageContainer.find('.editable-submit'),
-        cancel = manageContainer.find('.editable-cancel'),
-        points = parseInt(attributesGroup.attr('data-points')),
-        usedPoints = parseInt(attributesGroup.attr('data-used-points'));
-
-    return {
-      'attributesGroup': attributesGroup,
-      'edit': edit,
-      'save': save,
-      'cancel': cancel,
-      'points': points,
-      'usedPoints': usedPoints
-    };
   };
 
   fn._changeToEditMode = function(data) {
@@ -154,7 +203,11 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     data.edit.hide();
   };
 
-  fn._authorize = function() {
+  // Define the changes that the current logged user can make in the character
+  // sheet. It prevents a user to change other people's sheet and also grant
+  // permissions based on the sheet mode of the character. Game masters have
+  // a free pass to change anything at any time.
+  fn._defineAuthorizationLevel = function() {
     var manageGroupContainer = $('.manage-group-container');
 
     if (this.isMaster || this.isSheetOwner) {
@@ -192,23 +245,6 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     this._backupData = null;
   },
 
-  fn.changeAttributePoints = function(data) {
-    data.attributesGroup.attr('data-used-points', data.usedPoints);
-    var pointsCounter = data.attributesGroup.find('.points-counter');
-
-    if (pointsCounter) {
-      pointsCounter.html(data.usedPoints);
-      pointsCounter.removeClass('exceeded-points').removeClass('available-points');
-
-      if (data.usedPoints < data.points) {
-        pointsCounter.addClass('available-points');
-      }
-      else if (data.usedPoints > data.points) {
-        pointsCounter.addClass('exceeded-points');
-      }
-    }
-  };
-
   fn._focusOnGroup = function(group) {
     this.attributesGroups.css({ opacity: 0.2 });
     group.css({ opacity: 1 });
@@ -216,6 +252,12 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
 
   fn._restoreGroupsOpacity = function() {
     this.attributesGroups.css({ opacity: 1 });
+  };
+
+  fn._createAliasForSheetModes = function() {
+    this.freeMode = this.sheetMode == 'free_mode';
+    this.gameMode = this.sheetMode == 'game_mode';
+    this.gameMasterMode = this.sheetMode == 'game_master_mode';
   };
 
   return SheetEditor;
