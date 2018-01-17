@@ -55,14 +55,14 @@ define('transform', [], function() {
 
         data.usedPoints = data.usedPoints + (newValue - currentValue);
 
-        var exceededLimit = data.points && data.usedPoints > data.points,
+        var limitExceeded = data.points && data.usedPoints > data.points,
             decreasedAttributeValue = newValue < attributeOriginalPoints;
 
         if (self.sheetEditor.isMaster || self.sheetEditor.freeMode) {
           decreasedAttributeValue = false;
         }
 
-        if (exceededLimit || decreasedAttributeValue) {
+        if (limitExceeded || decreasedAttributeValue) {
           return false;
         } else {
           self.sheetEditor.changeAttributePoints(data);
