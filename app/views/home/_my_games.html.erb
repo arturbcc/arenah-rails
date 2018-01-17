@@ -1,0 +1,37 @@
+<div class='col col-sm-12'>
+  <h3>Meus jogos</h3>
+  <section class='game-rooms-section'>
+    <% characters.each do |character| %>
+      <% game = character.game %>
+      <%= link_to game_home_path(game) do %>
+        <div class="game col col-sm-12">
+          <header>
+            <%= banner(game) %>
+          </header>
+
+          <section>
+            <h3><%= game.name %></h3>
+            <div class="text-left subtitle">
+              <%= character.name %>
+
+              <% master_label = character.gender == 'male' ? 'Mestre' : 'Mestra' %>
+              <% player_label = character.gender == 'male' ? 'Jogador' : 'Jogadora' %>
+
+              <span class="badge badge-primary"><%= character.game_master? ? master_label : player_label %></span>
+            </div>
+
+            <hr />
+
+            <div class="short-description">
+              <div class="avatar-container">
+                <div class="avatar-wrapper">
+                  <%= avatar(character, class: 'my-character-avatar') %>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      <% end %>
+    <% end %>
+  </section>
+</div>

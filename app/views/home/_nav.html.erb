@@ -13,6 +13,9 @@
       <a href="#sign-up">Crie sua sala</a>
     </li>
     <% if current_user %>
+      <li class="page-scroll">
+        <a href="#my-rooms">Meus jogos</a>
+      </li>
       <li>
         <%= link_to "Olá, #{current_user.name}",
               edit_profile_path(current_user.id),
