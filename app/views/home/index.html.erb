@@ -55,17 +55,19 @@
     </div>
   </div>
 
-  <section class="container content-section text-center container-fluid">
-  </section>
+  <% if current_user.present? %>
+    <section class="container content-section text-center container-fluid">
+    </section>
 
-  <section id="my-rooms" class="container content-section-1 text-center container-fluid">
-    <div class="row">
-      <%= render 'my_games', characters: current_user.characters %>
-    </div>
-  </section>
+    <section id="my-rooms" class="container content-section-1 text-center container-fluid">
+      <div class="row">
+        <%= render 'my_games', characters: current_user.characters %>
+      </div>
+    </section>
 
-  <section class="container content-section text-center container-fluid">
-  </section>
+    <section class="container content-section text-center container-fluid">
+    </section>
+  <% end %>
 
   <%= render 'shared/flash_message', message: alert, message_type: 'success' %>
   <%= render 'shared/flash_message', message: notice, message_type: 'success' unless invalid_notice?(notice) %>
