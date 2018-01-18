@@ -47,9 +47,9 @@ module Sheet
 
       def used_points
         @used_points ||= begin
-          return 0 if character_attributes.blank?
+          return 0 if character_attributes.blank? || group_points_formula.blank?
 
-          character_attributes.reduce(0) {|sum, attribute| sum += attribute.cost || attribute.points.to_i }
+          character_attributes.reduce(0) { |sum, attribute| sum += attribute.cost || attribute.points.to_i }
         end
       end
 

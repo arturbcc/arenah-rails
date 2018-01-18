@@ -218,7 +218,7 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
 
     if (!this.isMaster && !this.freeMode) {
       this._removeNotEditableFields();
-      this._blockEditionOnGroupsWithNegativePoints();
+      this._blockEditionOnGroupsWithNullOrNegativePoints();
       this._blockEditionOnGroupsOfTypeOpen();
     }
 
@@ -232,14 +232,15 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     $('.attributes-group[data-editable-only-on-free-mode]').find('.manage-group-container').remove();
   };
 
-  fn._blockEditionOnGroupsWithNegativePoints = function() {
+  fn._blockEditionOnGroupsWithNullOrNegativePoints = function() {
     var groups = $('.attributes-group');
     $.each(groups, function() {
       var element = $(this),
           points = parseInt(element.data('points')),
-          usedPoints = parseInt(element.data('used-points'));
+          usedPoints = parseInt(element.data('used-points')),
+          groupWithoutPoints = element.data('points') == null;
 
-      if (usedPoints > points) {
+      if (usedPoints > points || groupWithoutPoints) {
         $('.manage-group-container', this).remove();
       }
     });
