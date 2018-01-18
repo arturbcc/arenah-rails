@@ -218,6 +218,8 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
 
     if (!this.isMaster && !this.freeMode) {
       this._removeNotEditableFields();
+      this._blockEditionOnGroupsWithNegativePoints();
+      this._blockEditionOnGroupsOfTypeOpen();
     }
 
     if (!this.isMaster) {
@@ -228,6 +230,23 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
   fn._removeNotEditableFields = function() {
     $('[data-editable-attribute=text]').removeAttr('data-editable-attribute');
     $('.attributes-group[data-editable-only-on-free-mode]').find('.manage-group-container').remove();
+  };
+
+  fn._blockEditionOnGroupsWithNegativePoints = function() {
+    var groups = $('.attributes-group');
+    $.each(groups, function() {
+      var element = $(this),
+          points = parseInt(element.data('points')),
+          usedPoints = parseInt(element.data('used-points'));
+
+      if (usedPoints > points) {
+        $('.manage-group-container', this).remove();
+      }
+    });
+  };
+
+  fn._blockEditionOnGroupsOfTypeOpen = function() {
+    $('[data-source-type="open"] .manage-group-container').remove();
   };
 
   fn._backup = function(data) {
