@@ -17,13 +17,15 @@
         <a href="#my-rooms">Meus jogos</a>
       </li>
       <li>
-        <%= link_to "Olá, #{current_user.name}",
-              edit_profile_path(current_user.id),
-              data: {
-                toggle: 'modal',
-                target: '#remote-modal',
-                hello: 'user'
-              } %>
+        <%=
+          link_to "Olá, #{current_user.name}",
+            edit_profile_path(current_user.id),
+            data: {
+              toggle: 'modal',
+              target: '#remote-modal',
+              hello: 'user'
+            }
+        %>
       </li>
     <% else %>
       <li class="page-scroll">
