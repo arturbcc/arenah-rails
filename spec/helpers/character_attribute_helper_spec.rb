@@ -52,22 +52,22 @@ describe CharacterAttributeHelper do
       expect(helper.editable_link).to include('<span')
     end
 
-    it 'includes a class if a formula is present' do
-      expect(helper.editable_link(class: 'test-class', formula: '1D100')).to include('test-class')
+    it 'includes a class if a formula is not present' do
+      expect(helper.editable_link(class: 'test-class')).to include('test-class')
     end
 
-    it 'includes does not include a class without a formula' do
-      expect(helper.editable_link(class: 'test-class', formula: '1D100')).to include('test-class')
+    it 'does not include a class if a formula is present' do
+      expect(helper.editable_link(class: 'test-class', formula: '1D100')).not_to include('test-class')
     end
 
     it 'includes a prefix' do
       expect(helper.editable_link(prefix: 'prefix')).to include('prefix')
     end
 
-    it 'includes data-attributes when there is a formula' do
-      expect(helper.editable_link(formula: '1D100', type: 'list')).to include('data-editable-attribute="list"')
-      expect(helper.editable_link(formula: '1D100', master_only: true)).to include('data-master-only="true"')
-      expect(helper.editable_link(formula: '1D100', value: 10000)).to include('data-value="10000"')
+    it 'includes data-attributes when there is no formula' do
+      expect(helper.editable_link(type: 'list')).to include('data-editable-attribute="list"')
+      expect(helper.editable_link(master_only: true)).to include('data-master-only="true"')
+      expect(helper.editable_link(value: 10000)).to include('data-value="10000"')
     end
 
     it 'does not include a formula' do

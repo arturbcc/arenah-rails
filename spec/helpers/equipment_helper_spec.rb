@@ -7,14 +7,14 @@ describe EquipmentHelper do
 
     context 'without options' do
       it 'renders an image for the equipment' do
-        image_path = helper.send('image_path', game, image_name)
+        image_path = helper.send('equipment_image_path', game, image_name)
         expect(helper.equipment_image(game, image_name)).to eq(image_tag(image_path))
       end
     end
 
     context 'with options' do
       it 'renders an image for the equipment' do
-        image_path = helper.send('image_path', game, image_name)
+        image_path = helper.send('equipment_image_path', game, image_name)
         image = helper.equipment_image(game, image_name, class: 'new-weapon')
         expect(image).to eq(image_tag(image_path, class: 'new-weapon'))
         expect(image).to include('new-weapon')
