@@ -39,7 +39,7 @@ class Character < ActiveRecord::Base
   #   game master. Not even the user that created the character will be able to
   #   tamper with the sheet. It is used when the game master want to have full
   #   controll of the changes.
-  enum sheet_mode: { free_mode: 0, game_mode: 1,  }
+  enum sheet_mode: { free_mode: 0, game_mode: 1, game_master_mode: 2 }
 
   belongs_to :user
   belongs_to :game
