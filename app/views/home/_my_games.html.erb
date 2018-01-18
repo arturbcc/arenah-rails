@@ -16,8 +16,11 @@
 
               <% master_label = character.gender == 'male' ? 'Mestre' : 'Mestra' %>
               <% player_label = character.gender == 'male' ? 'Jogador' : 'Jogadora' %>
+              <% role_badge = character.game_master? ? 'badge-master' : 'badge-player' %>
 
-              <span class="badge badge-primary"><%= character.game_master? ? master_label : player_label %></span>
+              <span class="badge role-badge <%= role_badge %>">
+                <%= character.game_master? ? master_label : player_label %>
+              </span>
             </div>
 
             <hr />

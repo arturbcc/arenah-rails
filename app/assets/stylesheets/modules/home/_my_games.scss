@@ -2,12 +2,20 @@
   max-height: 180px;
 }
 
-.badge-primary {
-  color: #fff;
-  background-color: #007bff;
+.role-badge {
   float: right;
   margin-right: 10px;
   padding: 3px 9px 3px 0;
+}
+
+.badge-player {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.badge-master {
+  color: #212529;
+  background-color: #28a745;
 }
 
 .avatar-container {
