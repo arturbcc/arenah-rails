@@ -234,13 +234,16 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
 
   fn._blockEditionOnGroupsWithNullOrNegativePoints = function() {
     var groups = $('.attributes-group');
+
     $.each(groups, function() {
       var element = $(this),
+          type = element.data('type'),
           points = parseInt(element.data('points')),
           usedPoints = parseInt(element.data('used-points')),
-          groupWithoutPoints = element.data('points') == null;
+          groupWithoutPoints = element.data('points') == null,
+          hasPointsToSpend = groupWithoutPoints || usedPoints >= points;
 
-      if (usedPoints > points || groupWithoutPoints) {
+      if (hasPointsToSpend && type != 'equipments') {
         $('.manage-group-container', this).remove();
       }
     });
