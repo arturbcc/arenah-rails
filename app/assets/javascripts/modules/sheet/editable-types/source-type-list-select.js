@@ -30,6 +30,12 @@ define('source-type-list-select', ['game-system', 'attributes-list', 'positive-n
     select.append(attributesList.toString());
     select = select.select2({ width: '70%', dropdownParent: $('.modal') });
 
+    if (unusedAttributes.length == 0) {
+      select.select2('disable');
+    } else {
+      select.select2('enable');
+    }
+
     return select;
   };
 
