@@ -32,8 +32,7 @@
   <% unless group.instructions.blank? %>
     <table class="attributes-group-instructions-content">
       <tr>
-        <%#= FIXME: The tooltip partial should receive name and description, this fix below must be removed %>
-        <%= render 'game/sheet/tooltip', attribute: Sheet::CharacterAttribute.new(name: group.name, description: group.instructions) %>
+        <%= render 'game/sheet/tooltip', name: group.name, description: group.instructions %>
      </tr>
     </table>
   <% end %>
