@@ -37,6 +37,15 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
 
     this._defineAuthorizationLevel();
     this._bindEvents();
+
+    var decreased = $('<span>').css({ color: '#c0111f' }).text('*');
+    var increased = $('<span>').css({ color: '#1da049' }).text('*');
+
+    var legend = $('<div>').addClass('attributes-group-legend');
+    legend.append($('<p>').append(decreased).append(' Atributo penalizado por item equipado'));
+    legend.append($('<p>').append(increased).append(' Atributo com bônus de item equipamento'));
+
+    $('.decreased').parents('.attributes-group').append(legend);
   };
 
   var fn = SheetEditor.prototype;
