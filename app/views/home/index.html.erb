@@ -61,7 +61,7 @@
 
     <section id="my-rooms" class="container content-section-1 text-center container-fluid">
       <div class="row">
-        <%= render 'my_games', characters: current_user.characters %>
+        <%= render 'my_games', characters: current_user.characters.select { |char| !char.npc? } %>
       </div>
     </section>
 
