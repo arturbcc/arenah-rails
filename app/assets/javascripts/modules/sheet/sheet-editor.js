@@ -216,14 +216,16 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
       manageGroupContainer.remove();
     }
 
-    if (!this.isMaster && !this.freeMode) {
-      this._removeNotEditableFields();
-      this._blockEditionOnGroupsWithNullOrNegativePoints();
-      this._blockEditionOnGroupsOfTypeOpen();
-    }
-
     if (!this.isMaster) {
       $('[data-master-only=true]').removeAttr('data-editable-attribute');
+
+      if (this.gameMode) {
+        this._removeNotEditableFields();
+        this._blockEditionOnGroupsWithNullOrNegativePoints();
+        this._blockEditionOnGroupsOfTypeOpen();
+      } else if (this.gameMasterMode) {
+        manageGroupContainer.remove();
+      }
     }
   };
 
