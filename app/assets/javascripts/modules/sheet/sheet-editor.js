@@ -30,10 +30,10 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
       text: EditableText
     };
 
-    this.editButtons = $('.editable-edit');
-    this.saveButtons = $('.editable-submit');
-    this.cancelButtons = $('.editable-cancel');
-    this.attributesGroups = $('.attributes-group');
+    this.editButtons = $('.editable-edit', '#sheet');
+    this.saveButtons = $('.editable-submit', '#sheet');
+    this.cancelButtons = $('.editable-cancel', '#sheet');
+    this.attributesGroups = $('.attributes-group', '#sheet');
 
     this._defineAuthorizationLevel();
     this._bindEvents();
