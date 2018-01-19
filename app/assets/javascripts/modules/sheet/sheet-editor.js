@@ -36,16 +36,8 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     this.attributesGroups = $('.attributes-group', '#sheet');
 
     this._defineAuthorizationLevel();
+    this._showLegendForModifiedAttributes();
     this._bindEvents();
-
-    var decreased = $('<span>').css({ color: '#c0111f' }).text('*');
-    var increased = $('<span>').css({ color: '#1da049' }).text('*');
-
-    var legend = $('<div>').addClass('attributes-group-legend');
-    legend.append($('<p>').append(decreased).append(' Atributo penalizado por item equipado'));
-    legend.append($('<p>').append(increased).append(' Atributo com bônus de item equipamento'));
-
-    $('.decreased').parents('.attributes-group').append(legend);
   };
 
   var fn = SheetEditor.prototype;
@@ -292,6 +284,37 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     this.freeMode = this.sheetMode == 'free_mode';
     this.gameMode = this.sheetMode == 'game_mode';
     this.gameMasterMode = this.sheetMode == 'game_master_mode';
+  };
+
+  fn._showLegendForModifiedAttributes = function() {
+    var self = this,
+        texts = {
+          decreased: 'Atributo penalizado por item equipado',
+          increased: 'Atributo com bônus de item equipado'
+        };
+
+    $.each($('.decreased, .increased'), function() {
+      var element = $(this),
+          legendContainer = self._findOrCreateLegendContainer(element),
+          klass = element.attr('class'),
+          mark = $('<span>').addClass(klass + '-mark').text('*');
+
+      if (legendContainer.find('.' + klass + '-mark').length == 0) {
+        legendContainer.append($('<p>').append(mark).append(' ' + texts[klass]));
+      }
+    });
+  };
+
+  fn._findOrCreateLegendContainer = function(element) {
+    var attributesGroup = element.parents('.attributes-group'),
+        container = attributesGroup.find('.attributes-group-legend');
+
+    if (container.length == 0) {
+      container = $('<div>').addClass('attributes-group-legend');
+      element.parents('.attributes-group').append(container);
+    }
+
+    return container;
   };
 
   return SheetEditor;
