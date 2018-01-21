@@ -23,7 +23,7 @@ class Game < ApplicationRecord
   after_create :set_game_to_owner
 
   def system
-    @system ||= Sheet::System.new(super)
+    @system ||= Sheet::System.new(JSON.parse(super))
   end
 
   # TODO: Do we need this method?

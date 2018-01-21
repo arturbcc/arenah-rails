@@ -17,6 +17,7 @@ User.delete_all
 Character.delete_all
 
 # USERS
+empty_sheet = { attributes_groups: [] }.to_json
 carlos = User.create!(email: 'carlos@arenah.com', name: 'Carlos', password: '12345678', confirmed_at: Time.now)
 mariana = User.create(email: 'mariana@arenah.com', name: 'Mariana', password: '12345678', confirmed_at: Time.now, legacy_password: Devise::Encryptable::Encryptors::Md5.digest('123', nil, nil, nil))
 luisfelipe = User.create!(email: 'luisfelipe@arenah.com', name: 'Luís Felipe', password: '12345678', confirmed_at: Time.now)
@@ -46,11 +47,11 @@ bobby = Character.create!(user: priscila, name: 'Bobby', avatar: 'bobby.png', po
 sheila = Character.create!(user: nathalia, name: 'Sheila', avatar: 'sheila.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'sheila'))
 
 eva = Character.create!(user: mayara, name: 'Eva', avatar: 'eva.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: load_sheet('vampiro-a-mascara', 'eva'))
-amy = Character.create!(user: mariana, name: 'Amy', avatar: 'amy.png', character_type: 2, gender: 1, post_count: 199, last_post_date: Time.now, sheet: '{}')
+amy = Character.create!(user: mariana, name: 'Amy', avatar: 'amy.png', character_type: 2, gender: 1, post_count: 199, last_post_date: Time.now, sheet: empty_sheet)
 
-khalmyr = Character.create!(user: artur, name: 'Khalmyr', avatar: 'khalmyr.png', character_type: 2, sheet: '{}')
-wynna = Character.create!(user: janeroe, name: 'Wynna', avatar: 'wynna.jpg', character_type: 2, sheet: '{}')
-mestre_dos_magos = Character.create!(user: artur, name: 'Mestre dos Magos', avatar: 'mestre-dos-magos.png', character_type: 2, sheet: '{}')
+khalmyr = Character.create!(user: artur, name: 'Khalmyr', avatar: 'khalmyr.png', character_type: 2, sheet: empty_sheet)
+wynna = Character.create!(user: janeroe, name: 'Wynna', avatar: 'wynna.jpg', character_type: 2, sheet: empty_sheet)
+mestre_dos_magos = Character.create!(user: artur, name: 'Mestre dos Magos', avatar: 'mestre-dos-magos.png', character_type: 2, sheet: empty_sheet)
 
 luffy = Character.create!(user: artur, name: 'Luffy', avatar: 'luffy.png', character_type: 1, sheet: load_sheet('crossover', 'luffy'))
 shurato = Character.create!(user: artur, name: 'Shurato', avatar: 'shurato.png', character_type: 1, sheet: load_sheet('crossover', 'shurato'))

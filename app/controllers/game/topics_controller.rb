@@ -21,7 +21,7 @@ class Game::TopicsController < Game::BaseController
   def create
     if identity.game_master?
       topic = Topic.new(topic_params).tap do |topic|
-        topic.game = current_game
+        topic.game_id = current_game.id
         topic.character_id = current_character.id
         topic.position = Topic.by_group_id(params[:topic_group_id]).count + 1
       end
