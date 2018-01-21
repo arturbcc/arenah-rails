@@ -21,7 +21,7 @@ RSpec.describe Game::PostsController, type: :controller do
 
       delete :destroy, params: { game: game, topic: topic, id: post.id, format: 'json' }
 
-      expect(response.status).to eq(401)
+      expect(response.code).to eq('401')
     end
 
     it 'prevents a user from deleting other user\'s post' do
@@ -30,8 +30,7 @@ RSpec.describe Game::PostsController, type: :controller do
       sign_in_user(player1_user)
       delete :destroy, params: { game: game, topic: topic, id: post.id, format: 'json' }
 
-      json = JSON.parse(response.body)
-      expect(json['status']).to eq(422)
+      expect(response.code).to eq('422')
     end
 
     it 'prevents a game master from deleting a post from other game' do
@@ -43,8 +42,7 @@ RSpec.describe Game::PostsController, type: :controller do
       sign_in_user(game_master_user)
       delete :destroy, params: { game: new_game, topic: new_topic, id: post.id, format: 'json' }
 
-      json = JSON.parse(response.body)
-      expect(json['status']).to eq(422)
+      expect(response.code).to eq('422')
     end
 
     it 'ignores inexistent posts' do
@@ -52,8 +50,7 @@ RSpec.describe Game::PostsController, type: :controller do
 
       delete :destroy, params: { game: game, topic: topic, id: 0, format: 'json' }
 
-      json = JSON.parse(response.body)
-      expect(json['status']).to eq(422)
+      expect(response.code).to eq('422')
     end
 
     it 'allows a master to delete posts from his players' do
@@ -62,8 +59,7 @@ RSpec.describe Game::PostsController, type: :controller do
       sign_in_user(game_master_user)
       delete :destroy, params: { game: game, topic: topic, id: post.id, format: 'json' }
 
-      json = JSON.parse(response.body)
-      expect(json['status']).to eq(200)
+      expect(response.code).to eq('200')
     end
 
     it 'allows a user to delete his/her posts' do
@@ -72,8 +68,7 @@ RSpec.describe Game::PostsController, type: :controller do
       sign_in_user(player1_user)
       delete :destroy, params: { game: game, topic: topic, id: post.id, format: 'json' }
 
-      json = JSON.parse(response.body)
-      expect(json['status']).to eq(200)
+      expect(response.code).to eq('200')
     end
   end
 

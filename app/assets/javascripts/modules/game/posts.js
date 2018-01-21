@@ -42,12 +42,12 @@ define('post', [], function() {
       $.ajax({
         url: url,
         type: 'DELETE',
+        dataType : 'html',
         success: function(data) {
-          if (data.status == 200) {
-            $el.parents('[data-post]').fadeOut();
-          } else {
-            NotyMessage.show('Não é possível apagar a postagem', 3000);
-          }
+          $el.parents('[data-post]').fadeOut();
+        },
+        error: function(data, blah) {
+          NotyMessage.show('Não foi possível apagar a postagem', 3000);
         }
       });
     }

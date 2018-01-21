@@ -3,6 +3,8 @@
 class Game::PostsController < Game::BaseController
   attr_accessor :current_page
 
+  skip_before_action :verify_authenticity_token, only: :destroy
+
   before_action :get_topic, :get_current_page
   before_action :load_recipients, only: [:new, :edit]
   before_action :authenticate_user!, except: :index
@@ -57,20 +59,25 @@ class Game::PostsController < Game::BaseController
     end
   end
 
-  # FIXME: Why don't I simply return head :200? With the current implementation
-  # it will return 200 when an error occur.
   def destroy
-    status = 422
+    status = :unprocessable_entity
 
     if current_post && current_user_ability.can_delete?
       current_post.destroy!
 
       # @topic.recalculate_last_post
-      status = 200
+      status = :ok
     end
 
-    # TODO: make tests to all cases
-    render json: { status: status }
+    # We can't use `:success` in the status because JQuery will assume something
+    # is wrong since there is a single space in the body (it is the behavior of
+    # the `head` in Rails). Instead, we need to send status :ok. It is also
+    # important to send the AJAX request with `dataType : 'html'`, to bypass the
+    # extra space problem.
+    #
+    # Check more about this here:
+    # https://stackoverflow.com/questions/4791499/jquery-doesnt-call-success-method-on-ajax-for-rails-standard-rest-delete-answ
+    head status
   end
 
   private

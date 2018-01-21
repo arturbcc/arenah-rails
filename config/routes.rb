@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get ':game/:topic/post/:id/responder', to: 'posts#new', as: :reply_post
     get ':game/:topic/post/:id/editar', to: 'posts#edit', as: :edit_post
     patch ':game/:topic/post/:id', to: 'posts#update', as: :update_post
-    delete ':game/:topic/post/:id', to: 'posts#destroy', as: :delete_post
+    delete ':game/:topic/post/:id', to: 'posts#destroy', as: :delete_post, defaults: { format: :json }
     post ':game/:topic/post/', to: 'posts#create', as: :create_post
     post ':game/:topic/post/preview', to: 'post_preview#show', as: :preview_post
 
@@ -51,7 +51,7 @@ Rails.application.routes.draw do
 
     get ':game/inscreva-se', to: 'subscription#show', as: :subscription
     post ':game/subscribe', to: 'subscription#create', as: :subscribe
-    delete ':game/unsubscribe', to: 'subscription#destroy', as: :unsubscribe
+    delete ':game/unsubscribe', to: 'subscription#destroy', as: :unsubscribe, defaults: { format: :json }
 
     get ':game/sistema', to: 'games#show', as: :system
 
