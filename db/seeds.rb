@@ -121,14 +121,14 @@ vampire_group_1 = TopicGroup.create!(game: vampire, name: 'Tópicos', position: 
 
 # Topics
 
-crossover_topic_1 = Topic.create!(title: 'Capítulo 2', description: 'A chave de Nosgoth', topic_group: crossover_group_1, game: crossover, character_id: khalmyr.id, position: 2)
-crossover_topic_2 = Topic.create!(title: 'Capítulo 1', description: 'Encontro de heróis', topic_group: crossover_group_1, game: crossover, character_id: khalmyr.id, position: 1)
-crossover_topic_3 = Topic.create!(title: 'Cenário', description: 'Conheça o cenário do jogo', topic_group: crossover_group_2, game: crossover, character_id: khalmyr.id, position: 1)
-crossover_topic_4 = Topic.create!(title: 'Raças', description: 'Conheça as raças', topic_group: crossover_group_2, game: crossover, character_id: khalmyr.id, position: 2)
+crossover_topic_1 = Topic.create!(title: 'Capítulo 2', description: 'A chave de Nosgoth', topic_group: crossover_group_1, game_id: crossover.id, character_id: khalmyr.id, position: 2)
+crossover_topic_2 = Topic.create!(title: 'Capítulo 1', description: 'Encontro de heróis', topic_group: crossover_group_1, game_id: crossover.id, character_id: khalmyr.id, position: 1)
+crossover_topic_3 = Topic.create!(title: 'Cenário', description: 'Conheça o cenário do jogo', topic_group: crossover_group_2, game_id: crossover.id, character_id: khalmyr.id, position: 1)
+crossover_topic_4 = Topic.create!(title: 'Raças', description: 'Conheça as raças', topic_group: crossover_group_2, game_id: crossover.id, character_id: khalmyr.id, position: 2)
 
-dangeons_topic_1 = Topic.create!(title: 'O jogo', description: 'Vamos rolar uns dados', topic_group: dangeons_group_1, game: dungeonsanddragons, character_id: mestre_dos_magos.id, position: 1)
+dangeons_topic_1 = Topic.create!(title: 'O jogo', description: 'Vamos rolar uns dados', topic_group: dangeons_group_1, game_id: dungeonsanddragons.id, character_id: mestre_dos_magos.id, position: 1)
 
-vampire_topic_1 = Topic.create!(title: 'Vampiro', description: 'A Máscara', topic_group: vampire_group_1, game: vampire, character_id: amy.id, position: 1)
+vampire_topic_1 = Topic.create!(title: 'Vampiro', description: 'A Máscara', topic_group: vampire_group_1, game_id: vampire.id, character_id: amy.id, position: 1)
 
 
 # Posts
