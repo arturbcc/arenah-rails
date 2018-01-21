@@ -1,4 +1,4 @@
-class CreateGames < ActiveRecord::Migration
+class CreateGames < ActiveRecord::Migration[5.0]
   def change
     create_table :games do |t|
       t.integer :character_id, index: true, foreign_key: true, null: false

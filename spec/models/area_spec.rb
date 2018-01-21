@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Area do
+RSpec.describe Area, type: :model do
   describe '#profile?' do
     it 'is in profile area' do
       expect(Area.new(:profile)).to be_profile

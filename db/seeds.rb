@@ -6,10 +6,20 @@ def load_sheet(game, character)
   File.read(File.join(Rails.root, "db/sheets/#{game}", "#{character}.json"))
 end
 
-# USERS
+puts 'Start seeding...'
 
+# DELETE CURRENT DATA
+Topic.delete_all
+Post.delete_all
+Game.delete_all
+TopicGroup.delete_all
+User.delete_all
+Character.delete_all
+
+# USERS
+empty_sheet = { attributes_groups: [] }.to_json
 carlos = User.create!(email: 'carlos@arenah.com', name: 'Carlos', password: '12345678', confirmed_at: Time.now)
-mariana = User.create!(email: 'mariana@arenah.com', name: 'Mariana', password: '12345678', confirmed_at: Time.now, legacy_password: Devise::Encryptable::Encryptors::Md5.digest('123', nil, nil, nil))
+mariana = User.create(email: 'mariana@arenah.com', name: 'Mariana', password: '12345678', confirmed_at: Time.now, legacy_password: Devise::Encryptable::Encryptors::Md5.digest('123', nil, nil, nil))
 luisfelipe = User.create!(email: 'luisfelipe@arenah.com', name: 'Luís Felipe', password: '12345678', confirmed_at: Time.now)
 willian = User.create!(email: 'willian@arenah.com', name: 'Willian', password: '12345678', confirmed_at: Time.now)
 priscila = User.create!(email: 'priscila@arenah.com', name: 'Priscila', password: '12345678', confirmed_at: Time.now)
@@ -37,11 +47,11 @@ bobby = Character.create!(user: priscila, name: 'Bobby', avatar: 'bobby.png', po
 sheila = Character.create!(user: nathalia, name: 'Sheila', avatar: 'sheila.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'sheila'))
 
 eva = Character.create!(user: mayara, name: 'Eva', avatar: 'eva.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: load_sheet('vampiro-a-mascara', 'eva'))
-amy = Character.create!(user: mariana, name: 'Amy', avatar: 'amy.png', character_type: 2, gender: 1, post_count: 199, last_post_date: Time.now, sheet: '{}')
+amy = Character.create!(user: mariana, name: 'Amy', avatar: 'amy.png', character_type: 2, gender: 1, post_count: 199, last_post_date: Time.now, sheet: empty_sheet)
 
-khalmyr = Character.create!(user: artur, name: 'Khalmyr', avatar: 'khalmyr.png', character_type: 2, sheet: '{}')
-wynna = Character.create!(user: janeroe, name: 'Wynna', avatar: 'wynna.jpg', character_type: 2, sheet: '{}')
-mestre_dos_magos = Character.create!(user: artur, name: 'Mestre dos Magos', avatar: 'mestre-dos-magos.png', character_type: 2, sheet: '{}')
+khalmyr = Character.create!(user: artur, name: 'Khalmyr', avatar: 'khalmyr.png', character_type: 2, sheet: empty_sheet)
+wynna = Character.create!(user: janeroe, name: 'Wynna', avatar: 'wynna.jpg', character_type: 2, sheet: empty_sheet)
+mestre_dos_magos = Character.create!(user: artur, name: 'Mestre dos Magos', avatar: 'mestre-dos-magos.png', character_type: 2, sheet: empty_sheet)
 
 luffy = Character.create!(user: artur, name: 'Luffy', avatar: 'luffy.png', character_type: 1, sheet: load_sheet('crossover', 'luffy'))
 shurato = Character.create!(user: artur, name: 'Shurato', avatar: 'shurato.png', character_type: 1, sheet: load_sheet('crossover', 'shurato'))
@@ -68,7 +78,6 @@ hiei.update(game: crossover)
 oliver_tsubasa.update(game: crossover)
 palace.update(game: crossover)
 coraline.update(game: crossover)
-khalmyr.update(game: crossover)
 wynna.update(game: crossover)
 luffy.update(game: crossover)
 shurato.update(game: crossover)
@@ -89,8 +98,6 @@ eric.update(game: dungeonsanddragons)
 presto.update(game: dungeonsanddragons)
 bobby.update(game: dungeonsanddragons)
 sheila.update(game: dungeonsanddragons)
-mestre_dos_magos.update(game: dungeonsanddragons)
-
 
 vampire = Game.new(
   name: 'Vampiros',
@@ -105,8 +112,6 @@ vampire = Game.new(
 )
 
 eva.update(game: vampire)
-amy.update(game: vampire)
-
 
 # Topic Groups
 
@@ -117,14 +122,14 @@ vampire_group_1 = TopicGroup.create!(game: vampire, name: 'Tópicos', position: 
 
 # Topics
 
-crossover_topic_1 = Topic.create!(title: 'Capítulo 2', description: 'A chave de Nosgoth', topic_group: crossover_group_1, game: crossover, character_id: khalmyr.id, position: 2)
-crossover_topic_2 = Topic.create!(title: 'Capítulo 1', description: 'Encontro de heróis', topic_group: crossover_group_1, game: crossover, character_id: khalmyr.id, position: 1)
-crossover_topic_3 = Topic.create!(title: 'Cenário', description: 'Conheça o cenário do jogo', topic_group: crossover_group_2, game: crossover, character_id: khalmyr.id, position: 1)
-crossover_topic_4 = Topic.create!(title: 'Raças', description: 'Conheça as raças', topic_group: crossover_group_2, game: crossover, character_id: khalmyr.id, position: 2)
+crossover_topic_1 = Topic.create!(title: 'Capítulo 2', description: 'A chave de Nosgoth', topic_group: crossover_group_1, game_id: crossover.id, character_id: khalmyr.id, position: 2)
+crossover_topic_2 = Topic.create!(title: 'Capítulo 1', description: 'Encontro de heróis', topic_group: crossover_group_1, game_id: crossover.id, character_id: khalmyr.id, position: 1)
+crossover_topic_3 = Topic.create!(title: 'Cenário', description: 'Conheça o cenário do jogo', topic_group: crossover_group_2, game_id: crossover.id, character_id: khalmyr.id, position: 1)
+crossover_topic_4 = Topic.create!(title: 'Raças', description: 'Conheça as raças', topic_group: crossover_group_2, game_id: crossover.id, character_id: khalmyr.id, position: 2)
 
-dangeons_topic_1 = Topic.create!(title: 'O jogo', description: 'Vamos rolar uns dados', topic_group: dangeons_group_1, game: dungeonsanddragons, character_id: mestre_dos_magos.id, position: 1)
+dangeons_topic_1 = Topic.create!(title: 'O jogo', description: 'Vamos rolar uns dados', topic_group: dangeons_group_1, game_id: dungeonsanddragons.id, character_id: mestre_dos_magos.id, position: 1)
 
-vampire_topic_1 = Topic.create!(title: 'Vampiro', description: 'A Máscara', topic_group: vampire_group_1, game: vampire, character_id: amy.id, position: 1)
+vampire_topic_1 = Topic.create!(title: 'Vampiro', description: 'A Máscara', topic_group: vampire_group_1, game_id: vampire.id, character_id: amy.id, position: 1)
 
 
 # Posts
@@ -179,3 +184,5 @@ Post.create!(topic: vampire_topic_1, character: eva, message: 'Proin tempor hend
   'Donec in pharetra ipsum. Pellentesque lectus tortor, varius dictum odio id, pharetra facilisis massa. Vestibulum eu velit consequat libero egestas ultricies. Vestibulum interdum a libero in tincidunt. Sed bibendum, mi vitae venenatis gravida, mi felis tempus erat, at scelerisque purus erat vel est. Duis iaculis dignissim arcu cursus pretium. Sed vel nisl non elit gravida gravida eget vel est. Nullam dui lectus, tempus a est mollis, porttitor pellentesque ligula. Nam sit amet lectus aliquet, bibendum libero vel, luctus mi. Duis malesuada libero non leo elementum mollis. \n\n' +
   'Nullam in metus ac nisi ultricies porttitor a ut orci. Phasellus eu dolor massa. Phasellus quis aliquet eros. Ut risus nunc, consectetur at metus quis, ullamcorper feugiat est. Mauris eget egestas erat. Cras eget purus nec eros condimentum ultrices. Duis tempus facilisis diam non ultrices. Mauris vitae accumsan nulla. \n\n' +
   'Phasellus in odio semper, tristique nulla at, tempor purus. Nulla facilisi. Integer eu viverra erat, id vulputate felis. Nulla malesuada sagittis dignissim. Praesent dictum sit amet odio non accumsan. Nam interdum neque commodo neque placerat, sed hendrerit arcu venenatis. Suspendisse odio ipsum, lobortis ut eleifend a, feugiat vitae elit. Integer et lorem ultricies erat tincidunt pulvinar.')
+
+puts 'Done. Good code :)'

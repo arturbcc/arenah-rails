@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require_relative '../support/shared_examples/sluggable'
 
-describe User, type: :model do
+RSpec.describe User, type: :model do
   it { should have_many :characters }
   it { should have_many :subscriptions }
   it { should validate_presence_of :name }

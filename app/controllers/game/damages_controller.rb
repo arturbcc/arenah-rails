@@ -12,7 +12,7 @@ class Game::DamagesController < Game::BaseController
   end
 
   def create
-    if @identity.game_master? && current_game.system.life_defined?
+    if identity.game_master? && current_game.system.life_defined?
       damage = params[:damage].to_i
 
       victims_ids.each do |id|

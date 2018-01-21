@@ -16,7 +16,7 @@ class Game::TopicGroupsController < Game::BaseController
   end
 
   def create
-    if @identity.game_master? && !limit_reached?
+    if identity.game_master? && !limit_reached?
       group = TopicGroup.new(topic_group_params).tap do |group|
         group.game = current_game
         group.position = TopicGroup.count+ 1
@@ -40,7 +40,7 @@ class Game::TopicGroupsController < Game::BaseController
   end
 
   def update
-    if @identity.game_master?
+    if identity.game_master?
       current_topic_group.update(topic_group_params)
       redirect_to game_topics_path(current_game)
     else
@@ -51,7 +51,7 @@ class Game::TopicGroupsController < Game::BaseController
   def destroy
     status = 422
 
-    if @identity.game_master?
+    if identity.game_master?
       current_topic_group.destroy!
 
       status = 200
@@ -63,7 +63,7 @@ class Game::TopicGroupsController < Game::BaseController
   def sort
     status = 403
 
-    if @identity.game_master?
+    if identity.game_master?
       JSON.parse(params['changes']).each do |group_id, position|
         current_game.topic_groups.find { |group| group.id == group_id.to_i }
           .update(position: position)

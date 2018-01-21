@@ -1,4 +1,4 @@
-class CreatePostRecipients < ActiveRecord::Migration
+class CreatePostRecipients < ActiveRecord::Migration[5.0]
   def change
     create_table :post_recipients do |t|
       t.integer :post_id

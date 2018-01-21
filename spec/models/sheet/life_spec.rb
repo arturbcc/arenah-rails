@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Sheet::Life do
+RSpec.describe Sheet::Life, type: :model do
   before(:all) do
     @system = load_system
   end

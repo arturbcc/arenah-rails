@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Post, type: :model do
+RSpec.describe Post, type: :model do
   it { should belong_to :topic }
   it { should belong_to :character }
   it { should have_many :post_recipients }
@@ -34,12 +34,17 @@ describe Post, type: :model do
   # end
 
   describe '#recipients' do
+    let(:user) { create(:user) }
+    let(:system) { load_system }
+    let(:character) { create(:character, user: user) }
+    let(:game) { create(:game, system: system, character: character) }
+    let(:topic_group) { create(:topic_group, game: game) }
+    let(:topic) { create(:topic, topic_group: topic_group, game_id: game.id) }
+
     it 'lists all recipients of the post' do
-      game = create(:game)
-      user = create(:user)
       character1 = create(:character, name: 'Jane Roe', user: user, game: game)
       character2 = create(:character, user: user, game: game)
-      post = create(:post, topic: create(:topic))
+      post = create(:post, topic: topic, character: character)
       create(:post_recipient, post: post, character: character1)
       create(:post_recipient, post: post, character: character2)
 

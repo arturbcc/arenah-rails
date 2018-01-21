@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :topic_group do
-    game_id 1
+    # game_id 1
     position 1
     sequence(:name) { |i| "group #{i}" }
   end

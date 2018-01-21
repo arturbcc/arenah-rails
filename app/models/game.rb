@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-class Game < ActiveRecord::Base
+class Game < ApplicationRecord
   extend FriendlyId
 
-  has_many :topics
   has_many :topic_groups, -> { order(:position) }
   has_many :characters
   has_many :subscriptions
@@ -20,8 +19,11 @@ class Game < ActiveRecord::Base
 
   enum status: [:inactive, :active]
 
+  before_create :ensure_owner_is_game_master
+  after_create :set_game_to_owner
+
   def system
-    @system ||= Sheet::System.new(super)
+    @system ||= Sheet::System.new(JSON.parse(super))
   end
 
   # TODO: Do we need this method?
@@ -57,5 +59,13 @@ class Game < ActiveRecord::Base
     characters
       .where('characters.character_type = ?', type)
       .order('characters.name')
+  end
+
+  def ensure_owner_is_game_master
+    character.game_master!
+  end
+
+  def set_game_to_owner
+    character.update(game: self)
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PostRecipient < ActiveRecord::Base
+class PostRecipient < ApplicationRecord
   belongs_to :post
   belongs_to :character
 end

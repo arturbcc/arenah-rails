@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe ApplicationHelper do
+RSpec.describe ApplicationHelper, type: :helper do
   describe '#icon' do
     it 'renders a font-awesome icon' do
       expect(helper.icon('home')).to eq('<i class="fa fa-home"></i>')

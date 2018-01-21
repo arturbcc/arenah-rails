@@ -57,16 +57,16 @@ class Game::PostsController < Game::BaseController
     end
   end
 
+  # FIXME: Why don't I simply return head :200? With the current implementation
+  # it will return 200 when an error occur.
   def destroy
     status = 422
 
-    if current_topic.present?
-      if current_user_ability.can_delete?
-        current_post.destroy!
+    if current_post && current_user_ability.can_delete?
+      current_post.destroy!
 
-        # @topic.recalculate_last_post
-        status = 200
-      end
+      # @topic.recalculate_last_post
+      status = 200
     end
 
     # TODO: make tests to all cases
@@ -80,11 +80,11 @@ class Game::PostsController < Game::BaseController
   end
 
   def current_post
-    @current_post ||= Post.find_by(topic: @topic, id: params[:id])
+    @current_post ||= Post.find_by(topic: current_topic, id: params[:id])
   end
 
   def current_user_ability
-    @ability ||= Ability.new(@identity, current_post, current_character)
+    @ability ||= Ability.new(identity, current_post, current_character)
   end
 
   def post_params
@@ -128,7 +128,7 @@ class Game::PostsController < Game::BaseController
   # NPC's
   def author
     character_id = params[:post][:character_id].to_i
-    return current_character unless character_id > 0 && @identity.game_master?
+    return current_character unless character_id > 0 && identity.game_master?
 
     npc = Character.find_by(
       id: character_id,

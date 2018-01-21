@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Sheet::DiceResultRule do
+RSpec.describe Sheet::DiceResultRule, type: :model do
   before(:all) do
     @system = load_system
   end

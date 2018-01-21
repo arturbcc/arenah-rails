@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Sheet::TableItem do
+RSpec.describe Sheet::TableItem, type: :model do
   let(:table) { @system.tables.first }
 
   before(:all) do

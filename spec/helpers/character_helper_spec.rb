@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe CharacterHelper do
+RSpec.describe CharacterHelper, type: :helper do
   describe '#avatar' do
     context 'with avatar' do
       let(:character) { build(:character, avatar: 'avatar.png', game: build(:game)) }

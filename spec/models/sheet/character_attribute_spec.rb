@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Sheet::CharacterAttribute do
+RSpec.describe Sheet::CharacterAttribute, type: :model do
   context 'Game System' do
     before(:all) do
       @system = load_system

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Sheet::Modifier do
+RSpec.describe Sheet::Modifier, type: :model do
   describe '#to_s' do
     it 'returns the modifier string representation' do
       modifier = Sheet::Modifier.new(base_attribute_name: 'Agilidade', signal: '+', points: 10)

@@ -1,4 +1,4 @@
-class CreateTopicGroups < ActiveRecord::Migration
+class CreateTopicGroups < ActiveRecord::Migration[5.0]
   def change
     create_table :topic_groups do |t|
       t.integer :game_id, index: true, foreign_key: true, null: false

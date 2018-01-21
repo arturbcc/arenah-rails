@@ -1,14 +1,16 @@
 require 'rails_helper'
 
-describe Ability do
+RSpec.describe Ability, type: :model do
   let(:master_identity) { Identity.new(:game_master) }
   let(:unlogged_identity) { Identity.new(:unlogged) }
   let(:visitor_identity) { Identity.new(:visitor) }
   let(:player_identity) { Identity.new(:player) }
 
   let(:user) { create(:user) }
-  let(:game) { create(:game) }
-  let(:topic) { create(:topic, game: game) }
+  let(:character) { create(:character, user: user) }
+  let(:game) { create(:game, character: character) }
+  let(:topic_group) { create(:topic_group, game: game) }
+  let(:topic) { create(:topic, topic_group: topic_group, game_id: game.id) }
 
   context 'game master' do
     let(:subject) { Ability.new(master_identity, build(:post)) }
@@ -155,8 +157,8 @@ describe Ability do
     end
 
     it 'is a recipient if the character is in the post\'s recipient list' do
-      character = create(:character, user: user)
-      post = create(:post, topic: topic, recipients: [character])
+      sender = create(:character, user: user, name: 'Jane sender')
+      post = create(:post, topic: topic, recipients: [character], character: sender)
       ability = Ability.new(master_identity, post, character)
       expect(ability).to be_recipient
     end

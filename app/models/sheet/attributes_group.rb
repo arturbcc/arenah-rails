@@ -60,6 +60,11 @@ module Sheet
       def to_params(options = {})
         {
           group_name: name,
+          # Points are not set from inside the class. They are calculated
+          # on the Sheet class, inside the `calculate_group_points` method,
+          # because it is necessary to access attributes from other groups to
+          # parse the formulas. Because of that, accessing only this class the
+          # points will always be `nil` unless the Sheet method is called.
           points: points,
           used_points: used_points,
           source_type: source_type,

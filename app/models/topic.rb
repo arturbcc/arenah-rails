@@ -8,17 +8,19 @@
 # * 0: redirects to first page
 # * 1: redirects to last page and last post
 # * 2: behaves according to the topic group rule
-class Topic < ActiveRecord::Base
+class Topic < ApplicationRecord
   extend FriendlyId
-  friendly_id :title, :use => :slugged
+  extend Forwardable
+  friendly_id :title, use: :slugged
+
+  def_delegator :topic_group, :game
 
   # TODO: on delete, we must recount the post count of all characters
-  # It should belongs to game room, or we need to remove the has_many topics from the game room
   has_many :posts, -> { order(:created_at) }, dependent: :delete_all
   belongs_to :topic_group
-  belongs_to :game
 
   validates :title, length: { maximum: 100 }
+  # FIXME: remove game_id from topic's table. 
   validates :game_id, :slug, presence: true
 
   scope :by_group_id, ->(group_id) { joins(:topic_group)

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Identity do
+RSpec.describe Identity, type: :model do
   context 'invalid role' do
     it 'is unlogged if no role is provided' do
       expect(Identity.new).to be_unlogged
