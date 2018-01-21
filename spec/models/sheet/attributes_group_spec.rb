@@ -2,14 +2,12 @@
 
 require 'rails_helper'
 
-describe Sheet::AttributesGroup do
+RSpec.describe Sheet::AttributesGroup, type: :model do
   context 'Game System' do
-    before(:all) do
-      @system = load_system
-    end
+    let(:system) { load_system }
 
     it 'serializes the group "Dados"' do
-      group = @system.sheet.attributes_groups.first
+      group = system.sheet.attributes_groups.first
 
       expect(group.name).to eq('Dados')
       expect(group.page).to eq(1)
@@ -23,7 +21,7 @@ describe Sheet::AttributesGroup do
     end
 
     it 'serializes the group "Dados Extras"' do
-      group = @system.sheet.attributes_groups[1]
+      group = system.sheet.attributes_groups[1]
 
       expect(group.name).to eq('Dados Extras')
       expect(group.page).to eq(1)
@@ -37,7 +35,7 @@ describe Sheet::AttributesGroup do
     end
 
     it 'serializes the group "Atributos"' do
-      group = @system.sheet.attributes_groups[2]
+      group = system.sheet.attributes_groups[2]
 
       expect(group.name).to eq('Atributos')
       expect(group.page).to eq(1)
@@ -54,7 +52,7 @@ describe Sheet::AttributesGroup do
     end
 
     it 'serializes the group "Perícias"' do
-      group = @system.sheet.attributes_groups[3]
+      group = system.sheet.attributes_groups[3]
 
       expect(group.name).to eq('Perícias')
       expect(group.page).to eq(1)
@@ -71,7 +69,7 @@ describe Sheet::AttributesGroup do
     end
 
     it 'serializes the group "Aprimoramentos"' do
-      group = @system.sheet.attributes_groups[4]
+      group = system.sheet.attributes_groups[4]
 
       expect(group.name).to eq('Aprimoramentos')
       expect(group.page).to eq(1)
@@ -88,7 +86,7 @@ describe Sheet::AttributesGroup do
     end
 
     it 'serializes the group "Itens"' do
-      group = @system.sheet.attributes_groups[5]
+      group = system.sheet.attributes_groups[5]
 
       expect(group.name).to eq('Itens')
       expect(group.page).to eq(2)
@@ -103,7 +101,7 @@ describe Sheet::AttributesGroup do
     end
 
     it 'serializes the group "História"' do
-      group = @system.sheet.attributes_groups[6]
+      group = system.sheet.attributes_groups[6]
 
       expect(group.name).to eq('História')
       expect(group.page).to eq(3)
@@ -117,7 +115,7 @@ describe Sheet::AttributesGroup do
     end
 
     it 'serializes the group "Status"' do
-      group = @system.sheet.attributes_groups[7]
+      group = system.sheet.attributes_groups[7]
 
       expect(group.name).to eq('Status')
       expect(group.page).to eq(1)
@@ -132,7 +130,7 @@ describe Sheet::AttributesGroup do
     end
 
     it 'serializes the group "Grimório"' do
-      group = @system.sheet.attributes_groups[8]
+      group = system.sheet.attributes_groups[8]
 
       expect(group.name).to eq('Grimório')
       expect(group.page).to eq(2)
@@ -147,7 +145,7 @@ describe Sheet::AttributesGroup do
     end
 
     it 'serializes the group "Equipamentos"' do
-      group = @system.sheet.attributes_groups.last
+      group = system.sheet.attributes_groups.last
 
       expect(group.name).to eq('Equipamentos')
       expect(group.page).to eq(2)
@@ -195,7 +193,7 @@ describe Sheet::AttributesGroup do
         { name: 'Percepção', points: 12 },
         { name: 'Carisma', points: 10 }
       ]
-      attributes_group = Sheet::AttributesGroup.new(character_attributes: attributes)
+      attributes_group = Sheet::AttributesGroup.new(character_attributes: attributes, group_points_formula: '100')
       expect(attributes_group.used_points).to eq(94)
     end
 
@@ -204,7 +202,7 @@ describe Sheet::AttributesGroup do
         { name: 'Força', points: 10  },
         { name: 'Constituição' }
       ]
-      attributes_group = Sheet::AttributesGroup.new(character_attributes: attributes)
+      attributes_group = Sheet::AttributesGroup.new(character_attributes: attributes, group_points_formula: '100')
       expect(attributes_group.used_points).to eq(10)
     end
   end
@@ -226,7 +224,7 @@ describe Sheet::AttributesGroup do
       Sheet::AttributesGroup.new(
         name: 'Group',
         extra_points: 10,
-        points: 100,
+        group_points_formula: '100',
         source_type: 'list',
         type: 'list',
         character_attributes: [
@@ -240,7 +238,7 @@ describe Sheet::AttributesGroup do
       it 'transforms the group in a hash params' do
         expected = {
           group_name: 'Group',
-          points: 100,
+          points: nil,
           used_points: 35,
           source_type: 'list',
           type: 'list'
@@ -253,7 +251,7 @@ describe Sheet::AttributesGroup do
       it 'transforms the group in a hash params' do
         expected = {
           group_name: 'Group',
-          points: 100,
+          points: nil,
           used_points: 35,
           source_type: 'list',
           type: 'list',

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Sheet::DiceRollRule do
+RSpec.describe Sheet::DiceRollRule, type: :model do
   before(:all) do
     @system = load_system
   end

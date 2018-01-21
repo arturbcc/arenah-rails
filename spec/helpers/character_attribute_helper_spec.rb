@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe CharacterAttributeHelper do
+RSpec.describe CharacterAttributeHelper, type: :helper do
   describe '#bar_level' do
     it 'returns the total if the points exceed the maximum' do
       expect(helper.bar_level(150, 100)).to eq(100)

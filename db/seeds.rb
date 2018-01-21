@@ -6,10 +6,19 @@ def load_sheet(game, character)
   File.read(File.join(Rails.root, "db/sheets/#{game}", "#{character}.json"))
 end
 
-# USERS
+puts 'Start seeding...'
 
+# DELETE CURRENT DATA
+Topic.delete_all
+Post.delete_all
+Game.delete_all
+TopicGroup.delete_all
+User.delete_all
+Character.delete_all
+
+# USERS
 carlos = User.create!(email: 'carlos@arenah.com', name: 'Carlos', password: '12345678', confirmed_at: Time.now)
-mariana = User.create!(email: 'mariana@arenah.com', name: 'Mariana', password: '12345678', confirmed_at: Time.now, legacy_password: Devise::Encryptable::Encryptors::Md5.digest('123', nil, nil, nil))
+mariana = User.create(email: 'mariana@arenah.com', name: 'Mariana', password: '12345678', confirmed_at: Time.now, legacy_password: Devise::Encryptable::Encryptors::Md5.digest('123', nil, nil, nil))
 luisfelipe = User.create!(email: 'luisfelipe@arenah.com', name: 'Luís Felipe', password: '12345678', confirmed_at: Time.now)
 willian = User.create!(email: 'willian@arenah.com', name: 'Willian', password: '12345678', confirmed_at: Time.now)
 priscila = User.create!(email: 'priscila@arenah.com', name: 'Priscila', password: '12345678', confirmed_at: Time.now)
@@ -68,7 +77,6 @@ hiei.update(game: crossover)
 oliver_tsubasa.update(game: crossover)
 palace.update(game: crossover)
 coraline.update(game: crossover)
-khalmyr.update(game: crossover)
 wynna.update(game: crossover)
 luffy.update(game: crossover)
 shurato.update(game: crossover)
@@ -89,8 +97,6 @@ eric.update(game: dungeonsanddragons)
 presto.update(game: dungeonsanddragons)
 bobby.update(game: dungeonsanddragons)
 sheila.update(game: dungeonsanddragons)
-mestre_dos_magos.update(game: dungeonsanddragons)
-
 
 vampire = Game.new(
   name: 'Vampiros',
@@ -105,8 +111,6 @@ vampire = Game.new(
 )
 
 eva.update(game: vampire)
-amy.update(game: vampire)
-
 
 # Topic Groups
 
@@ -179,3 +183,5 @@ Post.create!(topic: vampire_topic_1, character: eva, message: 'Proin tempor hend
   'Donec in pharetra ipsum. Pellentesque lectus tortor, varius dictum odio id, pharetra facilisis massa. Vestibulum eu velit consequat libero egestas ultricies. Vestibulum interdum a libero in tincidunt. Sed bibendum, mi vitae venenatis gravida, mi felis tempus erat, at scelerisque purus erat vel est. Duis iaculis dignissim arcu cursus pretium. Sed vel nisl non elit gravida gravida eget vel est. Nullam dui lectus, tempus a est mollis, porttitor pellentesque ligula. Nam sit amet lectus aliquet, bibendum libero vel, luctus mi. Duis malesuada libero non leo elementum mollis. \n\n' +
   'Nullam in metus ac nisi ultricies porttitor a ut orci. Phasellus eu dolor massa. Phasellus quis aliquet eros. Ut risus nunc, consectetur at metus quis, ullamcorper feugiat est. Mauris eget egestas erat. Cras eget purus nec eros condimentum ultrices. Duis tempus facilisis diam non ultrices. Mauris vitae accumsan nulla. \n\n' +
   'Phasellus in odio semper, tristique nulla at, tempor purus. Nulla facilisi. Integer eu viverra erat, id vulputate felis. Nulla malesuada sagittis dignissim. Praesent dictum sit amet odio non accumsan. Nam interdum neque commodo neque placerat, sed hendrerit arcu venenatis. Suspendisse odio ipsum, lobortis ut eleifend a, feugiat vitae elit. Integer et lorem ultricies erat tincidunt pulvinar.')
+
+puts 'Done. Good code :)'

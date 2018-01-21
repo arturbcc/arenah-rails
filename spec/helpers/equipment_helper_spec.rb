@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe EquipmentHelper do
+RSpec.describe EquipmentHelper, type: :helper do
   describe '#equipment_image' do
     let(:game) { 'crossover' }
     let(:image_name) { 'sword' }

@@ -1,13 +1,17 @@
 require 'rails_helper'
 
-describe SheetPresenter do
+RSpec.describe SheetPresenter, type: :presenter do
   describe '#system' do
     let(:user) { create(:user) }
-    let(:system) { @system = load_system }
-    let(:game) { create(:game, system: system.to_json) }
+    let(:system) { load_system }
+    let(:character) { create(:character, user: user) }
+    let(:game) { create(:game, system: system, character: character) }
     let(:sheet) { load_sheet('crossover', 'inuyasha') }
-    let(:character) { create(:character, game: game, user: user) }
-    let(:presenter) { SheetPresenter.new(character) }
+    let(:presenter) { described_class.new(character) }
+
+    before do
+      character.update(game: game)
+    end
 
     it 'returns the system of the sheet' do
       expect(presenter.system.name).to eq(system.name)

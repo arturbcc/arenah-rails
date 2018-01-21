@@ -2,69 +2,75 @@
 
 require 'rails_helper'
 
-describe Game::PostsController do
-  let(:user) { create(:user) }
-  let!(:game) { create(:game) }
-  let!(:topic) { create(:topic, game: game) }
-
+RSpec.describe Game::PostsController, type: :controller do
   describe '#delete' do
+    let(:game_master_user) { create(:user, name: 'John Doe') }
+    let(:game_master_character) { create(:character, user: game_master_user, name: 'Game master') }
+    let!(:game) { create(:game, character: game_master_character) }
+    let(:topic_group) { create(:topic_group, game: game) }
+    let!(:topic) { create(:topic, topic_group: topic_group, game_id: game.id) }
+
+    let(:player1_user) { create(:user, name: 'Jane Roe') }
+    let!(:player1_character) { create(:character, user: player1_user, name: 'Player 1', game: game) }
+
+    let(:player2_user) { create(:user, name: 'Mary Loe') }
+    let!(:player2_character) { create(:character, user: player2_user, name: 'Player 2', game: game) }
+
     it 'prevents unlogged users from deleting a post' do
-      delete :destroy, game: game, topic: topic, id: 1, format: 'json'
+      post = create(:post, topic: topic, character: player1_character)
+
+      delete :destroy, params: { game: game, topic: topic, id: post.id, format: 'json' }
 
       expect(response.status).to eq(401)
     end
 
     it 'prevents a user from deleting other user\'s post' do
-      post = create(:post, topic: topic)
+      post = create(:post, topic: topic, character: player2_character)
 
-      sign_in_user(user)
-      delete :destroy, game: game, topic: topic, id: post.id, format: 'json'
+      sign_in_user(player1_user)
+      delete :destroy, params: { game: game, topic: topic, id: post.id, format: 'json' }
 
       json = JSON.parse(response.body)
       expect(json['status']).to eq(422)
     end
 
     it 'prevents a game master from deleting a post from other game' do
-      master = create(:character, :game_master, user: user)
-      post = create(:post, topic: topic)
+      new_game = create(:game, character: player2_character)
+      new_topic_group = create(:topic_group, game: new_game)
+      new_topic = create(:topic, topic_group: new_topic_group, game_id: game.id)
+      post = create(:post, topic: new_topic, character: player2_character)
 
-      sign_in_user(user)
-      delete :destroy, game: game, topic: topic, id: post.id, format: 'json'
+      sign_in_user(game_master_user)
+      delete :destroy, params: { game: new_game, topic: new_topic, id: post.id, format: 'json' }
 
       json = JSON.parse(response.body)
       expect(json['status']).to eq(422)
     end
 
     it 'ignores inexistent posts' do
-      character = create(:character, user: user, game: game)
-      post = create(:post, topic: topic, character: character)
+      sign_in_user(game_master_user)
 
-      sign_in_user(user)
-      delete :destroy, game: game, topic: topic, id: (post.id + 1), format: 'json'
+      delete :destroy, params: { game: game, topic: topic, id: 0, format: 'json' }
 
       json = JSON.parse(response.body)
       expect(json['status']).to eq(422)
     end
 
     it 'allows a master to delete posts from his players' do
-      master = create(:character, :game_master, user: user, game: game)
-      post = create(:post, topic: topic)
+      post = create(:post, topic: topic, character: player1_character)
 
-      sign_in_user(user)
-      delete :destroy, game: game, topic: topic, id: post.id, format: 'json'
+      sign_in_user(game_master_user)
+      delete :destroy, params: { game: game, topic: topic, id: post.id, format: 'json' }
 
       json = JSON.parse(response.body)
       expect(json['status']).to eq(200)
     end
 
     it 'allows a user to delete his/her posts' do
-      game = create(:game)
-      character = create(:character, user: user, game: game)
-      topic = create(:topic, game: game)
-      post = create(:post, topic: topic, character: character)
+      post = create(:post, topic: topic, character: player1_character)
 
-      sign_in_user(user)
-      delete :destroy, game: game, topic: topic, id: post.id, format: 'json'
+      sign_in_user(player1_user)
+      delete :destroy, params: { game: game, topic: topic, id: post.id, format: 'json' }
 
       json = JSON.parse(response.body)
       expect(json['status']).to eq(200)
@@ -75,6 +81,6 @@ describe Game::PostsController do
 
   def sign_in_user(user)
     @request.env["devise.mapping"] = Devise.mappings[:user]
-    sign_in user
+    sign_in(user)
   end
 end

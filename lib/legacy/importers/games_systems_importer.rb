@@ -32,7 +32,7 @@ module Legacy
           end
 
           if game.arenah_game
-            game.arenah_game.update(system: game_system.to_json)
+            game.arenah_game.update(system: game_system)
             game.system = game_system
           else
             puts "Cannot update game #{game.name}".red
@@ -164,7 +164,7 @@ module Legacy
         end
 
         sheet = { attributes_groups: sheet }
-        character.arenah_character.update(sheet: sheet.to_json)
+        character.arenah_character.update(sheet: sheet)
       end
     end
   end

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :character do
     sequence(:name) { |i| "character #{i}" }
     character_type 0

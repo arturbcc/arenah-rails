@@ -1,9 +1,12 @@
 config/database.yml
-log/*.log
+/log/*.log
 coverage
-tmp/*
+/tmp/*
 misc/csvs
 public/uploads
-
 public/games/*
 .env
+!/tmp/.keep
+/node_modules
+/yarn-error.log
+.byebug_history

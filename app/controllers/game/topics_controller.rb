@@ -19,7 +19,7 @@ class Game::TopicsController < Game::BaseController
   end
 
   def create
-    if @identity.game_master?
+    if identity.game_master?
       topic = Topic.new(topic_params).tap do |topic|
         topic.game = current_game
         topic.character_id = current_character.id
@@ -44,7 +44,7 @@ class Game::TopicsController < Game::BaseController
   end
 
   def update
-    if @identity.game_master?
+    if identity.game_master?
       current_topic.update(topic_params)
       redirect_to game_topics_path(current_game)
     else
@@ -56,7 +56,7 @@ class Game::TopicsController < Game::BaseController
     status = 422
 
     if current_topic.present?
-      if @identity.game_master?
+      if identity.game_master?
         current_topic.destroy!
 
         status = 200
@@ -69,7 +69,7 @@ class Game::TopicsController < Game::BaseController
   def sort
     status = 403
 
-    if @identity.game_master?
+    if identity.game_master?
       JSON.parse(params['changes']).each do |topic_id, position|
         current_game.topics.find { |topic| topic.id == topic_id.to_i }
           .update(position: position)

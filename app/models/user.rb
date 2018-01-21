@@ -2,7 +2,7 @@
 
 require Rails.root.join('lib', 'devise', 'encryptors', 'md5')
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   extend FriendlyId
 
   devise :database_authenticatable, :registerable, :confirmable,

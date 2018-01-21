@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :post_recipient do
-    post_id 1
-    character_id 1
+    # post_id 1
+    # character_id 1
   end
 end

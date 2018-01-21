@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Character < ActiveRecord::Base
+class Character < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
@@ -42,7 +42,7 @@ class Character < ActiveRecord::Base
   enum sheet_mode: { free_mode: 0, game_mode: 1, game_master_mode: 2 }
 
   belongs_to :user
-  belongs_to :game
+  belongs_to :game, optional: true
   has_many :posts
 
   has_many :sent_messages, -> { order(created_at: :desc) }, foreign_key: :from, class_name: 'Message'
@@ -53,8 +53,8 @@ class Character < ActiveRecord::Base
 
   def sheet
     @sheet ||= begin
-      sheet = Sheet::Sheet.new(super)
-      apply_attributes_relationship_on(sheet)
+      character_sheet = Sheet::Sheet.new(super)
+      apply_attributes_relationship_on(character_sheet)
     end
   end
 

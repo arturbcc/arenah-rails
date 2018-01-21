@@ -5,7 +5,7 @@ default: &default
   database: <%= ENV["POSTGRESQL_DATABASE"] || "arenah_development" %>
   password: <%= ENV["POSTGRESQL_PASSWORD"] %>
   host: <%= ENV["POSTGRESQL_HOST"] || "localhost" %>
-  pool: <%= ENV["POSTGRESQL_POOL"] || 5 %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   port: <%= ENV["POSTGRESQL_PORT"] || 5432 %>
 
 development:

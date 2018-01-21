@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require_relative '../support/shared_examples/sluggable'
 
-describe TopicGroup, type: :model do
+RSpec.describe TopicGroup, type: :model do
   it_behaves_like 'a sluggable', 'topic-group-name' do
-    let(:sluggable) { TopicGroup.create(game_id: 1, name: 'Topic Group Name') }
+    let(:sluggable) { TopicGroup.create(name: 'Topic Group Name') }
   end
 
   it { should have_many :topics }

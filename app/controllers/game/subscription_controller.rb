@@ -42,7 +42,7 @@ class Game::SubscriptionController < Game::BaseController
 
   def send_message_to_masters(message)
     current_game.masters.each do |master|
-      Message.create!(from: Message::FROM_ARENAH, to: master.id, body: message)
+      # Message.create!(from: Message::FROM_ARENAH, to: master.id, body: message)
     end
   end
 end

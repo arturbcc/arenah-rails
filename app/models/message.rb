@@ -2,11 +2,11 @@
 
 # require 'html/sanitizer'
 
-class Message < ActiveRecord::Base
-  belongs_to :sender, class_name: 'Character'
-  belongs_to :receiver, class_name: 'Character'
+class Message < ApplicationRecord
+  belongs_to :sender, class_name: 'Character', foreign_key: :from
+  belongs_to :receiver, class_name: 'Character', foreign_key: :to
 
-  FROM_ARENAH = 0
+  # FROM_ARENAH = 0
 
   def excerpt(length)
     content = Rails::Html::FullSanitizer.new.sanitize(body)

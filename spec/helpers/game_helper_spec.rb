@@ -2,10 +2,13 @@
 
 require 'rails_helper'
 
-describe GameHelper do
+RSpec.describe GameHelper, type: :helper do
+  let(:user) { create(:user) }
+  let(:character) { create(:character, user: user, name: 'Game Room Owner') }
+
   describe '#banner' do
     context 'with banner' do
-      let(:game) { build(:game, banner: 'resident-evil.png') }
+      let(:game) { build(:game, character: character, banner: 'resident-evil.png') }
 
       it 'renders the game\'s banner with a link to the game' do
         expect(helper.banner(game)).to include(game.banner)
@@ -13,7 +16,7 @@ describe GameHelper do
     end
 
     context 'without banner' do
-      let(:game) { build(:game) }
+      let(:game) { build(:game, character: character) }
 
       it 'renders the default banner with a link to the game' do
         expect(helper.banner(game)).to include('defaults/banner.jpg')
@@ -30,7 +33,7 @@ describe GameHelper do
   describe '#banner_url' do
     context 'with game' do
       it 'returns the banner url of the game' do
-        game = create(:game, banner: 'game_banner.png')
+        game = create(:game, character: character, banner: 'game_banner.png')
         expect(helper.banner_url(game)).to include(game.banner)
       end
     end
@@ -44,7 +47,7 @@ describe GameHelper do
 
   describe '#custom' do
     context 'with game' do
-      let(:game) { build(:game) }
+      let(:game) { build(:game, character: character) }
 
       it 'renders the game\'s custom css' do
         expect(helper.custom_css(game)).to include('css/custom.css')

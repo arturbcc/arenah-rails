@@ -7,7 +7,7 @@
 #
 # * 0: redirects to first page
 # * 1: redirects to last page and last post
-class TopicGroup < ActiveRecord::Base
+class TopicGroup < ApplicationRecord
   TOPIC_GROUP_LIMIT = 3
 
   extend FriendlyId

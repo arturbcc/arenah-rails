@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Message do
+RSpec.describe Message, type: :model do
   describe '#excerpt' do
     it 'returns the whole string if it fits on the expected characters range' do
       message = Message.new(body: 'This is a short message')

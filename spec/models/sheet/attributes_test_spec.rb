@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Sheet::AttributesTest do
+RSpec.describe Sheet::AttributesTest, type: :model do
   before(:all) do
     @system = load_system
   end
