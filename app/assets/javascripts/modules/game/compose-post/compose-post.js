@@ -24,11 +24,11 @@ define('compose-post', ['compose-post-accordion', 'compose-post-preview', 'imper
   var fn = ComposePost.prototype;
 
   fn._bindEvents = function() {
-    $.proxyAll(this, 'autoComplete', 'selectRecipient', 'onSave');
+    $.proxyAll(this, 'autoComplete', 'selectRecipient', '_onSave');
 
     this.characters.load(this.autoComplete);
     this.recipients.onSelect(this.selectRecipient);
-    this.saveButton.on('click', this.onSave);
+    this.saveButton.on('click', this._onSave);
   };
 
   fn.autoComplete = function() {
@@ -60,7 +60,7 @@ define('compose-post', ['compose-post-accordion', 'compose-post-preview', 'imper
     this.composePostAccordion.showOnGroup(id);
   };
 
-  fn.onSave = function(event) {
+  fn._onSave = function(event) {
     event.preventDefault();
 
     var message = $('#bbcode-editor').val();
