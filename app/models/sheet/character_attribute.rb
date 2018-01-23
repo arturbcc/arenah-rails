@@ -17,12 +17,12 @@ module Sheet
     # This method is used to be called on a formula. When an attribute is
     # used as a variable, it must provide a value to be used in the math.
     #
-    # Return:
+    # Returns a number according to these rules:
     #
     # * If the attribute has a cost, it will be the attribute value.
     # * Else, if there are points on it, the points will be summed up with
     #   the based attribute value and the modifiers
-    # * At last, if no rule was matched, it returns the the content
+    # * At last, if no rule was matched, it returns the content.
     def value
       if cost
         cost.to_i
