@@ -152,11 +152,14 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     // before saving.
     // TODO: it would be a nice feature to log modifications to show to the
     // game master
-    element.siblings('.editable-cancel:first').trigger('click');
 
     if (this.currentEditable && this.currentEditable.onSave && typeof this.currentEditable.onSave == "function") {
+      var data = this.currentAttributesGroupData(element);
+
       this.currentEditable.onSave(data);
     }
+
+    element.siblings('.editable-cancel:first').trigger('click');
   };
 
   // Undo all the current changes. Once the changes are cancelled, the group

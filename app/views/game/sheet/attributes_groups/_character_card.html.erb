@@ -6,7 +6,7 @@
     <% group.character_attributes.each do |attribute| %>
       <div class="col-xs-4 col-sm-4">
         <table class="key-value-table">
-          <%= content_tag :tr, data: { 'atribute-name': attribute.name } do %>
+          <%= content_tag :tr, data: { 'attribute-name': attribute.name } do %>
             <td class="key">
               <%=
                 link_to "#{attribute.name}:",

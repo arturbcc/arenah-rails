@@ -57,7 +57,7 @@ Rails.application.routes.draw do
 
     get 'sala/criar', to: 'home#new', as: :new
 
-    resources :sheet, only: :show, param: :character_slug, path: ':game/ficha'
+    resources :sheet, only: [:show, :update], param: :character_slug, path: ':game/ficha'
 
     get 'personagem/trocar-para/:game/:character', to: 'change_character#show', as: :change_character
   end
