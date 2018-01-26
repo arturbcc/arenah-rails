@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 feature 'Visiting home' do
-  scenario 'load games on home page' do
+  xscenario 'load games on home page' do
     user = create(:user)
     character = create(:character, user: user)
     game1 = create(:game, character: character)
