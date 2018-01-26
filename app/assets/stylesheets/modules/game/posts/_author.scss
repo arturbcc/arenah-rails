@@ -26,7 +26,7 @@
     margin: 0;
   }
 
-  img {
+  .flip-panel img {
     display: block;
     max-width: 133px;
     max-height: 133px;
@@ -153,4 +153,13 @@
 
 .post .author .circle .full {
   background-color: #b6b6a6;
+}
+
+.click-me {
+  background: image-url('click_me.png') no-repeat;
+  background-size: 75px;
+  margin-left: 60px;
+  width: 110px;
+  height: 20px;
+  margin-top: 10px;
 }
