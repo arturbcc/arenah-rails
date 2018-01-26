@@ -428,7 +428,7 @@ RSpec.describe Sheet::CharacterAttribute, type: :model do
 
       expected = [
         { name: 'Vida', points: 49 },
-        { name: 'Magia', points: 9  },
+        { name: 'Magia', points: 9, total: 100 },
         { name: 'XP', points: 2636 },
         { name: 'PH', points: 10 },
         { name: 'Recursos', points: 1252 },

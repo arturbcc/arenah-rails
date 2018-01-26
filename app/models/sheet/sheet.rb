@@ -33,6 +33,10 @@ module Sheet
 
     def find_character_attribute(group_name, attribute_name)
       group = find_attributes_group(group_name)
+      find_character_attribute_on_group(group, attribute_name)
+    end
+
+    def find_character_attribute_on_group(group, attribute_name)
       return nil unless group
 
       group.character_attributes.detect { |attr| attr.name == attribute_name }

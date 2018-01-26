@@ -1,4 +1,4 @@
-<div class="sheet" id="sheet" data-character-id="<%= @sheet.character.id %>">
+<div class="sheet" id="sheet" data-character-id="<%= @sheet.character.id %>" data-update-url="<%= game_sheet_path(@game, @sheet.character) %>">
   <% @sheet.pages.each do |page| %>
     <div class="inner-border page-columns-<%= page.number_of_columns %>" data-columns="<%= page.number_of_columns %>">
       <%= render 'avatar', page: page.number, system_name: @sheet.system.name, character: @sheet.character %>

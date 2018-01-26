@@ -46,7 +46,7 @@ define('post', [], function() {
         success: function(data) {
           $el.parents('[data-post]').fadeOut();
         },
-        error: function(data, blah) {
+        error: function(data) {
           NotyMessage.show('Não foi possível apagar a postagem', 3000);
         }
       });

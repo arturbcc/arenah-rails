@@ -154,12 +154,24 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     // game master
 
     if (this.currentEditable && this.currentEditable.onSave && typeof this.currentEditable.onSave == "function") {
-      var data = this.currentAttributesGroupData(element);
+      var data = this.currentAttributesGroupData(element),
+          changes = this.currentEditable.onSave(data),
+          updateUrl = $('#sheet').data('update-url');
 
-      this.currentEditable.onSave(data);
+      $.ajax({
+        url: updateUrl,
+        type: 'PATCH',
+        dataType : 'html',
+        data: changes,
+        success: function(data) {
+          NotyMessage.show('Alterações salvas com sucesso', 3000, 'success');
+          element.siblings('.editable-cancel:first').trigger('click');
+        },
+        error: function(data) {
+          NotyMessage.show('Não foi possível alterar a ficha', 3000);
+        }
+      });
     }
-
-    element.siblings('.editable-cancel:first').trigger('click');
   };
 
   // Undo all the current changes. Once the changes are cancelled, the group
