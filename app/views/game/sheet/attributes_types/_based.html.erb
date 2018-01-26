@@ -8,14 +8,18 @@
   </td>
 
   <td class="text-right">
-    <%=
-      editable_link({
-        type: 'spinner',
-        value: attribute.points,
-        text: attribute.to_s,
-        master_only: attribute.master_only
-      })
-    %>
+    <% if local_assigns[:text_only] %>
+      <%= link_to attribute.to_s, 'javascript:;' %>
+    <% else %>
+      <%=
+        editable_link({
+          type: 'spinner',
+          value: attribute.points,
+          text: attribute.to_s,
+          master_only: attribute.master_only
+        })
+      %>
+    <% end %>
   </td>
 
   <%= render 'game/sheet/tooltip', name: attribute.name, description: attribute.description %>
