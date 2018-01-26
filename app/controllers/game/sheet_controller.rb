@@ -15,6 +15,8 @@ class Game::SheetController < Game::BaseController
     if character
       group = character.sheet.find_attributes_group(params[:group_name])
       params[:character_attributes].each do |attribute_name, modified_item|
+        next unless ['content', 'points'].include?(modified_item[:field_name])
+        
         character_attribute = character.sheet.find_character_attribute_on_group(group, attribute_name)
         character_attribute.public_send("#{modified_item[:field_name]}=", modified_item[:value])
       end
