@@ -209,6 +209,12 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
       if (self.currentEditable && self.currentEditable.transform && typeof self.currentEditable.transform === 'function') {
         self.currentEditable.transform(editable);
       }
+
+      editable.input.$input.keypress(function(e) {
+        if (e.which == 13) {
+          return false;
+        }
+      });
     });
 
     data.attributesGroup.find('a[data-editable-attribute]').editable('show');
