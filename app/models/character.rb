@@ -53,7 +53,7 @@ class Character < ApplicationRecord
 
   def sheet
     @sheet ||= begin
-      character_sheet = Sheet::Sheet.new(JSON.parse(super))
+      character_sheet = Sheet::Sheet.new(super)
       apply_attributes_relationship_on(character_sheet)
     end
   end

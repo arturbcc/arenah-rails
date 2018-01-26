@@ -1,9 +1,9 @@
 def load_system(game)
-  File.read(File.join(Rails.root, 'db/systems', "#{game}.json"))
+  JSON.parse(File.read(File.join(Rails.root, 'db/systems', "#{game}.json")))
 end
 
 def load_sheet(game, character)
-  File.read(File.join(Rails.root, "db/sheets/#{game}", "#{character}.json"))
+  JSON.parse(File.read(File.join(Rails.root, "db/sheets/#{game}", "#{character}.json")))
 end
 
 puts 'Start seeding...'
@@ -17,7 +17,7 @@ User.delete_all
 Character.delete_all
 
 # USERS
-empty_sheet = { attributes_groups: [] }.to_json
+empty_sheet = {}
 carlos = User.create!(email: 'carlos@arenah.com', name: 'Carlos', password: '12345678', confirmed_at: Time.now)
 mariana = User.create(email: 'mariana@arenah.com', name: 'Mariana', password: '12345678', confirmed_at: Time.now, legacy_password: Devise::Encryptable::Encryptors::Md5.digest('123', nil, nil, nil))
 luisfelipe = User.create!(email: 'luisfelipe@arenah.com', name: 'Luís Felipe', password: '12345678', confirmed_at: Time.now)

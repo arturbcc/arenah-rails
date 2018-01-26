@@ -44,7 +44,7 @@ RSpec.describe Character, type: :model do
   context '#sheet' do
     it 'loads the sheet' do
       sheet = load_sheet('crossover', 'inuyasha')
-      inuyasha = Character.create!(user: user, name: 'Inuyasha', sheet: sheet.to_json)
+      inuyasha = Character.create!(user: user, name: 'Inuyasha', sheet: sheet)
 
       expect(inuyasha.sheet.attributes_groups.count).to eq(10)
     end
@@ -52,9 +52,9 @@ RSpec.describe Character, type: :model do
     it 'loads the sheet with a system and applies table values on the groups' do
       user = create(:user)
       character = create(:character, user: user, name: 'Game owner and master')
-      game = create(:game, system: load_system.to_json, character: character)
+      game = create(:game, system: load_system, character: character)
       sheet = load_sheet('crossover', 'inuyasha')
-      inuyasha = Character.create!(user: user, game: game, name: 'Inuyasha', sheet: sheet.to_json)
+      inuyasha = Character.create!(user: user, game: game, name: 'Inuyasha', sheet: sheet)
 
       speed = inuyasha.sheet.find_character_attribute('Dados Extras', 'Velocidade')
       agility = inuyasha.sheet.find_character_attribute('Atributos', 'Agilidade')

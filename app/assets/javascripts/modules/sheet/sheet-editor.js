@@ -163,11 +163,11 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
         type: 'PATCH',
         dataType : 'html',
         data: changes,
-        success: function(data) {
+        success: function() {
           NotyMessage.show('Alterações salvas com sucesso', 3000, 'success');
           element.siblings('.editable-cancel:first').trigger('click');
         },
-        error: function(data) {
+        error: function() {
           NotyMessage.show('Não foi possível alterar a ficha', 3000);
         }
       });

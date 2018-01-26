@@ -19,7 +19,7 @@ class Game::SheetController < Game::BaseController
         character_attribute.public_send("#{modified_item[:field_name]}=", modified_item[:value])
       end
 
-      character.update(sheet: character.sheet.to_json)
+      character.update(sheet: character.sheet)
 
       head :ok
     else
