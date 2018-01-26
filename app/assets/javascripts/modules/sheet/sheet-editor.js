@@ -196,7 +196,10 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
   };
 
   fn._changeToEditMode = function(data) {
-    var self = this;
+    var self = this,
+        tabindexCounter = 1;
+
+    $('[tabindex]').removeAttr('tabindex');
 
     data.attributesGroup.find('a[data-editable-attribute]').editable('destroy');
     data.attributesGroup.find('a[data-editable-attribute]').editable({
@@ -210,19 +213,27 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
         self.currentEditable.transform(editable);
       }
 
-      editable.input.$input.keypress(function(e) {
-        if (e.which == 13) {
-          return false;
-        }
-      });
+      self._preventEnterKey(editable);
+
+      editable.input.$input.attr('tabindex', tabindexCounter++);
     });
 
     data.attributesGroup.find('a[data-editable-attribute]').editable('show');
-    data.attributesGroup.find("[data-accept-edit-mode]").addClass("edit-mode");
-    data.attributesGroup.find("input:first").focus();
+    data.attributesGroup.find('[data-accept-edit-mode]').addClass('edit-mode');
+    data.attributesGroup.find('input[tabindex=1]').focus();
     data.save.show();
     data.cancel.show();
     data.edit.hide();
+  };
+
+  // Prevent users to close the edit mode when they press the ENTER key.
+  // They have to save the group on the group's save button.
+  fn._preventEnterKey = function(editable) {
+    editable.input.$input.keypress(function(e) {
+      if (e.which == 13) {
+        return false;
+      }
+    })
   };
 
   // Define the changes that the current logged user can make in the character

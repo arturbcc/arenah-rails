@@ -27,6 +27,7 @@ define('source-type-open', [], function() {
     var editContainer = data.attributesGroup.find('.editable-list-group');
     editContainer.addClass('edit-mode').removeClass('hidden');
     data.attributesGroup.find('[data-accept-edit-mode]').hide();
+    editContainer.find('input.editable-list-input').focus();
   };
 
   fn.onCancel = function(data) {
@@ -43,12 +44,6 @@ define('source-type-open', [], function() {
   };
 
   fn._newItemEvents = function(data) {
-    // var self = this,
-    //     editContainer = data.attributesGroup.find('.editable-list-group'),
-    //     select = editContainer.find('select'),
-    //     gameSlug = $('#game-room').val(),
-    //     groupName = data.attributesGroup.data('group-name');
-
     this._newItem(data);
   };
 
