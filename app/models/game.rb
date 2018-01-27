@@ -9,7 +9,7 @@ class Game < ApplicationRecord
 
   belongs_to :character
 
-  friendly_id :name, :use => :slugged
+  friendly_id :name, use: :slugged
 
   validates :name, length: { maximum: 45 }
   validates :short_description, length: { maximum: 320 }
@@ -23,14 +23,8 @@ class Game < ApplicationRecord
   after_create :set_game_to_owner
 
   def system
-    @system ||= Sheet::System.new(super)
+    @system ||= Sheet::System.new(raw_system)
   end
-
-  # TODO: Do we need this method?
-  # def system_attributes=(hash)
-  #   system.assign_attributes(hash)
-  #   self[:system] = system.as_json
-  # end
 
   def close!
     inactive!

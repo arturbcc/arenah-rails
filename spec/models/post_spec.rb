@@ -37,7 +37,7 @@ RSpec.describe Post, type: :model do
     let(:user) { create(:user) }
     let(:system) { load_system }
     let(:character) { create(:character, user: user) }
-    let(:game) { create(:game, system: system, character: character) }
+    let(:game) { create(:game, raw_system: system, character: character) }
     let(:topic_group) { create(:topic_group, game: game) }
     let(:topic) { create(:topic, topic_group: topic_group, game_id: game.id) }
 

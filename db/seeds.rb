@@ -31,30 +31,30 @@ johndoe = User.create!(email: 'johndoe@arenah.com', name: 'John Doe', password: 
 janeroe = User.create!(email: 'janeroe@arenah.com', name: 'Jane Roe', password: '12345678', confirmed_at: Time.now)
 visitante = User.create!(email: 'visitante@arenah.com', name: 'Visitante', password: '12345678', confirmed_at: Time.now)
 
-inuyasha = Character.create!(user: mariana, name: 'Inuyasha', avatar: 'inuyasha.jpg', post_count: 1093, signature: '[b]Quero mudar o mundo[/b], cruzar os céus e nada temer...', last_post_date: Time.now, sheet: load_sheet('crossover', 'inuyasha'))
-strange = Character.create!(user: luisfelipe, name: 'Strange', avatar: 'strange.jpg', post_count: 501, last_post_date: 1.day.ago, sheet_mode: 0, sheet: load_sheet('crossover', 'strange'))
-goku = Character.create!(user: willian, name: 'Goku', avatar: 'goku.jpg', post_count: 400, signature: '[img]http://stuffpoint.com/dragonball-z/image/107122-dragonball-z-dbz-banner.jpg[/img]', last_post_date: 1.day.ago, sheet: load_sheet('crossover', 'goku'))
-hiei = Character.create!(user: priscila, name: 'Hiei', avatar: 'hiei.png', post_count: 382, last_post_date: 4.days.ago, sheet: load_sheet('crossover', 'hiei'))
-oliver_tsubasa = Character.create!(user: nathalia, name: 'Oliver Tsubasa', avatar: 'oliver.jpg', post_count: 12, last_post_date: 7.days.ago, sheet: load_sheet('crossover', 'oliver_tsubasa'))
-palace = Character.create!(user: mayara, name: 'Palace', avatar: 'palace.jpg', post_count: 10, gender: 1, last_post_date: 10.days.ago, sheet: load_sheet('crossover', 'palace'))
-coraline = Character.create!(user: pablo, name: 'Coraline', avatar: 'coraline.jpg', post_count: 50, gender: 1, last_post_date: 1.day.ago, sheet: load_sheet('crossover', 'coraline'))
+inuyasha = Character.create!(user: mariana, name: 'Inuyasha', avatar: 'inuyasha.jpg', post_count: 1093, signature: '[b]Quero mudar o mundo[/b], cruzar os céus e nada temer...', last_post_date: Time.now, raw_sheet: load_sheet('crossover', 'inuyasha'))
+strange = Character.create!(user: luisfelipe, name: 'Strange', avatar: 'strange.jpg', post_count: 501, last_post_date: 1.day.ago, sheet_mode: 0, raw_sheet: load_sheet('crossover', 'strange'))
+goku = Character.create!(user: willian, name: 'Goku', avatar: 'goku.jpg', post_count: 400, signature: '[img]http://stuffpoint.com/dragonball-z/image/107122-dragonball-z-dbz-banner.jpg[/img]', last_post_date: 1.day.ago, raw_sheet: load_sheet('crossover', 'goku'))
+hiei = Character.create!(user: priscila, name: 'Hiei', avatar: 'hiei.png', post_count: 382, last_post_date: 4.days.ago, raw_sheet: load_sheet('crossover', 'hiei'))
+oliver_tsubasa = Character.create!(user: nathalia, name: 'Oliver Tsubasa', avatar: 'oliver.jpg', post_count: 12, last_post_date: 7.days.ago, raw_sheet: load_sheet('crossover', 'oliver_tsubasa'))
+palace = Character.create!(user: mayara, name: 'Palace', avatar: 'palace.jpg', post_count: 10, gender: 1, last_post_date: 10.days.ago, raw_sheet: load_sheet('crossover', 'palace'))
+coraline = Character.create!(user: pablo, name: 'Coraline', avatar: 'coraline.jpg', post_count: 50, gender: 1, last_post_date: 1.day.ago, raw_sheet: load_sheet('crossover', 'coraline'))
 
-hank = Character.create!(user: luisfelipe, name: 'Hank', avatar: 'hank.png', post_count: 199, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'hank'))
-diana = Character.create!(user: mariana, name: 'Diana', avatar: 'diana.png', post_count: 299, gender: 1, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'diana'))
-eric = Character.create!(user: carlos, name: 'Eric', avatar: 'eric.png', post_count: 19, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'eric'))
-presto = Character.create!(user: willian, name: 'Presto', avatar: 'presto.png', post_count: 0, sheet: load_sheet('caverna-do-dragao', 'presto'))
-bobby = Character.create!(user: priscila, name: 'Bobby', avatar: 'bobby.png', post_count: 199, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'bobby'))
-sheila = Character.create!(user: nathalia, name: 'Sheila', avatar: 'sheila.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: load_sheet('caverna-do-dragao', 'sheila'))
+hank = Character.create!(user: luisfelipe, name: 'Hank', avatar: 'hank.png', post_count: 199, last_post_date: Time.now, raw_sheet: load_sheet('caverna-do-dragao', 'hank'))
+diana = Character.create!(user: mariana, name: 'Diana', avatar: 'diana.png', post_count: 299, gender: 1, last_post_date: Time.now, raw_sheet: load_sheet('caverna-do-dragao', 'diana'))
+eric = Character.create!(user: carlos, name: 'Eric', avatar: 'eric.png', post_count: 19, last_post_date: Time.now, raw_sheet: load_sheet('caverna-do-dragao', 'eric'))
+presto = Character.create!(user: willian, name: 'Presto', avatar: 'presto.png', post_count: 0, raw_sheet: load_sheet('caverna-do-dragao', 'presto'))
+bobby = Character.create!(user: priscila, name: 'Bobby', avatar: 'bobby.png', post_count: 199, last_post_date: Time.now, raw_sheet: load_sheet('caverna-do-dragao', 'bobby'))
+sheila = Character.create!(user: nathalia, name: 'Sheila', avatar: 'sheila.png', post_count: 199, gender: 1, last_post_date: Time.now, raw_sheet: load_sheet('caverna-do-dragao', 'sheila'))
 
-eva = Character.create!(user: mayara, name: 'Eva', avatar: 'eva.png', post_count: 199, gender: 1, last_post_date: Time.now, sheet: load_sheet('vampiro-a-mascara', 'eva'))
-amy = Character.create!(user: mariana, name: 'Amy', avatar: 'amy.png', character_type: 2, gender: 1, post_count: 199, last_post_date: Time.now, sheet: empty_sheet)
+eva = Character.create!(user: mayara, name: 'Eva', avatar: 'eva.png', post_count: 199, gender: 1, last_post_date: Time.now, raw_sheet: load_sheet('vampiro-a-mascara', 'eva'))
+amy = Character.create!(user: mariana, name: 'Amy', avatar: 'amy.png', character_type: 2, gender: 1, post_count: 199, last_post_date: Time.now, raw_sheet: empty_sheet)
 
-khalmyr = Character.create!(user: artur, name: 'Khalmyr', avatar: 'khalmyr.png', character_type: 2, sheet: empty_sheet)
-wynna = Character.create!(user: janeroe, name: 'Wynna', avatar: 'wynna.jpg', character_type: 2, sheet: empty_sheet)
-mestre_dos_magos = Character.create!(user: artur, name: 'Mestre dos Magos', avatar: 'mestre-dos-magos.png', character_type: 2, sheet: empty_sheet)
+khalmyr = Character.create!(user: artur, name: 'Khalmyr', avatar: 'khalmyr.png', character_type: 2, raw_sheet: empty_sheet)
+wynna = Character.create!(user: janeroe, name: 'Wynna', avatar: 'wynna.jpg', character_type: 2, raw_sheet: empty_sheet)
+mestre_dos_magos = Character.create!(user: artur, name: 'Mestre dos Magos', avatar: 'mestre-dos-magos.png', character_type: 2, raw_sheet: empty_sheet)
 
-luffy = Character.create!(user: artur, name: 'Luffy', avatar: 'luffy.png', character_type: 1, sheet: load_sheet('crossover', 'luffy'))
-shurato = Character.create!(user: artur, name: 'Shurato', avatar: 'shurato.png', character_type: 1, sheet: load_sheet('crossover', 'shurato'))
+luffy = Character.create!(user: artur, name: 'Luffy', avatar: 'luffy.png', character_type: 1, raw_sheet: load_sheet('crossover', 'luffy'))
+shurato = Character.create!(user: artur, name: 'Shurato', avatar: 'shurato.png', character_type: 1, raw_sheet: load_sheet('crossover', 'shurato'))
 
 #GAMES
 crossover = Game.create!(
@@ -69,7 +69,7 @@ crossover = Game.create!(
                 '[center][img]http://www.arenah.com.br/content/cdn/games/crossover/images/banners/capa.png[/img][/center]',
   banner: 'crossover.jpg',
   subtitle: 'Onde os mundos se cruzam',
-  system: load_system('crossover'))
+  raw_system: load_system('crossover'))
 
 inuyasha.update(game: crossover)
 strange.update(game: crossover)
@@ -89,7 +89,7 @@ dungeonsanddragons = Game.create!(
   banner: 'caverna-do-dragao.jpg',
   character: mestre_dos_magos,
   subtitle: 'Decifre os enigmas do Mestre dos Magos',
-  system: load_system('caverna-do-dragao'))
+  raw_system: load_system('caverna-do-dragao'))
 
 
 hank.update(game: dungeonsanddragons)
@@ -108,7 +108,7 @@ vampire = Game.new(
   banner: 'vampiro.png',
   character: amy,
   status: 1,
-  system: load_system('vampiro-a-mascara')
+  raw_system: load_system('vampiro-a-mascara')
 )
 
 eva.update(game: vampire)

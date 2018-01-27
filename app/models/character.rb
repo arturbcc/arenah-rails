@@ -53,16 +53,10 @@ class Character < ApplicationRecord
 
   def sheet
     @sheet ||= begin
-      character_sheet = Sheet::Sheet.new(super)
+      character_sheet = Sheet::Sheet.new(raw_sheet)
       apply_attributes_relationship_on(character_sheet)
     end
   end
-
-  # TODO: Is this method necessary?
-  # def sheet_attributes=(hash)
-  #   sheet.assign_attributes(hash)
-  #   self[:sheet] = sheet.as_json
-  # end
 
   def life_attribute
     return nil unless game.system.life.present?

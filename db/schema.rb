@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180107154819) do
+ActiveRecord::Schema.define(version: 20180127125757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,11 +28,11 @@ ActiveRecord::Schema.define(version: 20180107154819) do
     t.datetime "last_post_date"
     t.integer "post_count", default: 0
     t.string "slug", null: false
-    t.jsonb "sheet", default: {}, null: false
+    t.jsonb "raw_sheet", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_characters_on_game_id"
-    t.index ["sheet"], name: "index_characters_on_sheet", using: :gin
+    t.index ["raw_sheet"], name: "index_characters_on_raw_sheet", using: :gin
     t.index ["slug"], name: "index_characters_on_slug", unique: true
     t.index ["user_id"], name: "index_characters_on_user_id"
   end
@@ -73,12 +73,12 @@ ActiveRecord::Schema.define(version: 20180107154819) do
     t.integer "status", default: 1
     t.string "google_analytics_code"
     t.boolean "show_signature", default: true
-    t.jsonb "system", default: {}, null: false
+    t.jsonb "raw_system", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_games_on_character_id"
+    t.index ["raw_system"], name: "index_games_on_raw_system", using: :gin
     t.index ["slug"], name: "index_games_on_slug", unique: true
-    t.index ["system"], name: "index_games_on_system", using: :gin
   end
 
   create_table "messages", id: :serial, force: :cascade do |t|

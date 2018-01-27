@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     post ':game/subscribe', to: 'subscription#create', as: :subscribe
     delete ':game/unsubscribe', to: 'subscription#destroy', as: :unsubscribe, defaults: { format: :json }
 
-    get ':game/sistema', to: 'games#show', as: :system
+    get ':game/sistema', to: 'system#show', as: :system
 
     get 'sala/criar', to: 'home#new', as: :new
 

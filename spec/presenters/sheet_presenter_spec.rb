@@ -5,7 +5,7 @@ RSpec.describe SheetPresenter, type: :presenter do
     let(:user) { create(:user) }
     let(:system) { load_system }
     let(:character) { create(:character, user: user) }
-    let(:game) { create(:game, system: system, character: character) }
+    let(:game) { create(:game, raw_system: system, character: character) }
     let(:sheet) { load_sheet('crossover', 'inuyasha') }
     let(:presenter) { described_class.new(character) }
 

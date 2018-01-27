@@ -12,8 +12,8 @@ define('game', ['characters'], function(Characters) {
     var url = this.container.val(),
         self = this;
 
-    $.getJSON(url).done(function(data) {
-      self.system = data.system;
+    $.getJSON(url).done(function(system) {
+      self.system = system;
     });
   };
 
