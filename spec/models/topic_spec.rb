@@ -6,7 +6,7 @@ RSpec.describe Topic, type: :model do
   let(:user) { create(:user) }
   let(:system) { load_system }
   let(:character) { create(:character, user: user) }
-  let(:game) { create(:game, system: system, character: character) }
+  let(:game) { create(:game, raw_system: system, character: character) }
 
   it_behaves_like 'a sluggable', 'topic-title' do
     let(:sluggable) { Topic.create(title: 'Topic Title', game_id: game.id) }
