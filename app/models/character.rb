@@ -77,6 +77,70 @@ class Character < ApplicationRecord
     active? && game_master? && belongs_to_active_game?
   end
 
+  # Public: Update the character sheet. Sheets are not updated all at once, but
+  # in parts, group by group.
+  #
+  # This method receives only the attributes that will be changed in a specific
+  # group.
+  #
+  # - changes: an array containing the list of attributes to change with the new
+  #   values. Each item in the array contains three attributes:
+  #
+  #   * attribute_name: the name of the character's attribute that will be
+  #     modified.
+  #   * field_name: each attribute has a set of attributes on its own. For
+  #     example, it can have `points` and `total`, or maybe a `content` if it
+  #     is a text attribute. this `field_name` contains the name of the field
+  #     that will receive the `value`.
+  #   * value: the new value that will be saved in the `field_name` of the
+  #     attribute with the given `attribute_name`.
+  #
+  #   Parameters example:
+  #
+  #   [
+  #      {
+  #        "attribute_name": "Strenght",
+  #   		 "field_name": "points",
+  #     	 "value": "10"
+  #      },
+  #      {
+  #        "attribute_name": "Constitution",
+  #     	 "field_name": "points",
+  #     	 "value": "12"
+  #      },
+  #      ...
+  #   ]
+  #
+  #  In the example above, the attribute `Strength` will have its `points`
+  #  changed to 10, while the `Constitution` will have its `points` changed to
+  #  12.
+  #
+  #  Usage example:
+  #
+  #    character.update_sheet('Skills', [{ attribute_name: 'Strength', field_name: 'content', value: 'Jane Roe' }])
+  #    => true
+  #
+  # Returns the update status.
+  def update_sheet(group_name, changes)
+    group = raw_sheet['attributes_groups'].find do |attributes_group|
+      attributes_group['name'] == group_name
+    end
+
+    return false unless group
+
+    changes.each do |change|
+      next unless ['content', 'points'].include?(change['field_name'])
+
+      change['value'] = change['value'].to_i if change['field_name'] == 'points'
+      attribute = group['character_attributes'].find do |attribute|
+        attribute['name'] == change['attribute_name']
+      end
+      attribute[change['field_name']] = change['value']
+    end
+
+    save!
+  end
+
   private
 
   def belongs_to_active_game?

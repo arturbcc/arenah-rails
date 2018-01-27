@@ -62,4 +62,48 @@ RSpec.describe Character, type: :model do
       expect(speed.points.to_i).to eq(2)
     end
   end
+
+  context '#update_sheet' do
+    let(:sheet) { load_raw_sheet('crossover', 'inuyasha') }
+    let(:character) { create(:character, user: user, raw_sheet: sheet) }
+
+    context 'when group exists' do
+      context 'and field name is `content`' do
+        let(:changes) { [{ attribute_name: 'Nome', field_name: 'content', value: 'Jane Roe' }.stringify_keys] }
+
+        it 'updates the database with the changes' do
+          status = character.update_sheet('Dados', changes)
+          expect(character.raw_sheet['attributes_groups'][0]['character_attributes'][0]['content']).to eq('Jane Roe')
+          expect(status).to be_truthy
+        end
+      end
+
+      context 'and field name is `point`' do
+        let(:changes) { [{ attribute_name: 'Força', field_name: 'points', value: '21' }.stringify_keys] }
+
+        it 'updates the database with the changes' do
+          status = character.update_sheet('Atributos', changes)
+          expect(character.raw_sheet['attributes_groups'][2]['character_attributes'][0]['points']).to eq(21)
+          expect(status).to be_truthy
+        end
+      end
+
+      context 'and field name is invalid' do
+        let(:changes) { [{ attribute_name: 'Força', field_name: 'description', value: '1900' }.stringify_keys] }
+
+        it 'does not update the database with the changes' do
+          status = character.update_sheet('Atributos', changes)
+          expect(character.raw_sheet).to eq(sheet)
+          expect(status).to be_truthy
+        end
+      end
+    end
+
+    context 'when group does not exist' do
+      it 'returns false' do
+        status = character.update_sheet('Invalid Group', [])
+        expect(status).to be_falsy
+      end
+    end
+  end
 end

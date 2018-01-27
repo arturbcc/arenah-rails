@@ -7,8 +7,12 @@ module RpgHelper
   end
 
   def load_sheet(game, character)
-    json = File.read(File.join(Rails.root, "db/sheets/#{game}", "#{character}.json"))
-    Sheet::Sheet.new(JSON.parse(json))
+    load_raw_sheet(game, character)
+    Sheet::Sheet.new(load_raw_sheet(game, character))
+  end
+
+  def load_raw_sheet(game, character)
+    JSON.parse(File.read(File.join(Rails.root, "db/sheets/#{game}", "#{character}.json")))
   end
 end
 
