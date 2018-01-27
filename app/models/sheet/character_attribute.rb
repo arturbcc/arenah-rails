@@ -39,12 +39,12 @@ module Sheet
       "#{points} / #{value}"
     end
 
-    def to_params
+    def to_params(options = {})
       params = {
         attribute_name: name,
         points: points,
         value: total || value
-      }
+      }.merge(options)
       params[:base_attribute_group] = base_attribute_group if base_attribute_group.present?
       params[:base_attribute_name] = base_attribute_name if base_attribute_name.present?
 

@@ -1,4 +1,4 @@
-<%= content_tag :tr, data: attribute.to_params do %>
+<%= content_tag :tr, data: attribute.to_params(field_to_update: 'points') do %>
   <td>
     <%= smart_description(attribute) do %>
       <%= render 'game/sheet/modified_attribute_mark', attribute: attribute %>
