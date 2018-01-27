@@ -145,33 +145,67 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
   // Save the current changes in the character sheet. The changes cannot be
   // undone. Once the group is saved, it will leave the edit mode.
   fn._save = function(event) {
-    var element = $(event.currentTarget);
+    var element = $(event.currentTarget),
+        data = this.currentAttributesGroupData(element),
+        changes = this._changesToSave(data),
+        self = this;
 
-    // TODO: update screen with js or use ajax and reload page?
     // TODO: on the backend, check if the user is master or character owner
     // before saving.
     // TODO: it would be a nice feature to log modifications to show to the
     // game master
 
-    if (this.currentEditable && this.currentEditable.onSave && typeof this.currentEditable.onSave == "function") {
-      var data = this.currentAttributesGroupData(element),
-          changes = this.currentEditable.onSave(data),
-          updateUrl = $('#sheet').data('update-url');
+    $.ajax({
+      url: $('#sheet').data('update-url'),
+      type: 'PATCH',
+      dataType : 'html',
+      contentType: "application/json",
+      data: JSON.stringify(changes),
+      success: function() {
+        var editable = self.currentEditable;
 
-      $.ajax({
-        url: updateUrl,
-        type: 'PATCH',
-        dataType : 'html',
-        data: changes,
-        success: function() {
-          NotyMessage.show('Alterações salvas com sucesso', 3000, 'success');
-          element.siblings('.editable-cancel:first').trigger('click');
-        },
-        error: function() {
-          NotyMessage.show('Não foi possível alterar a ficha', 3000);
+        if (editable.onSave && typeof editable.onSave === "function") {
+          self.currentEditable.onSave(changes);
         }
+
+        element.siblings('.editable-cancel:first').trigger('click');
+
+        NotyMessage.show('Alterações salvas com sucesso', 3000, 'success');
+      },
+      error: function() {
+        NotyMessage.show('Não foi possível alterar a ficha', 3000);
+      }
+    });
+  };
+
+  // Collect data from the current attribute's group html to save in the
+  // character sheet.
+  //
+  // Returns a structure with the following contract:
+  //
+  // {
+  //   group_name: 'Skills',
+  //   character_attributes: [
+  //     { attribute_name: 'Strength', field_name: 'points', value: 12 },
+  //     ...
+  //   ]
+  // }
+  fn._changesToSave = function(data) {
+    var inputs = data.attributesGroup.find('.editableform input'),
+        changes = { group_name: data.attributesGroup.data('group-name'), character_attributes: [] };
+
+    $.each(inputs, function() {
+      var input = $(this),
+          tr = input.parents('tr[data-attribute-name]');
+
+      changes.character_attributes.push({
+        attribute_name: tr.data('attribute-name'),
+        field_name: tr.data('field-to-update'),
+        value: input.val()
       });
-    }
+    });
+
+    return changes;
   };
 
   // Undo all the current changes. Once the changes are cancelled, the group

@@ -5,20 +5,10 @@ define('editable-character-card', [], function() {
 
   var fn = EditableCharacterCard.prototype;
 
-  fn.onSave = function(data) {
-    var inputs = data.attributesGroup.find('.editableform input'),
-        changes = { group_name: data.attributesGroup.data('group-name'), character_attributes: {} };
-
-    $.each(inputs, function() {
-      var input = $(this),
-          tr = input.parents('tr[data-attribute-name]'),
-          attributeName = tr.data('attribute-name'),
-          attributeValue = input.val();
-
-          changes.character_attributes[attributeName] = { field_name: 'content', value: attributeValue };
+  fn.onSave = function(changes) {
+    $.each(changes.character_attributes, function(_, change) {
+      $('tr[data-attribute-name="' + change.attribute_name + '"] .value a').html(change.value);
     });
-
-    return changes;
   };
 
   return EditableCharacterCard;
