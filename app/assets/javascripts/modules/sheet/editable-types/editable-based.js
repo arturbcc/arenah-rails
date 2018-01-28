@@ -34,5 +34,12 @@ define('editable-based', ['transform', 'source-type-list'], function(Transform, 
     }
   };
 
+  fn.afterSave = function(data, _) {
+    var sourceType = data.attributesGroup.attr('data-source-type');
+    if (sourceType === 'list') {
+      this.sourceTypeList.leaveEditMode(data);
+    }
+  };
+
   return EditableBased;
 });

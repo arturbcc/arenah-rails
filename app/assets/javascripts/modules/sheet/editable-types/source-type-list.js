@@ -39,14 +39,17 @@ define('source-type-list', ['source-type-list-new-item', 'source-type-list-selec
   };
 
   fn.onCancel = function(data) {
+    this.leaveEditMode(data);
+    this._rollback(data);
+  };
+
+  fn.leaveEditMode = function(data) {
     data.attributesGroup.find('[data-accept-edit-mode]').show();
     data.attributesGroup.find('.editable-list-group').addClass('hidden');
     data.attributesGroup.find('[data-editable-attribute]').each(function() {
       $(this).editable('hide');
     });
-
-    this._rollback(data);
-  };
+  }
 
   fn.startDragAndDrop = function(data) {
     var editContainer = data.attributesGroup.find('.editable-list-group'),

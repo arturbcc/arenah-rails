@@ -162,6 +162,10 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
         self._updateSheetWithNewValues(changes);
         self._leaveEditMode(data);
 
+        if (editable.afterSave && typeof editable.afterSave === "function") {
+          editable.afterSave(data, changes);
+        }
+
         NotyMessage.show('Alterações salvas com sucesso', 3000, 'success');
       },
       error: function() {
@@ -183,6 +187,8 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
   // This method is an approach to follow through with the second
   // implementation.
   fn._updateSheetWithNewValues = function(changes) {
+    var self = this;
+
     $.each(changes.character_attributes, function(_, change) {
       var tr = $('tr[data-attribute-name="' + change.attribute_name + '"]'),
           element = tr.find('a[data-editable-attribute]');
@@ -196,7 +202,43 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
         element.attr('data-value', value);
         element.html(value + equipmentModifier);
         tr.attr('data-points', change.value);
+        self._updateBasedAttributes(changes.group_name, change);
       }
+    });
+  };
+
+  // Once we update an attribute, we have to change the value of all attributes
+  // that have it as a base. This is the HTML of a classic based attribute:
+  //
+  // <tr data-attribute-name="Swimming" data-points="27" data-value="32"
+  //   data-base-attribute-group="Attributes" data-base-attribute-name="Agility">
+  //
+  // In this example, the base value is 5 (32 - 27). It is important to update
+  // the `data-value` by adding the new attribute value (from the `change`
+  // parameter) on the `data-points`. For example, if the base attribute
+  // changed from 5 to 7, the new `data-value` must be 34.
+  //
+  // Parameters:
+  //
+  // - attributesGroupName: name of the group where the base attribute belongs.
+  // - chance: the same structure returned in the `changesToSave` method. It
+  //           will be a hash like this:
+  //
+  //           { attribute_name: 'Strength', field_name: 'points', value: 12 }
+  fn._updateBasedAttributes = function(attributesGroupName, change) {
+    var baseAttributeGroupOperator = '[data-base-attribute-group="' + attributesGroupName + '"]',
+        baseAttributeOperator = '[data-base-attribute-name="' + change.attribute_name + '"]',
+        basedAttributes = $('#sheet').find(baseAttributeGroupOperator + baseAttributeOperator);
+
+    $.each(basedAttributes, function() {
+      var tr = $(this),
+          element = tr.find('.text-right a'),
+          parts = element.text().split(' / '),
+          newValue = parseInt(change.value) + parseInt(parts[0]),
+          newText = parts[0] + ' / ' + newValue;
+
+      element.text(newText);
+      tr.attr('data-value', newValue);
     });
   };
 
@@ -218,13 +260,16 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
 
     $.each(inputs, function() {
       var input = $(this),
-          tr = input.parents('tr[data-attribute-name]');
+          tr = input.parents('tr[data-attribute-name]'),
+          currentValue = input.val();
 
-      changes.character_attributes.push({
-        attribute_name: tr.data('attribute-name'),
-        field_name: tr.data('field-to-update'),
-        value: input.val()
-      });
+      if (tr.data('points') != currentValue) {
+        changes.character_attributes.push({
+          attribute_name: tr.data('attribute-name'),
+          field_name: tr.data('field-to-update'),
+          value: currentValue
+        });
+      }
     });
 
     return changes;
