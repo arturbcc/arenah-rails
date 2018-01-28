@@ -1,4 +1,5 @@
 // TODO: Will it be like this? Check if we can componentize it
+// TODO: I don't need ga tracking on localhost. Maybe this file should not exist.
 var Track = {
   event: function (category, action, label) {
     if (window.ga) {
