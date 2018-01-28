@@ -494,7 +494,8 @@ RSpec.describe Sheet::CharacterAttribute, type: :model do
           base_attribute_name: 'Agilidade',
           attribute_name: 'Natação',
           points: 30,
-          value: 40
+          value: 40,
+          equipment_modifier: nil
         }
         expect(attribute.to_params).to eq(expected)
       end
@@ -505,7 +506,8 @@ RSpec.describe Sheet::CharacterAttribute, type: :model do
         expected = {
           attribute_name: 'Natação',
           points: nil,
-          value: 0
+          value: 0,
+          equipment_modifier: nil
         }
         attribute = Sheet::CharacterAttribute.new(name: 'Natação')
         expect(attribute.to_params).to eq(expected)
