@@ -150,11 +150,6 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
         changes = this._changesToSave(data),
         self = this;
 
-    // TODO: on the backend, check if the user is master or character owner
-    // before saving.
-    // TODO: it would be a nice feature to log modifications to show to the
-    // game master
-
     $.ajax({
       url: $('#sheet').data('update-url'),
       type: 'PATCH',
@@ -164,16 +159,43 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
       success: function() {
         var editable = self.currentEditable;
 
-        if (editable.onSave && typeof editable.onSave === "function") {
-          self.currentEditable.onSave(changes);
-        }
-
-        element.siblings('.editable-cancel:first').trigger('click');
+        self._updateSheetWithNewValues(changes);
+        self._leaveEditMode(data);
 
         NotyMessage.show('Alterações salvas com sucesso', 3000, 'success');
       },
       error: function() {
         NotyMessage.show('Não foi possível alterar a ficha', 3000);
+      }
+    });
+  };
+
+  // After updating the sheet, there were two available options:
+  //
+  // * Close the modal and reopen it, to ensure all the groups and attributes
+  //   would be recalculated. That would be the easiest implementation, but not
+  //   the best user experience.
+  //
+  // * Reset all the values in the sheet using javascript, to ensure the data
+  //   attributes of all groups are changed as well. It is a hard task, but
+  //   exceeds by far the experience of real time editing.
+  //
+  // This method is an approach to follow through with the second
+  // implementation.
+  fn._updateSheetWithNewValues = function(changes) {
+    $.each(changes.character_attributes, function(_, change) {
+      var tr = $('tr[data-attribute-name="' + change.attribute_name + '"]'),
+          element = tr.find('a[data-editable-attribute]');
+
+      if (element.data('editable-attribute') === 'text') {
+        element.html(change.value);
+      } else {
+        var equipmentModifier = parseInt(tr.data('equipment-modifier') || 0),
+            value = parseInt(change.value);
+
+        element.attr('data-value', value);
+        element.html(value + equipmentModifier);
+        tr.attr('data-points', change.value);
       }
     });
   };
@@ -211,17 +233,9 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
   // Undo all the current changes. Once the changes are cancelled, the group
   // will leave the edit mode.
   fn._cancel = function(event) {
-    this._restoreGroupsOpacity();
-
-    this.editButtons.show();
-
     var data = this.currentAttributesGroupData($(event.currentTarget));
 
-    data.attributesGroup.find('a[data-editable-attribute]').editable('hide');
-    data.attributesGroup.find("[data-accept-edit-mode]").removeClass("edit-mode");
-    data.save.hide();
-    data.cancel.hide();
-    data.edit.show();
+    this._leaveEditMode(data);
     this._rollback();
 
     if (this.currentEditable && this.currentEditable.onCancel && typeof this.currentEditable.onCancel == "function") {
@@ -229,30 +243,54 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     }
   };
 
+  fn._leaveEditMode = function(data) {
+    this._restoreGroupsOpacity();
+    this.editButtons.show();
+    data.attributesGroup.find('a[data-editable-attribute]').editable('hide');
+    data.attributesGroup.find("[data-accept-edit-mode]").removeClass("edit-mode");
+    data.save.hide();
+    data.cancel.hide();
+    data.edit.show();
+  };
+
   fn._changeToEditMode = function(data) {
     var self = this,
         tabindexCounter = 1;
 
     $('[tabindex]').removeAttr('tabindex');
+    var editableLinks = data.attributesGroup.find('a[data-editable-attribute]');
 
-    data.attributesGroup.find('a[data-editable-attribute]').editable('destroy');
-    data.attributesGroup.find('a[data-editable-attribute]').editable({
-      toggle: 'manual',
-      showbuttons: false,
-      onblur: 'ignore',
-      mode: 'inline',
-      emptytext: '',
-    }).on('shown', function(e, editable) {
-      if (self.currentEditable && self.currentEditable.transform && typeof self.currentEditable.transform === 'function') {
-        self.currentEditable.transform(editable);
+    editableLinks.editable('destroy');
+    $.each(editableLinks, function() {
+      var editableField = $(this).editable({
+        toggle: 'manual',
+        showbuttons: false,
+        onblur: 'ignore',
+        mode: 'inline',
+        emptytext: ''
+      }).on('shown', function(e, editable) {
+        if (self.currentEditable && self.currentEditable.transform && typeof self.currentEditable.transform === 'function') {
+          self.currentEditable.transform(editable);
+        }
+
+        self._preventEnterKey(editable);
+
+        editable.input.$input.attr('tabindex', tabindexCounter++);
+      });
+
+      if (editableField.parents('[data-attribute-name="Força"]').length > 0) {
+        var lastValue = editableField.text();
+        // For some reason, editable is losing the value and filling the
+        // input with the wrong value. However, by setting the correct value
+        // using the setValue method, it overrides the .html() (or .text()),
+        // displaying an incorrect value in the label. To fix that, we have to
+        // set the editable value and reset the .html.
+        editableField.editable('setValue', editableField.attr('data-value'));
+        editableField.html(lastValue);
       }
-
-      self._preventEnterKey(editable);
-
-      editable.input.$input.attr('tabindex', tabindexCounter++);
+      editableField.editable('show');
     });
 
-    data.attributesGroup.find('a[data-editable-attribute]').editable('show');
     data.attributesGroup.find('[data-accept-edit-mode]').addClass('edit-mode');
     data.attributesGroup.find('input[tabindex=1]').focus();
     data.save.show();

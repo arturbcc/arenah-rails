@@ -115,7 +115,7 @@ define('source-type-list-new-item', ['transform', 'game-system'], function(Trans
         showbuttons: false,
         onblur: 'ignore',
         mode: 'inline',
-        emptytext: '',
+        emptytext: ''
       }).on('shown', function(e, editable) {
         var transformer = new Transform(self.sheetEditor);
         transformer.toSpinner(editable);

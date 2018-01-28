@@ -22,15 +22,5 @@ define('editable-name-value', ['transform', 'source-type-list'], function(Transf
     }
   };
 
-  fn.onSave = function(data) {
-    var keys = Object.keys(changes.character_attributes);
-
-    $.each(keys, function(_, attributeName) {
-      $('tr[data-attribute-name="' + attributeName + '"] a[data-editable-attribute]')
-        .html(changes.character_attributes[attributeName].value);
-    });
-  };
-
-
   return EditableNameValue;
 });

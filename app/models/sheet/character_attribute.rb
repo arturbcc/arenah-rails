@@ -43,7 +43,8 @@ module Sheet
       params = {
         attribute_name: name,
         points: points,
-        value: total || value
+        value: total || value,
+        equipment_modifier: equipment_modifier
       }.merge(options)
       params[:base_attribute_group] = base_attribute_group if base_attribute_group.present?
       params[:base_attribute_name] = base_attribute_name if base_attribute_name.present?
