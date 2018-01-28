@@ -190,20 +190,28 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     var self = this;
 
     $.each(changes.character_attributes, function(_, change) {
-      var tr = $('tr[data-attribute-name="' + change.attribute_name + '"]'),
-          element = tr.find('a[data-editable-attribute]');
+      var attributeRows = $('tr[data-attribute-name="' + change.attribute_name + '"]');
 
-      if (element.data('editable-attribute') === 'text') {
-        element.html(change.value);
-      } else {
-        var equipmentModifier = parseInt(tr.data('equipment-modifier') || 0),
-            value = parseInt(change.value);
+      $.each(attributeRows, function() {
+        var tr = $(this),
+            element = tr.find('a[data-editable-attribute]');
 
-        element.attr('data-value', value);
-        element.html(value + equipmentModifier);
-        tr.attr('data-points', change.value);
-        self._updateBasedAttributes(changes.group_name, change);
-      }
+        // In groups with sourceType list, there are two panels with data: one
+        // the users see in regular mode and one they see in edit mode. It is
+        // important to keep both updated.
+        if (element.length == 0) {
+          element = tr.find('.text-right a');
+        }
+
+        if (element.data('editable-attribute') === 'text') {
+          element.html(change.value);
+        } else if (self.currentEditable.updateSheetWithNewValues && typeof self.currentEditable.updateSheetWithNewValues === 'function') {
+          var equipmentModifier = parseInt(tr.data('equipment-modifier') || 0);
+          self.currentEditable.updateSheetWithNewValues(element, change, equipmentModifier, tr);
+        }
+      });
+
+      self._updateBasedAttributes(changes.group_name, change);
     });
   };
 
@@ -266,7 +274,7 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
       if (tr.data('points') != currentValue) {
         changes.character_attributes.push({
           attribute_name: tr.data('attribute-name'),
-          field_name: tr.data('field-to-update'),
+          field_name: tr.data('field-to-update') || 'points',
           value: currentValue
         });
       }
@@ -323,16 +331,16 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
         editable.input.$input.attr('tabindex', tabindexCounter++);
       });
 
-      if (editableField.parents('[data-attribute-name="Força"]').length > 0) {
-        var lastValue = editableField.text();
-        // For some reason, editable is losing the value and filling the
-        // input with the wrong value. However, by setting the correct value
-        // using the setValue method, it overrides the .html() (or .text()),
-        // displaying an incorrect value in the label. To fix that, we have to
-        // set the editable value and reset the .html.
-        editableField.editable('setValue', editableField.attr('data-value'));
-        editableField.html(lastValue);
-      }
+      var lastValue = editableField.text();
+
+      // For some reason, editable is losing the value and filling the
+      // input with the wrong value. However, by setting the correct value
+      // using the setValue method, it overrides the .html() (or .text()),
+      // displaying an incorrect value in the label. To fix that, we have to
+      // set the editable value and reset the .html.
+      editableField.editable('setValue', editableField.attr('data-value'));
+      editableField.html(lastValue);
+
       editableField.editable('show');
     });
 

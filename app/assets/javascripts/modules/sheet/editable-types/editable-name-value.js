@@ -22,5 +22,14 @@ define('editable-name-value', ['transform', 'source-type-list'], function(Transf
     }
   };
 
+  fn.updateSheetWithNewValues = function(element, change, equipmentModifier, tr) {
+    var value = parseInt(change.value);
+
+    element.attr('data-value', value);
+    element.html(value + equipmentModifier);
+
+    tr.attr('data-points', value);
+  };
+
   return EditableNameValue;
 });
