@@ -91,6 +91,7 @@ define('source-type-list', ['source-type-list-new-item', 'source-type-list-selec
         data.usedPoints = data.usedPoints - points;
         self.sheetEditor.changeAttributePoints(data);
         ui.draggable.remove();
+        self.sheetEditor.garbageItems.push(ui.draggable.data('attribute-name'));
         self.loadNewAttributesList(data);
       }
     });

@@ -12,6 +12,7 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     this.isMaster = options.isMaster || false;
     this.isSheetOwner = options.isSheetOwner || false;
     this.equipmentsUrl = options.equipmentsUrl || '';
+    this.garbageItems = [];
 
     // Valid sheet modes are: game_master_mode, free_mode and game_mode
     this.sheetMode = options.sheetMode || 'game_master_mode';
@@ -159,7 +160,7 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
       success: function() {
         var editable = self.currentEditable;
 
-        self._updateSheetWithNewValues(changes);
+        self._updateSheetWithNewValues(data, changes);
         self._leaveEditMode(data);
 
         if (editable.afterSave && typeof editable.afterSave === "function") {
@@ -186,11 +187,11 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
   //
   // This method is an approach to follow through with the second
   // implementation.
-  fn._updateSheetWithNewValues = function(changes) {
+  fn._updateSheetWithNewValues = function(data, changes) {
     var self = this;
 
     $.each(changes.character_attributes, function(_, change) {
-      var attributeRows = $('tr[data-attribute-name="' + change.attribute_name + '"]');
+      var attributeRows = data.attributesGroup.find('tr[data-attribute-name="' + change.attribute_name + '"]');
 
       $.each(attributeRows, function() {
         var tr = $(this),
@@ -212,6 +213,10 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
       });
 
       self._updateBasedAttributes(changes.group_name, change);
+    });
+
+    $.each(changes.deleted_attributes, function() {
+      data.attributesGroup.find('tr[data-attribute-name="' + this + '"]').remove();
     });
   };
 
@@ -260,6 +265,10 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
   //   character_attributes: [
   //     { attribute_name: 'Strength', field_name: 'points', value: 12 },
   //     ...
+  //   ],
+  //   deleted_attributes: [
+  //     'Perception',
+  //     'Agility'
   //   ]
   // }
   fn._changesToSave = function(data) {
@@ -280,6 +289,8 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
       }
     });
 
+    changes.deleted_attributes = this.garbageItems;
+
     return changes;
   };
 
@@ -298,6 +309,8 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
 
   fn._leaveEditMode = function(data) {
     this._restoreGroupsOpacity();
+    this.garbageItems = []
+
     this.editButtons.show();
     data.attributesGroup.find('a[data-editable-attribute]').editable('hide');
     data.attributesGroup.find("[data-accept-edit-mode]").removeClass("edit-mode");
@@ -310,6 +323,7 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     var self = this,
         tabindexCounter = 1;
 
+    this.garbageItems = []
     $('[tabindex]').removeAttr('tabindex');
     var editableLinks = data.attributesGroup.find('a[data-editable-attribute]');
 

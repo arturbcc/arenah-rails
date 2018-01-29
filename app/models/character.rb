@@ -78,10 +78,13 @@ class Character < ApplicationRecord
   end
 
   # Public: Update the character sheet. Sheets are not updated all at once, but
-  # in parts, group by group.
+  # in parts, group by group. This method also removes attributes that were
+  # deleted by the user.
   #
-  # This method receives only the attributes that will be changed in a specific
-  # group.
+  # This method receives only the attributes that will be changed and those
+  # that will be removed in a specific group .
+  #
+  # - group_name: name of the group that will be updated.
   #
   # - changes: an array containing the list of attributes to change with the new
   #   values. Each item in the array contains three attributes:
@@ -115,13 +118,18 @@ class Character < ApplicationRecord
   #  changed to 10, while the `Constitution` will have its `points` changed to
   #  12.
   #
+  # - deleted_items: the user can remove attributes from a group, if the group
+  #   is a list. In this case, this parameter will contain the names of all
+  #   attributes that must be removed.
+  #
   #  Usage example:
   #
-  #    character.update_sheet('Skills', [{ attribute_name: 'Strength', field_name: 'content', value: 'Jane Roe' }])
+  #    character.update_sheet('Skills', [{ attribute_name: 'Strength',
+  #      field_name: 'content', value: 'Jane Roe' }], ['Perception'])
   #    => true
   #
   # Returns the update status.
-  def update_sheet(group_name, changes)
+  def update_sheet(group_name, changes, deleted_attributes)
     group = raw_sheet['attributes_groups'].find do |attributes_group|
       attributes_group['name'] == group_name
     end
@@ -132,10 +140,12 @@ class Character < ApplicationRecord
       next unless ['content', 'points'].include?(change['field_name'])
 
       change['value'] = change['value'].to_i if change['field_name'] == 'points'
-      attribute = group['character_attributes'].find do |attribute|
-        attribute['name'] == change['attribute_name']
-      end
+      attribute = attribute_by_name(group, change['attribute_name'])
       attribute[change['field_name']] = change['value']
+    end
+
+    deleted_attributes.each do |attribute_name|
+      group['character_attributes'].delete_if { |attribute| attribute['name'] == attribute_name }
     end
 
     save!
@@ -159,5 +169,11 @@ class Character < ApplicationRecord
     end
 
     sheet
+  end
+
+  def attribute_by_name(group, name)
+    group['character_attributes'].find do |attribute|
+      attribute['name'] == name
+    end
   end
 end
