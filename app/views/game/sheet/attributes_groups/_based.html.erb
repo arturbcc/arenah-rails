@@ -12,10 +12,6 @@
   </table>
 
   <% if group.source_type == 'list' %>
-    <div class="based-warning bg-warning">
-      Feche a ficha e abra novamente para que a relação com os demais atributos seja recalculada.
-    </div>
-
     <%= render 'game/sheet/attributes_groups/edit_panel', group: group %>
   <% end %>
 <% end %>
