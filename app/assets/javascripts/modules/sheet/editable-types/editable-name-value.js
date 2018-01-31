@@ -2,11 +2,9 @@ define('editable-name-value', ['transform', 'source-type-list'], function(Transf
   function EditableNameValue(sheetEditor, data) {
     this.sheetEditor = sheetEditor;
     this.transformer = new Transform(sheetEditor);
+    this.sourceTypeList = new SourceTypeList(sheetEditor, data);
 
-    this.onCancel = null;
-    this.transform = null;
-
-    return this._initialize(data);
+    this._initialize(data);
   };
 
   var fn = EditableNameValue.prototype;
@@ -15,10 +13,26 @@ define('editable-name-value', ['transform', 'source-type-list'], function(Transf
     var sourceType = data.attributesGroup.data('source-type');
 
     if (sourceType === 'list') {
-      return new SourceTypeList(this.sheetEditor, data);
+      this.transform = this.sourceTypeList.transform;
     } else if (sourceType === 'fixed') {
       this.transform = this.transformer.toSpinner;
-      return this;
+    }
+  };
+
+  fn.onCancel = function(data) {
+    var sourceType = data.attributesGroup.attr('data-source-type');
+    if (sourceType === 'list') {
+      this.sourceTypeList.onCancel(data);
+    }
+  };
+
+  // When the source of the group is list we need to delegate the `closing`
+  // behaviour to the sourceTypeList object. It will cleanup all resources
+  // and hide one of the panels that are displayed to the users.
+  fn.afterSave = function(data, _) {
+    var sourceType = data.attributesGroup.attr('data-source-type');
+    if (sourceType === 'list') {
+      this.sourceTypeList.leaveEditMode(data);
     }
   };
 
