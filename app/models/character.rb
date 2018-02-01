@@ -122,6 +122,12 @@ class Character < ApplicationRecord
   #   is a list. In this case, this parameter will contain the names of all
   #   attributes that must be removed.
   #
+  # - added_items: the user can add new attributes from a list, in case the
+  #   group is a list. It is an array of hashes and each hash contain the name
+  #   of the attribute to add and its points or cost. Cost has precedence over
+  #   points, it will try to fetch the cost from the game system and, if no
+  #   cost is available, it will then try to fetch the points.
+  #
   #  Usage example:
   #
   #    character.update_sheet('Skills', [{ attribute_name: 'Strength',
@@ -129,7 +135,7 @@ class Character < ApplicationRecord
   #    => true
   #
   # Returns the update status.
-  def update_sheet(group_name, changes, deleted_attributes)
+  def update_sheet(group_name, changes, deleted_attributes, added_attributes)
     group = raw_sheet['attributes_groups'].find do |attributes_group|
       attributes_group['name'] == group_name
     end
@@ -142,6 +148,14 @@ class Character < ApplicationRecord
       change['value'] = change['value'].to_i if change['field_name'] == 'points'
       attribute = attribute_by_name(group, change['attribute_name'])
       attribute[change['field_name']] = change['value']
+    end
+
+    added_attributes.each do |attribute|
+      if attribute['cost']
+        group['character_attributes'] << { name: attribute['name'], cost: attribute['cost']}
+      elsif attribute['points']
+        group['character_attributes'] << { name: attribute['name'], points: attribute['points']}
+      end
     end
 
     deleted_attributes.each do |attribute_name|

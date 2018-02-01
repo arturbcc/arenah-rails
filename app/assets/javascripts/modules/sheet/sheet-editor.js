@@ -3,9 +3,9 @@
 // It knows which component to call when the user edits a specific attributes
 // group, and is also responsible to change between view and edit mode. All
 // classes that deal with groups can be found at ./editable-types/*.js
-define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character-card',
+define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'editable-character-card',
   'editable-equipments', 'editable-mixed', 'editable-name-value', 'editable-rich-text',
-  'editable-text'], function(EditableBased, EditableBullet, EditableCharacterCard,
+  'editable-text'], function(GameSystem, EditableBased, EditableBullet, EditableCharacterCard,
   EditableEquipments, EditableMixed, EditableNameValue, EditableRichText, EditableText) {
 
   function SheetEditor(options = {}) {
@@ -13,6 +13,7 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     this.isSheetOwner = options.isSheetOwner || false;
     this.equipmentsUrl = options.equipmentsUrl || '';
     this.garbageItems = [];
+    this.itemsToInclude = [];
 
     // Valid sheet modes are: game_master_mode, free_mode and game_mode
     this.sheetMode = options.sheetMode || 'game_master_mode';
@@ -269,8 +270,14 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
   //   deleted_attributes: [
   //     'Perception',
   //     'Agility'
+  //   ],
+  //   added_attributes: [
+  //     'Charisma'
   //   ]
   // }
+
+//TODO: what about added_attribute value?? It can be cost or points
+
   fn._changesToSave = function(data) {
     var inputs = data.attributesGroup.find('.editableform input'),
         changes = { group_name: data.attributesGroup.data('group-name'), character_attributes: [] };
@@ -280,7 +287,7 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
           tr = input.parents('tr[data-attribute-name]'),
           currentValue = input.val();
 
-      if (tr.data('points') != currentValue) {
+      if (tr.data('points') !== currentValue) {
         changes.character_attributes.push({
           attribute_name: tr.data('attribute-name'),
           field_name: tr.data('field-to-update') || 'points',
@@ -290,6 +297,7 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     });
 
     changes.deleted_attributes = this.garbageItems;
+    changes.added_attributes = this.itemsToInclude;
 
     return changes;
   };
@@ -302,14 +310,15 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     this._leaveEditMode(data);
     this._rollback();
 
-    if (this.currentEditable && this.currentEditable.onCancel && typeof this.currentEditable.onCancel == "function") {
+    if (this.currentEditable && this.currentEditable.onCancel && typeof this.currentEditable.onCancel === "function") {
       this.currentEditable.onCancel(data);
     }
   };
 
   fn._leaveEditMode = function(data) {
     this._restoreGroupsOpacity();
-    this.garbageItems = []
+    this.garbageItems = [];
+    this.itemsToInclude = [];
 
     this.editButtons.show();
     data.attributesGroup.find('a[data-editable-attribute]').editable('hide');
@@ -323,7 +332,8 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     var self = this,
         tabindexCounter = 1;
 
-    this.garbageItems = []
+    this.garbageItems = [];
+    this.itemsToInclude = [];
     $('[tabindex]').removeAttr('tabindex');
     var editableLinks = data.attributesGroup.find('a[data-editable-attribute]');
 
@@ -486,6 +496,22 @@ define('sheet-editor', ['editable-based', 'editable-bullet', 'editable-character
     }
 
     return container;
+  };
+
+  fn.addNewItem = function(groupName, attributeName, value) {
+    var gameSystem = new GameSystem(),
+        item = { attributeName: attributeName },
+        attribute = gameSystem.getAttribute(groupName, attributeName);
+
+    if (attribute) {
+      if (attribute.cost !== undefined) {
+        item.cost = value;
+      } else {
+        item.points = value;
+      }
+
+      this.itemsToInclude.push(item);
+    }
   };
 
   return SheetEditor;

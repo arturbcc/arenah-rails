@@ -28,7 +28,7 @@ define('game-system', [], function() {
     if (groupName && attributeName) {
       var attributes = this.ListOfcharacterAttributes(groupName);
 
-      if (!attributes) {
+      if (!attributes || attributes.length == 0) {
         attributes = this.listOfAttributes(groupName);
       }
 

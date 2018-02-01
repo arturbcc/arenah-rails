@@ -34,12 +34,16 @@ define('source-type-list-new-item', ['transform', 'game-system'], function(Trans
 
     if (index > 0) {
       if (!exceededLimit) {
-        var template = $('.editable-list-group[data-group-name=' + data.attributesGroup.attr('data-group-name') + ']').find('.template.hidden:first').clone(),
+        var groupName = data.attributesGroup.attr('data-group-name'),
+            template = $('.editable-list-group[data-group-name=' + groupName + ']').find('.template.hidden:first').clone(),
             items = editContainer.find('.name-value-attributes'),
             description = editContainer.find('.editable-current-item-description .qtip-content').html(),
             newItem = this._fillTemplate(data, template, description, selectedValue);
 
         items.append(newItem);
+
+        this.sheetEditor.addNewItem(groupName, newItem.data('attribute-name'),
+          newItem.data('points'));
 
         data.usedPoints = data.usedPoints + parseInt(points);
         this.sheetEditor.changeAttributePoints(data);
