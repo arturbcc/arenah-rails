@@ -201,7 +201,7 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
         // In groups with sourceType list, there are two panels with data: one
         // the users see in regular mode and one they see in edit mode. It is
         // important to keep both updated.
-        if (element.length == 0) {
+        if (element.length === 0) {
           element = tr.find('.text-right a');
         }
 
@@ -218,6 +218,13 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
 
     $.each(changes.deleted_attributes, function() {
       data.attributesGroup.find('tr[data-attribute-name="' + this + '"]').remove();
+    });
+
+    $.each(changes.added_attributes, function(_, attribute) {
+      var table = data.attributesGroup.find('[data-accept-edit-mode]');
+      table.append(attribute.attributeName);
+      // data.attributesGroup.find('tr[data-attribute-name="' + this + '"]').remove();
+      // TODO: add new item on list
     });
   };
 
@@ -279,7 +286,7 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
 //TODO: what about added_attribute value?? It can be cost or points
 
   fn._changesToSave = function(data) {
-    var inputs = data.attributesGroup.find('.editableform input'),
+    var inputs = data.attributesGroup.find('.editableform input:visible'),
         changes = { group_name: data.attributesGroup.data('group-name'), character_attributes: [] };
 
     $.each(inputs, function() {
@@ -335,6 +342,7 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
     this.garbageItems = [];
     this.itemsToInclude = [];
     $('[tabindex]').removeAttr('tabindex');
+    $('[editable-current-item-description]').html('');
     var editableLinks = data.attributesGroup.find('a[data-editable-attribute]');
 
     editableLinks.editable('destroy');

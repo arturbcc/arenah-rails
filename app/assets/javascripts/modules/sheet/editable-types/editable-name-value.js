@@ -37,6 +37,7 @@ define('editable-name-value', ['transform', 'source-type-list'], function(Transf
   };
 
   fn.updateSheetWithNewValues = function(element, change, equipmentModifier, tr) {
+    debugger;
     var value = parseInt(change.value);
 
     element.attr('data-value', value);
