@@ -101,5 +101,22 @@ define('source-type-list', ['source-type-list-new-item', 'source-type-list-selec
     this._selectController.loadNewAttributesList(data);
   };
 
+  // Activate QTip on an element. It will delegate this function to the
+  // `SourceTypeListNewItem` component.
+  //
+  // It is useful when we add a new attribute from a list and click `ok`. The
+  // new attribute must appear in the list of items, and it must have the
+  // tooltip with the attribute's description. For more information, check the
+  // method `_includeAddedAttributes` in the sheet-editor.js component.
+  //
+  // - container: element inside a sheet page, form where we can go up in the
+  //   DOM to find out how many coluns the tooltip should take.
+  //
+  // - template: element with the .smart-description class. This element will
+  //   have the tooltip.
+  fn.activateTooltip = function(container, template) {
+    this._newAttributeController.newItemTooltip(container, template);
+  };
+
   return SourceTypeList;
 });

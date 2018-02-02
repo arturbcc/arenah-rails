@@ -216,15 +216,27 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
       self._updateBasedAttributes(changes.group_name, change);
     });
 
+    this._removeDeletedAttributes(data, changes);
+    this._includeAddedAttributes(data, changes);
+  };
+
+  fn._removeDeletedAttributes = function(data, changes) {
     $.each(changes.deleted_attributes, function() {
       data.attributesGroup.find('tr[data-attribute-name="' + this + '"]').remove();
     });
+  };
+
+  fn._includeAddedAttributes = function(data, changes) {
+    var self = this;
 
     $.each(changes.added_attributes, function(_, attribute) {
-      var table = data.attributesGroup.find('[data-accept-edit-mode]');
-      table.append(attribute.attributeName);
-      // data.attributesGroup.find('tr[data-attribute-name="' + this + '"]').remove();
-      // TODO: add new item on list
+      var table = data.attributesGroup.find('[data-accept-edit-mode]'),
+          container = data.attributesGroup.find('.editable-list-items').find('[data-attribute-name="' + attribute.attributeName + '"]');
+          tr = container.clone();
+
+      tr.removeAttr('data-state');
+      table.append(tr);
+      self.currentEditable.sourceTypeList._newAttributeController._newItemTooltip(table, tr);
     });
   };
 

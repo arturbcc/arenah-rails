@@ -48,7 +48,7 @@ define('source-type-list-new-item', ['transform', 'game-system'], function(Trans
         data.usedPoints = data.usedPoints + parseInt(points);
         this.sheetEditor.changeAttributePoints(data);
 
-        this._newItemTooltip(editContainer, template);
+        this.newItemTooltip(editContainer, template);
         this._newItemMouseOver(template);
         this._clearDescription(editContainer);
 
@@ -67,7 +67,7 @@ define('source-type-list-new-item', ['transform', 'game-system'], function(Trans
     editContainer.find('.editable-current-item-description').html('');
   };
 
-  fn._newItemTooltip = function(editContainer, template) {
+  fn.newItemTooltip = function(editContainer, template) {
     var columns = editContainer.parents('[data-columns]:first').attr('data-columns'),
         item = template.find('.smart-description');
 
