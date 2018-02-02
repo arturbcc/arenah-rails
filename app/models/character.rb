@@ -152,9 +152,9 @@ class Character < ApplicationRecord
 
     added_attributes.each do |attribute|
       if attribute['cost']
-        group['character_attributes'] << { name: attribute['name'], cost: attribute['cost']}
+        group['character_attributes'] << { name: attribute['attributeName'], cost: attribute['cost'] }.stringify_keys
       elsif attribute['points']
-        group['character_attributes'] << { name: attribute['name'], points: attribute['points']}
+        group['character_attributes'] << { name: attribute['attributeName'], points: attribute['points'] }.stringify_keys
       end
     end
 
