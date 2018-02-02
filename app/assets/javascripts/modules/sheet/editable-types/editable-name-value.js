@@ -2,7 +2,6 @@ define('editable-name-value', ['transform', 'source-type-list'], function(Transf
   function EditableNameValue(sheetEditor, data) {
     this.sheetEditor = sheetEditor;
     this.transformer = new Transform(sheetEditor);
-    this.sourceTypeList = new SourceTypeList(sheetEditor, data);
 
     this._initialize(data);
   };
@@ -13,6 +12,7 @@ define('editable-name-value', ['transform', 'source-type-list'], function(Transf
     var sourceType = data.attributesGroup.data('source-type');
 
     if (sourceType === 'list') {
+      this.sourceTypeList = new SourceTypeList(this.sheetEditor, data);
       this.transform = this.sourceTypeList.transform;
     } else if (sourceType === 'fixed') {
       this.transform = this.transformer.toSpinner;
@@ -37,7 +37,6 @@ define('editable-name-value', ['transform', 'source-type-list'], function(Transf
   };
 
   fn.updateSheetWithNewValues = function(element, change, equipmentModifier, tr) {
-    debugger;
     var value = parseInt(change.value);
 
     element.attr('data-value', value);

@@ -234,9 +234,13 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
           container = data.attributesGroup.find('.editable-list-items').find('[data-attribute-name="' + attribute.attributeName + '"]');
           tr = container.clone();
 
+      if (self.currentEditable.formatAddedAttribute && typeof self.currentEditable.formatAddedAttribute === 'function') {
+        self.currentEditable.formatAddedAttribute(tr.find('.text-right'));
+      }
+
       tr.removeAttr('data-state');
       table.append(tr);
-      self.currentEditable.sourceTypeList._newAttributeController._newItemTooltip(table, tr);
+      self.currentEditable.sourceTypeList.activateTooltip(table, tr);
     });
   };
 

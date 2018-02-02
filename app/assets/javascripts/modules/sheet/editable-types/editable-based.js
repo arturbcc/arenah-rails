@@ -60,5 +60,9 @@ define('editable-based', ['transform', 'source-type-list'], function(Transform, 
     }
   };
 
+  fn.formatAddedAttribute = function(element) {
+    element.text('rolou');
+  };
+
   return EditableBased;
 });
