@@ -379,16 +379,6 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
         editable.input.$input.attr('tabindex', tabindexCounter++);
       });
 
-      var lastValue = editableField.text();
-
-      // For some reason, editable is losing the value and filling the
-      // input with the wrong value. However, by setting the correct value
-      // using the setValue method, it overrides the .html() (or .text()),
-      // displaying an incorrect value in the label. To fix that, we have to
-      // set the editable value and reset the .html.
-      editableField.editable('setValue', editableField.attr('data-value'));
-      editableField.html(lastValue);
-
       editableField.editable('show');
     });
 
