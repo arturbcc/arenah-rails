@@ -319,10 +319,35 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
       }
     });
 
-    changes.deleted_attributes = this.garbageItems;
-    changes.added_attributes = this.itemsToInclude;
+    var arrayIntersection = this._arraysIntersection(this.garbageItems, this.itemsToInclude);
+    changes.deleted_attributes = this._arraysDifference(this.garbageItems, arrayIntersection);
+    changes.added_attributes = this._arraysOfHashDifference(this.itemsToInclude, arrayIntersection);
 
     return changes;
+  };
+
+  fn._arraysIntersection = function(deletedAttributes, addedAttributes) {
+    return $.map(addedAttributes, function(item) {
+      return $.inArray(item.name, deletedAttributes) < 0 ? null : item.name;
+    });
+  };
+
+  fn._arraysDifference = function(array1, array2) {
+    var difference = [];
+
+    $.grep(array1, function(el) {
+      if ($.inArray(el, array2) == -1) {
+        difference.push(el);
+      }
+    });
+
+    return difference;
+  };
+
+  fn._arraysOfHashDifference = function(arrayOfHash, arrayOfNames) {
+    return $.grep(arrayOfHash, function(item) {
+      return $.inArray(item.name, arrayOfNames) == -1
+    });
   };
 
   // Undo all the current changes. Once the changes are cancelled, the group
