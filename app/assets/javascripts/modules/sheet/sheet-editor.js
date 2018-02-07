@@ -514,7 +514,7 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
 
   fn.addNewItem = function(groupName, attributeName, value) {
     var gameSystem = new GameSystem(),
-        item = { attributeName: attributeName },
+        item = { name: attributeName },
         attribute = gameSystem.getAttribute(groupName, attributeName);
 
     if (attribute) {

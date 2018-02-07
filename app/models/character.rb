@@ -135,7 +135,7 @@ class Character < ApplicationRecord
   #    => true
   #
   # Returns the update status.
-  def update_sheet(group_name, changes, deleted_attributes, added_attributes)
+  def update_sheet(group_name:, changes: [], deleted_attributes: [], added_attributes:[])
     group = raw_sheet['attributes_groups'].find do |attributes_group|
       attributes_group['name'] == group_name
     end
@@ -152,9 +152,9 @@ class Character < ApplicationRecord
 
     added_attributes.each do |attribute|
       if attribute['cost']
-        group['character_attributes'] << { name: attribute['attributeName'], cost: attribute['cost'] }.stringify_keys
+        group['character_attributes'] << { name: attribute['name'], cost: attribute['cost'] }.stringify_keys
       elsif attribute['points']
-        group['character_attributes'] << { name: attribute['attributeName'], points: attribute['points'] }.stringify_keys
+        group['character_attributes'] << { name: attribute['name'], points: attribute['points'] }.stringify_keys
       end
     end
 
