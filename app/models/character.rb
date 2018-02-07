@@ -142,25 +142,20 @@ class Character < ApplicationRecord
 
     return false unless group
 
-    changes.each do |change|
-      next unless ['content', 'points'].include?(change['field_name'])
+    modify_attributes(group, changes)
 
-      change['value'] = change['value'].to_i if change['field_name'] == 'points'
-      attribute = attribute_by_name(group, change['attribute_name'])
-      attribute[change['field_name']] = change['value']
+    # If the same attribute is in the `added_attributes` AND in the
+    # `deleted_attributes`, no change will be done in the database, so we need
+    # to remove it from both lists.
+    added_attributes_names = added_attributes.map { |attribute| attribute['name'] }
+    intersection = added_attributes_names & deleted_attributes
+    intersection.each do |attribute_name|
+      added_attributes.reject! { |attribute| attribute['name'] == attribute_name }
     end
+    deleted_attributes -= intersection
 
-    added_attributes.each do |attribute|
-      if attribute['cost']
-        group['character_attributes'] << { name: attribute['name'], cost: attribute['cost'] }.stringify_keys
-      elsif attribute['points']
-        group['character_attributes'] << { name: attribute['name'], points: attribute['points'] }.stringify_keys
-      end
-    end
-
-    deleted_attributes.each do |attribute_name|
-      group['character_attributes'].delete_if { |attribute| attribute['name'] == attribute_name }
-    end
+    add_new_attributes(group, added_attributes)
+    remove_deleted_attributes(group, deleted_attributes)
 
     save!
   end
@@ -188,6 +183,38 @@ class Character < ApplicationRecord
   def attribute_by_name(group, name)
     group['character_attributes'].find do |attribute|
       attribute['name'] == name
+    end
+  end
+
+  def modify_attributes(group, changes)
+    changes.each do |change|
+      next unless ['content', 'points', 'total'].include?(change['field_name'])
+
+      change['value'] = change['value'].to_i if change['field_name'] == 'points'
+      attribute = attribute_by_name(group, change['attribute_name'])
+      attribute[change['field_name']] = change['value']
+    end
+  end
+
+  def add_new_attributes(group, added_attributes)
+    added_attributes.each do |attribute|
+      if attribute['cost']
+        group['character_attributes'] << {
+          name: attribute['name'],
+          cost: attribute['cost']
+        }.stringify_keys
+      elsif attribute['points']
+        group['character_attributes'] << {
+          name: attribute['name'],
+          points: attribute['points']
+        }.stringify_keys
+      end
+    end
+
+    def remove_deleted_attributes(group, deleted_attributes)
+      deleted_attributes.each do |attribute_name|
+        group['character_attributes'].delete_if { |attribute| attribute['name'] == attribute_name }
+      end
     end
   end
 end

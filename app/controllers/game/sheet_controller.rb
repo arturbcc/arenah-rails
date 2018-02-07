@@ -14,7 +14,7 @@ class Game::SheetController < Game::BaseController
     # TODO: log modifications to show to the game master
     character = Character.friendly.find(params[:character_slug])
     status = character&.update_sheet(
-      name: params[:group_name],
+      group_name: params[:group_name],
       changes: params[:character_attributes],
       deleted_attributes: params[:deleted_attributes],
       added_attributes: params[:added_attributes]

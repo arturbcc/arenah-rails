@@ -231,7 +231,7 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
 
     $.each(changes.added_attributes, function(_, attribute) {
       var table = data.attributesGroup.find('[data-accept-edit-mode]'),
-          container = data.attributesGroup.find('.editable-list-items').find('[data-attribute-name="' + attribute.attributeName + '"]');
+          container = data.attributesGroup.find('.editable-list-items').find('[data-attribute-name="' + attribute.name + '"]');
           tr = container.clone();
 
       if (self.currentEditable.formatAddedAttribute && typeof self.currentEditable.formatAddedAttribute === 'function') {
