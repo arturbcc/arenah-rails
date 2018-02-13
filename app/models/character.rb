@@ -190,7 +190,7 @@ class Character < ApplicationRecord
     changes.each do |change|
       next unless ['content', 'points', 'total'].include?(change['field_name'])
 
-      change['value'] = change['value'].to_i if change['field_name'] == 'points'
+      change['value'] = change['value'].to_i if change['field_name'] != 'content'
       attribute = attribute_by_name(group, change['attribute_name'])
       attribute[change['field_name']] = change['value']
     end
