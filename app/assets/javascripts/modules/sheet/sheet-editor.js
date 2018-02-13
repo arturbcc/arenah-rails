@@ -303,7 +303,11 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
 
   fn._changesToSave = function(data) {
     var inputs = data.attributesGroup.find('.editableform input:visible'),
-        changes = { group_name: data.attributesGroup.data('group-name'), character_attributes: [] };
+        changes = { group_name: data.attributesGroup.data('group-name'), character_attributes: [] },
+        // attributesNames control the names of the attributes already included
+        // in the character_attributes array. If it appears a second time, the
+        // change must be saved in the `total` field.
+        attributesNames = [];
 
     $.each(inputs, function() {
       var input = $(this),
@@ -311,9 +315,21 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
           currentValue = input.val();
 
       if (tr.data('points') !== currentValue) {
+        var fieldName = tr.data('field-to-update') || 'points',
+            attributeName = tr.data('attribute-name');
+
+        // If there are two inputs (e.g. when the attribute has an editable name
+        // AND and editable value), the second one must be saved in the `total`
+        // field.
+        if (attributesNames.indexOf(attributeName) > -1) {
+          fieldName = 'total';
+        } else {
+          attributesNames.push(attributeName);
+        }
+
         changes.character_attributes.push({
-          attribute_name: tr.data('attribute-name'),
-          field_name: tr.data('field-to-update') || 'points',
+          attribute_name: attributeName,
+          field_name: fieldName,
           value: currentValue
         });
       }
@@ -403,6 +419,18 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
 
         editable.input.$input.attr('tabindex', tabindexCounter++);
       });
+
+      var lastValue = editableField.text();
+
+      // For some reason, editable is losing the value and filling the
+      // input with the wrong value. However, by setting the correct value
+      // using the setValue method, it overrides the .html() (or .text()),
+      // displaying an incorrect value in the label. To fix that, we have to
+      // set the editable value and reset the .html.
+      if (editableField.attr('data-value')) {
+        editableField.editable('setValue', editableField.attr('data-value'));
+      }
+      editableField.html(lastValue);
 
       editableField.editable('show');
     });
