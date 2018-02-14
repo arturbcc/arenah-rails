@@ -207,11 +207,14 @@ class Character < ApplicationRecord
         next
       end
 
-      sheet = self.game.system.sheet
-      system_attribute = sheet.find_list_attribute(group['name'], attribute['name'])
-      item[:base_attribute_group] = system_attribute.base_attribute_group if system_attribute&.base_attribute_group
-      item[:base_attribute_name] = system_attribute.base_attribute_name if system_attribute&.base_attribute_name
-      item[:description] = system_attribute.description if system_attribute&.description
+      if self.game && self.game.system
+        sheet = self.game.system.sheet
+        system_attribute = sheet.find_list_attribute(group['name'], attribute['name'])
+        item[:base_attribute_group] = system_attribute.base_attribute_group if system_attribute&.base_attribute_group
+        item[:base_attribute_name] = system_attribute.base_attribute_name if system_attribute&.base_attribute_name
+        item[:description] = system_attribute.description if system_attribute&.description
+      end
+
       group['character_attributes'] << item.stringify_keys;
     end
 
