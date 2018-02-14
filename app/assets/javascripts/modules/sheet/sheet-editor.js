@@ -404,7 +404,7 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
     this.garbageItems = [];
     this.itemsToInclude = [];
     $('[tabindex]').removeAttr('tabindex');
-    $('[editable-current-item-description]').html('');
+    $('.editable-current-item-description').html('');
     var editableLinks = data.attributesGroup.find('a[data-editable-attribute]');
 
     editableLinks.editable('destroy');
