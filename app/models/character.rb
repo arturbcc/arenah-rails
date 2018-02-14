@@ -199,7 +199,6 @@ class Character < ApplicationRecord
   def add_new_attributes(group, added_attributes)
     added_attributes.each do |attribute|
       item = { name: attribute['name'] };
-
       if attribute['cost']
         item[:cost] = attribute['cost']
       elsif attribute['points']
@@ -210,9 +209,9 @@ class Character < ApplicationRecord
 
       sheet = self.game.system.sheet
       system_attribute = sheet.find_list_attribute(group['name'], attribute['name'])
-      item[:base_attribute_group] = system_attribute.base_attribute_group if system_attribute.base_attribute_group
-      item[:base_attribute_name] = system_attribute.base_attribute_name if system_attribute.base_attribute_name
-      item[:description] = system_attribute.description if system_attribute.description
+      item[:base_attribute_group] = system_attribute.base_attribute_group if system_attribute&.base_attribute_group
+      item[:base_attribute_name] = system_attribute.base_attribute_name if system_attribute&.base_attribute_name
+      item[:description] = system_attribute.description if system_attribute&.description
       group['character_attributes'] << item.stringify_keys;
     end
 

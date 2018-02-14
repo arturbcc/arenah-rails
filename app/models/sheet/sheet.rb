@@ -50,7 +50,7 @@ module Sheet
     def find_list_attribute_on_group(group, attribute_name)
       return nil unless group
 
-      group.list.detect { |attr| attr.name == attribute_name }
+      group.list&.detect { |attr| attr.name == attribute_name }
     end
 
     # Public: link all attributes' groups and build the

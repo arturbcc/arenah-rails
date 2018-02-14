@@ -247,7 +247,10 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
 
       tr.removeAttr('data-state');
       table.append(tr);
-      self.currentEditable.sourceTypeList.activateTooltip(table, tr);
+
+      if (self.currentEditable.sourceTypeList) {
+        self.currentEditable.sourceTypeList.activateTooltip(table, tr);
+      }
     });
   };
 
@@ -575,15 +578,13 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
         item = { name: attributeName },
         attribute = gameSystem.getAttribute(groupName, attributeName);
 
-    if (attribute) {
-      if (attribute.cost !== undefined) {
-        item.cost = value;
-      } else {
-        item.points = value;
-      }
-
-      this.itemsToInclude.push(item);
+    if (attribute && attribute.cost !== undefined) {
+      item.cost = value;
+    } else {
+      item.points = value;
     }
+
+    this.itemsToInclude.push(item);
   };
 
   return SheetEditor;

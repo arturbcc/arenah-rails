@@ -86,6 +86,7 @@ define('source-type-open', [], function() {
         data.usedPoints = data.usedPoints - points;
         self.sheetEditor.changeAttributePoints(data);
         ui.draggable.remove();
+        self.sheetEditor.garbageItems.push(ui.draggable.data('attribute-name'));
       }
     });
   };
@@ -96,16 +97,19 @@ define('source-type-open', [], function() {
         addButton = editContainer.find('.add-editable-list-item'),
         self = this;
 
-    addButton.unbind().click(function() {
+    addButton.off('click').on('click', function() {
       var name = input.val(),
           template = $('.editable-list-group[data-group-name=' + data.attributesGroup.data('group-name') + ']').find('.template.hidden:first').clone(),
-          items = editContainer.find('.name-value-attributes');
+          items = editContainer.find('.name-value-attributes'),
+          groupName = data.attributesGroup.attr('data-group-name');
 
       items.append(self._fillTemplate(template, name));
       self._newItemMouseOver(template);
       self._startDragAndDrop(data);
       editContainer.find('.editable-current-item-description').html('');
       input.val('');
+
+      self.sheetEditor.addNewItem(groupName, name, 0);
     });
   };
 
