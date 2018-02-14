@@ -212,7 +212,7 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
           element = tr.find('.text-right a');
         }
 
-        if (element.data('editable-attribute') === 'text') {
+        if (element.data('editable-attribute') === 'text' || element.data('editable-attribute') === 'ckeditor') {
           element.html(change.value);
         } else if (self.currentEditable.updateSheetWithNewValues && typeof self.currentEditable.updateSheetWithNewValues === 'function') {
           var equipmentModifier = parseInt(tr.data('equipment-modifier') || 0);
@@ -343,6 +343,18 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
       }
     });
 
+    var ckEditors = data.attributesGroup.find('.ckeditor-attribute');
+    $.each(ckEditors, function() {
+      var editor = $(this),
+          instanceName = editor.data('name');
+
+      changes.character_attributes.push({
+        attribute_name: editor.data('attribute-name'),
+        field_name: 'content',
+        value: CKEDITOR.instances[instanceName].getData()
+      });
+    });
+
     var arrayIntersection = this._arraysIntersection(this.garbageItems, this.itemsToInclude);
     changes.deleted_attributes = this._arraysDifference(this.garbageItems, arrayIntersection);
     changes.added_attributes = this._arraysOfHashDifference(this.itemsToInclude, arrayIntersection);
@@ -428,7 +440,7 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
         editable.input.$input.attr('tabindex', tabindexCounter++);
       });
 
-      var lastValue = editableField.text();
+      var lastValue = editableField.html();
 
       // For some reason, editable is losing the value and filling the
       // input with the wrong value. However, by setting the correct value

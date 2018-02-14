@@ -40,7 +40,9 @@
         "position": "column_1",
         "show_on_posts": false,
         "instructions": "",
-        "character_attributes": []
+        "character_attributes": [
+          { "name": "História", "content": "" }
+        ]
       },
       {
         "name": "Físicos",

@@ -222,7 +222,10 @@
         "position": "column_1",
         "type": "rich_text",
         "source_type": "open",
-        "instructions": "A história do <b>personagem</b> é importante para torná-lo mais real, para que se possa compreendê-lo de forma mais profunda e detalhada. Escreva o que achar relevante sobre o passado, o presente e as ambições para o futuro, bem como a aparência, suas principais habilidades e os eventos pelos quais se tornou famoso."
+        "instructions": "A história do <b>personagem</b> é importante para torná-lo mais real, para que se possa compreendê-lo de forma mais profunda e detalhada. Escreva o que achar relevante sobre o passado, o presente e as ambições para o futuro, bem como a aparência, suas principais habilidades e os eventos pelos quais se tornou famoso.",
+        "character_attributes": [
+          { "name": "História", "content": "" }
+        ]
       },
       {
         "name": "Status",
