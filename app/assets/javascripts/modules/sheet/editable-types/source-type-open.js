@@ -30,13 +30,21 @@ define('source-type-open', [], function() {
     editContainer.find('input.editable-list-input').focus();
   };
 
-  fn.onCancel = function(data) {
+  fn._leaveEditMode = function(data) {
     data.attributesGroup.find('[data-accept-edit-mode]').show();
     data.attributesGroup.find('.editable-list-group').addClass('hidden');
     data.attributesGroup.find('[data-editable-attribute]').each(function() {
       $(this).editable('hide');
     });
+  };
+
+  fn.onCancel = function(data) {
+    this._leaveEditMode(data);
     this._rollback(data);
+  };
+
+  fn.afterSave = function(data, _) {
+    this._leaveEditMode(data);
   };
 
   fn.transform = function(editable) {
