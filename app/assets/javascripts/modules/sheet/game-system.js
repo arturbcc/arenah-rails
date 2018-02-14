@@ -6,7 +6,7 @@ define('game-system', [], function() {
   var fn = GameSystem.prototype;
 
   fn.unusedAttributesList = function(groupName, usedAttributes) {
-    var attributes = this.listOfAttributes(groupName);
+    var attributes = this.listOfAttributes(groupName) || [];
     return $.grep(attributes, function(attribute) {
       return usedAttributes.indexOf(attribute.name) < 0;
     });
@@ -42,7 +42,7 @@ define('game-system', [], function() {
   fn._findGroup = function(groupName) {
     var groups = this.system.sheet.attributes_groups;
 
-    return currentGroup = $.grep(groups, function(group) {
+    return $.grep(groups, function(group) {
       return group.name === groupName;
     })[0];
   };

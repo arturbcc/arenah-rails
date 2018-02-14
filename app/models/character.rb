@@ -135,32 +135,27 @@ class Character < ApplicationRecord
   #    => true
   #
   # Returns the update status.
-  def update_sheet(group_name, changes, deleted_attributes, added_attributes)
+  def update_sheet(group_name:, changes: [], deleted_attributes: [], added_attributes:[])
     group = raw_sheet['attributes_groups'].find do |attributes_group|
       attributes_group['name'] == group_name
     end
 
     return false unless group
 
-    changes.each do |change|
-      next unless ['content', 'points'].include?(change['field_name'])
-
-      change['value'] = change['value'].to_i if change['field_name'] == 'points'
-      attribute = attribute_by_name(group, change['attribute_name'])
-      attribute[change['field_name']] = change['value']
+    # If the same attribute is in the `added_attributes` AND in the
+    # `deleted_attributes`, no change will be done in the database, so we need
+    # to remove it from both lists.
+    added_attributes_names = added_attributes.map { |attribute| attribute['name'] }
+    intersection = added_attributes_names & deleted_attributes
+    intersection.each do |attribute_name|
+      added_attributes.reject! { |attribute| attribute['name'] == attribute_name }
     end
+    deleted_attributes -= intersection
 
-    added_attributes.each do |attribute|
-      if attribute['cost']
-        group['character_attributes'] << { name: attribute['name'], cost: attribute['cost']}
-      elsif attribute['points']
-        group['character_attributes'] << { name: attribute['name'], points: attribute['points']}
-      end
-    end
+    add_new_attributes(group, added_attributes)
+    remove_deleted_attributes(group, deleted_attributes)
 
-    deleted_attributes.each do |attribute_name|
-      group['character_attributes'].delete_if { |attribute| attribute['name'] == attribute_name }
-    end
+    modify_attributes(group, changes)
 
     save!
   end
@@ -188,6 +183,45 @@ class Character < ApplicationRecord
   def attribute_by_name(group, name)
     group['character_attributes'].find do |attribute|
       attribute['name'] == name
+    end
+  end
+
+  def modify_attributes(group, changes)
+    changes.each do |change|
+      next unless ['content', 'points', 'total'].include?(change['field_name'])
+
+      change['value'] = change['value'].to_i if change['field_name'] != 'content'
+      attribute = attribute_by_name(group, change['attribute_name'])
+      attribute[change['field_name']] = change['value'] if attribute.present?
+    end
+  end
+
+  def add_new_attributes(group, added_attributes)
+    added_attributes.each do |attribute|
+      item = { name: attribute['name'] };
+      if attribute['cost']
+        item[:cost] = attribute['cost']
+      elsif attribute['points']
+        item[:points] = attribute['points']
+      else
+        next
+      end
+
+      if self.game && self.game.system
+        sheet = self.game.system.sheet
+        system_attribute = sheet.find_list_attribute(group['name'], attribute['name'])
+        item[:base_attribute_group] = system_attribute.base_attribute_group if system_attribute&.base_attribute_group
+        item[:base_attribute_name] = system_attribute.base_attribute_name if system_attribute&.base_attribute_name
+        item[:description] = system_attribute.description if system_attribute&.description
+      end
+
+      group['character_attributes'] << item.stringify_keys;
+    end
+
+    def remove_deleted_attributes(group, deleted_attributes)
+      deleted_attributes.each do |attribute_name|
+        group['character_attributes'].delete_if { |attribute| attribute['name'] == attribute_name }
+      end
     end
   end
 end

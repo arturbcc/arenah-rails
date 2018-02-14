@@ -306,7 +306,7 @@ RSpec.describe Sheet::CharacterAttribute, type: :model do
       group_name = 'Perícias'
       group = @sheet.find_attributes_group(group_name)
       expect(group.name).to eq(group_name)
-      expect(group.character_attributes.count).to eq(14)
+      expect(group.character_attributes.count).to eq(15)
 
       expected = [
         { name: 'História', points: 10 },
@@ -322,6 +322,7 @@ RSpec.describe Sheet::CharacterAttribute, type: :model do
         { name: 'Ler/Escrever', points: 27 },
         { name: 'Espada curta', points: 35 },
         { name: 'Espada longa', points: 37 },
+        { name: 'Levantamento de peso', points: 8 },
         { name: 'Saltos', points: 10 }
       ]
 
@@ -495,7 +496,8 @@ RSpec.describe Sheet::CharacterAttribute, type: :model do
           attribute_name: 'Natação',
           points: 30,
           value: 40,
-          equipment_modifier: nil
+          equipment_modifier: nil,
+          type: nil
         }
         expect(attribute.to_params).to eq(expected)
       end
@@ -507,7 +509,8 @@ RSpec.describe Sheet::CharacterAttribute, type: :model do
           attribute_name: 'Natação',
           points: nil,
           value: 0,
-          equipment_modifier: nil
+          equipment_modifier: nil,
+          type: nil
         }
         attribute = Sheet::CharacterAttribute.new(name: 'Natação')
         expect(attribute.to_params).to eq(expected)

@@ -1,4 +1,4 @@
-<%= content_tag :tr, data: attribute.to_params do %>
+<%= content_tag :tr, data: attribute.to_params(base_attribute_group: attribute.base_attribute_group, base_attribute_name: attribute.base_attribute_name) do %>
   <td>
     <%= smart_description(attribute) do %>
       <% if attribute.base_attribute && attribute.base_attribute.abbreviation.present? %>

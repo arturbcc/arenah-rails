@@ -2,14 +2,21 @@
   data: group.to_params(editable_only_on_free_mode: true) do %>
   <%= render 'game/sheet/attributes_groups/group_title', group: group %>
 
-  <% group.character_attributes.each do |attribute| %>
-    <div>
-      <% data = { type: attribute.type, name: "ckeditor-#{group.name.parameterize}", editable_attribute: 'ckeditor' } %>
-      <%= link_to 'javascript:;', class: 'ckeditor-attribute', data: data do %>
-        <%= raw(attribute.content) %>
-      <% end %>
+  <table class="table table-condensed" data-accept-edit-mode>
+    <tbody>
+      <% group.character_attributes.each do |attribute| %>
+        <%= content_tag :tr, data: attribute.to_params do %>
+          <td>
+            <% data = { type: attribute.type, name: "ckeditor-#{group.name.parameterize}",
+              editable_attribute: 'ckeditor', attribute_name: attribute.name } %>
+            <%= link_to 'javascript:;', class: 'ckeditor-attribute', data: data do %>
+              <%= raw(attribute.content) %>
+            <% end %>
 
-      <textarea class="hidden"><%= attribute.content %></textarea>
-    </div>
-  <% end %>
+            <textarea class="hidden"><%= attribute.content %></textarea>
+          </td>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

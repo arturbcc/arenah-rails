@@ -72,7 +72,7 @@ RSpec.describe Character, type: :model do
         let(:changes) { [{ attribute_name: 'Nome', field_name: 'content', value: 'Jane Roe' }.stringify_keys] }
 
         it 'updates the database with the changes' do
-          status = character.update_sheet('Dados', changes, [])
+          status = character.update_sheet(group_name: 'Dados', changes: changes)
           expect(character.raw_sheet['attributes_groups'][0]['character_attributes'][0]['content']).to eq('Jane Roe')
           expect(status).to be_truthy
         end
@@ -82,7 +82,7 @@ RSpec.describe Character, type: :model do
         let(:changes) { [{ attribute_name: 'Força', field_name: 'points', value: '21' }.stringify_keys] }
 
         it 'updates the database with the changes' do
-          status = character.update_sheet('Atributos', changes, [])
+          status = character.update_sheet(group_name: 'Atributos', changes: changes)
           expect(character.raw_sheet['attributes_groups'][2]['character_attributes'][0]['points']).to eq(21)
           expect(status).to be_truthy
         end
@@ -92,7 +92,7 @@ RSpec.describe Character, type: :model do
         let(:changes) { [{ attribute_name: 'Força', field_name: 'description', value: '1900' }.stringify_keys] }
 
         it 'does not update the database with the changes' do
-          status = character.update_sheet('Atributos', changes, [])
+          status = character.update_sheet(group_name: 'Atributos', changes: changes)
           expect(character.raw_sheet).to eq(sheet)
           expect(status).to be_truthy
         end
@@ -105,7 +105,7 @@ RSpec.describe Character, type: :model do
           attributes_group = character.raw_sheet['attributes_groups'][3]
           expect(attributes_group['character_attributes'].any? { |attribute| attribute['name'] == 'História' }).to be_truthy
 
-          status = character.update_sheet('Perícias', changes, ['História'])
+          status = character.update_sheet(group_name: 'Perícias', changes: changes, deleted_attributes: ['História'])
           character.reload
 
           attributes_group = character.raw_sheet['attributes_groups'][3]
@@ -113,11 +113,81 @@ RSpec.describe Character, type: :model do
           expect(status).to be_truthy
         end
       end
+
+      context 'and there are items to add' do
+        let(:changes) { [] }
+
+        context 'and attribute has cost' do
+          it 'includes the attribute in the list' do
+            attribute = { name: 'Dodge',  cost: 1 }.stringify_keys
+            attributes_group = character.raw_sheet['attributes_groups'][3]
+            expect(attributes_group['character_attributes'].any? { |attribute| attribute['name'] == 'Dodge' }).to be_falsy
+
+            status = character.update_sheet(group_name: 'Perícias', changes: changes, added_attributes: [attribute])
+            character.reload
+
+            attributes_group = character.raw_sheet['attributes_groups'][3]
+            expect(attributes_group['character_attributes'].any? { |attribute| attribute['name'] == 'Dodge' }).to be_truthy
+            expect(attributes_group['character_attributes'][-1]['cost']).to eq(1)
+            expect(status).to be_truthy
+          end
+        end
+
+        context 'and attribute has points' do
+          it 'includes the attribute in the list' do
+            attribute = { name: 'Dodge',  points: 10 }.stringify_keys
+            attributes_group = character.raw_sheet['attributes_groups'][3]
+            expect(attributes_group['character_attributes'].any? { |attribute| attribute['name'] == 'Dodge' }).to be_falsy
+
+            status = character.update_sheet(group_name: 'Perícias', changes: changes, added_attributes: [attribute])
+            character.reload
+
+            attributes_group = character.raw_sheet['attributes_groups'][3]
+            expect(attributes_group['character_attributes'].any? { |attribute| attribute['name'] == 'Dodge' }).to be_truthy
+            expect(attributes_group['character_attributes'][-1]['points']).to eq(10)
+            expect(status).to be_truthy
+          end
+        end
+      end
+
+      context 'and the game master deletes an attribute he/she has just added in the same operation' do
+        let(:changes) { [] }
+
+        it 'does not include the attribute' do
+          attribute = { name: 'Dodge',  cost: 1 }.stringify_keys
+          attributes_group = character.raw_sheet['attributes_groups'][3]
+          expect(attributes_group['character_attributes'].any? { |attribute| attribute['name'] == 'Dodge' }).to be_falsy
+
+          status = character.update_sheet(group_name: 'Perícias', changes: changes, added_attributes: [attribute], deleted_attributes: ['Dodge'])
+          character.reload
+
+          attributes_group = character.raw_sheet['attributes_groups'][3]
+          expect(attributes_group['character_attributes'].any? { |attribute| attribute['name'] == 'Dodge' }).to be_falsy
+          expect(status).to be_truthy
+        end
+      end
+
+      context 'and the game master includes an attribute he/she has just deleted in the same operation' do
+        let(:changes) { [] }
+
+        it 'does not delete the attribute' do
+          attribute = { name: 'História',  points: 10 }.stringify_keys
+          attributes_group = character.raw_sheet['attributes_groups'][3]
+          expect(attributes_group['character_attributes'].any? { |attribute| attribute['name'] == 'História' }).to be_truthy
+
+          status = character.update_sheet(group_name: 'Perícias', changes: changes, added_attributes: [attribute], deleted_attributes: ['História'])
+          character.reload
+
+          attributes_group = character.raw_sheet['attributes_groups'][3]
+          expect(attributes_group['character_attributes'].any? { |attribute| attribute['name'] == 'História' }).to be_truthy
+          expect(status).to be_truthy
+        end
+      end
     end
 
     context 'when group does not exist' do
       it 'returns false' do
-        status = character.update_sheet('Invalid Group', [], [])
+        status = character.update_sheet(group_name: 'Invalid Group', changes: [], deleted_attributes: [])
         expect(status).to be_falsy
       end
     end

@@ -65,7 +65,7 @@ RSpec.describe Sheet::AttributesGroup, type: :model do
       expect(group.attributes_points_formula).to be_nil
       expect(group.group_points_formula).to eq('10 * dados=>idade + 5 * atributos=>inteligencia')
       expect(group.character_attributes.count).to eq(0)
-      expect(group.list.count).to eq(14)
+      expect(group.list.count).to eq(15)
     end
 
     it 'serializes the group "Aprimoramentos"' do
@@ -111,7 +111,7 @@ RSpec.describe Sheet::AttributesGroup, type: :model do
       expect(group.source_type).to eq('open')
       expect(group.show_on_posts?).to be false
       expect(group.instructions).not_to be_blank
-      expect(group.character_attributes).to be_nil
+      expect(group.character_attributes.count).to eq(1)
     end
 
     it 'serializes the group "Status"' do

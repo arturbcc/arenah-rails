@@ -194,6 +194,13 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
     $.each(changes.character_attributes, function(_, change) {
       var attributeRows = data.attributesGroup.find('tr[data-attribute-name="' + change.attribute_name + '"]');
 
+      // Change the equipmentModifier in the change so we can consider this
+      // modifier when updating attributes that are based in the current one.
+      var mainTableRow = $(attributeRows[0]);
+      if (mainTableRow.data('equipment-modifier')) {
+        change.equipmentModifier = parseInt(mainTableRow.data('equipment-modifier'));
+      }
+
       $.each(attributeRows, function() {
         var tr = $(this),
             element = tr.find('a[data-editable-attribute]');
@@ -201,11 +208,11 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
         // In groups with sourceType list, there are two panels with data: one
         // the users see in regular mode and one they see in edit mode. It is
         // important to keep both updated.
-        if (element.length == 0) {
+        if (element.length === 0) {
           element = tr.find('.text-right a');
         }
 
-        if (element.data('editable-attribute') === 'text') {
+        if (element.data('editable-attribute') === 'text' || element.data('editable-attribute') === 'ckeditor') {
           element.html(change.value);
         } else if (self.currentEditable.updateSheetWithNewValues && typeof self.currentEditable.updateSheetWithNewValues === 'function') {
           var equipmentModifier = parseInt(tr.data('equipment-modifier') || 0);
@@ -216,8 +223,34 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
       self._updateBasedAttributes(changes.group_name, change);
     });
 
+    this._removeDeletedAttributes(data, changes);
+    this._includeAddedAttributes(data, changes);
+  };
+
+  fn._removeDeletedAttributes = function(data, changes) {
     $.each(changes.deleted_attributes, function() {
       data.attributesGroup.find('tr[data-attribute-name="' + this + '"]').remove();
+    });
+  };
+
+  fn._includeAddedAttributes = function(data, changes) {
+    var self = this;
+
+    $.each(changes.added_attributes, function(_, attribute) {
+      var table = data.attributesGroup.find('[data-accept-edit-mode]'),
+          container = data.attributesGroup.find('.editable-list-items').find('[data-attribute-name="' + attribute.name + '"]');
+          tr = container.clone();
+
+      if (self.currentEditable.formatAddedAttribute && typeof self.currentEditable.formatAddedAttribute === 'function') {
+        self.currentEditable.formatAddedAttribute(tr.find('.text-right'));
+      }
+
+      tr.removeAttr('data-state');
+      table.append(tr);
+
+      if (self.currentEditable.sourceTypeList && self.currentEditable.sourceTypeList.activateTooltip && typeof self.currentEditable.sourceTypeList.activateTooltip === 'function') {
+        self.currentEditable.sourceTypeList.activateTooltip(table, tr);
+      }
     });
   };
 
@@ -249,7 +282,8 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
           element = tr.find('.text-right a'),
           parts = element.text().split(' / '),
           newValue = parseInt(change.value) + parseInt(parts[0]),
-          newText = parts[0] + ' / ' + newValue;
+          equipmentModifier = parseInt(change.equipmentModifier || 0),
+          newText = parts[0] + ' / ' + (newValue  + equipmentModifier);
 
       element.text(newText);
       tr.attr('data-value', newValue);
@@ -275,12 +309,13 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
   //     'Charisma'
   //   ]
   // }
-
-//TODO: what about added_attribute value?? It can be cost or points
-
   fn._changesToSave = function(data) {
-    var inputs = data.attributesGroup.find('.editableform input'),
-        changes = { group_name: data.attributesGroup.data('group-name'), character_attributes: [] };
+    var inputs = data.attributesGroup.find('.editableform input:visible'),
+        changes = { group_name: data.attributesGroup.data('group-name'), character_attributes: [] },
+        // attributesNames control the names of the attributes already included
+        // in the character_attributes array. If it appears a second time, the
+        // change must be saved in the `total` field.
+        attributesNames = [];
 
     $.each(inputs, function() {
       var input = $(this),
@@ -288,18 +323,67 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
           currentValue = input.val();
 
       if (tr.data('points') !== currentValue) {
+        var fieldName = tr.data('field-to-update') || 'points',
+            attributeName = tr.data('attribute-name');
+
+        // If there are two inputs (e.g. when the attribute has an editable name
+        // AND and editable value), the second one must be saved in the `total`
+        // field.
+        if (attributesNames.indexOf(attributeName) > -1) {
+          fieldName = 'total';
+        } else {
+          attributesNames.push(attributeName);
+        }
+
         changes.character_attributes.push({
-          attribute_name: tr.data('attribute-name'),
-          field_name: tr.data('field-to-update') || 'points',
+          attribute_name: attributeName,
+          field_name: fieldName,
           value: currentValue
         });
       }
     });
 
-    changes.deleted_attributes = this.garbageItems;
-    changes.added_attributes = this.itemsToInclude;
+    var ckEditors = data.attributesGroup.find('.ckeditor-attribute');
+    $.each(ckEditors, function() {
+      var editor = $(this),
+          instanceName = editor.data('name');
+
+      changes.character_attributes.push({
+        attribute_name: editor.data('attribute-name'),
+        field_name: 'content',
+        value: CKEDITOR.instances[instanceName].getData()
+      });
+    });
+
+    var arrayIntersection = this._arraysIntersection(this.garbageItems, this.itemsToInclude);
+    changes.deleted_attributes = this._arraysDifference(this.garbageItems, arrayIntersection);
+    changes.added_attributes = this._arraysOfHashDifference(this.itemsToInclude, arrayIntersection);
 
     return changes;
+  };
+
+  fn._arraysIntersection = function(deletedAttributes, addedAttributes) {
+    return $.map(addedAttributes, function(item) {
+      return $.inArray(item.name, deletedAttributes) < 0 ? null : item.name;
+    });
+  };
+
+  fn._arraysDifference = function(array1, array2) {
+    var difference = [];
+
+    $.grep(array1, function(el) {
+      if ($.inArray(el, array2) == -1) {
+        difference.push(el);
+      }
+    });
+
+    return difference;
+  };
+
+  fn._arraysOfHashDifference = function(arrayOfHash, arrayOfNames) {
+    return $.grep(arrayOfHash, function(item) {
+      return $.inArray(item.name, arrayOfNames) == -1
+    });
   };
 
   // Undo all the current changes. Once the changes are cancelled, the group
@@ -335,6 +419,7 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
     this.garbageItems = [];
     this.itemsToInclude = [];
     $('[tabindex]').removeAttr('tabindex');
+    $('.editable-current-item-description').html('');
     var editableLinks = data.attributesGroup.find('a[data-editable-attribute]');
 
     editableLinks.editable('destroy');
@@ -355,14 +440,16 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
         editable.input.$input.attr('tabindex', tabindexCounter++);
       });
 
-      var lastValue = editableField.text();
+      var lastValue = editableField.html();
 
       // For some reason, editable is losing the value and filling the
       // input with the wrong value. However, by setting the correct value
       // using the setValue method, it overrides the .html() (or .text()),
       // displaying an incorrect value in the label. To fix that, we have to
       // set the editable value and reset the .html.
-      editableField.editable('setValue', editableField.attr('data-value'));
+      if (editableField.attr('data-value')) {
+        editableField.editable('setValue', editableField.attr('data-value'));
+      }
       editableField.html(lastValue);
 
       editableField.editable('show');
@@ -500,18 +587,16 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
 
   fn.addNewItem = function(groupName, attributeName, value) {
     var gameSystem = new GameSystem(),
-        item = { attributeName: attributeName },
+        item = { name: attributeName },
         attribute = gameSystem.getAttribute(groupName, attributeName);
 
-    if (attribute) {
-      if (attribute.cost !== undefined) {
-        item.cost = value;
-      } else {
-        item.points = value;
-      }
-
-      this.itemsToInclude.push(item);
+    if (attribute && attribute.cost !== undefined) {
+      item.cost = value;
+    } else {
+      item.points = value;
     }
+
+    this.itemsToInclude.push(item);
   };
 
   return SheetEditor;

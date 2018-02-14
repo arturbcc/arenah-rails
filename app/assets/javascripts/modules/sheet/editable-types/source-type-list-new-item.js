@@ -16,7 +16,7 @@ define('source-type-list-new-item', ['transform', 'game-system'], function(Trans
     var editContainer = data.attributesGroup.find('.editable-list-group'),
         addButton = editContainer.find('.add-editable-list-item');
 
-    addButton.on('click', $.proxy(this._addAttribute, this));
+    addButton.off('click').on('click', $.proxy(this._addAttribute, this));
   };
 
   fn._addAttribute = function(event) {
@@ -48,13 +48,14 @@ define('source-type-list-new-item', ['transform', 'game-system'], function(Trans
         data.usedPoints = data.usedPoints + parseInt(points);
         this.sheetEditor.changeAttributePoints(data);
 
-        this._newItemTooltip(editContainer, template);
+        this.newItemTooltip(editContainer, template);
         this._newItemMouseOver(template);
         this._clearDescription(editContainer);
 
         this.sourceTypeList.startDragAndDrop(data);
         this.sourceTypeList.loadNewAttributesList(data);
         select.select2('val', '0');
+        data.attributesGroup.find('.empty-group-warning').hide();
       } else {
         NotyMessage.show('Você não possui pontos para adicionar este atributo', 3000);
       }
@@ -67,7 +68,7 @@ define('source-type-list-new-item', ['transform', 'game-system'], function(Trans
     editContainer.find('.editable-current-item-description').html('');
   };
 
-  fn._newItemTooltip = function(editContainer, template) {
+  fn.newItemTooltip = function(editContainer, template) {
     var columns = editContainer.parents('[data-columns]:first').attr('data-columns'),
         item = template.find('.smart-description');
 
@@ -132,11 +133,15 @@ define('source-type-list-new-item', ['transform', 'game-system'], function(Trans
   fn._fillTemplate = function(data, template, description, selectedValue) {
     var name = selectedValue.data('name'),
         abbreviation = selectedValue.data('abbreviation') || '',
+        baseAttributeGroup = selectedValue.data('base-attribute-group'),
+        baseAttributeName = selectedValue.data('base-attribute-name'),
         points = selectedValue.data('value') || 0;
 
     template.removeClass('template').removeClass('hidden');
     template.attr('data-attribute-name', name);
     template.attr('data-attribute-abbreviation', abbreviation);
+    template.attr('data-base-attribute-group', baseAttributeGroup);
+    template.attr('data-base-attribute-name', baseAttributeName);
     template.attr('data-points', points);
     template.attr('data-state', 'new');
     template.removeClass('prevent-delete');

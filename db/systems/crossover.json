@@ -176,6 +176,7 @@
           { "name": "Ler/Escrever", "description": "Indica se o personagem é alfabetizado ou não." },
           { "name": "Espada curta", "base_attribute_group": "Atributos", "base_attribute_name": "Destreza", "description": "<p style='text-align: center'><img src='http://rpg-medieval-world.weebly.com/uploads/8/5/6/5/8565555/9210438.jpg' /></p>", "action": "attack" },
           { "name": "Espada longa", "base_attribute_group": "Atributos", "base_attribute_name": "Destreza", "description": "<p style='text-align: center'><img src='http://cdn.obsidianportal.com/images/601658/Olivers_Longsword.jpg' /></p>", "action": "defense" },
+          { "name": "Levantamento de peso", "base_attribute_group": "Atributos", "base_attribute_name": "Força", "description": "Habilidade de levantar pesos" },
           { "name": "Saltos", "base_attribute_group": "Atributos", "base_attribute_name": "Agilidade", "description": "Capacidade de pular grandes distâncias", "action": "defense" }
         ]
       },
@@ -221,7 +222,10 @@
         "position": "column_1",
         "type": "rich_text",
         "source_type": "open",
-        "instructions": "A história do <b>personagem</b> é importante para torná-lo mais real, para que se possa compreendê-lo de forma mais profunda e detalhada. Escreva o que achar relevante sobre o passado, o presente e as ambições para o futuro, bem como a aparência, suas principais habilidades e os eventos pelos quais se tornou famoso."
+        "instructions": "A história do <b>personagem</b> é importante para torná-lo mais real, para que se possa compreendê-lo de forma mais profunda e detalhada. Escreva o que achar relevante sobre o passado, o presente e as ambições para o futuro, bem como a aparência, suas principais habilidades e os eventos pelos quais se tornou famoso.",
+        "character_attributes": [
+          { "name": "História", "content": "" }
+        ]
       },
       {
         "name": "Status",

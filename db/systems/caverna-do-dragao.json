@@ -95,7 +95,9 @@
         "position": "footer",
         "show_on_posts": false,
         "instructions": "",
-        "character_attributes": []
+        "character_attributes": [
+          { "name": "História", "content": "" }
+        ]
       },
       {
         "name": "Vida",
