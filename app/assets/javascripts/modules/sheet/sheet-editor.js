@@ -248,7 +248,7 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
       tr.removeAttr('data-state');
       table.append(tr);
 
-      if (self.currentEditable.sourceTypeList) {
+      if (self.currentEditable.sourceTypeList && self.currentEditable.sourceTypeList.activateTooltip && typeof self.currentEditable.sourceTypeList.activateTooltip === 'function') {
         self.currentEditable.sourceTypeList.activateTooltip(table, tr);
       }
     });

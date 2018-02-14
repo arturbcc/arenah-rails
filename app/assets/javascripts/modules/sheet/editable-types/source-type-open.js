@@ -30,7 +30,7 @@ define('source-type-open', [], function() {
     editContainer.find('input.editable-list-input').focus();
   };
 
-  fn._leaveEditMode = function(data) {
+  fn.leaveEditMode = function(data) {
     data.attributesGroup.find('[data-accept-edit-mode]').show();
     data.attributesGroup.find('.editable-list-group').addClass('hidden');
     data.attributesGroup.find('[data-editable-attribute]').each(function() {
@@ -39,12 +39,12 @@ define('source-type-open', [], function() {
   };
 
   fn.onCancel = function(data) {
-    this._leaveEditMode(data);
+    this.leaveEditMode(data);
     this._rollback(data);
   };
 
   fn.afterSave = function(data, _) {
-    this._leaveEditMode(data);
+    this.leaveEditMode(data);
   };
 
   fn.transform = function(editable) {
