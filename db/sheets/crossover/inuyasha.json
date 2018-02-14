@@ -167,6 +167,7 @@
         { "name": "Ler/Escrever", "points": 27,  "description": "Indica se o personagem é alfabetizado ou não." },
         { "name": "Espada curta", "points": 35,  "base_attribute_group": "Atributos", "base_attribute_name": "Destreza", "description": "<p style='text-align: center'><img src='http://rpg-medieval-world.weebly.com/uploads/8/5/6/5/8565555/9210438.jpg' /></p>", "action": "attack" },
         { "name": "Espada longa", "points": 37,  "base_attribute_group": "Atributos", "base_attribute_name": "Destreza", "description": "<p style='text-align: center'><img src='http://cdn.obsidianportal.com/images/601658/Olivers_Longsword.jpg' /></p>", "action": "defense" },
+        { "name": "Levantamento de peso", "points": 8, "base_attribute_group": "Atributos", "base_attribute_name": "Força", "description": "Habilidade de levantar pesos" },
         { "name": "Saltos", "points": 10,  "base_attribute_group": "Atributos", "base_attribute_name": "Agilidade", "description": "Capacidade de pular grandes distâncias", "action": "defense" }
       ]
     },

@@ -142,8 +142,6 @@ class Character < ApplicationRecord
 
     return false unless group
 
-    modify_attributes(group, changes)
-
     # If the same attribute is in the `added_attributes` AND in the
     # `deleted_attributes`, no change will be done in the database, so we need
     # to remove it from both lists.
@@ -156,6 +154,8 @@ class Character < ApplicationRecord
 
     add_new_attributes(group, added_attributes)
     remove_deleted_attributes(group, deleted_attributes)
+
+    modify_attributes(group, changes)
 
     save!
   end
@@ -192,23 +192,28 @@ class Character < ApplicationRecord
 
       change['value'] = change['value'].to_i if change['field_name'] != 'content'
       attribute = attribute_by_name(group, change['attribute_name'])
-      attribute[change['field_name']] = change['value']
+      attribute[change['field_name']] = change['value'] if attribute.present?
     end
   end
 
   def add_new_attributes(group, added_attributes)
     added_attributes.each do |attribute|
+      item = { name: attribute['name'] };
+
       if attribute['cost']
-        group['character_attributes'] << {
-          name: attribute['name'],
-          cost: attribute['cost']
-        }.stringify_keys
+        item[:cost] = attribute['cost']
       elsif attribute['points']
-        group['character_attributes'] << {
-          name: attribute['name'],
-          points: attribute['points']
-        }.stringify_keys
+        item[:points] = attribute['points']
+      else
+        next
       end
+
+      sheet = self.game.system.sheet
+      system_attribute = sheet.find_list_attribute(group['name'], attribute['name'])
+      item[:base_attribute_group] = system_attribute.base_attribute_group if system_attribute.base_attribute_group
+      item[:base_attribute_name] = system_attribute.base_attribute_name if system_attribute.base_attribute_name
+      item[:description] = system_attribute.description if system_attribute.description
+      group['character_attributes'] << item.stringify_keys;
     end
 
     def remove_deleted_attributes(group, deleted_attributes)

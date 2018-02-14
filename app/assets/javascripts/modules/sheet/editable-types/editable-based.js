@@ -61,7 +61,23 @@ define('editable-based', ['transform', 'source-type-list'], function(Transform, 
   };
 
   fn.formatAddedAttribute = function(element) {
-    element.text('rolou');
+    var value = parseInt(element.find('a[data-editable-attribute]').data('value')),
+        tr = element.parent(),
+        baseAttributeGroup = tr.data('base-attribute-group'),
+        baseAttributeName = tr.data('base-attribute-name'),
+        total = value;
+
+    if (baseAttributeGroup && baseAttributeName) {
+      var group = $('#sheet').find('.attributes-group[data-group-name="' + baseAttributeGroup + '"]'),
+          attribute = group.find('[data-accept-edit-mode] tr[data-attribute-name="' + baseAttributeName + '"]'),
+          equipmentModifier = parseInt(attribute.data('equipment-modifier') || 0);
+
+      total += (parseInt(attribute.attr('data-points')) + equipmentModifier);
+    }
+
+    tr.attr('data-value', total);
+    element.html('');
+    element.append($('<a>').attr('href', 'javascript:;').text(value + ' / ' + total));
   };
 
   return EditableBased;

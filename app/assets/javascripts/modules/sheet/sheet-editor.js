@@ -194,6 +194,13 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
     $.each(changes.character_attributes, function(_, change) {
       var attributeRows = data.attributesGroup.find('tr[data-attribute-name="' + change.attribute_name + '"]');
 
+      // Change the equipmentModifier in the change so we can consider this
+      // modifier when updating attributes that are based in the current one.
+      var mainTableRow = $(attributeRows[0]);
+      if (mainTableRow.data('equipment-modifier')) {
+        change.equipmentModifier = parseInt(mainTableRow.data('equipment-modifier'));
+      }
+
       $.each(attributeRows, function() {
         var tr = $(this),
             element = tr.find('a[data-editable-attribute]');
@@ -272,7 +279,8 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
           element = tr.find('.text-right a'),
           parts = element.text().split(' / '),
           newValue = parseInt(change.value) + parseInt(parts[0]),
-          newText = parts[0] + ' / ' + newValue;
+          equipmentModifier = parseInt(change.equipmentModifier || 0),
+          newText = parts[0] + ' / ' + (newValue  + equipmentModifier);
 
       element.text(newText);
       tr.attr('data-value', newValue);
@@ -298,9 +306,6 @@ define('sheet-editor', ['game-system', 'editable-based', 'editable-bullet', 'edi
   //     'Charisma'
   //   ]
   // }
-
-//TODO: what about added_attribute value?? It can be cost or points
-
   fn._changesToSave = function(data) {
     var inputs = data.attributesGroup.find('.editableform input:visible'),
         changes = { group_name: data.attributesGroup.data('group-name'), character_attributes: [] },

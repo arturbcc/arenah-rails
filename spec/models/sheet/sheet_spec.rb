@@ -99,5 +99,21 @@ RSpec.describe Sheet::Sheet, type: :model do
         expect(groups.map(&:name)).to eq(['Status'])
       end
     end
+
+    describe '#find_list_attribute_on_group' do
+      context 'when group exists' do
+        it 'returns the attribute' do
+          group = @system.sheet.attributes_groups[3]
+          attribute = group.list.first
+          expect(@system.sheet.find_list_attribute_on_group(group, 'História')).to eq(attribute)
+        end
+      end
+
+      context 'when group does not exist' do
+        it 'returns nil' do
+          expect(subject.find_list_attribute_on_group(nil, 'test')).to be_nil
+        end
+      end
+    end
   end
 end
