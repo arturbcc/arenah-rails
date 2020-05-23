@@ -148,7 +148,7 @@ GEM
       websocket-driver (>= 0.2.0)
     powerpack (0.1.1)
     public_suffix (3.0.1)
-    puma (3.11.2)
+    puma (3.12.6)
     rack (2.0.3)
     rack-mini-profiler (0.10.7)
       rack (>= 1.2.0)
@@ -312,7 +312,7 @@ DEPENDENCIES
   newrelic_rpm
   pg (~> 0.18)
   poltergeist
-  puma (~> 3.7)
+  puma (~> 3.12)
   rack-mini-profiler
   rails (= 5.1.4)
   rails-controller-testing
