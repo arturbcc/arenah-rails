@@ -52,7 +52,7 @@ end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'puma', '~> 3.7'
+  gem 'puma', '~> 4.3'
   gem 'rack-mini-profiler'
   gem 'rubocop', '~> 0.48.1'
   gem 'spring'
