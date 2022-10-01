@@ -1,21 +1,20 @@
 default: &default
-  adapter: mysql2
-  host: localhost
-  port: 3306
-  encoding: utf8
-  username: root
-  password: root
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV["POSTGRESQL_USER"] || 'postgres' %>
+  password: <%= ENV["POSTGRESQL_PASSWORD"] %>
+  host: <%= ENV["POSTGRESQL_HOST"] || 'localhost' %>
+  pool: <%= ENV["POSTGRESQL_POOL"] || ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  port: <%= ENV["POSTGRESQL_PORT"] || 5432 %>
 
 development:
   <<: *default
-  database: arenah_development
+  database: <%= ENV["POSTGRESQL_DATABASE"] || "arenah_development" %>
 
 test:
   <<: *default
-  database: arenah_test
+  database: <%= ENV["POSTGRESQL_DATABASE"] || "arenah_test" %>
 
 production:
   <<: *default
-  database: arenah_production
+  database: <%= ENV["POSTGRESQL_DATABASE"] || 'arenah_production' %>
