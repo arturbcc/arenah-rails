@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.5.0'
+ruby '2.7.6'
 
 # Core gems
 gem 'devise'
@@ -17,7 +17,7 @@ gem 'rails', '5.1.4'
 # Frontend gems
 # Use Uglifier as compressor for JavaScript assets
 gem 'bootstrap-sass'
-gem 'ckeditor'
+gem 'ckeditor', '4.2.4'
 gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
@@ -48,6 +48,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'shoulda'
+  gem 'shoulda-matchers'
 end
 
 group :development do
