@@ -1,0 +1,15 @@
+#!/bin/bash
+
+RED='\033[031m'
+GREEN='\033[032m'
+YELLOW='\033[033m'
+CYAN='\033[036m'
+NC='\033[0m' # No Color
+
+branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+
+if [ "$branch" == 'master' ]; then
+  git push dokku master:main
+else
+  echo -e "${RED}You need to be in the `master` branch to run this script${NC}"
+fi
