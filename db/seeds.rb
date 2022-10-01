@@ -25,7 +25,7 @@ willian = User.create!(email: 'willian@arenah.com', name: 'Willian', password: '
 priscila = User.create!(email: 'priscila@arenah.com', name: 'Priscila', password: '12345678', confirmed_at: Time.now)
 nathalia = User.create!(email: 'nathalia@arenah.com', name: 'Nathália', password: '12345678', confirmed_at: Time.now)
 mayara = User.create!(email: 'mayara@arenah.com', name: 'Mayara', password: '12345678', confirmed_at: Time.now)
-pablo = User.create!(email: 'pablo@arenah.com', name: 'Pablo', password: '12345678', confirmed_at: Time.now)
+paulo = User.create!(email: 'paulo@arenah.com', name: 'Paulo', password: '12345678', confirmed_at: Time.now)
 artur = User.create!(email: 'artur@arenah.com', name: 'Artur', password: '12345678', confirmed_at: Time.now)
 johndoe = User.create!(email: 'johndoe@arenah.com', name: 'John Doe', password: '12345678', confirmed_at: Time.now)
 janeroe = User.create!(email: 'janeroe@arenah.com', name: 'Jane Roe', password: '12345678', confirmed_at: Time.now)
@@ -37,7 +37,7 @@ goku = Character.create!(user: willian, name: 'Goku', avatar: 'goku.jpg', post_c
 hiei = Character.create!(user: priscila, name: 'Hiei', avatar: 'hiei.png', post_count: 382, last_post_date: 4.days.ago, raw_sheet: load_sheet('crossover', 'hiei'))
 oliver_tsubasa = Character.create!(user: nathalia, name: 'Oliver Tsubasa', avatar: 'oliver.jpg', post_count: 12, last_post_date: 7.days.ago, raw_sheet: load_sheet('crossover', 'oliver_tsubasa'))
 palace = Character.create!(user: mayara, name: 'Palace', avatar: 'palace.jpg', post_count: 10, gender: 1, last_post_date: 10.days.ago, raw_sheet: load_sheet('crossover', 'palace'))
-coraline = Character.create!(user: pablo, name: 'Coraline', avatar: 'coraline.jpg', post_count: 50, gender: 1, last_post_date: 1.day.ago, raw_sheet: load_sheet('crossover', 'coraline'))
+coraline = Character.create!(user: paulo, name: 'Coraline', avatar: 'coraline.jpg', post_count: 50, gender: 1, last_post_date: 1.day.ago, raw_sheet: load_sheet('crossover', 'coraline'))
 
 hank = Character.create!(user: luisfelipe, name: 'Hank', avatar: 'hank.png', post_count: 199, last_post_date: Time.now, raw_sheet: load_sheet('caverna-do-dragao', 'hank'))
 diana = Character.create!(user: mariana, name: 'Diana', avatar: 'diana.png', post_count: 299, gender: 1, last_post_date: Time.now, raw_sheet: load_sheet('caverna-do-dragao', 'diana'))
